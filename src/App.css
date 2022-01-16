@@ -37,6 +37,27 @@
   }
 }
 
+#nav-bar {
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  margin: auto;
+}
+
+#logo {
+  height: 90px;
+  border-radius: 100px;
+  margin: 5px;
+}
+
+#site-nav, #account-links {
+  margin: auto;
+}
+
+#hr-one {
+  height: 8px;
+  background-color: ;
+=======
 .feature-block h3, p, img {
   text-align: left;
 }
