@@ -21,7 +21,7 @@ function App() {
   const updateAvatar = (newImg: string) =>
     setAvatar(newImg)
 
-  const logout = () => {
+  const logoutHandler = () => {
     axios.post(
       'https://maestrodeljuego.herokuapp.com/auth/token/logout/',
       {},
@@ -40,7 +40,7 @@ function App() {
 
   return (
     <Router>
-      <NavBar />
+      <NavBar user={user} logout={logoutHandler}/>
       <Routes>
       <Route
           path='/login'

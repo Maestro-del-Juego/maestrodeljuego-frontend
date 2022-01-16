@@ -12,7 +12,7 @@ const Login = ({setAuth, updateAvatar}) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log("click happens")
-    axios.post("https://questions-t10.herokuapp.com/auth/token/login/", {
+    axios.post('https://maestrodeljuego.herokuapp.com/auth/token/login/', {
       "username": username,
       "password": password
     })
@@ -22,21 +22,9 @@ const Login = ({setAuth, updateAvatar}) => {
           console.log(data.data.auth_token)
           setAuth(username, data.data.auth_token)
           setLoggedIn(true)
-          axios.get('https://questions-t10.herokuapp.com/auth/users', {
-            headers: {
-              "Authorization": `Token ${data.data.auth_token}`
-            }
-          })
-            .then(response => {
-              axios.get(`https://questions-t10.herokuapp.com/user/${response.data[0].pk}/`)
-                .then(response => {
-                  console.log(response.data.pk)
-                  updateAvatar(response.data.image_url)
-                })
-                })
-        }
-      })
-      .catch((error) => alert(error.message))
+          }
+        })
+      .catch((error) => {setErrors("Username or password is incorrect.")})
     
   }
 

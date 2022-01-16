@@ -6,18 +6,19 @@ const Registration = ({setAuth, updateAvatar}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [errors, setErrors] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault()
     if (password === retypePassword) {
-      axios.post("https://questions-t10.herokuapp.com/auth/users/", {
+      axios.post('https://maestrodeljuego.herokuapp.com/auth/users/', {
         "username": username,
         "password": password,
         "re_password": retypePassword
       })
         
-      axios.post("https://questions-t10.herokuapp.com/auth/token/login/", {
+      axios.post('https://maestrodeljuego.herokuapp.com/auth/token/login/', {
             "username": username,
             "password": password
           })
@@ -42,7 +43,7 @@ const Registration = ({setAuth, updateAvatar}) => {
           })
         .catch((error) => alert(error.message))
         } else {
-      alert("Password and Re-typed Password do not match!")
+      setErrors("Passwords do not match.")
     }
   }
 
@@ -58,6 +59,7 @@ const Registration = ({setAuth, updateAvatar}) => {
           onChange={(event) => setUsername(event.target.value)}>
         </input>
       </div>
+      <p>{errors}</p>
       <div className="mv2">
         <label className="db mb2" htmlFor="passwordInput">
           Create Password

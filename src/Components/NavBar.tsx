@@ -1,11 +1,15 @@
+import { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function NavBar() {
-  
+interface navProps {
+  user: string,
+  logout: any
+}
 
+export default function NavBar(props: navProps) {
   return (
     <>
-      <div>
+      <div id="nav-bar">
         <img src="@/assets/logo.png" id="logo" title="Game Master" />
         <div id="site-nav">
           <Link to="/">Your Collection</Link> |
@@ -14,8 +18,14 @@ export default function NavBar() {
           <Link to="/about">Game Night!</Link>
         </div>
         <div id="account-links">
-          <Link to="/login">Login</Link>
-          <Link to="/registration">Register</Link>
+          { (props.user === '') ?
+            (<>
+            <Link to="/login">Login</Link>
+            <Link to="/registration">Register</Link>
+            </>)
+            :
+            <button type="submit" onClick={props.logout}>Log Out</button>
+          }
         </div>
       </div>
       <hr id="hr-one" />
