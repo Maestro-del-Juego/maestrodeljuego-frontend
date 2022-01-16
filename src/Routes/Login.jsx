@@ -7,7 +7,7 @@ const Login = ({setAuth, updateAvatar}) => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault()
