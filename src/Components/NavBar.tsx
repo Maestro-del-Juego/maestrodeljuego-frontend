@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function NavBar({ }) {
+export default function NavBar() {
   
 
   return (
@@ -15,7 +15,7 @@ export default function NavBar({ }) {
         </div>
         <div id="account-links">
           <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          <Link to="/registration">Register</Link>
         </div>
       </div>
       <hr id="hr-one" />
