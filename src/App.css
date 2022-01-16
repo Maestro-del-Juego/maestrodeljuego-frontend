@@ -57,4 +57,40 @@
 #hr-one {
   height: 8px;
   background-color: ;
+=======
+.feature-block h3, p, img {
+  text-align: left;
+}
+.feature-block h3 {
+  margin-top: 10px;
+}
+.feature-block p {
+  margin-top: 15px;
+  clear: left;
+}
+.feature-block .feature-icon {
+    width: 40px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    float: left;
+}
+
+.feature-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px;
+  justify-content: center;
+}
+.feature-block {
+  margin-left: 3%;
+  margin-right: 3%;
+  width: 22%;
+  }
+.home-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  height: 400px;
+  width: 70%;
 }

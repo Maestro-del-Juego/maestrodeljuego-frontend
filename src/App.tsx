@@ -6,6 +6,9 @@ import NavBar from './Components/NavBar';
 import useLocalStorageState from 'use-local-storage-state';
 import Login from './Routes/Login';
 import Registration from './Routes/Registration';
+import Home from "./routes/Home";
+// import Search from "./routes/Search";
+
 
 function App() {
 
@@ -42,7 +45,7 @@ function App() {
     <Router>
       <NavBar user={user} logout={logoutHandler}/>
       <Routes>
-      <Route
+        <Route
           path='/login'
           element={<Login setAuth={setAuth} updateAvatar={updateAvatar} />} 
         />
@@ -50,6 +53,8 @@ function App() {
           path='/registration'
           element={<Registration setAuth={setAuth} updateAvatar={updateAvatar} />} 
         />
+        <Route path="/" element={<Home />} />
+        {/* <Route path="/search" element={<Search />} /> */}
       </Routes>
     </Router>
   );
