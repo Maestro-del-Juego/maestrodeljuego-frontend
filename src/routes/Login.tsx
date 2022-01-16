@@ -2,14 +2,19 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router';
 
-const Login = ({setAuth, updateAvatar}) => {
+interface loginProps {
+  setAuth: any,
+  updateAvatar: any
+}
+
+const Login = (props: loginProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [token, setToken] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault()
     console.log("click happens")
     axios.post('https://maestrodeljuego.herokuapp.com/auth/token/login/', {
@@ -20,7 +25,7 @@ const Login = ({setAuth, updateAvatar}) => {
         console.log(data)
         if (data && data.data.auth_token) {
           console.log(data.data.auth_token)
-          setAuth(username, data.data.auth_token)
+          props.setAuth(username, data.data.auth_token)
           setLoggedIn(true)
           }
         })

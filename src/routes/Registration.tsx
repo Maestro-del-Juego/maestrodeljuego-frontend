@@ -1,15 +1,20 @@
 import axios from 'axios';
 import { useState } from 'react';
-import  { Navigate } from 'react-router'
+import { Navigate } from 'react-router'
 
-const Registration = ({setAuth, updateAvatar}) => {
+interface regProps {
+  setAuth: any,
+  updateAvatar: any
+}
+
+const Registration = (props: regProps) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [errors, setErrors] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault()
     if (password === retypePassword) {
       axios.post('https://maestrodeljuego.herokuapp.com/auth/users/', {
@@ -25,9 +30,9 @@ const Registration = ({setAuth, updateAvatar}) => {
           .then((data) => {
             console.log(data)
             if (data && data.data.auth_token) {
-              setAuth(username, data.data.auth_token)
+              props.setAuth(username, data.data.auth_token)
               setLoggedIn(true)
-              updateAvatar("")
+              props.updateAvatar("")
               axios.get('https://questions-t10.herokuapp.com/auth/users', {
                 headers: {
                   "Authorization": `Token ${data.data.auth_token}`

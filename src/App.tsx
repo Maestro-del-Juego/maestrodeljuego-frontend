@@ -6,7 +6,7 @@ import NavBar from './Components/NavBar';
 import useLocalStorageState from 'use-local-storage-state';
 import Login from './Routes/Login';
 import Registration from './Routes/Registration';
-import Home from "./routes/Home";
+import Home from "./Routes/Home";
 // import Search from "./routes/Search";
 
 
