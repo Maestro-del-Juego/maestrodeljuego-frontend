@@ -24,10 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "overrides": {
-    "mini-css-extract-plugin": "2.4.5"
+    "eject": "react-scripts eject",
+    "preinstall": "npx npm-force-resolutions && node preinstallHotfix"
   },
   "eslintConfig": {
     "extends": [
