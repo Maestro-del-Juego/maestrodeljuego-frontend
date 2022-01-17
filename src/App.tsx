@@ -7,7 +7,8 @@ import useLocalStorageState from 'use-local-storage-state';
 import Login from './Routes/Login';
 import Registration from './Routes/Registration';
 import Home from "./Routes/Home";
-// import Search from "./routes/Search";
+import Search from "./Routes/Search";
+import GameInfoPage from "./Routes/GameInfoPage"
 
 
 function App() {
@@ -54,7 +55,9 @@ function App() {
           element={<Registration setAuth={setAuth} updateAvatar={updateAvatar} />} 
         />
         <Route path="/" element={<Home />} />
-        {/* <Route path="/search" element={<Search />} /> */}
+        <Route path="/search" element={<Search />} />
+        <Route
+          path='games/:gameId' element={<GameInfoPage />} />
       </Routes>
     </Router>
   );
