@@ -11,6 +11,7 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "axios": "^0.24.0",
+    "buffer": "^6.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
@@ -50,7 +51,7 @@
     ]
   },
   "devDependencies": {
-    "@types/xml2js": "^0.4.9"
-  },
-  "mini-css-extract-plugin": "2.4.5"
+    "@types/xml2js": "^0.4.9",
+    "mini-css-extract-plugin": "2.4.5"
+  }
 }
