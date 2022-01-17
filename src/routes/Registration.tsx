@@ -54,7 +54,7 @@ const Registration = (props: regProps) => {
   }
 
 
-  return ( loggedIn ? <Navigate to="/aboutyou" /> :
+  return ( loggedIn ? <Navigate to={`/play_stats/${username}`}  /> :
     (<form onSubmit={handleSubmit}>
       <div className="username-register">
         <label htmlFor="usernameInput">Create Username</label>

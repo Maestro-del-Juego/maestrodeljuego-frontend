@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer, RadarChart, PolarGrid, Radar, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
+import { PieChart, Pie, RadarChart, ResponsiveContainer, Tooltip, PolarGrid, Radar, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
 
 interface statProps {
   user: string
@@ -8,47 +8,47 @@ interface statProps {
 export default function PlayStats(props: statProps) {
 
   const dataTitle = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-    { name: 'Group E', value: 278 },
-    { name: 'Group F', value: 189 },
+    { name: 'Eclipse', value: 400 },
+    { name: 'Caylus', value: 300 },
+    { name: 'Dixit', value: 300 },
+    { name: 'Sushi Go!', value: 200 },
+    { name: 'Dominion', value: 278 },
+    { name: 'Bristol', value: 189 },
   ];
 
   const dataGenre = [
     {
-      subject: 'Math',
+      subject: 'Bidding',
       A: 120,
       B: 110,
       fullMark: 150,
     },
     {
-      subject: 'Chinese',
+      subject: 'Deck-Building',
       A: 98,
       B: 130,
       fullMark: 150,
     },
     {
-      subject: 'English',
+      subject: 'Dice',
       A: 86,
       B: 130,
       fullMark: 150,
     },
     {
-      subject: 'Geography',
+      subject: 'Area Control',
       A: 99,
       B: 100,
       fullMark: 150,
     },
     {
-      subject: 'Physics',
+      subject: 'War Game',
       A: 85,
       B: 90,
       fullMark: 150,
     },
     {
-      subject: 'History',
+      subject: 'Traditional Cards',
       A: 65,
       B: 85,
       fullMark: 150,
@@ -61,7 +61,6 @@ export default function PlayStats(props: statProps) {
       <div id="most-played">
         <div id="by-title">
           <h3>Most Played Games</h3>
-          <ResponsiveContainer width="100%" height="100%">
             <PieChart width={400} height={400}>
               <Pie
                 dataKey="value"
@@ -69,11 +68,11 @@ export default function PlayStats(props: statProps) {
                 cx="50%"
                 cy="50%"
                 outerRadius={80}
-                fill="#8884d8"
-                label
-              />
+              fill="#8884d8"
+              label
+            />
+            <Tooltip />
             </PieChart>
-          </ResponsiveContainer>
         </div>
         <div id="by-genre">
           <h3>Most Played Genres</h3>

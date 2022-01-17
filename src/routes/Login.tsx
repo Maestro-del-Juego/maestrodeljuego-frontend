@@ -34,7 +34,7 @@ const Login = (props: loginProps) => {
   }
 
   return (
-    loggedIn ? <Navigate to="/" /> :
+    loggedIn ? <Navigate to={`/play_stats/${username}`} /> :
       (<form onSubmit={handleSubmit}>
         {/* conditionally show error message */}
         {errors && <div className="bg-red white pa3">{errors}</div>}
