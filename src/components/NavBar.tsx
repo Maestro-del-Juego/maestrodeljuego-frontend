@@ -1,6 +1,7 @@
 import { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import image from '../assets/logo.png';
+import Login from '../routes/Login';
 
 interface navProps {
   user: string,
@@ -11,7 +12,9 @@ export default function NavBar(props: navProps) {
   return (
     <>
       <div id="nav-bar">
-        <img src={image} id="logo" title="Game Master" />
+        <Link to="/">
+          <img src={image} id="logo" title="Game Master" />
+        </Link>
         <div id="site-nav">
           <Link to="/">Your Collection</Link> |
           <Link to="/about">Wishlist</Link> |
@@ -21,11 +24,18 @@ export default function NavBar(props: navProps) {
         <div id="account-links">
           { (props.user === '') ?
             (<>
-            <Link to="/login">Login</Link>
-            <Link to="/registration">Register</Link>
+              <Link to="/login">Login</Link>
+              |
+              <Link to="/registration">Register</Link>
             </>)
             :
-            <button type="submit" onClick={props.logout}>Log Out</button>
+            (<div id="navbar-avatar">
+              <Link to="/user_page">
+                <img src="https://thumbs.dreamstime.com/b/vector-illustration-isolated-white-background-user-profile-avatar-black-line-icon-user-profile-avatar-black-solid-icon-121102166.jpg" title="User Avatar" id="avatar" />
+              </Link>
+              <Link to="/" onClick={props.logout} id="log-out">Log Out</Link>
+            </div>
+            )
           }
         </div>
       </div>
