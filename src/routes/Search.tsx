@@ -1,5 +1,5 @@
-import SearchBar from "../Components/SearchBar"
-import SearchResult from "../Components/SearchResult"
+import SearchBar from "../components/SearchBar"
+import SearchResult from "../components/SearchResult"
 import { useState } from "react"
 
 export default function Search() {
