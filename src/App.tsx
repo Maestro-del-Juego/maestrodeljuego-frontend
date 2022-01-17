@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from './Components/NavBar';
+import NavBar from './components/NavBar';
 import useLocalStorageState from 'use-local-storage-state';
-import Login from './Routes/Login';
-import Registration from './Routes/Registration';
-import Home from "./Routes/Home";
-import Search from "./Routes/Search";
-import GameInfoPage from "./Routes/GameInfoPage"
+import Login from './routes/Login';
+import Registration from './routes/Registration';
+import Home from "./routes/Home";
+import Search from "./routes/Search";
+import GameInfoPage from "./routes/GameInfoPage"
 
 
 function App() {

@@ -1,4 +1,4 @@
-import FeatureBlock from "../Components/FeatureBlock"
+import FeatureBlock from "../components/FeatureBlock"
 
 export default function Home() {
     return (
