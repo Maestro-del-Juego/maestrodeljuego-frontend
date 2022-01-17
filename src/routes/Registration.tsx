@@ -13,6 +13,7 @@ const Registration = (props: regProps) => {
   const [retypePassword, setRetypePassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [errors, setErrors] = useState('');
+  const [avatar, setAvatar] = useState('');
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
@@ -85,6 +86,17 @@ const Registration = (props: regProps) => {
           id="retypePasswordInput"
           value={retypePassword}
           onChange={(event) => setRetypePassword(event.target.value)}
+        />
+      </div>
+      <div className="mv2">
+        <label className="db mb2" htmlFor="avatarInput">
+          Include an HTML image link to upload an avatar for your account.
+        </label>
+        <input
+          type="text"
+          id="avatarInput"
+          value={avatar}
+          onChange={(event) => setAvatar(event.target.value)}
         />
       </div>
       <div className="mv2">
