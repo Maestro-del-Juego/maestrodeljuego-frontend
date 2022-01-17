@@ -50,7 +50,8 @@
   margin: 5px;
 }
 
-#site-nav, #account-links {
+#site-nav,
+#account-links {
   margin: auto;
 }
 
@@ -59,7 +60,9 @@
   background-color: ;
 }
 
-.feature-block h3, p, img {
+.feature-block h3,
+p,
+img {
   text-align: left;
 }
 .feature-block h3 {
@@ -70,10 +73,10 @@
   clear: left;
 }
 .feature-block .feature-icon {
-    width: 40px;
-    margin-bottom: 0px;
-    margin-right: 10px;
-    float: left;
+  width: 40px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+  float: left;
 }
 
 .feature-list {
@@ -86,7 +89,7 @@
   margin-left: 3%;
   margin-right: 3%;
   width: 22%;
-  }
+}
 .home-image {
   display: block;
   margin-left: auto;
@@ -112,4 +115,13 @@
 a {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+#settings-avatar {
+  height: 300px;
+}
+
+#top-settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
