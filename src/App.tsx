@@ -9,6 +9,7 @@ import Registration from './routes/Registration';
 import Home from "./routes/Home";
 import Search from "./routes/Search";
 import GameInfoPage from "./routes/GameInfoPage"
+import PlayStats from './routes/PlayStats';
 
 
 function App() {
@@ -58,6 +59,8 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route
           path='games/:gameId' element={<GameInfoPage />} />
+        <Route
+          path='play_stats/:user' element={<PlayStats user={user} />} />
       </Routes>
     </Router>
   );
