@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 interface resultsProps {
     gameId: number;
     gameName: string;
@@ -5,6 +7,9 @@ interface resultsProps {
 
 export default function SearchResult(props: resultsProps) {
     return (
-        <div>{props.gameName}</div>
+        <div className="search-result-card">
+            <Link to={`/games/${props.gameId}`} key={props.gameId}>
+            <div>{props.gameName}</div> </Link>
+        </div>
     )
 }
