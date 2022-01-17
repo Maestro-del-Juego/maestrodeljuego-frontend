@@ -95,3 +95,21 @@
   height: 400px;
   width: 70%;
 }
+
+#avatar {
+  height: 80px;
+}
+
+#navbar-avatar {
+  display: flex;
+  flex-direction: column;
+}
+
+#log-out {
+  text-align: center;
+}
+
+a {
+  margin-left: 5px;
+  margin-right: 5px;
+}
