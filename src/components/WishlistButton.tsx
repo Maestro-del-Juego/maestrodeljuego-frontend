@@ -2,10 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 
 interface wishlistButtonProps {
-  token: string;
-  gameId: any;
-  wishlisted: boolean;
-  setWishlisted: any;
+    token: string;
+    gameId: any;
+    wishlisted: boolean;
+    setWishlisted: any;
+    setOwned: any;
 }
 
 export default function WishlistButton(props: wishlistButtonProps) {
@@ -28,6 +29,7 @@ export default function WishlistButton(props: wishlistButtonProps) {
       .then((response) => {
         if (response) {
           props.setWishlisted(response.data.wishlisted);
+          props.setOwned(false)
         }
       });
   };
@@ -38,7 +40,7 @@ export default function WishlistButton(props: wishlistButtonProps) {
           className="wishlist-button"
           onClick={(event) => handleSubmit(event)}
         >
-          Wishlist Button Text
+          {props.wishlisted === true ? (<>Remove from wishlist</>) : (<>Add to wishlist</>)}
         </button>
       ) : (
         <></>
