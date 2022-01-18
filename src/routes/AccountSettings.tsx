@@ -5,103 +5,95 @@ interface settingsProps {
   user: string;
   avatar: string;
   authToken: string;
+  updateAvatar: any;
 }
 export default function AccountSettings(props: settingsProps) {
   const [avExpanded, setAvExpanded] = useState(false);
   const [newAv, setNewAv] = useState(props.avatar);
-  const [currentUserName, setCurrentUserName] = useState('');
+  const [currentPassUser, setCurrentPassUser] = useState('');
   const [newUserName, setNewUserName] = useState('');
+  const [reNewUsername, setReNewUsername] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [reNewPassword, setReNewPassword] = useState('');
-  const [badCurrentUser, setBadCurrentUser] = useState('');
+  const [badCurrentPassUser, setBadCurrentPassUser] = useState('');
   const [badNewUser, setBadNewUser] = useState('');
   const [badCurrentPass, setBadCurrentPass] = useState('');
   const [badNewPass, setBadNewPass] = useState('');
-  const [badReNewPass, setBadReNewPass] = useState('');
 
   const handleAvSubmit = (event: any) => {
+    event.preventDefault();
+    console.log(newAv);
+    console.log(props.authToken);
     axios
-      .post('https://maestrodeljuego.herokuapp.com/auth/token/login/', {
-        username: props.user,
-        password: props.avatar,
+      .patch(
+        'https://maestrodeljuego.herokuapp.com/auth/users/me/',
+        {
+          avatar: `${newAv}`,
+        },
+        {
+          headers: {
+            Authorization: `Token ${props.authToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        props.updateAvatar(response.data.avatar);
+        setNewAv('');
       })
-      .then((data) => {
-        console.log(data);
-        // if (data && data.data.auth_token) {
-        //   props.setAuth(username, data.data.auth_token)
-        //   setLoggedIn(true)
-        //   props.updateAvatar("")
-        //   axios.get('https://questions-t10.herokuapp.com/auth/users', {
-        //     headers: {
-        //       "Authorization": `Token ${data.data.auth_token}`
-        // }
-      })
-      //     .then(response => {
-      //       axios.get(`https://questions-t10.herokuapp.com/user/${response.data[0].pk}/`)
-      //         .then(response => {
-      //           console.log(response)
-      //         })
-      //     })
-      // }
-      // })
       .catch((error) => alert(error.message));
   };
 
   const handlePassSubmit = (event: any) => {
+    event.preventDefault();
+    if (newPassword !== reNewPassword) {
+      setBadNewPass("New passwords don't match!");
+    }
     axios
-      .post('https://maestrodeljuego.herokuapp.com/auth/token/login/', {
-        username: props.user,
-        password: props.avatar,
+      .patch(
+        'https://maestrodeljuego.herokuapp.com/auth/users/me/',
+        {
+          new_password: `${newPassword}`,
+          re_new_password: `${reNewPassword}`,
+          current_password: `${currentPassword}`,
+        },
+        {
+          headers: {
+            Authorization: `Token ${props.authToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
       })
-      .then((data) => {
-        console.log(data);
-        // if (data && data.data.auth_token) {
-        //   props.setAuth(username, data.data.auth_token)
-        //   setLoggedIn(true)
-        //   props.updateAvatar("")
-        //   axios.get('https://questions-t10.herokuapp.com/auth/users', {
-        //     headers: {
-        //       "Authorization": `Token ${data.data.auth_token}`
-        // }
-      })
-      //     .then(response => {
-      //       axios.get(`https://questions-t10.herokuapp.com/user/${response.data[0].pk}/`)
-      //         .then(response => {
-      //           console.log(response)
-      //         })
-      //     })
-      // }
-      // })
-      .catch((error) => alert(error.message));
+      .catch((error) =>
+        setBadCurrentPass('Current password submitted was wrong.')
+      );
   };
 
   const handleUserSubmit = (event: any) => {
+    event.preventDefault();
+    if (newUserName !== reNewUsername) {
+      setBadNewUser("New usernames don't match!");
+    }
     axios
-      .post('https://maestrodeljuego.herokuapp.com/auth/token/login/', {
-        username: props.user,
-        password: props.avatar,
+      .patch(
+        'https://maestrodeljuego.herokuapp.com/auth/users/me/',
+        {
+          new_username: `${newUserName}`,
+          re_new_username: `${reNewUsername}`,
+          current_password: `${currentPassword}`,
+        },
+        {
+          headers: {
+            Authorization: `Token ${props.authToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
       })
-      .then((data) => {
-        console.log(data);
-        // if (data && data.data.auth_token) {
-        //   props.setAuth(username, data.data.auth_token)
-        //   setLoggedIn(true)
-        //   props.updateAvatar("")
-        //   axios.get('https://questions-t10.herokuapp.com/auth/users', {
-        //     headers: {
-        //       "Authorization": `Token ${data.data.auth_token}`
-        // }
-      })
-      //     .then(response => {
-      //       axios.get(`https://questions-t10.herokuapp.com/user/${response.data[0].pk}/`)
-      //         .then(response => {
-      //           console.log(response)
-      //         })
-      //     })
-      // }
-      // })
-      .catch((error) => alert(error.message));
+      .catch((error) => setBadCurrentPassUser('Password submitted was wrong.'));
   };
 
   return (
@@ -131,7 +123,7 @@ export default function AccountSettings(props: settingsProps) {
               <label htmlFor="change-av">Submit a new HTML image link: </label>
               <input
                 type="text"
-                value={props.avatar}
+                value={newAv}
                 id="change-av"
                 onChange={(event) => setNewAv(event.target.value)}
               />
@@ -142,14 +134,14 @@ export default function AccountSettings(props: settingsProps) {
         <div id="change-username">
           <h2>Change Username</h2>
           <form onSubmit={handleUserSubmit}>
-            <label htmlFor="current-user-name">Current Username</label>
+            <label htmlFor="current-pass-username">Password</label>
             <input
-              type="text"
-              id="current-user-name"
-              value={currentUserName}
-              onChange={(event) => setCurrentUserName(event.target.value)}
+              type="password"
+              id="current-pass-username"
+              value={currentPassUser}
+              onChange={(event) => setCurrentPassUser(event.target.value)}
             ></input>
-            {badCurrentUser === '' ? null : <p>{badCurrentUser}</p>}
+            {badCurrentPassUser === '' ? null : <p>{badCurrentPassUser}</p>}
             <label htmlFor="new-user-name">New Username</label>
             <input
               type="text"
@@ -158,6 +150,13 @@ export default function AccountSettings(props: settingsProps) {
               onChange={(event) => setNewUserName(event.target.value)}
             ></input>
             {badNewUser === '' ? null : <p>{badNewUser}</p>}
+            <label htmlFor="re-new-user-name">Re-enter New Username</label>
+            <input
+              type="text"
+              id="re-new-user-name"
+              value={reNewUsername}
+              onChange={(event) => setReNewUsername(event.target.value)}
+            ></input>
           </form>
         </div>
       </div>
@@ -187,7 +186,6 @@ export default function AccountSettings(props: settingsProps) {
             value={reNewPassword}
             onChange={(event) => setReNewPassword(event.target.value)}
           ></input>
-          {badReNewPass === '' ? null : <p>{badReNewPass}</p>}
         </form>
       </div>
     </div>

@@ -61,7 +61,7 @@ function App() {
         <Route
           path="/user_page/:user"
           element={
-            <AccountSettings user={user} avatar={avatar} authToken={token} />
+            <AccountSettings user={user} avatar={avatar} authToken={token} updateAvatar={updateAvatar} />
           }
         />
         {/* <Route path="/search" element={<Search />} /> */}

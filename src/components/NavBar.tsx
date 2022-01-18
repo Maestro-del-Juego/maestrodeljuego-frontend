@@ -32,7 +32,7 @@ export default function NavBar(props: navProps) {
             </>
           ) : (
             <div id="navbar-avatar">
-              <Link to="/user_page">
+              <Link to={`/user_page/${props.user}`}>
                 <img
                   src={
                     props.avatar === '' || props.avatar === null
