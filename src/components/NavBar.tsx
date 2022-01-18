@@ -5,13 +5,14 @@ interface navProps {
   user: string;
   logout: any;
   avatar: string;
+  auth: string;
 }
 
 export default function NavBar(props: navProps) {
   return (
     <>
       <div id="nav-bar">
-        <Link to={props.user === '' ? '/' : `/play_stats/${props.user}`}>
+        <Link to={props.auth === '' ? '/' : `/play_stats/${props.user}`}>
           <img
             src={image}
             id="logo"

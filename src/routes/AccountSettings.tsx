@@ -6,10 +6,11 @@ interface settingsProps {
   avatar: string;
   authToken: string;
   updateAvatar: any;
+  updateUser: any;
 }
 export default function AccountSettings(props: settingsProps) {
   const [avExpanded, setAvExpanded] = useState(false);
-  const [newAv, setNewAv] = useState(props.avatar);
+  const [newAv, setNewAv] = useState('');
   const [currentPassUser, setCurrentPassUser] = useState('');
   const [newUserName, setNewUserName] = useState('');
   const [reNewUsername, setReNewUsername] = useState('');
@@ -20,6 +21,8 @@ export default function AccountSettings(props: settingsProps) {
   const [badNewUser, setBadNewUser] = useState('');
   const [badCurrentPass, setBadCurrentPass] = useState('');
   const [badNewPass, setBadNewPass] = useState('');
+  const [currentAv, setCurrentAv] = useState(props.avatar);
+  const [currentUsername, setCurrentUsername] = useState(props.user);
 
   const handleAvSubmit = (event: any) => {
     event.preventDefault();
@@ -38,7 +41,9 @@ export default function AccountSettings(props: settingsProps) {
         }
       )
       .then((response) => {
-        props.updateAvatar(response.data.avatar);
+        console.log(response);
+        props.updateAvatar(newAv);
+        setCurrentAv(newAv);
         setNewAv('');
       })
       .catch((error) => alert(error.message));
@@ -94,6 +99,8 @@ export default function AccountSettings(props: settingsProps) {
       .then((response) => {
         {
           console.log(response);
+          setCurrentUsername(newUserName);
+          props.updateUser(newUserName);
           setNewUserName('');
           setReNewUsername('');
           setCurrentPassUser('');
@@ -109,14 +116,14 @@ export default function AccountSettings(props: settingsProps) {
         <div id="settings-avatar-div">
           <img
             src={
-              props.avatar
-                ? props.avatar
+              currentAv
+                ? currentAv
                 : 'https://thumbs.dreamstime.com/b/vector-illustration-isolated-white-background-user-profile-avatar-black-line-icon-user-profile-avatar-black-solid-icon-121102166.jpg'
             }
             alt="User Avatar"
             id="settings-avatar"
           ></img>
-          <h3>{props.user}</h3>
+          <h3>{currentUsername}</h3>
           <button
             onClick={() => {
               setAvExpanded(!avExpanded);
