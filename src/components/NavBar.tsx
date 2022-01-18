@@ -1,7 +1,5 @@
-import { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import image from '../assets/logo.png';
-import Login from '../routes/Login';
 
 interface navProps {
   user: string;
@@ -12,8 +10,8 @@ export default function NavBar(props: navProps) {
   return (
     <>
       <div id="nav-bar">
-        <Link to="/">
-          <img src={image} id="logo" title="Game Master" />
+        <Link to={(props.user === '') ? "/" : `/play_stats/${props.user}` }>
+          <img src={image} id="logo" title="Game Master" alt="Game Master Logo" />
         </Link>
         <div id="site-nav">
           <Link to="/">Your Collection</Link> |<Link to="/about">Wishlist</Link>{' '}

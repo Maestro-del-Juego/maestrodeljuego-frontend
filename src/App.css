@@ -116,6 +116,7 @@ a {
   margin-right: 5px;
 }
 
+
 #settings-avatar {
   height: 300px;
 }
@@ -123,4 +124,19 @@ a {
 #top-settings {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+#by-genre {
+  width: 400px;
+  height: 400px;
+  margin-left: 50px;
+}
+#by-title {
+  width: 400px;
+  height: 400px;
+  margin-left: 50px;
+}
+
+#most-played {
+  display: flex;
 }

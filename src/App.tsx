@@ -10,6 +10,7 @@ import AccountSettings from './routes/AccountSettings';
 import Home from "./routes/Home";
 import Search from "./routes/Search";
 import GameInfoPage from "./routes/GameInfoPage"
+import PlayStats from './routes/PlayStats';
 
 function App() {
   const [user, setUser] = useLocalStorageState('gameMasterUser', '');
@@ -67,6 +68,8 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route
           path='games/:gameId' element={<GameInfoPage />} />
+        <Route
+          path='play_stats/:user' element={<PlayStats user={user} token={token} />} />
       </Routes>
     </Router>
   );
