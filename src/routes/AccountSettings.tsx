@@ -65,6 +65,9 @@ export default function AccountSettings(props: settingsProps) {
       )
       .then((response) => {
         console.log(response);
+        setNewPassword('');
+        setReNewPassword('');
+        setCurrentPassword('');
       })
       .catch((error) =>
         setBadCurrentPass('Current password submitted was wrong.')
@@ -82,7 +85,7 @@ export default function AccountSettings(props: settingsProps) {
         {
           new_username: `${newUserName}`,
           re_new_username: `${reNewUsername}`,
-          current_password: `${currentPassword}`,
+          current_password: `${currentPassUser}`,
         },
         {
           headers: {
@@ -91,7 +94,12 @@ export default function AccountSettings(props: settingsProps) {
         }
       )
       .then((response) => {
-        console.log(response);
+        {
+          console.log(response);
+          setNewUserName('');
+          setReNewUsername('');
+          setCurrentPassUser('');
+        }
       })
       .catch((error) => setBadCurrentPassUser('Password submitted was wrong.'));
   };
