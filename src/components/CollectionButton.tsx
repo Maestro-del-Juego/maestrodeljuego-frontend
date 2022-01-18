@@ -6,6 +6,7 @@ interface collectionButtonProps {
     gameId: any;
     owned: boolean;
     setOwned: any;
+    setWishlisted: any;
 }
 
 export default function CollectionButton(props: collectionButtonProps) {
@@ -23,7 +24,9 @@ export default function CollectionButton(props: collectionButtonProps) {
         }
         ).then(response => {
             if (response) {
+                console.log(response)
                 props.setOwned(response.data.owned)
+                props.setWishlisted(false)
             }})
     }
     return (
@@ -33,7 +36,7 @@ export default function CollectionButton(props: collectionButtonProps) {
               className="collection-button"
               onClick={(event) => handleSubmit(event)}
             >
-              Collection Button Text
+              {props.owned === true ? (<>Remove from collection</>) : (<>Add to collection</>)}
             </button>
           ) : (
             <></>

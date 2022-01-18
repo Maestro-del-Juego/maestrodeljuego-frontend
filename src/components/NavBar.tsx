@@ -16,6 +16,7 @@ export default function NavBar(props: navProps) {
         <div id="site-nav">
           <Link to="/">Your Collection</Link> |<Link to="/about">Wishlist</Link>{' '}
           |<Link to="/">Browse Games</Link> |
+          <Link to="/search">Search Games</Link> |
           <Link to="/about">Game Night!</Link>
         </div>
         <div id="account-links">
