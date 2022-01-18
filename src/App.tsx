@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -13,9 +13,9 @@ import GameInfoPage from './routes/GameInfoPage';
 import PlayStats from './routes/PlayStats';
 
 function App() {
-  const [user, setUser] = useLocalStorageState('gameMasterUser', '');
+  const [user, setUser] = useState('');
   const [token, setToken] = useLocalStorageState('gameMasterToken', '');
-  const [avatar, setAvatar] = useLocalStorageState('gameMasterAvatar', '');
+  const [avatar, setAvatar] = useState('');
 
   function setAuth(username: string, token: string) {
     setUser(username);
@@ -23,6 +23,8 @@ function App() {
   }
 
   const updateAvatar = (newImg: string) => setAvatar(newImg);
+
+  const updateUser = (newUser: string) => setUser(newUser);
 
   const logoutHandler = () => {
     axios
@@ -45,7 +47,7 @@ function App() {
 
   return (
     <Router>
-      <NavBar user={user} logout={logoutHandler} />
+      <NavBar user={user} logout={logoutHandler} avatar={avatar} auth={token} />
       <Routes>
         <Route
           path="/login"
@@ -61,7 +63,13 @@ function App() {
         <Route
           path="/user_page/:user"
           element={
-            <AccountSettings user={user} avatar={avatar} authToken={token} />
+            <AccountSettings
+              user={user}
+              avatar={avatar}
+              authToken={token}
+              updateAvatar={updateAvatar}
+              updateUser={updateUser}
+            />
           }
         />
         {/* <Route path="/search" element={<Search />} /> */}

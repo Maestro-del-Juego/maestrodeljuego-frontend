@@ -100,6 +100,8 @@ img {
 
 #avatar {
   height: 80px;
+  width: 80px;
+  border-radius: 100%;
 }
 
 #navbar-avatar {
@@ -120,7 +122,8 @@ a {
   height: 200px;
 }
 
-.game-info-card, .game-info-card p {
+.game-info-card,
+.game-info-card p {
   text-align: center;
 }
 
@@ -134,6 +137,8 @@ a {
 
 #settings-avatar {
   height: 300px;
+  width: 300px;
+  border-radius: 100%;
 }
 
 #top-settings {

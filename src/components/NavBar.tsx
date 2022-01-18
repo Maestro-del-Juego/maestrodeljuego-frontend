@@ -4,14 +4,21 @@ import image from '../assets/logo.png';
 interface navProps {
   user: string;
   logout: any;
+  avatar: string;
+  auth: string;
 }
 
 export default function NavBar(props: navProps) {
   return (
     <>
       <div id="nav-bar">
-        <Link to={(props.user === '') ? "/" : `/play_stats/${props.user}` }>
-          <img src={image} id="logo" title="Game Master" alt="Game Master Logo" />
+        <Link to={props.auth === '' ? '/' : `/play_stats/${props.user}`}>
+          <img
+            src={image}
+            id="logo"
+            title="Game Master"
+            alt="Game Master Logo"
+          />
         </Link>
         <div id="site-nav">
           <Link to="/">Your Collection</Link> |<Link to="/about">Wishlist</Link>{' '}
@@ -29,7 +36,11 @@ export default function NavBar(props: navProps) {
             <div id="navbar-avatar">
               <Link to={`/user_page/${props.user}`}>
                 <img
-                  src="https://thumbs.dreamstime.com/b/vector-illustration-isolated-white-background-user-profile-avatar-black-line-icon-user-profile-avatar-black-solid-icon-121102166.jpg"
+                  src={
+                    props.avatar === '' || props.avatar === null
+                      ? 'https://thumbs.dreamstime.com/b/vector-illustration-isolated-white-background-user-profile-avatar-black-line-icon-user-profile-avatar-black-solid-icon-121102166.jpg'
+                      : props.avatar
+                  }
                   title="User Avatar"
                   id="avatar"
                 />
