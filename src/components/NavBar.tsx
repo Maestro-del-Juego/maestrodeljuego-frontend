@@ -5,7 +5,8 @@ import Login from '../routes/Login';
 
 interface navProps {
   user: string,
-  logout: any
+  logout: any,
+  avatar: string
 }
 
 export default function NavBar(props: navProps) {
@@ -31,7 +32,7 @@ export default function NavBar(props: navProps) {
             :
             (<div id="navbar-avatar">
               <Link to="/user_page">
-                <img src="https://thumbs.dreamstime.com/b/vector-illustration-isolated-white-background-user-profile-avatar-black-line-icon-user-profile-avatar-black-solid-icon-121102166.jpg" title="User Avatar" id="avatar" />
+                <img src={(props.avatar === '' || props.avatar === null) ? "https://thumbs.dreamstime.com/b/vector-illustration-isolated-white-background-user-profile-avatar-black-line-icon-user-profile-avatar-black-solid-icon-121102166.jpg" : props.avatar} title="User Avatar" id="avatar" />
               </Link>
               <Link to="/" onClick={props.logout} id="log-out">Log Out</Link>
             </div>

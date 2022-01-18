@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router';
+import { setUncaughtExceptionCaptureCallback } from 'process';
 
 interface loginProps {
   setAuth: any,
@@ -24,17 +25,24 @@ const Login = (props: loginProps) => {
       .then((data) => {
         console.log(data)
         if (data && data.data.auth_token) {
-          console.log(data.data.auth_token)
           props.setAuth(username, data.data.auth_token)
+          setToken(data.data.auth_token)
           setLoggedIn(true)
-          }
-        })
-      .catch((error) => {setErrors("Username or password is incorrect.")})
-    
+          console.log(data.data.auth_token)
+          axios.get('https://maestrodeljuego.herokuapp.com/auth/users/me', {
+            headers: {
+              "Authorization": `Token ${data.data.auth_token}`
+            }
+          })
+            .then(results => props.updateAvatar(results.data.avatar))
+            .catch(error => console.log(error))
+        }
+      })
+      .catch((error) => { setErrors("Username or password is incorrect.") })
   }
-
+    
   return (
-    loggedIn ? <Navigate to="/" /> :
+    // loggedIn ? <Navigate to="/" /> :
       (<form onSubmit={handleSubmit}>
         {/* conditionally show error message */}
         {errors && <div className="bg-red white pa3">{errors}</div>}

@@ -44,7 +44,7 @@ function App() {
 
   return (
     <Router>
-      <NavBar user={user} logout={logoutHandler}/>
+      <NavBar user={user} logout={logoutHandler} avatar={avatar} />
       <Routes>
         <Route
           path='/login'
