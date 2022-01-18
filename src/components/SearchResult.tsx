@@ -8,8 +8,9 @@ interface resultsProps {
 export default function SearchResult(props: resultsProps) {
     return (
         <div className="search-result-card">
-            <Link to={`/games/${props.gameId}`} key={props.gameId}>
-            <div>{props.gameName}</div> </Link>
+            <Link className="search-result-link" to={`/games/${props.gameId}`} key={props.gameId}>
+                {props.gameName}
+            </Link>
         </div>
     )
 }
