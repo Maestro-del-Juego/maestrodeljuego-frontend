@@ -4,7 +4,6 @@ import axios from 'axios'
 
 export default function GameInfoPage() {
     let params = useParams()
-    const [gameData, setGameData] = useState([])
     const [gameTitle, setGameTitle] = useState("")
     const [pubYear, setPubYear] = useState(null)
     const [minPlayers, setMinPlayers] = useState(null)
@@ -23,18 +22,16 @@ export default function GameInfoPage() {
                 setMaxPlayers(response.data.max_players)
                 setPlaytime(response.data.playtime)
                 setImageUrl(response.data.image)
-                setGameData(response.data)
                 console.log(response.data)
             })
     }, [params.gameId, gameTitle])
 
     return (
-        <div>
+        <div className="game-info-card">
             <h2>{gameTitle}</h2>
-            <img className="game-box-image" alt={gameTitle} src={imageUrl}></img>
             <p>{pubYear}</p>
-            <p>{minPlayers} - {maxPlayers} players</p>
-            <p>Approximate playtime: {playtime} minutes</p>
+            <img className="game-box-image" alt={gameTitle} src={imageUrl}></img>
+            <p>{minPlayers} - {maxPlayers} Players | {playtime} Min Playtime</p>
         </div>
     )
 }
