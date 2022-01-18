@@ -50,8 +50,8 @@ export default function AccountSettings(props: settingsProps) {
       setBadNewPass("New passwords don't match!");
     }
     axios
-      .patch(
-        'https://maestrodeljuego.herokuapp.com/auth/users/me/',
+      .post(
+        'https://maestrodeljuego.herokuapp.com/auth/users/set_password/',
         {
           new_password: `${newPassword}`,
           re_new_password: `${reNewPassword}`,
@@ -69,9 +69,7 @@ export default function AccountSettings(props: settingsProps) {
         setReNewPassword('');
         setCurrentPassword('');
       })
-      .catch((error) =>
-        setBadCurrentPass('Current password submitted was wrong.')
-      );
+      .catch((error) => console.log(error));
   };
 
   const handleUserSubmit = (event: any) => {
@@ -80,8 +78,8 @@ export default function AccountSettings(props: settingsProps) {
       setBadNewUser("New usernames don't match!");
     }
     axios
-      .patch(
-        'https://maestrodeljuego.herokuapp.com/auth/users/me/',
+      .post(
+        'https://maestrodeljuego.herokuapp.com/auth/users/set_username/',
         {
           new_username: `${newUserName}`,
           re_new_username: `${reNewUsername}`,
@@ -101,7 +99,7 @@ export default function AccountSettings(props: settingsProps) {
           setCurrentPassUser('');
         }
       })
-      .catch((error) => setBadCurrentPassUser('Password submitted was wrong.'));
+      .catch((error) => console.log(error));
   };
 
   return (

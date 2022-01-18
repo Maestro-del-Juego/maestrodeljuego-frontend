@@ -41,6 +41,7 @@ const Registration = (props: regProps) => {
               if (data && data.data.auth_token) {
                 props.setAuth(username, data.data.auth_token);
                 setLoggedIn(true);
+                props.updateAvatar(data.data.avatar);
                 props.updateAvatar('');
               }
             })
