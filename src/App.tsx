@@ -61,12 +61,20 @@ function App() {
         <Route
           path="/user_page/:user"
           element={
-            <AccountSettings user={user} avatar={avatar} authToken={token} updateAvatar={updateAvatar} />
+            <AccountSettings
+              user={user}
+              avatar={avatar}
+              authToken={token}
+              updateAvatar={updateAvatar}
+            />
           }
         />
         {/* <Route path="/search" element={<Search />} /> */}
         <Route path="/search" element={<Search />} />
-        <Route path="games/:gameId" element={<GameInfoPage />} />
+        <Route
+          path="games/:gameId"
+          element={<GameInfoPage token={token} user={user} />}
+        />
         <Route
           path="play_stats/:user"
           element={<PlayStats user={user} token={token} />}

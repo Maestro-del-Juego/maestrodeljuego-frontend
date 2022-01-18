@@ -22,6 +22,7 @@ export default function Search() {
             : ''}
         {resultsData.map(({id, name}: any) => (
         <SearchResult
+            key={id}
             gameId={id}
             gameName={name}
         />

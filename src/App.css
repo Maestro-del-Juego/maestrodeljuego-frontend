@@ -117,6 +117,25 @@ a {
   margin-right: 5px;
 }
 
+<<<<<<< HEAD
+=======
+.game-box-image {
+  height: 200px;
+}
+
+.game-info-card, .game-info-card p {
+  text-align: center;
+}
+
+.game-info-card h6 {
+  margin-top: 0px;
+}
+
+.game-info-card h2 {
+  margin-bottom: 4px;
+}
+
+>>>>>>> main
 #settings-avatar {
   height: 300px;
   border-radius: 100%;
