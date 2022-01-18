@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router';
-import { setUncaughtExceptionCaptureCallback } from 'process';
 
 interface loginProps {
   setAuth: any,

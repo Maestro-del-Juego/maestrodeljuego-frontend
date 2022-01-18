@@ -157,6 +157,7 @@ export default function AccountSettings(props: settingsProps) {
               value={reNewUsername}
               onChange={(event) => setReNewUsername(event.target.value)}
             ></input>
+            <button type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -186,6 +187,7 @@ export default function AccountSettings(props: settingsProps) {
             value={reNewPassword}
             onChange={(event) => setReNewPassword(event.target.value)}
           ></input>
+          <button type="submit">Submit</button>
         </form>
       </div>
     </div>
