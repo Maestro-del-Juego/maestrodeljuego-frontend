@@ -1,8 +1,10 @@
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { PieChart, Pie, RadarChart, ResponsiveContainer, Tooltip, PolarGrid, Radar, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
 
 interface statProps {
-  user: string
+  user: string, 
+  token: string
 }
 
 export default function PlayStats(props: statProps) {
@@ -54,6 +56,21 @@ export default function PlayStats(props: statProps) {
       fullMark: 150,
     },
   ];
+
+  useEffect(() => {
+    const loadData = () => {
+      try {
+        axios.get('https://maestrodeljuego.herokuapp.com/library/', {headers: {
+          "Authorization": `Token ${props.token}`
+        }})
+          .then(result => console.log(result))
+          .catch(error => console.log(error))
+      } catch(error) {
+        console.log(error)
+      }
+    }
+    loadData();
+  }, [])
 
   return (
     <div id="play-stats-page">

@@ -60,7 +60,7 @@ function App() {
         <Route
           path='games/:gameId' element={<GameInfoPage />} />
         <Route
-          path='play_stats/:user' element={<PlayStats user={user} />} />
+          path='play_stats/:user' element={<PlayStats user={user} token={token} />} />
       </Routes>
     </Router>
   );

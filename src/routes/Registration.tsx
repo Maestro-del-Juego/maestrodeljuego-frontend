@@ -34,17 +34,6 @@ const Registration = (props: regProps) => {
               props.setAuth(username, data.data.auth_token)
               setLoggedIn(true)
               props.updateAvatar("")
-              axios.get('https://questions-t10.herokuapp.com/auth/users', {
-                headers: {
-                  "Authorization": `Token ${data.data.auth_token}`
-                }
-              })
-                .then(response => {
-                  axios.get(`https://questions-t10.herokuapp.com/user/${response.data[0].pk}/`)
-                    .then(response => {
-                      console.log(response)
-                    })
-                })
             }
           })
         .catch((error) => alert(error.message))
