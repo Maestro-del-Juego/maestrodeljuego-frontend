@@ -11,14 +11,20 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "axios": "^0.24.0",
+    "buffer": "^6.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "stream": "^0.0.2",
+    "timers": "^0.1.1",
     "tslib": "^2.3.1",
     "typescript": "^4.5.4",
+    "use-local-storage": "^2.2.6",
     "use-local-storage-state": "^13.0.0",
-    "web-vitals": "^2.1.3"
+    "web-vitals": "^2.1.3",
+    "xml2js": "^0.4.23",
+    "xml2json": "^0.12.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/xml2js": "^0.4.9",
     "mini-css-extract-plugin": "2.4.5"
   }
 }

@@ -6,9 +6,10 @@ import NavBar from './components/NavBar';
 import useLocalStorageState from 'use-local-storage-state';
 import Login from './routes/Login';
 import Registration from './routes/Registration';
-import Home from './routes/Home';
 import AccountSettings from './routes/AccountSettings';
-// import Search from "./routes/Search";
+import Home from "./routes/Home";
+import Search from "./routes/Search";
+import GameInfoPage from "./routes/GameInfoPage"
 
 function App() {
   const [user, setUser] = useLocalStorageState('gameMasterUser', '');
@@ -63,6 +64,9 @@ function App() {
           }
         />
         {/* <Route path="/search" element={<Search />} /> */}
+        <Route path="/search" element={<Search />} />
+        <Route
+          path='games/:gameId' element={<GameInfoPage />} />
       </Routes>
     </Router>
   );
