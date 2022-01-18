@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useState } from 'react';
 
 interface collectionButtonProps {
-    token: string
-    gameId: number
+    token: string;
+    gameId: any;
     owned: boolean;
     setOwned: any;
 }
@@ -26,5 +26,18 @@ export default function CollectionButton(props: collectionButtonProps) {
                 props.setOwned(response.data.owned)
             }})
     }
-    return (<button className="collection-button" onClick={(event) => handleSubmit(event)}>Collection Button Text</button>)
+    return (
+        <>
+          {props.token !== "" ? (
+            <button
+              className="collection-button"
+              onClick={(event) => handleSubmit(event)}
+            >
+              Collection Button Text
+            </button>
+          ) : (
+            <></>
+          )}
+        </>
+      );
 }

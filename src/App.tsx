@@ -55,9 +55,12 @@ function App() {
           element={<Registration setAuth={setAuth} updateAvatar={updateAvatar} />} 
         />
         <Route path="/" element={<Home />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/search" element={<Search />}
+        />
         <Route
-          path='games/:gameId' element={<GameInfoPage />} />
+          path="games/:gameId"
+          element={<GameInfoPage token={token} user={user} />}
+        />
       </Routes>
     </Router>
   );
