@@ -29,9 +29,11 @@ export default function GameInfoPage() {
     return (
         <div className="game-info-card">
             <h2>{gameTitle}</h2>
-            <p>{pubYear}</p>
+            <h6>({pubYear})</h6>
             <img className="game-box-image" alt={gameTitle} src={imageUrl}></img>
             <p>{minPlayers} - {maxPlayers} Players | {playtime} Min Playtime</p>
+            <button className="wishlist-button-add">Add to Wishlist</button>
+            <button className="collection-button-add">Add to Collection</button>
         </div>
     )
 }
