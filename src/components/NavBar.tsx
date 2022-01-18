@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import image from '../assets/logo.png';
 
 interface navProps {
-  user: string,
-  logout: any
+  user: string;
+  logout: any;
 }
 
 export default function NavBar(props: navProps) {
@@ -14,31 +14,34 @@ export default function NavBar(props: navProps) {
           <img src={image} id="logo" title="Game Master" alt="Game Master Logo" />
         </Link>
         <div id="site-nav">
-          <Link to="/">Your Collection</Link> |
-          <Link to="/about">Wishlist</Link> |
-          <Link to="/">Browse Games</Link> |
+          <Link to="/">Your Collection</Link> |<Link to="/about">Wishlist</Link>{' '}
+          |<Link to="/">Browse Games</Link> |
           <Link to="/about">Game Night!</Link>
         </div>
         <div id="account-links">
-          { (props.user === '') ?
-            (<>
-              <Link to="/login">Login</Link>
-              |
+          {props.user === '' ? (
+            <>
+              <Link to="/login">Login</Link>|
               <Link to="/registration">Register</Link>
-            </>)
-            :
-            (<div id="navbar-avatar">
-              <Link to="/user_page">
-                <img src="https://thumbs.dreamstime.com/b/vector-illustration-isolated-white-background-user-profile-avatar-black-line-icon-user-profile-avatar-black-solid-icon-121102166.jpg" alt="User Avatar" id="avatar" />
+            </>
+          ) : (
+            <div id="navbar-avatar">
+              <Link to={`/user_page/${props.user}`}>
+                <img
+                  src="https://thumbs.dreamstime.com/b/vector-illustration-isolated-white-background-user-profile-avatar-black-line-icon-user-profile-avatar-black-solid-icon-121102166.jpg"
+                  title="User Avatar"
+                  id="avatar"
+                />
               </Link>
-              <Link to="/" onClick={props.logout} id="log-out">Log Out</Link>
+              <Link to="/" onClick={props.logout} id="log-out">
+                Log Out
+              </Link>
             </div>
-            )
-          }
+          )}
         </div>
       </div>
       <hr id="hr-one" />
       <hr id="hr-two" />
     </>
-  )
+  );
 }
