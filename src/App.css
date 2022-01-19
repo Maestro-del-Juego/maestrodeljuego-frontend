@@ -173,11 +173,59 @@ a {
   justify-items: center;
 }
 
+#vote-card-container > h3 {
+  margin: 0px;
+}
+
 #vote-buttons {
   display: flex;
 }
 
 #guest-vote-form {
   display: grid;
-  grid-template-rows: 1fr 4fr;
+  grid-template-rows: 1fr 4fr 1fr;
+}
+
+.vote-card-image {
+  height: 100px;
+  width: 75px;
+}
+
+#game-suggestions {
+  display: flex;
+  margin: auto;
+}
+
+#guest-list-select {
+  display: flex;
+  justify-content: center;
+}
+
+#guest-list-form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#guest-list-form > h3 {
+  text-align: center;
+}
+
+#vote-header {
+  text-align: center;
+}
+
+#vote-submit {
+  margin: auto;
+}
+
+#vote-form-label,
+#guest-list-dropdown,
+#guest-list-select {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#guest-select {
+  display: flex;
 }
