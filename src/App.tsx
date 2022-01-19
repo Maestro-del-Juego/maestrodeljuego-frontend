@@ -11,11 +11,13 @@ import Home from './routes/Home';
 import Search from './routes/Search';
 import GameInfoPage from './routes/GameInfoPage';
 import PlayStats from './routes/PlayStats';
+import VotingForm from './routes/VotingForm';
+import CollectionPage from './routes/CollectionPage';
 
 function App() {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useLocalStorageState('gameMasterUser', '');
   const [token, setToken] = useLocalStorageState('gameMasterToken', '');
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useLocalStorageState('gameMasterAvatar', '');
 
   function setAuth(username: string, token: string) {
     setUser(username);
@@ -41,6 +43,7 @@ function App() {
         console.log(res);
         setUser('');
         setToken('');
+        localStorage.clear();
       })
       .catch((error) => alert(error));
   };
@@ -81,6 +84,11 @@ function App() {
         <Route
           path="play_stats/:user"
           element={<PlayStats user={user} token={token} />}
+        />
+        <Route path="/game_night" element={<VotingForm />} />
+        <Route
+          path="/collection/:user"
+          element={<CollectionPage user={user} token={token} />}
         />
       </Routes>
     </Router>
