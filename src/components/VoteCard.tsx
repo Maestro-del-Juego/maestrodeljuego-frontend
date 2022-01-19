@@ -17,7 +17,6 @@ export default function VoteCard() {
         <button className="frowny-vote" title="frowny-vote">
           <i className="far fa-frown"></i>
         </button>
-        «
       </div>
     </div>
   );
