@@ -11,6 +11,7 @@ import Home from './routes/Home';
 import Search from './routes/Search';
 import GameInfoPage from './routes/GameInfoPage';
 import PlayStats from './routes/PlayStats';
+import VotingForm from './routes/VotingForm';
 
 function App() {
   const [user, setUser] = useState('');
@@ -82,6 +83,9 @@ function App() {
           path="play_stats/:user"
           element={<PlayStats user={user} token={token} />}
         />
+        <Route
+          path="/game_night"
+          element={<VotingForm />} />
       </Routes>
     </Router>
   );

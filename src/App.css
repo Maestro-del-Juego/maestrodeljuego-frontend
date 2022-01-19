@@ -160,3 +160,24 @@ a {
 #most-played {
   display: flex;
 }
+
+#vote-card-container {
+  height: 300px;
+  width: 150px;
+  border: 3px;
+  border-color: #282c34;
+  border-radius: 5%;
+  display: grid;
+  grid-template-columns: 1fr, 1fr, 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+#vote-buttons {
+  display: flex;
+}
+
+#guest-vote-form {
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+}
