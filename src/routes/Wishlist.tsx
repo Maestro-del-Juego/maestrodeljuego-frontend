@@ -2,33 +2,33 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import GameCard from '../components/GameCard';
 
-interface collectionProps {
+interface wishlistProps {
   user: string;
   token: string;
 }
 
-export default function CollectionPage(props: collectionProps) {
-  const [collection, setCollection] = useState<any>([]);
+export default function CollectionPage(props: wishlistProps) {
+  const [wishlist, setWishlist] = useState<any>([]);
 
   useEffect(() => {
     axios
-      .get('https://maestrodeljuego.herokuapp.com/library/', {
+      .get('https://maestrodeljuego.herokuapp.com/wishlist/', {
         headers: {
           Authorization: `Token ${props.token}`,
         },
       })
       .then((result) => {
         console.log(result);
-        setCollection(result.data);
+        setWishlist(result.data);
       })
       .catch((error) => console.log(error));
   }, []);
 
   return (
     <>
-      <h1 id="collection-header">{props.user}'s Collection</h1>
+      <h1>{props.user}'s Wishlist</h1>
       <div id="collection-container">
-        {collection.map((game: any) => (
+        {wishlist.map((game: any) => (
           <GameCard
             gameId={game.bgg}
             gameName={game.title}

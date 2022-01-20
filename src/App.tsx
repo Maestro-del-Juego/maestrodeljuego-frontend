@@ -13,6 +13,7 @@ import GameInfoPage from './routes/GameInfoPage';
 import PlayStats from './routes/PlayStats';
 import VotingForm from './routes/VotingForm';
 import CollectionPage from './routes/CollectionPage';
+import Wishlist from './routes/Wishlist';
 
 function App() {
   const [user, setUser] = useLocalStorageState('gameMasterUser', '');
@@ -89,6 +90,10 @@ function App() {
         <Route
           path="/collection/:user"
           element={<CollectionPage user={user} token={token} />}
+        />
+        <Route
+          path="/wishlist/:user"
+          element={<Wishlist user={user} token={token} />}
         />
       </Routes>
     </Router>
