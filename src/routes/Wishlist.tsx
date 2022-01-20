@@ -9,6 +9,7 @@ interface wishlistProps {
 
 export default function CollectionPage(props: wishlistProps) {
   const [wishlist, setWishlist] = useState<any>([]);
+  
 
   useEffect(() => {
     axios
