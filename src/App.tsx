@@ -11,6 +11,7 @@ import Home from './routes/Home';
 import Search from './routes/Search';
 import GameInfoPage from './routes/GameInfoPage';
 import PlayStats from './routes/PlayStats';
+import CreateEvent from './routes/CreateEvent';
 import VotingForm from './routes/VotingForm';
 import CollectionPage from './routes/CollectionPage';
 import Wishlist from './routes/Wishlist';
@@ -85,6 +86,10 @@ function App() {
         <Route
           path="play_stats/:user"
           element={<PlayStats user={user} token={token} />}
+        />
+        <Route
+          path="/newevent"
+          element={<CreateEvent user={user} token={token} />}
         />
         <Route path="/game_night" element={<VotingForm />} />
         <Route

@@ -161,6 +161,17 @@ a {
   display: flex;
 }
 
+.event-form-game-button {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+}
+
+.game-selection-image {
+  height: 110px;
+  width: auto;
+  margin: auto;
+}
 #vote-card-container {
   height: 300px;
   width: 150px;
