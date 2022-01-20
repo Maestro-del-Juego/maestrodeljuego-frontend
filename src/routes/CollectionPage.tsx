@@ -26,8 +26,9 @@ export default function CollectionPage(props: collectionProps) {
       .then((result) => {
         console.log(result);
         setCollection(result.data);
+        console.log(collection);
         setAlphaCollection(
-          result.data.sort(function (a: any, b: any) {
+          [...result.data].sort(function (a: any, b: any) {
             let fa = a.title.toLowerCase(),
               fb = b.title.toLowerCase();
 
