@@ -12,11 +12,14 @@ import Search from './routes/Search';
 import GameInfoPage from './routes/GameInfoPage';
 import PlayStats from './routes/PlayStats';
 import CreateEvent from './routes/CreateEvent';
+import VotingForm from './routes/VotingForm';
+import CollectionPage from './routes/CollectionPage';
+import Wishlist from './routes/Wishlist';
 
 function App() {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useLocalStorageState('gameMasterUser', '');
   const [token, setToken] = useLocalStorageState('gameMasterToken', '');
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useLocalStorageState('gameMasterAvatar', '');
 
   function setAuth(username: string, token: string) {
     setUser(username);
@@ -42,6 +45,7 @@ function App() {
         console.log(res);
         setUser('');
         setToken('');
+        localStorage.clear();
       })
       .catch((error) => alert(error));
   };
@@ -86,6 +90,14 @@ function App() {
         <Route
           path="/newevent"
           element={<CreateEvent user={user} token={token} />}
+        <Route path="/game_night" element={<VotingForm />} />
+        <Route
+          path="/collection/:user"
+          element={<CollectionPage user={user} token={token} />}
+        />
+        <Route
+          path="/wishlist/:user"
+          element={<Wishlist user={user} token={token} />}
         />
       </Routes>
     </Router>
