@@ -42,15 +42,6 @@ export default function EventForm(props: eventFormProps) {
     const inviteesArray: any = []
     props.guestList.forEach(guest => inviteesArray.push(guest.pk))
     while (gameSelectionArray.length < 10) {gameSelectionArray.push(null)}
-    console.log(date)
-    console.log(inviteesArray)
-    console.log(startTime)
-    console.log(location)
-    console.log(gameSelectionArray[0])
-    console.log(gameSelectionArray[1])
-    console.log(gameSelectionArray[2])
-    console.log(gameSelectionArray[3])
-    console.log(gameSelectionArray[4])
     event.preventDefault();
     axios.post(eventApi, {
         "date": date,
