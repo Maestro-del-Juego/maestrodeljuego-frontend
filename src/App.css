@@ -230,7 +230,10 @@ a {
   display: flex;
 }
 
-#collection-display {
+#collection-container {
   display: grid;
-  grid-template-columns: 1fr, 1fr, 1fr, 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+#collection-header {
+  text-align: center;
 }

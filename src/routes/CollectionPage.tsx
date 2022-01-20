@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import SearchResult from '../components/SearchResult';
+import GameCard from '../components/GameCard';
 
 interface collectionProps {
   user: string;
@@ -9,9 +9,6 @@ interface collectionProps {
 
 export default function CollectionPage(props: collectionProps) {
   const [collection, setCollection] = useState<any>([]);
-
-  let collectionArray: any[];
-  collectionArray = [];
 
   useEffect(() => {
     axios
@@ -27,14 +24,17 @@ export default function CollectionPage(props: collectionProps) {
       .catch((error) => console.log(error));
   }, []);
 
-  console.log(collectionArray);
-
   return (
     <>
-      <h1>{props.user}'s Collection</h1>
+      <h1 id="collection-header">{props.user}'s Collection</h1>
       <div id="collection-container">
         {collection.map((game: any) => (
-          <SearchResult gameId={game.bgg} gameName={game.title} />
+          <GameCard
+            gameId={game.bgg}
+            gameName={game.title}
+            pubYear={game.pub_year}
+            imageUrl={game.image}
+          />
         ))}
       </div>
     </>

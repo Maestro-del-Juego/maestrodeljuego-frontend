@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import SearchResult from '../components/SearchResult';
+import GameCard from '../components/GameCard';
 
 interface wishlistProps {
   user: string;
@@ -29,7 +29,12 @@ export default function CollectionPage(props: wishlistProps) {
       <h1>{props.user}'s Wishlist</h1>
       <div id="collection-container">
         {wishlist.map((game: any) => (
-          <SearchResult gameId={game.bgg} gameName={game.title} />
+          <GameCard
+            gameId={game.bgg}
+            gameName={game.title}
+            pubYear={game.pub_year}
+            imageUrl={game.image}
+          />
         ))}
       </div>
     </>
