@@ -7,7 +7,7 @@ interface gameProps {
   imageUrl: string;
 }
 
-export default function GaemCard(props: gameProps) {
+export default function GameCard(props: gameProps) {
   return (
     <div className="game-info-card">
       <img
