@@ -90,6 +90,7 @@ function App() {
         <Route
           path="/newevent"
           element={<CreateEvent user={user} token={token} />}
+        />
         <Route path="/game_night" element={<VotingForm />} />
         <Route
           path="/collection/:user"
