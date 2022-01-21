@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import VoteCard from '../components/VoteCard';
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const dummyGuests = [
@@ -22,21 +22,14 @@ interface gameNightProps {
 export default function VotingForm(props: gameNightProps) {
   const [guestPick, setGuestPick] = useState(true);
   const [gameNight, setGameNight] = useState<any>({});
-  const [gameNightKey, setGameNightKey] = useSearchParams();
+
+  let { gameId } = useParams();
 
   useEffect(() => {
-    console.log(gameNightKey.get('game_night'));
+    console.log(gameId);
+    console.log(props.token);
     axios
-      .get(
-        `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightKey.get(
-          'game_night'
-        )}`,
-        {
-          headers: {
-            Authorization: `Token ${props.token}`,
-          },
-        }
-      )
+      .get(`https://maestrodeljuego.herokuapp.com/gamenight/${gameId}`)
       .then((result: any) => {
         console.log(result);
       })
