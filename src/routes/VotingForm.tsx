@@ -9,10 +9,8 @@ interface gameNightProps {
 
 export default function VotingForm(props: gameNightProps) {
   const [guestPick, setGuestPick] = useState(true);
-  const [gameNight, setGameNight] = useState<any>({});
   const [guestList, setGuestList] = useState([]);
   const [gameList, setGameList] = useState([]);
-  const [voteData, setVoteData] = useState<any>({});
 
   let { gameId } = useParams();
 
@@ -22,7 +20,6 @@ export default function VotingForm(props: gameNightProps) {
     axios
       .get(`https://maestrodeljuego.herokuapp.com/gamenight/${gameId}`)
       .then((result: any) => {
-        setGameNight(result.data);
         console.log(result.data);
         setGuestList(result.data.invitees);
         setGameList(result.data.options);
