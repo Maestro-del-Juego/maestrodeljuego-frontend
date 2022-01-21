@@ -93,8 +93,8 @@ function App() {
           element={<CreateEvent user={user} token={token} />}
         />
         <Route path="/game_night" element={<GameNightMenu token={token}/>}  />
-        <Route path="/game_night/:gameId" element={<VotingForm />} />
-        {/* <Route path="/game_night/:gameId/owner_view" element={<GameNightOwnerView />} /> */}
+        <Route path="/game_night/:eventId" element={<VotingForm />} />
+        {/* <Route path="/game_night/:eventId/finalize" element={<GameNightOwnerView />} /> */}
         <Route
           path="/collection/:user"
           element={<CollectionPage user={user} token={token} />}
