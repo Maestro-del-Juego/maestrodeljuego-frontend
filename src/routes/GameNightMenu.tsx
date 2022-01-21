@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 interface gameNightProps {
     token: string;
@@ -15,9 +16,9 @@ interface gameNightObject {
     location: string;
 }
 
+
 export default function GameNightMenu(props: gameNightProps) {
     const [gameNightList, setGameNightList] = useState<gameNightObject[]>([]);
-    // const gameNightArray = {} as gameNightObject;
     useEffect(() => {
         const gameNightUrl = `https://maestrodeljuego.herokuapp.com/auth/users/me`;
         axios
@@ -37,20 +38,39 @@ export default function GameNightMenu(props: gameNightProps) {
                     gameNightArray.push(entryObject)
                 })
                 gameNightArray.sort(function(a,b) {
-                    return Date.parse(b.date) - Date.parse(a.date); });
-                console.log(gameNightArray)
+                    return Date.parse(b.date) - Date.parse(a.date); }); //sorts array by date, newest to oldest
                 setGameNightList(gameNightArray);
             });
         }, [props.token]);
-        console.log(gameNightList)
     return (
-        <>
-            <Link to="/createevent/">Create New Event</Link>
-            <h5>Upcoming Game Nights</h5>
+        <div className="game-night-menu-container">
+            <Link className="new-event-link" to="/createevent/" key={"new-event-link"}>Create New Event</Link>
+            <h4>Upcoming Game Nights</h4>
             {gameNightList.map((event) => (
-                <div>{event.location}</div>
+                <>
+                {moment(event.date).isBefore(moment()) === false ? (
+                    <div className="game-night-event-container" key={`container-${event.pk}`} >
+                        <Link className="event-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>
+                            <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
+                            <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
+                        </Link>
+                    </div>) : (<></>)
+                }
+                </>
             ))}
-            <h5>Past Game Nights</h5>
-        </>
+            <h4>Past Game Nights</h4>
+            {gameNightList.map((event) => (
+                <>
+                {moment(event.date).isBefore(moment()) ? (
+                    <div className="game-night-event-container" key={`container-${event.pk}`} >
+                        <Link className="event-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>
+                            <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
+                            <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
+                        </Link>
+                    </div>) : (<></>)
+                }
+                </>
+            ))}
+        </div>
     )
 }
