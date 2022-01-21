@@ -14,6 +14,9 @@ export default function VotingForm(props: gameNightProps) {
 
   let { gameId } = useParams();
 
+  let voteData: any[];
+  voteData = [];
+
   useEffect(() => {
     console.log(gameId);
     console.log(props.token);
@@ -21,8 +24,18 @@ export default function VotingForm(props: gameNightProps) {
       .get(`https://maestrodeljuego.herokuapp.com/gamenight/${gameId}`)
       .then((result: any) => {
         console.log(result.data);
+        console.log(result.data.options);
         setGuestList(result.data.invitees);
         setGameList(result.data.options);
+        for (let i = 0; i < result.data.options.length; i++) {
+          voteData.push({
+            gamenight: result.data.pk,
+            invitee: 0,
+            game: result.data.options[i],
+            vote: 0,
+          });
+        }
+        console.log(voteData);
       })
       .catch((error: any) => console.log(error));
   }, []);
