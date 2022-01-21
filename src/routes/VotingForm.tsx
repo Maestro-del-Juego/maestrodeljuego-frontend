@@ -9,24 +9,22 @@ interface gameNightProps {
 
 export default function VotingForm(props: gameNightProps) {
   const [guestPick, setGuestPick] = useState(true);
-  const [guestList, setGuestList] = useState([]);
+  const [guestList, setGuestList] = useState<any[]>([]);
   const [gameList, setGameList] = useState([]);
   const [guest, setGuest] = useState('');
+  const [voter, setVoter] = useState(0);
+  const [votes, setVotes] = useState<any[]>([]);
 
   let { gameId } = useParams();
 
-  let voteData: any[];
-  voteData = [];
-
   useEffect(() => {
     console.log(gameId);
-    console.log(props.token);
     axios
       .get(`https://maestrodeljuego.herokuapp.com/gamenight/${gameId}`)
       .then((result: any) => {
         console.log(result.data);
-        console.log(result.data.options);
         setGuestList(result.data.invitees);
+        console.log(result.data.options);
         setGameList(result.data.options);
         setGuest(
           result.data.invitees[0].first_name +
@@ -34,22 +32,35 @@ export default function VotingForm(props: gameNightProps) {
             result.data.invitees[0].last_name
         );
         for (let i = 0; i < result.data.options.length; i++) {
-          voteData.push({
-            gamenight: result.data.pk,
-            invitee: 0,
-            game: result.data.options[i],
-            vote: 0,
-          });
+          setVotes((oldData) => [
+            ...oldData,
+            {
+              pk: result.data.options[i].pk,
+              vote: 0,
+            },
+          ]);
         }
-        console.log(voteData);
       })
       .catch((error: any) => console.log(error));
   }, []);
 
-  // let guestList = [...gameNight.invitees];
-
   const guestListHandler = () => {
     setGuestPick(!guestPick);
+    for (let individual of guestList) {
+      if (individual.first_name + ' ' + individual.last_name === guest) {
+        setVoter(individual.pk);
+      }
+    }
+  };
+
+  const voteHandler = (gamePk: number, voteScore: number) => {
+    let newVotes = [...votes];
+    for (let gameId of newVotes) {
+      if (gameId.pk === gamePk) {
+        gameId.vote = voteScore;
+      }
+      setVotes(newVotes);
+    }
   };
 
   return guestPick ? (
@@ -85,7 +96,15 @@ export default function VotingForm(props: gameNightProps) {
       <h2 className="vote-header">Below are your selections:</h2>
       <div id="vote-card-container">
         {gameList.map((game: any, i: any) => {
-          return <VoteCard title={game.title} url={game.image} />;
+          return (
+            <VoteCard
+              title={game.title}
+              url={game.image}
+              key={game.pk}
+              voteHandler={voteHandler}
+              pk={game.pk}
+            />
+          );
         })}
       </div>
       <button type="submit" onClick={guestListHandler} id="vote-submit">
