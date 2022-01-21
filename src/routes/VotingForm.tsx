@@ -3,18 +3,6 @@ import VoteCard from '../components/VoteCard';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const dummyGuests = [
-  'Frodo',
-  'Merry',
-  'Sam',
-  'Pippin',
-  'Aragorn',
-  'Boromir',
-  'Legolas',
-  'Gimli',
-  'Gandalf',
-];
-
 interface gameNightProps {
   token: string;
 }
@@ -22,6 +10,9 @@ interface gameNightProps {
 export default function VotingForm(props: gameNightProps) {
   const [guestPick, setGuestPick] = useState(true);
   const [gameNight, setGameNight] = useState<any>({});
+  const [guestList, setGuestList] = useState([]);
+  const [gameList, setGameList] = useState([]);
+  const [voteData, setVoteData] = useState<any>({});
 
   let { gameId } = useParams();
 
@@ -31,20 +22,19 @@ export default function VotingForm(props: gameNightProps) {
     axios
       .get(`https://maestrodeljuego.herokuapp.com/gamenight/${gameId}`)
       .then((result: any) => {
-        console.log(result);
+        setGameNight(result.data);
+        console.log(result.data);
+        setGuestList(result.data.invitees);
+        setGameList(result.data.options);
       })
       .catch((error: any) => console.log(error));
-  });
+  }, []);
+
+  // let guestList = [...gameNight.invitees];
 
   const guestListHandler = () => {
     setGuestPick(!guestPick);
   };
-
-  let gameArray = [];
-
-  for (let i = 0; i < 5; i++) {
-    gameArray.push(<VoteCard />);
-  }
 
   return guestPick ? (
     <div id="guest-list-select">
@@ -56,10 +46,10 @@ export default function VotingForm(props: gameNightProps) {
             name="guests"
             id="guest-list-dropdown"
           >
-            {dummyGuests.map((name, i) => {
+            {guestList.map((name: any, i: any) => {
               return (
-                <option value={name} key={i}>
-                  {name}
+                <option value={name.first_name + ' ' + name.last_name} key={i}>
+                  {name.first_name + ' ' + name.last_name}
                 </option>
               );
             })}
@@ -72,10 +62,16 @@ export default function VotingForm(props: gameNightProps) {
     </div>
   ) : (
     <div id="guest-vote-form">
-      <h1 id="vote-header">Welcome to Game Night!</h1>
-      <div id="game-suggestions">{gameArray}</div>
+      <h1 className="vote-header">Welcome to Game Night!</h1>
+      <br></br>
+      <h2 className="vote-header">Below are your selections:</h2>
+      <div id="vote-card-container">
+        {gameList.map((game: any, i: any) => {
+          return <VoteCard title={game.title} url={game.image} />;
+        })}
+      </div>
       <button type="submit" onClick={guestListHandler} id="vote-submit">
-        Back
+        Vote
       </button>
     </div>
   );

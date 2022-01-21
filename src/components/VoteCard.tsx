@@ -1,12 +1,13 @@
-export default function VoteCard() {
+interface voteCardProps {
+  url: string;
+  title: string;
+}
+
+export default function VoteCard(props: voteCardProps) {
   return (
-    <div id="vote-card-container">
-      <h3>Game Title</h3>
-      <img
-        src="https://m.media-amazon.com/images/I/9172ZauQ7CL._AC_SY550_.jpg"
-        alt="Game Cover Art"
-        className="vote-card-image"
-      />
+    <div id="vote-card">
+      <h5>{props.title}</h5>
+      <img src={props.url} alt="Game Cover Art" className="vote-card-image" />
       <div id="vote-buttons">
         <button className="smiley-vote" title="smiley-vote">
           <i className="far fa-smile"></i>
