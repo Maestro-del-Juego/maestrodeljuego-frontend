@@ -25,7 +25,7 @@ export default function NavBar(props: navProps) {
           <Link to={`/wishlist/${props.user}`}>Wishlist</Link> |
           <Link to="/">Browse Games</Link> |
           <Link to="/search">Search Games</Link> |
-          <Link to="/about">Game Night!</Link>
+          <Link to="/gamenight">Game Night!</Link>
         </div>
         <div id="account-links">
           {props.user === '' ? (
