@@ -35,7 +35,7 @@ export default function EventForm(props: eventFormProps) {
     props.selectedGames.forEach(game => gameSelectionArray.push(game.pk))
     const inviteesArray: any = []
     props.guestList.forEach(guest => inviteesArray.push(guest.pk))
-    while (gameSelectionArray.length < 10) {gameSelectionArray.push(null)}
+    // while (gameSelectionArray.length < 10) {gameSelectionArray.push(null)}
     event.preventDefault();
     axios.post(eventApi, {
         "date": date,
@@ -43,16 +43,17 @@ export default function EventForm(props: eventFormProps) {
         "start_time": startTime,
         "end_time": endTime,
         "location": location,
-        "option1": gameSelectionArray[0],
-        "option2": gameSelectionArray[1],
-        "option3": gameSelectionArray[2],
-        "option4": gameSelectionArray[3],
-        "option5": gameSelectionArray[4],
-        "option6": gameSelectionArray[5],
-        "option7": gameSelectionArray[6],
-        "option8": gameSelectionArray[7],
-        "option9": gameSelectionArray[8],
-        "option10": gameSelectionArray[9]
+        "options": gameSelectionArray
+        // "option1": gameSelectionArray[0],
+        // "option2": gameSelectionArray[1],
+        // "option3": gameSelectionArray[2],
+        // "option4": gameSelectionArray[3],
+        // "option5": gameSelectionArray[4],
+        // "option6": gameSelectionArray[5],
+        // "option7": gameSelectionArray[6],
+        // "option8": gameSelectionArray[7],
+        // "option9": gameSelectionArray[8],
+        // "option10": gameSelectionArray[9]
     },
     {
         headers: {

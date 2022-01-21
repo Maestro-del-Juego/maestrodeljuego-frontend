@@ -52,7 +52,7 @@ export default function GameNightMenu(props: gameNightProps) {
                     <div className="game-night-event-container" key={`container-${event.pk}`} >
                             <p className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
                             <p className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
-                            <Link className="event-voting-link" to={`/game_night/${event.rid}/`} key={`guest-link-${event.pk}`}>Share this link with your guests</Link>
+                            <Link className="event-voting-link" to={`/game_night/${event.rid}/`} key={`guest-link-${event.pk}`}>Share this link with your guests</Link> | 
                             <Link className="event-finalize-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>Finalize event details</Link>
                     </div>) : (<></>)
                 }
