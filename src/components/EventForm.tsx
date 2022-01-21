@@ -120,29 +120,26 @@ export default function EventForm(props: eventFormProps) {
         <div>
             <DropdownButton id="contact-dropdown" title="Add Contacts">
             {props.contactList.map((contact) => (
-                    <>
-                    <Dropdown.Item onClick={() => {props.handleAddGuestClick(contact); setUpdater(updater + 1);}}>{contact.first_name} {contact.last_name}</Dropdown.Item>
-                    </>
+                    <Dropdown.Item key={`${contact.pk}-dropdown`} onClick={() => {props.handleAddGuestClick(contact); setUpdater(updater + 1);}}>{contact.first_name} {contact.last_name}</Dropdown.Item>
                 ))}
             </DropdownButton>
         </div>
         <div>
             <DropdownButton id="game-dropdown" title="Select Games">
                 {props.collection.map((game) => (
-                    <>
-                    <Dropdown.Item onClick={() => {props.handleAddClick(game); setUpdater(updater + 1);}}>{game.title}</Dropdown.Item>
-                    </>
+                    <Dropdown.Item key={`${game.pk}-dropdown`} onClick={() => {props.handleAddClick(game); setUpdater(updater + 1);}}>{game.title}</Dropdown.Item>
                 ))}
             </DropdownButton>
         </div>
       <div className="selected-games-container">
           <h3>Selected Games:</h3>
         {props.selectedGames.map((game) => (
-          <div className="game-selection-container" key={`${game.pk}-selected-icon`}>
-            <img className="game-selection-image" src={game.image} alt={game.title} />
+          <div className="game-selection-container" key={`${game.pk}-selected-container`}>
+            <img className="game-selection-image" key={`${game.pk}-selected-image`} src={game.image} alt={game.title} />
             <h6>{game.title}</h6>
             <button
               className="event-form-game-button"
+              key={`${game.pk}-remove-game-button`}
               onClick={() => {
                 props.handleRemoveClick(game);
                 setUpdater(updater - 1);

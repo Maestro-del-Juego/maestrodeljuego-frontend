@@ -88,7 +88,7 @@ function App() {
           element={<PlayStats user={user} token={token} />}
         />
         <Route
-          path="/newevent"
+          path="/createevent"
           element={<CreateEvent user={user} token={token} />}
         />
         <Route path="/game_night" element={<VotingForm />} />
