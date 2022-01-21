@@ -11,6 +11,7 @@ export default function VotingForm(props: gameNightProps) {
   const [guestPick, setGuestPick] = useState(true);
   const [guestList, setGuestList] = useState<any[]>([]);
   const [gameList, setGameList] = useState([]);
+  const [gameNightPk, setGameNightPk] = useState(0);
   const [guest, setGuest] = useState('');
   const [voter, setVoter] = useState(0);
   const [votes, setVotes] = useState<any[]>([]);
@@ -24,6 +25,7 @@ export default function VotingForm(props: gameNightProps) {
       .then((result: any) => {
         console.log(result.data);
         setGuestList(result.data.invitees);
+        setGameNightPk(result.data.pk);
         console.log(result.data.options);
         setGameList(result.data.options);
         setGuest(
@@ -61,6 +63,23 @@ export default function VotingForm(props: gameNightProps) {
       }
       setVotes(newVotes);
     }
+  };
+
+  const voteSubmit = (event: any) => {
+    event.preventDefault();
+    let voteSubmission = [...votes];
+    for (let voteObj of voteSubmission) {
+      voteObj.gamenight = gameNightPk;
+      voteObj.invitee = voter;
+    }
+    console.log(voteSubmission);
+    axios
+      .post(
+        `https://maestrodeljuego.herokuapp.com/gamenight/${gameId}`,
+        voteSubmission
+      )
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 
   return guestPick ? (
@@ -107,9 +126,12 @@ export default function VotingForm(props: gameNightProps) {
           );
         })}
       </div>
-      <button type="submit" onClick={guestListHandler} id="vote-submit">
-        Vote
-      </button>
+      <form id="vote-submission-form" onSubmit={voteSubmit}>
+        <button type="submit" id="vote-submit">
+          Vote
+        </button>
+        </form>
+        <button onClick={() => setGuestPick(!guestPick)}>Back</button>
     </div>
   );
 }
