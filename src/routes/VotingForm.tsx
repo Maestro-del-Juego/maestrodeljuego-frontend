@@ -37,7 +37,7 @@ export default function VotingForm(props: gameNightProps) {
           setVotes((oldData) => [
             ...oldData,
             {
-              pk: result.data.options[i].pk,
+              game: result.data.options[i].pk,
               vote: 0,
             },
           ]);
@@ -58,7 +58,7 @@ export default function VotingForm(props: gameNightProps) {
   const voteHandler = (gamePk: number, voteScore: number) => {
     let newVotes = [...votes];
     for (let gameId of newVotes) {
-      if (gameId.pk === gamePk) {
+      if (gameId.game === gamePk) {
         gameId.vote = voteScore;
       }
       setVotes(newVotes);
@@ -75,8 +75,13 @@ export default function VotingForm(props: gameNightProps) {
     console.log(voteSubmission);
     axios
       .post(
-        `https://maestrodeljuego.herokuapp.com/gamenight/${gameId}`,
-        voteSubmission
+        `https://maestrodeljuego.herokuapp.com/gamenight/${gameId}/voting/`,
+        voteSubmission,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       )
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
@@ -130,8 +135,8 @@ export default function VotingForm(props: gameNightProps) {
         <button type="submit" id="vote-submit">
           Vote
         </button>
-        </form>
-        <button onClick={() => setGuestPick(!guestPick)}>Back</button>
+      </form>
+      <button onClick={() => setGuestPick(!guestPick)}>Back</button>
     </div>
   );
 }
