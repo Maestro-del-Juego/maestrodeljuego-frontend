@@ -40,7 +40,8 @@ export default function CreateEvent(props: createEventProps) {
       })
       .then((response) => {
         console.log(response.data);
-        setCollection(response.data);
+        let tempArray = response.data.sort((a: any, b: any) => a.title< b.title ? -1 : a.title > b.title ? 1 : 0)
+        setCollection(tempArray);
       });
     axios
       .get(contactUrl, {
@@ -51,7 +52,8 @@ export default function CreateEvent(props: createEventProps) {
       })
       .then((response) => {
         console.log(response.data);
-        setContactList(response.data);
+        let tempArray = response.data.sort((a: any, b: any) => a.first_name < b.first_name ? -1 : a.first_name > b.first_name ? 1 : 0)
+        setContactList(tempArray);
       });
   }, [props.token]);
 
