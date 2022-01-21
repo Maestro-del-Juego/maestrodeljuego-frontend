@@ -11,6 +11,7 @@ export default function VotingForm(props: gameNightProps) {
   const [guestPick, setGuestPick] = useState(true);
   const [guestList, setGuestList] = useState([]);
   const [gameList, setGameList] = useState([]);
+  const [guest, setGuest] = useState('');
 
   let { gameId } = useParams();
 
@@ -27,6 +28,11 @@ export default function VotingForm(props: gameNightProps) {
         console.log(result.data.options);
         setGuestList(result.data.invitees);
         setGameList(result.data.options);
+        setGuest(
+          result.data.invitees[0].first_name +
+            ' ' +
+            result.data.invitees[0].last_name
+        );
         for (let i = 0; i < result.data.options.length; i++) {
           voteData.push({
             gamenight: result.data.pk,
@@ -55,6 +61,8 @@ export default function VotingForm(props: gameNightProps) {
             title="Guest List Dropdown"
             name="guests"
             id="guest-list-dropdown"
+            value={guest}
+            onChange={(event) => setGuest(event.target.value)}
           >
             {guestList.map((name: any, i: any) => {
               return (
