@@ -257,3 +257,29 @@ a {
   display: grid;
   grid-template-columns: 1fr 6fr;
 }
+
+.new-event-link {
+  font-size: 30px;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.upcoming-heading {
+  margin-top: 20px;
+}
+
+.game-night-menu-container {
+  text-align: center;
+}
+
+.game-night-event-container {
+  padding: 8px;
+  margin: 8px;
+  border-style: solid;
+  border-width: 1px;
+  display: inline-block;
+}
+
+.game-night-event-container * {
+  text-align: center;
+}

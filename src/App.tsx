@@ -15,6 +15,7 @@ import CreateEvent from './routes/CreateEvent';
 import VotingForm from './routes/VotingForm';
 import CollectionPage from './routes/CollectionPage';
 import Wishlist from './routes/Wishlist';
+import GameNightMenu from './routes/GameNightMenu';
 
 function App() {
   const [user, setUser] = useLocalStorageState('gameMasterUser', '');
@@ -88,13 +89,15 @@ function App() {
           element={<PlayStats user={user} token={token} />}
         />
         <Route
-          path="/newevent"
+          path="/createevent"
           element={<CreateEvent user={user} token={token} />}
         />
         <Route
           path="/game_night/:gameId"
           element={<VotingForm token={token} />}
         />
+        <Route path="/game_night" element={<GameNightMenu token={token}/>}  />
+        {/* <Route path="/game_night/:eventId/finalize" element={<GameNightOwnerView />} /> */}
         <Route
           path="/collection/:user"
           element={<CollectionPage user={user} token={token} />}

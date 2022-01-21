@@ -54,7 +54,7 @@ export default function GameInfoPage(props: gameInfoProps) {
         console.log(response.data);
       });
     }
-  }, [params.gameId, gameTitle]);
+  }, [params.gameId, props.token]);
 
   return (
     <div className="game-info-card">
