@@ -20,7 +20,7 @@ interface gameNightObject {
 export default function GameNightMenu(props: gameNightProps) {
     const [gameNightList, setGameNightList] = useState<gameNightObject[]>([]);
     useEffect(() => {
-        const gameNightUrl = `https://maestrodeljuego.herokuapp.com/auth/users/me`;
+        const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/`;
         axios
             .get(gameNightUrl, {
                 headers: {
@@ -29,10 +29,10 @@ export default function GameNightMenu(props: gameNightProps) {
                   },
             })
             .then((response) => {
-                console.log(response.data.gamenights)
-                setGameNightList(response.data.gamenights)
+                console.log(response)
+                setGameNightList(response.data)
                 const gameNightArray: Array<gameNightObject> = []
-                response.data.gamenights.forEach((entry: any) => {
+                response.data.forEach((entry: any) => {
                     const entryObject: gameNightObject =
                     {pk:entry.pk, rid:entry.rid, date:entry.date, start_time:entry.start_time, end_time:entry.end_time, location:entry.location};
                     gameNightArray.push(entryObject)
