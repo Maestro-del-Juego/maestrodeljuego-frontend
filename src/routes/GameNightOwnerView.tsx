@@ -50,7 +50,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const handleSubmit = (event: any) => {
     const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightId}/`;
     event.preventDefault();
-    axios.post(gameNightUrl, {
+    axios.patch(gameNightUrl, {
         "date": date,
         "start_time": startTime,
         "end_time": endTime,
