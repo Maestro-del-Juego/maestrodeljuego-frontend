@@ -29,6 +29,10 @@ export default function EventForm(props: eventFormProps) {
   const [location, setLocation] = useState('')
   const [updater, setUpdater] = useState(0);
 
+  const [newContactFirst, setNewContactFirst] = useState('')
+  const [newContactLast, setNewContactLast] = useState('')
+  const [newContactEmail, setNewContactEmail] = useState('')
+
   const handleSubmit = (event: any) => {
     const eventApi = 'https://maestrodeljuego.herokuapp.com/gamenight/';
     const gameSelectionArray: any = []
@@ -66,6 +70,29 @@ export default function EventForm(props: eventFormProps) {
     })
   };
 
+  const handleNewContactSubmit = (event: any) => {
+    const contactApi = 'https://maestrodeljuego.herokuapp.com/contacts/'
+    event.preventDefault();
+    axios
+        .post(contactApi, {
+            "first_name": newContactFirst,
+            "last_name": newContactLast,
+            "email": newContactEmail
+        },
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${props.token}`
+            }
+        }
+        ).then(response => {
+            const tempArray = props.guestList;
+            tempArray.push(response.data)
+            props.setGuestList(tempArray)
+            setUpdater(updater+1)
+        })
+  }
+
   const handleChange = (inputType: any, event: any) => {
     if (inputType === 'date') {
       setDate(event.target.value);
@@ -82,14 +109,26 @@ export default function EventForm(props: eventFormProps) {
     if (inputType === 'location') {
         setLocation(event.target.value);
         console.log(event.target.value);
-      }
+    }
+    if (inputType === 'newContactFirst') {
+        setNewContactFirst(event.target.value);
+        console.log(event.target.value);
+    }
+    if (inputType === 'newContactLast') {
+        setNewContactLast(event.target.value);
+        console.log(event.target.value);
+    }
+    if (inputType === 'newContactEmail') {
+        setNewContactEmail(event.target.value);
+        console.log(event.target.value);
+    }
   };
 
 
   return (
     <>
-      <div className="event-form-container">
-        <form className="create-event-form" onSubmit={handleSubmit}>
+      <div className="new-event-form-container">
+        <form className="new-event-form" onSubmit={handleSubmit}>
           <label className="form-label">Date: </label>
           <input
             type="date"
@@ -125,6 +164,31 @@ export default function EventForm(props: eventFormProps) {
                 ))}
             </DropdownButton>
         </div>
+
+        <div className="contact-form-container">
+        <form className="create-contact-form" onSubmit={handleNewContactSubmit}>
+          <label className="form-label">First Name: </label>
+          <input
+            type="text"
+            value={newContactFirst}
+            onChange={(event) => handleChange('newContactFirst', event)}
+          />
+          <label className="form-label">Last Name: </label>
+          <input
+            type="text"
+            value={newContactLast}
+            onChange={(event) => handleChange('newContactLast', event)}
+          />
+          <label className="form-label">Email: </label>
+          <input
+            type="text"
+            value={newContactEmail}
+            onChange={(event) => handleChange('newContactEmail', event)}
+          />
+          <button className="submit-button">Add New Contact</button>
+        </form>
+      </div>
+
         <div>
             <DropdownButton id="game-dropdown" title="Select Games">
                 {props.collection.map((game) => (

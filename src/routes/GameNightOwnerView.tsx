@@ -38,6 +38,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
         setStartTime(response.data.start_time);
         setEndTime(response.data.end_time);
         setLocation(response.data.location);
+        setSelectedGameList(response.data.games);
         let tempArray = response.data.options.sort((a: any, b: any) =>
           a.votes > b.votes ? -1 : a.votes < b.votes ? 1 : 0
         );
@@ -47,9 +48,9 @@ export default function GameNightOwnerView(props: gameNightProps) {
   }, [props.token, gameNightUrl]);
 
   const handleSubmit = (event: any) => {
-    const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightId}`;
+    const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightId}/`;
     event.preventDefault();
-    axios.patch(gameNightUrl, {
+    axios.post(gameNightUrl, {
         "date": date,
         "start_time": startTime,
         "end_time": endTime,
