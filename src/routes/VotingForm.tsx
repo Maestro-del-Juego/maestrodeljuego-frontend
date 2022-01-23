@@ -15,7 +15,7 @@ export default function VotingForm(props: gameNightProps) {
   const [guest, setGuest] = useState('');
   const [voter, setVoter] = useState(0);
   const [votes, setVotes] = useState<any[]>([]);
-  const [attending, setAttending] = useState(true)
+  const [attending, setAttending] = useState(true);
 
   let { gameId } = useParams();
 
@@ -109,16 +109,16 @@ export default function VotingForm(props: gameNightProps) {
               );
             })}
           </select>
-          <Button type="submit" id="guest-list-button">
-            Select
-          </Button>
         </div>
+        <div id="rsvp-form">
+          <h3>Will you be attending?</h3>
+          <Button>Yes</Button>
+          <Button>No</Button>
+        </div>
+        <Button type="submit" id="guest-list-button">
+          Submit
+        </Button>
       </form>
-      <div id="rsvp-form">
-        <h3>Will you be attending?</h3>
-        <Button>Yes</Button>
-        <Button>No</Button>
-      </div>
     </div>
   ) : (
     <div id="guest-vote-form">

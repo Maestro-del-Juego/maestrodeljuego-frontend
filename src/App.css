@@ -219,6 +219,7 @@ a {
 
 #guest-list-form {
   align-self: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -226,6 +227,11 @@ a {
 
 #guest-list-form > h3 {
   text-align: center;
+}
+
+#guest-list-button {
+  margin-top: 60px;
+  width: 120px;
 }
 
 .vote-header {
