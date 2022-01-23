@@ -283,3 +283,31 @@ a {
 .game-night-event-container * {
   text-align: center;
 }
+
+
+.vote-results-container, .selected-game-container {
+  clear: left;
+  padding: 10px;
+}
+.vote-results-container img {
+  float: left;
+  margin-right: 10px;
+}
+
+.vote-results-container h6 {
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.selected-game-container img {
+  float: left;
+  margin-right: 10px;
+}
+
+.selected-game-container h6 {
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+
+
