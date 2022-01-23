@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import VoteCard from '../components/VoteCard';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import { Button } from 'react-bootstrap';
 interface gameNightProps {
   token: string;
 }
@@ -15,6 +15,7 @@ export default function VotingForm(props: gameNightProps) {
   const [guest, setGuest] = useState('');
   const [voter, setVoter] = useState(0);
   const [votes, setVotes] = useState<any[]>([]);
+  const [attending, setAttending] = useState(true)
 
   let { gameId } = useParams();
 
@@ -91,6 +92,7 @@ export default function VotingForm(props: gameNightProps) {
     <div id="guest-list-select">
       <form onSubmit={guestListHandler} id="guest-list-form">
         <h3>Guest List</h3>
+        <h6>Select your name</h6>
         <div id="guest-select">
           <select
             title="Guest List Dropdown"
@@ -107,17 +109,22 @@ export default function VotingForm(props: gameNightProps) {
               );
             })}
           </select>
-          <button type="submit" id="guest-list-button">
+          <Button type="submit" id="guest-list-button">
             Select
-          </button>
+          </Button>
         </div>
       </form>
+      <div id="rsvp-form">
+        <h3>Will you be attending?</h3>
+        <Button>Yes</Button>
+        <Button>No</Button>
+      </div>
     </div>
   ) : (
     <div id="guest-vote-form">
       <h1 className="vote-header">Welcome to Game Night!</h1>
       <br></br>
-      <h2 className="vote-header">Below are your selections:</h2>
+      <h2 className="vote-header">Your host has suggested these games:</h2>
       <div id="vote-card-container">
         {gameList.map((game: any, i: any) => {
           return (
@@ -131,12 +138,14 @@ export default function VotingForm(props: gameNightProps) {
           );
         })}
       </div>
-      <form id="vote-submission-form" onSubmit={voteSubmit}>
-        <button type="submit" id="vote-submit">
-          Vote
-        </button>
-      </form>
-      <button onClick={() => setGuestPick(!guestPick)}>Back</button>
+      <div id="vote-form-buttons">
+        <form id="vote-submission-form" onSubmit={voteSubmit}>
+          <Button type="submit" id="vote-submit">
+            Vote
+          </Button>
+        </form>
+        <Button onClick={() => setGuestPick(!guestPick)}>Back</Button>
+      </div>
     </div>
   );
 }
