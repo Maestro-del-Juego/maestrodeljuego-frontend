@@ -14,6 +14,7 @@ interface gameNightObject {
     start_time: string;
     end_time: string;
     location: string;
+    status: string;
 }
 
 
@@ -34,7 +35,7 @@ export default function GameNightMenu(props: gameNightProps) {
                 const gameNightArray: Array<gameNightObject> = []
                 response.data.forEach((entry: any) => {
                     const entryObject: gameNightObject =
-                    {pk:entry.pk, rid:entry.rid, date:entry.date, start_time:entry.start_time, end_time:entry.end_time, location:entry.location};
+                    {pk:entry.pk, rid:entry.rid, date:entry.date, start_time:entry.start_time, end_time:entry.end_time, location:entry.location, status: entry.status};
                     gameNightArray.push(entryObject)
                 })
                 gameNightArray.sort(function(a,b) {
@@ -48,7 +49,7 @@ export default function GameNightMenu(props: gameNightProps) {
             <h4>Upcoming Game Nights</h4>
             {gameNightList.map((event) => (
                 <>
-                {moment(event.date).isBefore(moment()) === false ? (
+                {(moment(event.date).isBefore(moment()) === false && event.status !== "Cancelled") ? (
                     <div className="game-night-event-container" key={`container-${event.pk}`} >
                             <p className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
                             <p className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
@@ -61,12 +62,24 @@ export default function GameNightMenu(props: gameNightProps) {
             <h4>Past Game Nights</h4>
             {gameNightList.map((event) => (
                 <>
-                {moment(event.date).isBefore(moment()) ? (
+                {(moment(event.date).isBefore(moment()) && event.status !== "Cancelled") ? (
                     <div className="game-night-event-container" key={`container-${event.pk}`} >
                             <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
                             <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
                             <Link className="event-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>View Event</Link>
                     </div>) : (<></>)
+                }
+                </>
+            ))}
+            <h4>Cancelled Game Nights</h4>
+            {gameNightList.map((event) => (
+                <>
+                {event.status === "Cancelled" ? (
+                <div className="game-night-event-container" key={`cancelled-${event.pk}`}>
+                    <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
+                    <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
+                </div>
+                ) : (<></>)
                 }
                 </>
             ))}
