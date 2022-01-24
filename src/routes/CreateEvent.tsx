@@ -29,10 +29,11 @@ export default function CreateEvent(props: createEventProps) {
   const [guestList, setGuestList] = useState<contactObject[]>([]);
 
   useEffect(() => {
-    const collectionUrl = 'https://maestrodeljuego.herokuapp.com/library/';
-    const contactUrl = 'https://maestrodeljuego.herokuapp.com/contacts/';
+    const userDataUrl = 'https://maestrodeljuego.herokuapp.com/auth/users/me'
+    // const collectionUrl = 'https://maestrodeljuego.herokuapp.com/library/';
+    // const contactUrl = 'https://maestrodeljuego.herokuapp.com/contacts/';
     axios
-      .get(collectionUrl, {
+      .get(userDataUrl, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Token ${props.token}`,
@@ -40,20 +41,10 @@ export default function CreateEvent(props: createEventProps) {
       })
       .then((response) => {
         console.log(response.data);
-        let tempArray = response.data.sort((a: any, b: any) => a.title< b.title ? -1 : a.title > b.title ? 1 : 0)
+        let tempArray = response.data.games.sort((a: any, b: any) => a.title< b.title ? -1 : a.title > b.title ? 1 : 0)
         setCollection(tempArray);
-      });
-    axios
-      .get(contactUrl, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Token ${props.token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        let tempArray = response.data.sort((a: any, b: any) => a.first_name < b.first_name ? -1 : a.first_name > b.first_name ? 1 : 0)
-        setContactList(tempArray);
+        let tempArray2 = response.data.contacts.sort((a: any, b: any) => a.first_name < b.first_name ? -1 : a.first_name > b.first_name ? 1 : 0)
+        setContactList(tempArray2);
       });
   }, [props.token]);
 
@@ -64,14 +55,12 @@ export default function CreateEvent(props: createEventProps) {
     }
     else if (array.length >= 10) { alert("Game limit reached!")}
     setSelectedGames(array);
-    console.log(selectedGames);
   };
 
   const handleRemoveClick = (game: collectionObject) => {
     let array = selectedGames;
     array.splice(array.indexOf(game), 1);
     setSelectedGames(array);
-    console.log(selectedGames);
   };
 
   const handleAddGuestClick = (contact: contactObject) => {
@@ -80,14 +69,13 @@ export default function CreateEvent(props: createEventProps) {
       array.push(contact);
     }
     setGuestList(array);
-    console.log(guestList);
+
   };
 
   const handleRemoveGuestClick = (guest: contactObject) => {
     let array = guestList;
     array.splice(array.indexOf(guest), 1);
     setGuestList(array);
-    console.log(guestList);
   };
 
   return (

@@ -5,6 +5,7 @@ import { contactObject } from '../routes/CreateEvent';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import 'bootstrap/dist/css/bootstrap.css';
+import { useNavigate } from 'react-router-dom';
 
 interface eventFormProps {
   collection: collectionObject[];
@@ -33,13 +34,14 @@ export default function EventForm(props: eventFormProps) {
   const [newContactLast, setNewContactLast] = useState('')
   const [newContactEmail, setNewContactEmail] = useState('')
 
+  const navigate: any = useNavigate();
+
   const handleSubmit = (event: any) => {
     const eventApi = 'https://maestrodeljuego.herokuapp.com/gamenight/';
     const gameSelectionArray: any = []
     props.selectedGames.forEach(game => gameSelectionArray.push(game.pk))
     const inviteesArray: any = []
     props.guestList.forEach(guest => inviteesArray.push(guest.pk))
-    // while (gameSelectionArray.length < 10) {gameSelectionArray.push(null)}
     event.preventDefault();
     axios.post(eventApi, {
         "date": date,
@@ -48,16 +50,6 @@ export default function EventForm(props: eventFormProps) {
         "end_time": endTime,
         "location": location,
         "options": gameSelectionArray
-        // "option1": gameSelectionArray[0],
-        // "option2": gameSelectionArray[1],
-        // "option3": gameSelectionArray[2],
-        // "option4": gameSelectionArray[3],
-        // "option5": gameSelectionArray[4],
-        // "option6": gameSelectionArray[5],
-        // "option7": gameSelectionArray[6],
-        // "option8": gameSelectionArray[7],
-        // "option9": gameSelectionArray[8],
-        // "option10": gameSelectionArray[9]
     },
     {
         headers: {
@@ -66,7 +58,9 @@ export default function EventForm(props: eventFormProps) {
         }
     }
     ).then(response => {
-        console.log(response)
+        alert("Game Night created!");
+        console.log(response);
+        navigate("/game_night/")
     })
   };
 

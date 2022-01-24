@@ -213,17 +213,25 @@ a {
 
 #guest-list-select {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
 #guest-list-form {
   align-self: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 #guest-list-form > h3 {
   text-align: center;
+}
+
+#guest-list-button {
+  margin-top: 60px;
+  width: 120px;
 }
 
 .vote-header {
@@ -284,8 +292,8 @@ a {
   text-align: center;
 }
 
-
-.vote-results-container, .selected-game-container {
+.vote-results-container,
+.selected-game-container {
   clear: left;
   padding: 10px;
 }
@@ -309,5 +317,31 @@ a {
   margin-top: 5px;
 }
 
+#vote-form-buttons {
+  display: flex;
+  justify-content: center;
+}
 
+#vote-form-buttons > Button {
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
+#rsvp-form {
+  align-self: center;
+  display: grid;
+  margin-top: 100px;
+}
+
+#rsvp-form > Button {
+  width: 70px;
+  margin: 8px 100px 8px 100px;
+}
+
+#email-confirm {
+  margin-top: 60px;
+}
+
+.gamenight-banner {
+  text-align: center;
+}
