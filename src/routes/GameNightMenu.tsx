@@ -21,6 +21,8 @@ interface gameNightObject {
 
 export default function GameNightMenu(props: gameNightProps) {
     const [gameNightList, setGameNightList] = useState<gameNightObject[]>([]);
+    const [showPast, setShowPast] = useState(false);
+    const [showCancelled, setShowCancelled] = useState(false);
     useEffect(() => {
         const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/`;
         axios
@@ -61,10 +63,14 @@ export default function GameNightMenu(props: gameNightProps) {
                 }
                 </React.Fragment>
             ))}
-            <h4>Past Game Nights</h4>
+            {showPast===false ? (
+            <h4>Past Game Nights <button onClick={() => setShowPast(true)}>Show</button></h4>
+            ) : (
+                <h4>Past Game Nights <button onClick={() => setShowPast(false)}>Hide</button></h4>
+            )}
             {gameNightList.map((event) => (
                 <React.Fragment key={`past-${event.pk}`}>
-                {(moment(event.date).isBefore(moment()) && event.status !== "Cancelled") ? (
+                {(moment(event.date).isBefore(moment()) && event.status !== "Cancelled" && showPast===true) ? (
                     <div className="game-night-event-container">
                             <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
                             <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
@@ -73,10 +79,14 @@ export default function GameNightMenu(props: gameNightProps) {
                 }
                 </React.Fragment>
             ))}
-            <h4>Cancelled Game Nights</h4>
+            {showCancelled===false ? (
+            <h4>Cancelled Game Nights <button onClick={() => setShowCancelled(true)}>Show</button></h4>
+            ) : (
+                <h4>Cancelled Game Nights <button onClick={() => setShowCancelled(false)}>Hide</button></h4>
+            )}
             {gameNightList.map((event) => (
                 <React.Fragment key={`cancelled-${event.pk}`}>
-                {event.status === "Cancelled" ? (
+                {event.status === "Cancelled" && showCancelled===true ? (
                 <div className="game-night-event-container">
                     <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
                     <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
