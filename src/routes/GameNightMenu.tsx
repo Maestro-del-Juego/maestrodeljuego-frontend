@@ -22,6 +22,7 @@ interface gameNightObject {
 export default function GameNightMenu(props: gameNightProps) {
     const [gameNightList, setGameNightList] = useState<gameNightObject[]>([]);
     useEffect(() => {
+        if (props.token !== "") {
         const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/`;
         axios
             .get(gameNightUrl, {
@@ -43,9 +44,11 @@ export default function GameNightMenu(props: gameNightProps) {
                     return Date.parse(b.date) - Date.parse(a.date); }); //sorts array by date, newest to oldest
                 setGameNightList(gameNightArray);
             });
-        }, [props.token]);
+        }}, [props.token]);
 
     return (
+        <>
+        {props.token !== "" ? (
         <div className="game-night-menu-container">
             <Link className="new-event-link" to="/createevent/">Create New Event</Link>
             <h4>Upcoming Game Nights</h4>
@@ -87,5 +90,7 @@ export default function GameNightMenu(props: gameNightProps) {
                 </React.Fragment>
             ))}
         </div>
+        ) : (<><h4>Please log in to see your game night events.</h4></>)
+        }</>
     )
 }
