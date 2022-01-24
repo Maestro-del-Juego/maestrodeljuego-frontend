@@ -123,6 +123,31 @@ export default function GameNightOwnerView(props: gameNightProps) {
       });
   };
 
+  const reopenGameNight = () => {
+    axios
+      .patch(
+        gameNightUrl,
+        {
+          date: date,
+          start_time: startTime,
+          end_time: endTime,
+          location: location,
+          games: selectedGameList,
+          status: 'Voting',
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${props.token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        alert("Game night reopened.")
+      });
+  };
+
   const handleChange = (inputType: any, event: any) => {
     if (inputType === 'date') {
       setDate(event.target.value);
@@ -200,6 +225,10 @@ export default function GameNightOwnerView(props: gameNightProps) {
         {status !== "Cancelled" ? (
         <button className="cancel-button"
             onClick={() => {if (window.confirm("Cancel game night?")) cancelGameNight()}}>Cancel Game Night</button>
+        ) : (<></>) }
+        {status === "Finalized" ? (
+        <button className="reopen-button"
+            onClick={() => {if (window.confirm("Reopen game night for voting and new RSVPs?")) reopenGameNight()}}>Reopen Game Night</button>
         ) : (<></>) }
       </div>
 
