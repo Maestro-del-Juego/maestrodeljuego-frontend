@@ -55,14 +55,12 @@ export default function CreateEvent(props: createEventProps) {
     }
     else if (array.length >= 10) { alert("Game limit reached!")}
     setSelectedGames(array);
-    console.log(selectedGames);
   };
 
   const handleRemoveClick = (game: collectionObject) => {
     let array = selectedGames;
     array.splice(array.indexOf(game), 1);
     setSelectedGames(array);
-    console.log(selectedGames);
   };
 
   const handleAddGuestClick = (contact: contactObject) => {
@@ -71,14 +69,13 @@ export default function CreateEvent(props: createEventProps) {
       array.push(contact);
     }
     setGuestList(array);
-    console.log(guestList);
+
   };
 
   const handleRemoveGuestClick = (guest: contactObject) => {
     let array = guestList;
     array.splice(array.indexOf(guest), 1);
     setGuestList(array);
-    console.log(guestList);
   };
 
   return (
