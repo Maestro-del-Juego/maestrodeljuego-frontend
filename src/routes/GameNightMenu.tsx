@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import React from 'react';
 
 interface gameNightProps {
     token: string;
@@ -43,46 +44,47 @@ export default function GameNightMenu(props: gameNightProps) {
                 setGameNightList(gameNightArray);
             });
         }, [props.token]);
+
     return (
-        <div className="game-night-menu-container" key={"menu-container"}>
-            <Link className="new-event-link" to="/createevent/" key={"new-event-link"}>Create New Event</Link>
+        <div className="game-night-menu-container">
+            <Link className="new-event-link" to="/createevent/">Create New Event</Link>
             <h4>Upcoming Game Nights</h4>
             {gameNightList.map((event) => (
-                <>
+                <React.Fragment key={`upcoming-${event.pk}`}>
                 {(moment(event.date).isBefore(moment()) === false && event.status !== "Cancelled") ? (
-                    <div className="game-night-event-container" key={`container-${event.pk}`} >
-                            <p className="event-info-date-loc" key={`date-loc-${event.pk}`}>{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
-                            <p className="event-info-times" key={`event-times-${event.pk}`}>{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
-                            <Link className="event-voting-link" to={`/game_night/${event.rid}/`} key={`guest-link-${event.pk}`}>Share this link with your guests</Link> | 
-                            <Link className="event-finalize-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>Finalize event details</Link>
+                    <div className="game-night-event-container">
+                            <p className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
+                            <p className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
+                            <Link className="event-voting-link" to={`/game_night/${event.rid}/`}>Share this link with your guests</Link> | 
+                            <Link className="event-finalize-link" to={`/game_night/${event.rid}/finalize`}>Finalize event details</Link>
                     </div>) : (<></>)
                 }
-                </>
+                </React.Fragment>
             ))}
             <h4>Past Game Nights</h4>
             {gameNightList.map((event) => (
-                <>
+                <React.Fragment key={`past-${event.pk}`}>
                 {(moment(event.date).isBefore(moment()) && event.status !== "Cancelled") ? (
-                    <div className="game-night-event-container" key={`container-${event.pk}`} >
-                            <div className="event-info-date-loc" key={`date-loc-${event.pk}`}>{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
-                            <div className="event-info-times" key={`event-times-${event.pk}`}>{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
-                            <Link className="event-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>View Event</Link>
+                    <div className="game-night-event-container">
+                            <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
+                            <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
+                            <Link className="event-link" to={`/game_night/${event.rid}/finalize`}>View Event</Link>
                     </div>) : (<></>)
                 }
-                </>
+                </React.Fragment>
             ))}
             <h4>Cancelled Game Nights</h4>
             {gameNightList.map((event) => (
-                <>
+                <React.Fragment key={`cancelled-${event.pk}`}>
                 {event.status === "Cancelled" ? (
-                <div className="game-night-event-container" key={`cancelled-${event.pk}`}>
-                    <div className="event-info-date-loc" key={`date-loc-${event.pk}`}>{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
-                    <div className="event-info-times" key={`event-times-${event.pk}`}>{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
-                    <Link className="event-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>View Event</Link>
+                <div className="game-night-event-container">
+                    <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
+                    <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
+                    <Link className="event-link" to={`/game_night/${event.rid}/finalize`}>View Event</Link>
                 </div>
                 ) : (<></>)
                 }
-                </>
+                </React.Fragment>
             ))}
         </div>
     )
