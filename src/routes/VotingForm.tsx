@@ -117,7 +117,7 @@ export default function VotingForm(props: gameNightProps) {
       }
       setVotes(newVotes);
     }
-    setVoted(true);
+    // setVoted(true);
   };
 
   const voteSubmit = (event: any) => {
@@ -138,7 +138,10 @@ export default function VotingForm(props: gameNightProps) {
           },
         }
       )
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        setVoted(true);
+      })
       .catch((error) => console.log(error));
   };
 
