@@ -70,6 +70,8 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
+        setStatus(response.data.status)
+        setUpdater(updater+1)
         console.log(selectedGameList);
       });
   };
@@ -90,6 +92,8 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
+        setStatus(response.data.status)
+        setUpdater(updater-1)
         alert("Game night cancelled!");
       });
   };
@@ -188,14 +192,17 @@ export default function GameNightOwnerView(props: gameNightProps) {
         </form>
       </div>
 
-      {status === "Voting" ?
       <div className="finalize-cancel-buttons-container">
+        {status === "Voting" ? (
         <button className="finalize-button"
             onClick={() => {if (window.confirm("Finalize game night details?")) finalizeGameNight()}}>Confirm Game Night</button>
+        ) : (<></>) }
+        {status !== "Cancelled" ? (
         <button className="cancel-button"
             onClick={() => {if (window.confirm("Cancel game night?")) cancelGameNight()}}>Cancel Game Night</button>
-      </div> : <></>
-      }
+        ) : (<></>) }
+      </div>
+
 
       <div className="all-voting-results-container">
         <h4>Voting Results:</h4>
