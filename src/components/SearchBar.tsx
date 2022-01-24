@@ -21,7 +21,7 @@ export default function SearchBar(props: searchProps) {
         props.setSearchSubmitted(true);
         const searchTerm: string = props.searchValue.replaceAll(' ','+')
         console.log(`https://www.boardgamegeek.com/xmlapi2/search?query=${searchTerm}&type=boardgame`)
-        const boardGameApi: string = `https://www.boardgamegeek.com/xmlapi2/search?query=${searchTerm}&type=boardgame`;
+        const boardGameApi: string = `https://boardgamegeek.com/xmlapi2/search?query=${searchTerm}&type=boardgame`;
         event.preventDefault();
         axios
             .get(boardGameApi)
