@@ -194,25 +194,25 @@ export default function GameNightOwnerView(props: gameNightProps) {
           <input
             type="date"
             value={date}
-            onChange={(event) => {if (status==="voting") handleChange('date', event)}}
+            onChange={(event) => {if (status==="Voting") handleChange('date', event)}}
           />
           <label className="form-label">Start Time: </label>
           <input
             type="time"
             value={startTime}
-            onChange={(event) => {if (status==="voting") handleChange('startTime', event)}}
+            onChange={(event) => {if (status==="Voting") handleChange('startTime', event)}}
           />
           <label className="form-label">End Time: </label>
           <input
             type="time"
             value={endTime}
-            onChange={(event) => {if (status==="voting") handleChange('endTime', event)}}
+            onChange={(event) => {if (status==="Voting") handleChange('endTime', event)}}
           />
           <label className="form-label">Location: </label>
           <input
             type="text"
             value={location}
-            onChange={(event) => {if (status==="voting") handleChange('location', event)}}
+            onChange={(event) => {if (status==="Voting") handleChange('location', event)}}
           />
           {status === "Voting" ?
           <button className="submit-button">Submit Changes</button>
