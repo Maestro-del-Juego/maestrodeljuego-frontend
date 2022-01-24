@@ -119,7 +119,36 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
+        setStatus(response.data.status)
+        setUpdater(updater+1)
         alert("Game night confirmed!")
+      });
+  };
+
+  const reopenGameNight = () => {
+    axios
+      .patch(
+        gameNightUrl,
+        {
+          date: date,
+          start_time: startTime,
+          end_time: endTime,
+          location: location,
+          games: selectedGameList,
+          status: 'Voting',
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${props.token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        setStatus(response.data.status)
+        setUpdater(updater+1)
+        alert("Game night reopened.")
       });
   };
 
@@ -165,25 +194,25 @@ export default function GameNightOwnerView(props: gameNightProps) {
           <input
             type="date"
             value={date}
-            onChange={(event) => {if (status==="voting") handleChange('date', event)}}
+            onChange={(event) => {if (status==="Voting") handleChange('date', event)}}
           />
           <label className="form-label">Start Time: </label>
           <input
             type="time"
             value={startTime}
-            onChange={(event) => {if (status==="voting") handleChange('startTime', event)}}
+            onChange={(event) => {if (status==="Voting") handleChange('startTime', event)}}
           />
           <label className="form-label">End Time: </label>
           <input
             type="time"
             value={endTime}
-            onChange={(event) => {if (status==="voting") handleChange('endTime', event)}}
+            onChange={(event) => {if (status==="Voting") handleChange('endTime', event)}}
           />
           <label className="form-label">Location: </label>
           <input
             type="text"
             value={location}
-            onChange={(event) => {if (status==="voting") handleChange('location', event)}}
+            onChange={(event) => {if (status==="Voting") handleChange('location', event)}}
           />
           {status === "Voting" ?
           <button className="submit-button">Submit Changes</button>
@@ -200,6 +229,10 @@ export default function GameNightOwnerView(props: gameNightProps) {
         {status !== "Cancelled" ? (
         <button className="cancel-button"
             onClick={() => {if (window.confirm("Cancel game night?")) cancelGameNight()}}>Cancel Game Night</button>
+        ) : (<></>) }
+        {status === "Finalized" ? (
+        <button className="reopen-button"
+            onClick={() => {if (window.confirm("Reopen game night for voting and new RSVPs?")) reopenGameNight()}}>Reopen Game Night</button>
         ) : (<></>) }
       </div>
 
@@ -219,6 +252,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <div className="game-selection-text-container">
               <h6>{game.title}</h6>
               <p>Vote Score: {game.votes}</p>
+              {status === "Voting" ? (
               <button
                 onClick={() => {
                   handleAddClick(game);
@@ -226,7 +260,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 }}
               >
                 Select Game
-              </button>
+              </button> ) : <></> }
             </div>
           </div>
         ))}
@@ -246,6 +280,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <div className="game-selection-text-container">
               <h6>{game.title}</h6>
               <p>Vote Score: {game.votes}</p>
+              {status === "Voting" ? (
               <button
                 onClick={() => {
                   handleRemoveClick(game);
@@ -253,7 +288,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 }}
               >
                 Remove Game
-              </button>
+              </button> ) : <></> }
             </div>
           </div>
         ))}
