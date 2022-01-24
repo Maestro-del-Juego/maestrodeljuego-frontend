@@ -78,6 +78,7 @@ export default function GameNightMenu(props: gameNightProps) {
                 <div className="game-night-event-container" key={`cancelled-${event.pk}`}>
                     <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
                     <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
+                    <Link className="event-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>View Event</Link>
                 </div>
                 ) : (<></>)
                 }

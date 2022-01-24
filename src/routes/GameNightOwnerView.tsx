@@ -161,36 +161,41 @@ export default function GameNightOwnerView(props: gameNightProps) {
           <input
             type="date"
             value={date}
-            onChange={(event) => handleChange('date', event)}
+            onChange={(event) => {if (status==="voting") handleChange('date', event)}}
           />
           <label className="form-label">Start Time: </label>
           <input
             type="time"
             value={startTime}
-            onChange={(event) => handleChange('startTime', event)}
+            onChange={(event) => {if (status==="voting") handleChange('startTime', event)}}
           />
           <label className="form-label">End Time: </label>
           <input
             type="time"
             value={endTime}
-            onChange={(event) => handleChange('endTime', event)}
+            onChange={(event) => {if (status==="voting") handleChange('endTime', event)}}
           />
           <label className="form-label">Location: </label>
           <input
             type="text"
             value={location}
-            onChange={(event) => handleChange('location', event)}
+            onChange={(event) => {if (status==="voting") handleChange('location', event)}}
           />
+          {status === "Voting" ?
           <button className="submit-button">Submit Changes</button>
+          : <></>
+          }
         </form>
       </div>
 
+      {status === "Voting" ?
       <div className="finalize-cancel-buttons-container">
         <button className="finalize-button"
             onClick={() => {if (window.confirm("Finalize game night details?")) finalizeGameNight()}}>Confirm Game Night</button>
         <button className="cancel-button"
             onClick={() => {if (window.confirm("Cancel game night?")) cancelGameNight()}}>Cancel Game Night</button>
-      </div>
+      </div> : <></>
+      }
 
       <div className="all-voting-results-container">
         <h4>Voting Results:</h4>
