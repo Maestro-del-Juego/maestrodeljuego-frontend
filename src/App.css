@@ -337,3 +337,11 @@ a {
   width: 70px;
   margin: 8px 100px 8px 100px;
 }
+
+#email-confirm {
+  margin-top: 60px;
+}
+
+.gamenight-banner {
+  text-align: center;
+}
