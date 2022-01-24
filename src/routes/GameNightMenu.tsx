@@ -55,7 +55,7 @@ export default function GameNightMenu(props: gameNightProps) {
             {gameNightList.map((event) => (
                 <React.Fragment key={`upcoming-${event.pk}`}>
                 {(moment(event.date).isBefore(moment()) === false && event.status !== "Cancelled") ? (
-                    <div className="game-night-event-container">
+                    <div className={`game-night-event-container ${event.status==="Finalized" ? "event-container-finalized" : "event-container-voting"}`}>
                             <p className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
                             <p className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
                             <Link className="event-voting-link" to={`/game_night/${event.rid}/`}>Share this link with your guests</Link> | 
