@@ -59,7 +59,7 @@ export default function GameNightMenu(props: gameNightProps) {
                             <p className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
                             <p className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
                             <Link className="event-voting-link" to={`/game_night/${event.rid}/`}>Share this link with your guests</Link> | 
-                            <Link className="event-finalize-link" to={`/game_night/${event.rid}/finalize`}>Finalize event details</Link>
+                            <Link className="event-finalize-link" to={`/game_night/${event.rid}/finalize`}>View event details</Link>
                     </div>) : (<></>)
                 }
                 </React.Fragment>
