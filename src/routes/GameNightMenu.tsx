@@ -22,6 +22,7 @@ interface gameNightObject {
 export default function GameNightMenu(props: gameNightProps) {
     const [gameNightList, setGameNightList] = useState<gameNightObject[]>([]);
     useEffect(() => {
+        if (props.token !== "") {
         const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/`;
         axios
             .get(gameNightUrl, {
@@ -43,20 +44,22 @@ export default function GameNightMenu(props: gameNightProps) {
                     return Date.parse(b.date) - Date.parse(a.date); }); //sorts array by date, newest to oldest
                 setGameNightList(gameNightArray);
             });
-        }, [props.token]);
+        }}, [props.token]);
 
     return (
+        <>
+        {props.token !== "" ? (
         <div className="game-night-menu-container">
             <Link className="new-event-link" to="/createevent/">Create New Event</Link>
             <h4>Upcoming Game Nights</h4>
             {gameNightList.map((event) => (
                 <React.Fragment key={`upcoming-${event.pk}`}>
                 {(moment(event.date).isBefore(moment()) === false && event.status !== "Cancelled") ? (
-                    <div className="game-night-event-container">
+                    <div className={`game-night-event-container ${event.status==="Finalized" ? "event-container-finalized" : "event-container-voting"}`}>
                             <p className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
                             <p className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
                             <Link className="event-voting-link" to={`/game_night/${event.rid}/`}>Share this link with your guests</Link> | 
-                            <Link className="event-finalize-link" to={`/game_night/${event.rid}/finalize`}>Finalize event details</Link>
+                            <Link className="event-finalize-link" to={`/game_night/${event.rid}/finalize`}>View event details</Link>
                     </div>) : (<></>)
                 }
                 </React.Fragment>
@@ -87,5 +90,7 @@ export default function GameNightMenu(props: gameNightProps) {
                 </React.Fragment>
             ))}
         </div>
+        ) : (<><h4>Please log in to see your game night events.</h4></>)
+        }</>
     )
 }
