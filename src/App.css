@@ -355,3 +355,17 @@ a {
 .gamenight-banner {
   text-align: center;
 }
+
+.frowny-vote,
+.neutral-vote,
+.smiley-vote {
+  margin: 3px;
+}
+
+.frowny-vote:active,
+.neutral-vote:active,
+.smiley-vote:active {
+  outline: none;
+  box-shadow: none;
+  background-color: green;
+}
