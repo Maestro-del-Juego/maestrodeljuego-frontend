@@ -119,6 +119,8 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
+        setStatus(response.data.status)
+        setUpdater(updater+1)
         alert("Game night confirmed!")
       });
   };
@@ -144,6 +146,8 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
+        setStatus(response.data.status)
+        setUpdater(updater+1)
         alert("Game night reopened.")
       });
   };
@@ -248,6 +252,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <div className="game-selection-text-container">
               <h6>{game.title}</h6>
               <p>Vote Score: {game.votes}</p>
+              {status === "Voting" ? (
               <button
                 onClick={() => {
                   handleAddClick(game);
@@ -255,7 +260,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 }}
               >
                 Select Game
-              </button>
+              </button> ) : <></> }
             </div>
           </div>
         ))}
@@ -275,6 +280,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <div className="game-selection-text-container">
               <h6>{game.title}</h6>
               <p>Vote Score: {game.votes}</p>
+              {status === "Voting" ? (
               <button
                 onClick={() => {
                   handleRemoveClick(game);
@@ -282,7 +288,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 }}
               >
                 Remove Game
-              </button>
+              </button> ) : <></> }
             </div>
           </div>
         ))}
