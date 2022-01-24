@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import GameCard from '../components/GameCard';
+import useLocalStorage from 'use-local-storage';
 interface gameNightProps {
   token: string;
 }
@@ -19,7 +20,7 @@ export default function VotingForm(props: gameNightProps) {
   const [attending, setAttending] = useState('True');
   const [inviteeEmail, setInviteeEmail] = useState('');
   const [eventStatus, setEventStatus] = useState('');
-  const [voted, setVoted] = useState(false);
+  const [voted, setVoted] = useLocalStorage('gameNightHasVoted', false);
   const [emailError, setEmailError] = useState('');
   const [finalGames, setFinalGames] = useState<any[]>([]);
   const [gameNightDate, setGameNightDate] = useState('');
@@ -117,6 +118,7 @@ export default function VotingForm(props: gameNightProps) {
       }
       setVotes(newVotes);
     }
+    // setVoted(true);
   };
 
   const voteSubmit = (event: any) => {
@@ -137,7 +139,10 @@ export default function VotingForm(props: gameNightProps) {
           },
         }
       )
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        setVoted(true);
+      })
       .catch((error) => console.log(error));
   };
 
