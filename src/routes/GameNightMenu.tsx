@@ -44,15 +44,15 @@ export default function GameNightMenu(props: gameNightProps) {
             });
         }, [props.token]);
     return (
-        <div className="game-night-menu-container">
+        <div className="game-night-menu-container" key={"menu-container"}>
             <Link className="new-event-link" to="/createevent/" key={"new-event-link"}>Create New Event</Link>
             <h4>Upcoming Game Nights</h4>
             {gameNightList.map((event) => (
                 <>
                 {(moment(event.date).isBefore(moment()) === false && event.status !== "Cancelled") ? (
                     <div className="game-night-event-container" key={`container-${event.pk}`} >
-                            <p className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
-                            <p className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
+                            <p className="event-info-date-loc" key={`date-loc-${event.pk}`}>{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
+                            <p className="event-info-times" key={`event-times-${event.pk}`}>{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
                             <Link className="event-voting-link" to={`/game_night/${event.rid}/`} key={`guest-link-${event.pk}`}>Share this link with your guests</Link> | 
                             <Link className="event-finalize-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>Finalize event details</Link>
                     </div>) : (<></>)
@@ -64,8 +64,8 @@ export default function GameNightMenu(props: gameNightProps) {
                 <>
                 {(moment(event.date).isBefore(moment()) && event.status !== "Cancelled") ? (
                     <div className="game-night-event-container" key={`container-${event.pk}`} >
-                            <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
-                            <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
+                            <div className="event-info-date-loc" key={`date-loc-${event.pk}`}>{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
+                            <div className="event-info-times" key={`event-times-${event.pk}`}>{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
                             <Link className="event-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>View Event</Link>
                     </div>) : (<></>)
                 }
@@ -76,8 +76,8 @@ export default function GameNightMenu(props: gameNightProps) {
                 <>
                 {event.status === "Cancelled" ? (
                 <div className="game-night-event-container" key={`cancelled-${event.pk}`}>
-                    <div className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
-                    <div className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
+                    <div className="event-info-date-loc" key={`date-loc-${event.pk}`}>{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</div>
+                    <div className="event-info-times" key={`event-times-${event.pk}`}>{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</div>
                     <Link className="event-link" to={`/game_night/${event.rid}/finalize`} key={`link-${event.pk}`}>View Event</Link>
                 </div>
                 ) : (<></>)
