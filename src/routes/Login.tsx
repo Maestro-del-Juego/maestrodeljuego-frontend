@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { Link } from 'react-router-dom';
 
 interface loginProps {
   setAuth: any;
@@ -48,40 +54,62 @@ const Login = (props: loginProps) => {
   return loggedIn ? (
     <Navigate to={`/play_stats/${username}`} />
   ) : (
-    <form onSubmit={handleSubmit}>
-      {/* conditionally show error message */}
-      {errors && <div className="bg-red white pa3">{errors}</div>}
-      <div className="mb-3 container">
-        <label className="form-label" htmlFor="username">
-          Username
-        </label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-          className="form-control"
-        />
-      </div>
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          {errors && <div className="bg-red white pa3">{errors}</div>}
+          <div className="mb-3 container">
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              autoComplete="username"
+              autoFocus
+            />
+          </div>
 
-      <div className="mb-3 container">
-        <label className="form-label" htmlFor="password">
-          Password
-        </label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          className="form-control"
-        />
-      </div>
-      <div className="mv2 container">
-        <button type="submit" className="btn btn-primary">
-          Log In
-        </button>
-      </div>
-    </form>
+          <div className="mb-3 container">
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              autoComplete="current-password"
+            />
+          </div>
+          <div id="login-links">
+            <Button type="submit" className="btn btn-primary">
+              Log In
+            </Button>
+            <Link to={'/registration'} style={{ textDecoration: 'none' }}>
+              <Button className="btn btn-primary">
+                Don't Have an Account?
+              </Button>
+            </Link>
+          </div>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

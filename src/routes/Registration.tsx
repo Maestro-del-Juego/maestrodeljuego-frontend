@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Navigate } from 'react-router';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 interface regProps {
   setAuth: any;
@@ -56,54 +61,84 @@ const Registration = (props: regProps) => {
   return loggedIn ? (
     <Navigate to={`/play_stats/${username}`} />
   ) : (
-    <form onSubmit={handleSubmit}>
-      <div className="username-register">
-        <label htmlFor="usernameInput">Create Username</label>
-        <input
-          type="text"
-          id="usernameInput"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        ></input>
-      </div>
-      <p>{errors}</p>
-      <div className="mv2">
-        <label className="db mb2" htmlFor="passwordInput">
-          Create Password
-        </label>
-        <input
-          type="password"
-          id="passwordInput"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </div>
-      <div className="mv2">
-        <label className="db mb2" htmlFor="retypePasswordInput">
-          Re-type Password
-        </label>
-        <input
-          type="password"
-          id="retypePasswordInput"
-          value={retypePassword}
-          onChange={(event) => setRetypePassword(event.target.value)}
-        />
-      </div>
-      <div className="mv2">
-        <label className="db mb2" htmlFor="avatarInput">
-          Include an HTML image link to upload an avatar for your account.
-        </label>
-        <input
-          type="text"
-          id="avatarInput"
-          value={avatar}
-          onChange={(event) => setAvatar(event.target.value)}
-        />
-      </div>
-      <div className="mv2">
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <Container component="main" maxWidth="xs">
+      <h2>Register an Account</h2>
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <div className="username-register">
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              autoComplete="username"
+              autoFocus
+            />
+          </div>
+          <p>{errors}</p>
+          <div className="mv2">
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              type="password"
+              id="password"
+              label="Password"
+              name="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              autoComplete="password"
+              autoFocus
+            />
+          </div>
+          <div className="mv2">
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              type="password"
+              id="repassword"
+              label="Retype Password"
+              name="repassword"
+              value={retypePassword}
+              onChange={(event) => setRetypePassword(event.target.value)}
+              autoComplete="repassword"
+              autoFocus
+            />
+          </div>
+          <div id="avatar-field">
+            <label htmlFor="avatar">
+              Include an HTML image link for your account avatar.
+            </label>
+            <TextField
+              margin="normal"
+              fullWidth
+              id="avatar"
+              label="User Avatar"
+              name="avatar"
+              value={avatar}
+              onChange={(event) => setAvatar(event.target.value)}
+              autoComplete="repassword"
+              autoFocus
+            />
+          </div>
+          <div className="mv2">
+            <Button type="submit">Submit</Button>
+          </div>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
