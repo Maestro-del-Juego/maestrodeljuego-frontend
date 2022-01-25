@@ -291,6 +291,16 @@ a {
   text-align: center;
 }
 
+.event-container-finalized {
+  border-color: green;
+  border-width: 3px;
+}
+
+.event-container-voting {
+  border-color:rgb(252, 220, 38);
+  border-width: 3px;
+}
+
 .vote-results-container,
 .selected-game-container {
   clear: left;
