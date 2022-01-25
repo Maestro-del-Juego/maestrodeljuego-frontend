@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import VoteCard from '../components/VoteCard';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
 import GameCard from '../components/GameCard';
 import useLocalStorage from 'use-local-storage';
 interface gameNightProps {
@@ -213,12 +212,12 @@ export default function VotingForm(props: gameNightProps) {
         </div>
         <div id="rsvp-form">
           <h3>Will you be attending?</h3>
-          <Button onClick={() => setAttending('True')}>Yes</Button>
-          <Button onClick={() => setAttending('False')}>No</Button>
+          <button onClick={() => setAttending('True')}>Yes</button>
+          <button onClick={() => setAttending('False')}>No</button>
         </div>
-        <Button type="submit" id="guest-list-button">
+        <button type="submit" id="guest-list-button">
           Submit
-        </Button>
+        </button>
       </form>
     </div>
   ) : (
@@ -241,11 +240,11 @@ export default function VotingForm(props: gameNightProps) {
       </div>
       <div id="vote-form-buttons">
         <form id="vote-submission-form" onSubmit={voteSubmit}>
-          <Button type="submit" id="vote-submit">
+          <button type="submit" id="vote-submit">
             Vote
-          </Button>
+          </button>
         </form>
-        <Button onClick={() => setGuestPick(!guestPick)}>Back</Button>
+        <button onClick={() => setGuestPick(!guestPick)}>Back</button>
       </div>
     </div>
   );
