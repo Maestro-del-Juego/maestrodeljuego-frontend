@@ -398,3 +398,16 @@ width: 50px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.guest-list-container {
+  display: flex;
+}
+
+.selected-games-container * {
+  margin-left: 10px;
+}
+
+.selected-games-container {
+  display: flex;
+  margin-left: 20px;
+}

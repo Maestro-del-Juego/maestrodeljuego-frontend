@@ -7,9 +7,13 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Popover, Typography } from '@mui/material';
+import { IconButton, Popover, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import Card from '@mui/material/Card';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 
 interface eventFormProps {
   collection: collectionObject[];
@@ -374,21 +378,26 @@ export default function EventForm(props: eventFormProps) {
       <div className="guest-list-container">
         <h3>Guest List:</h3>
         {props.guestList.map((guest) => (
-          <div
-            className="guest-container"
+          <Card
+            sx={{maxWidth: 200}}
             key={`${guest.first_name}${guest.last_name}`}
           >
-            {guest.first_name} {guest.last_name}
-            <button
+            <CardContent>
+            <Typography sx={{fontWeight: "bold"}}>{guest.first_name} {guest.last_name}</Typography>
+            <Typography sx={{fontSize: 12}}>{guest.email}</Typography>
+            <CardActions>
+            <IconButton
               className="guest-list-form-button"
               onClick={() => {
                 props.handleRemoveGuestClick(guest);
                 setUpdater(updater - 1);
               }}
             >
-              Remove Guest
-            </button>
-          </div>
+              <DeleteIcon />
+            </IconButton>
+            </CardActions>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </>
