@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import GameCard from '../components/GameCard';
 import useLocalStorage from 'use-local-storage';
+import Button from '@mui/material/Button';
 interface gameNightProps {
   token: string;
 }
@@ -212,12 +213,16 @@ export default function VotingForm(props: gameNightProps) {
         </div>
         <div id="rsvp-form">
           <h3>Will you be attending?</h3>
-          <button onClick={() => setAttending('True')}>Yes</button>
-          <button onClick={() => setAttending('False')}>No</button>
+          <Button variant="contained" onClick={() => setAttending('True')}>
+            Yes
+          </Button>
+          <Button variant="contained" onClick={() => setAttending('False')}>
+            No
+          </Button>
         </div>
-        <button type="submit" id="guest-list-button">
+        <Button variant="contained" type="submit" id="guest-list-button">
           Submit
-        </button>
+        </Button>
       </form>
     </div>
   ) : (
@@ -240,11 +245,13 @@ export default function VotingForm(props: gameNightProps) {
       </div>
       <div id="vote-form-buttons">
         <form id="vote-submission-form" onSubmit={voteSubmit}>
-          <button type="submit" id="vote-submit">
+          <Button variant="contained" type="submit" id="vote-submit">
             Vote
-          </button>
+          </Button>
         </form>
-        <button onClick={() => setGuestPick(!guestPick)}>Back</button>
+        <Button variant="contained" onClick={() => setGuestPick(!guestPick)}>
+          Back
+        </Button>
       </div>
     </div>
   );

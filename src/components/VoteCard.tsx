@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from '@mui/material/Button';
 
 interface voteCardProps {
   url: string;
@@ -18,7 +19,7 @@ export default function VoteCard(props: voteCardProps) {
       <img src={props.url} alt="Game Cover Art" className="vote-card-image" />
       <div id="vote-buttons">
         {smileySelected ? (
-          <button
+          <Button
             className="smiley-vote"
             title="smiley-vote"
             // variant="success"
@@ -28,9 +29,9 @@ export default function VoteCard(props: voteCardProps) {
             }}
           >
             <i className="far fa-smile"></i>
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
             className="smiley-vote"
             title="smiley-vote"
             // variant="outline-success"
@@ -40,10 +41,10 @@ export default function VoteCard(props: voteCardProps) {
             }}
           >
             <i className="far fa-smile"></i>
-          </button>
+          </Button>
         )}
         {neutralSelected ? (
-          <button
+          <Button
             className="smiley-vote"
             title="smiley-vote"
             // variant="warning"
@@ -53,9 +54,9 @@ export default function VoteCard(props: voteCardProps) {
             }}
           >
             <i className="far fa-meh"></i>
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
             className="smiley-vote"
             title="smiley-vote"
             // variant="outline-warning"
@@ -65,10 +66,10 @@ export default function VoteCard(props: voteCardProps) {
             }}
           >
             <i className="far fa-meh"></i>
-          </button>
+          </Button>
         )}
         {frownySelected ? (
-          <button
+          <Button
             className="smiley-vote"
             title="smiley-vote"
             // variant="danger"
@@ -78,9 +79,9 @@ export default function VoteCard(props: voteCardProps) {
             }}
           >
             <i className="far fa-frown"></i>
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
             className="smiley-vote"
             title="smiley-vote"
             // variant="outline-danger"
@@ -90,7 +91,7 @@ export default function VoteCard(props: voteCardProps) {
             }}
           >
             <i className="far fa-frown"></i>
-          </button>
+          </Button>
         )}
       </div>
     </div>
