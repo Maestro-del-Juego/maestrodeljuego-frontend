@@ -316,10 +316,10 @@ a {
   margin-top: 5px;
 }
 
-.selected-game-container img {
+/* .selected-game-container img {
   float: left;
   margin-right: 10px;
-}
+} */
 
 .selected-game-container h6 {
   margin-left: 10px;
@@ -393,4 +393,53 @@ a {
 #game-feedback > h3 {
   margin-top: 40px;
   margin-bottom: 10px;
+}
+
+.menu-image {
+height: 50px;
+width: 50px;
+}
+
+.create-contact-form {
+  padding: 10px;
+  margin: 10px;
+}
+
+.new-event-form {
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.contact-button-group {
+  text-align: center;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#game-menu-button {
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.guest-picker-container, .game-picker-container {
+  display: flex;
+  margin-left: 20px;
+}
+
+.guest-picker-container {
+  float: left;
+}
+.games-guests-container {
+  display: flex;
+}
+
+.contact-button-group-container {
+  float: left;
+}
+
+.game-picker-title {
+  margin-right: 15px;
 }
