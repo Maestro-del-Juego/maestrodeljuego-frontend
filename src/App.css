@@ -297,7 +297,7 @@ a {
 }
 
 .event-container-voting {
-  border-color:rgb(252, 220, 38);
+  border-color: rgb(252, 220, 38);
   border-width: 3px;
 }
 
@@ -396,8 +396,8 @@ a {
 }
 
 .menu-image {
-height: 50px;
-width: 50px;
+  height: 50px;
+  width: 50px;
 }
 
 .create-contact-form {
@@ -424,7 +424,8 @@ width: 50px;
   margin-bottom: 10px;
 }
 
-.guest-picker-container, .game-picker-container {
+.guest-picker-container,
+.game-picker-container {
   display: flex;
   margin-left: 20px;
 }
@@ -442,4 +443,13 @@ width: 50px;
 
 .game-picker-title {
   margin-right: 15px;
+}
+
+#avatar-field {
+  margin-top: 30px;
+}
+
+#login-links {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
 }

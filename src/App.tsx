@@ -109,6 +109,10 @@ function App() {
           element={<CollectionPage user={user} token={token} />}
         />
         <Route
+          path="/collection/"
+          element={<Login setAuth={setAuth} updateAvatar={updateAvatar} />}
+        />
+        <Route
           path="/wishlist/:user"
           element={<Wishlist user={user} token={token} />}
         />
