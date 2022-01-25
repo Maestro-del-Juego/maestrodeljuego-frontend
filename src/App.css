@@ -379,3 +379,22 @@ width: 50px;
   padding: 10px;
   margin: 10px;
 }
+
+.new-event-form {
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.contact-button-group {
+  text-align: center;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#game-menu-button {
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

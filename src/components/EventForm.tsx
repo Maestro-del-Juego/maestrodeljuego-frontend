@@ -4,11 +4,12 @@ import { collectionObject } from '../routes/CreateEvent';
 import { contactObject } from '../routes/CreateEvent';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Popover } from '@mui/material';
+import { Popover, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import moment from 'moment';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface eventFormProps {
   collection: collectionObject[];
@@ -94,6 +95,9 @@ export default function EventForm(props: eventFormProps) {
         tempArray.push(response.data);
         props.setGuestList(tempArray);
         setUpdater(updater + 1);
+        setNewContactFirst("");
+        setNewContactLast("");
+        setNewContactEmail("");
       });
   };
 
@@ -220,6 +224,7 @@ export default function EventForm(props: eventFormProps) {
       </div>
 
       <div>
+        <ButtonGroup className="contact-button-group" variant="contained" aria-label="outlined primary button group">
         <Button
           id="contact-menu-button"
           aria-controls={openContactMenu ? 'basic-menu' : undefined}
@@ -229,6 +234,14 @@ export default function EventForm(props: eventFormProps) {
         >
           Add Contacts
         </Button>
+        <Button
+          aria-describedby={newContactPopupId}
+          variant="contained"
+          onClick={handleNewContactClick}
+        >
+          Create New Contact
+        </Button>
+        </ButtonGroup>
         <Menu
           id="game-menu"
           anchorEl={contactAnchor}
@@ -253,13 +266,13 @@ export default function EventForm(props: eventFormProps) {
       </div>
 
       <div className="contact-form-popup-container">
-        <Button
+        {/* <Button
           aria-describedby={newContactPopupId}
           variant="contained"
           onClick={handleNewContactClick}
         >
           Create New Contact
-        </Button>
+        </Button> */}
         <Popover
           id={newContactPopupId}
           open={newContactOpen}
@@ -304,6 +317,7 @@ export default function EventForm(props: eventFormProps) {
           aria-haspopup="true"
           aria-expanded={openGameMenu ? 'true' : undefined}
           onClick={handleGameClick}
+          variant="contained" 
         >
           Select Games
         </Button>
@@ -355,6 +369,7 @@ export default function EventForm(props: eventFormProps) {
             </button>
           </div>
         ))}
+
       </div>
       <div className="guest-list-container">
         <h3>Guest List:</h3>
