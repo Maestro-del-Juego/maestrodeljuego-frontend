@@ -369,3 +369,13 @@ a {
   box-shadow: none;
   background-color: green;
 }
+
+.menu-image {
+height: 50px;
+width: 50px;
+}
+
+.create-contact-form {
+  padding: 10px;
+  margin: 10px;
+}
