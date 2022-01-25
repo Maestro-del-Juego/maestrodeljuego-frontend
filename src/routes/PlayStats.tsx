@@ -1,14 +1,23 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { PieChart, Pie, RadarChart, ResponsiveContainer, Tooltip, PolarGrid, Radar, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  RadarChart,
+  ResponsiveContainer,
+  Tooltip,
+  PolarGrid,
+  Radar,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+} from 'recharts';
 
 interface statProps {
-  user: string, 
-  token: string
+  user: string;
+  token: string;
 }
 
 export default function PlayStats(props: statProps) {
-
   const dataTitle = [
     { name: 'Eclipse', value: 400 },
     { name: 'Caylus', value: 300 },
@@ -60,17 +69,20 @@ export default function PlayStats(props: statProps) {
   useEffect(() => {
     const loadData = () => {
       try {
-        axios.get('https://maestrodeljuego.herokuapp.com/library/', {headers: {
-          "Authorization": `Token ${props.token}`
-        }})
-          .then(result => console.log(result))
-          .catch(error => console.log(error))
-      } catch(error) {
-        console.log(error)
+        axios
+          .get('https://maestrodeljuego.herokuapp.com/auth/users/me/', {
+            headers: {
+              Authorization: `Token ${props.token}`,
+            },
+          })
+          .then((result) => console.log(result))
+          .catch((error) => console.log(error));
+      } catch (error) {
+        console.log(error);
       }
-    }
+    };
     loadData();
-  }, [])
+  }, []);
 
   return (
     <div id="play-stats-page">
@@ -78,18 +90,18 @@ export default function PlayStats(props: statProps) {
       <div id="most-played">
         <div id="by-title">
           <h3>Most Played Games</h3>
-            <PieChart width={400} height={400}>
-              <Pie
-                dataKey="value"
-                data={dataTitle}
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
+          <PieChart width={400} height={400}>
+            <Pie
+              dataKey="value"
+              data={dataTitle}
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
               fill="#8884d8"
               label
             />
             <Tooltip />
-            </PieChart>
+          </PieChart>
         </div>
         <div id="by-genre">
           <h3>Most Played Genres</h3>
@@ -98,11 +110,17 @@ export default function PlayStats(props: statProps) {
               <PolarGrid />
               <PolarAngleAxis dataKey="subject" />
               <PolarRadiusAxis />
-              <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+              <Radar
+                name="Mike"
+                dataKey="A"
+                stroke="#8884d8"
+                fill="#8884d8"
+                fillOpacity={0.6}
+              />
             </RadarChart>
           </ResponsiveContainer>
         </div>
       </div>
     </div>
-  )
+  );
 }
