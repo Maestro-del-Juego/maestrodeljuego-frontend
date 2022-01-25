@@ -51,7 +51,6 @@ export default function GameNightMenu(props: gameNightProps) {
     const copyToClipboard = (url: string) => {
         const copyText = url;
         navigator.clipboard.writeText(copyText);
-        alert("Copied: " + url)
     }
 
     return (
