@@ -443,3 +443,20 @@ width: 50px;
 .game-picker-title {
   margin-right: 15px;
 }
+
+.gn-owner-view-container {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.voting-and-rsvp-container {
+  display: flex;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.rsvp-container {
+  margin-left: 20px;
+}
+.finalize-cancel-buttons-container {
+  margin-top: 10px;
+}
