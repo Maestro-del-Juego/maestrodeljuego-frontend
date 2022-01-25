@@ -22,7 +22,8 @@ export default function VoteCard(props: voteCardProps) {
           <Button
             className="smiley-vote"
             title="smiley-vote"
-            // variant="success"
+            variant="contained"
+            color="success"
             onClick={() => {
               props.voteHandler(props.pk, 0);
               setSmileySelected(false);
@@ -34,7 +35,8 @@ export default function VoteCard(props: voteCardProps) {
           <Button
             className="smiley-vote"
             title="smiley-vote"
-            // variant="outline-success"
+            variant="outlined"
+            color="success"
             onClick={() => {
               props.voteHandler(props.pk, 1);
               setSmileySelected(true);
@@ -47,7 +49,8 @@ export default function VoteCard(props: voteCardProps) {
           <Button
             className="smiley-vote"
             title="smiley-vote"
-            // variant="warning"
+            variant="contained"
+            color="warning"
             onClick={() => {
               props.voteHandler(props.pk, 0);
               setNeutralSelected(false);
@@ -59,7 +62,8 @@ export default function VoteCard(props: voteCardProps) {
           <Button
             className="smiley-vote"
             title="smiley-vote"
-            // variant="outline-warning"
+            variant="outlined"
+            color="warning"
             onClick={() => {
               props.voteHandler(props.pk, 0);
               setNeutralSelected(true);
@@ -72,7 +76,8 @@ export default function VoteCard(props: voteCardProps) {
           <Button
             className="smiley-vote"
             title="smiley-vote"
-            // variant="danger"
+            variant="contained"
+            color="error"
             onClick={() => {
               props.voteHandler(props.pk, 0);
               setFrownySelected(false);
@@ -84,7 +89,8 @@ export default function VoteCard(props: voteCardProps) {
           <Button
             className="smiley-vote"
             title="smiley-vote"
-            // variant="outline-danger"
+            variant="outlined"
+            color="error"
             onClick={() => {
               props.voteHandler(props.pk, -1);
               setFrownySelected(true);
