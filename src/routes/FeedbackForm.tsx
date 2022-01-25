@@ -11,9 +11,15 @@ import Button from '@mui/material/Button';
 interface feedbackProps {}
 
 export default function FeedbackForm(props: feedbackProps) {
+  const [guestPick, setGuestPick] = useState(true);
+  const [guestEmail, setGuestEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [guest, setGuest] = useState('');
+  const [votes, setVotes] = useState<any[]>([]);
+  const [feedbackProvider, setFeedbackProvider] = useState(0);
+  const [guestList, setGuestList] = useState<any[]>([]);
   const [host, setHost] = useState('');
   const [playedGames, setPlayedGames] = useState<any[]>([]);
-  const [scores, setScores] = useState<any[]>([]);
   const [feedback, setFeedback] = useState('');
   const [overallScore, setOverallScore] = useState<number | null>(2);
   const [overallHover, setOverallHover] = useState(-1);
@@ -27,13 +33,52 @@ export default function FeedbackForm(props: feedbackProps) {
       .then((result: any) => {
         console.log(result.data);
         setHost(result.data.user.username);
+        setGuestList(result.data.invitees);
         setPlayedGames(result.data.games);
+        setGuest(
+          result.data.invitees[0].first_name +
+            ' ' +
+            result.data.invitees[0].last_name
+        );
+        setFeedbackProvider(result.data.invitees[0].pk);
+        for (let i = 0; i < result.data.games.length; i++) {
+          setVotes((oldData) => [
+            ...oldData,
+            {
+              game: result.data.games[i].pk,
+              rating: 0,
+            },
+          ]);
+        }
       })
       .catch((error: any) => console.log(error));
   }, []);
 
-  const voteHandler = () => {
+  useEffect(() => {
+    for (let individual of guestList) {
+      if (individual.first_name + ' ' + individual.last_name === guest) {
+        setFeedbackProvider(individual.pk);
+      }
+    }
+  }, [guest]);
+
+  const feedbackHandler = () => {
     console.log('Vote Submitted!');
+  };
+
+  const guestHandler = () => {
+    console.log('Placeholder');
+    setGuestPick(false);
+  };
+
+  const voteHandler = (gamePk: number, voteScore: number) => {
+    let newVotes = [...votes];
+    for (let gameId of newVotes) {
+      if (gameId.game === gamePk) {
+        gameId.rating = voteScore;
+      }
+      setVotes(newVotes);
+    }
   };
 
   const labels: { [index: string]: string } = {
@@ -49,7 +94,48 @@ export default function FeedbackForm(props: feedbackProps) {
     5: 'I NEED MORE OF THIS',
   };
 
-  return (
+  return guestPick ? (
+    <div id="guest-list-select">
+      <form onSubmit={guestHandler} id="guest-list-form">
+        <h3>Guest List</h3>
+        <h6>Select your name</h6>
+        <div id="guest-select">
+          <select
+            title="Guest List Dropdown"
+            name="guests"
+            id="guest-list-dropdown"
+            value={guest}
+            onChange={(event) => {
+              setGuest(event.target.value);
+            }}
+          >
+            {guestList.map((name: any, i: any) => {
+              return (
+                <option value={name.first_name + ' ' + name.last_name} key={i}>
+                  {name.first_name + ' ' + name.last_name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div id="email-confirm">
+          <p>{emailError}</p>
+          <label htmlFor="guest-email">
+            <h3>Please confirm your email:</h3>
+          </label>
+          <input
+            id="guest-email"
+            type="text"
+            value={guestEmail}
+            onChange={(event) => setGuestEmail(event.target.value)}
+          ></input>
+        </div>
+        <Button type="submit" id="guest-list-button">
+          Submit
+        </Button>
+      </form>
+    </div>
+  ) : (
     <form>
       <div id="feedback-form">
         <h1>Thank you for attending {host}'s Game Night!</h1>

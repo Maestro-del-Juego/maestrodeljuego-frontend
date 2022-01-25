@@ -39,7 +39,7 @@ export default function FeedbackCard(props: feedbackCardProps) {
         value={score}
         precision={0.5}
         onChange={(event, newValue) => {
-          setScore(newValue);
+          props.voteHandler(props.pk, newValue)
         }}
         onChangeActive={(event, newHover) => {
           setHover(newHover);
