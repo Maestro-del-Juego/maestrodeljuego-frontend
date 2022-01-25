@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Popover } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import moment from 'moment';
 
 interface eventFormProps {
   collection: collectionObject[];
@@ -164,31 +166,56 @@ export default function EventForm(props: eventFormProps) {
     <>
       <div className="new-event-form-container">
         <form className="new-event-form" onSubmit={handleSubmit}>
-          <label className="form-label">Date: </label>
-          <input
+          <TextField
+            id="date-time-picker"
+            label="Date"
             type="date"
             value={date}
             onChange={(event) => handleChange('date', event)}
+            sx={{ width: 220 }}
+            InputLabelProps={{
+             shrink: true,
+           }}
           />
-          <label className="form-label">Start Time: </label>
-          <input
+          <TextField
+            id="start-time-picker"
+            label="Start time"
             type="time"
             value={startTime}
             onChange={(event) => handleChange('startTime', event)}
-          />
-          <label className="form-label">End Time: </label>
-          <input
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{
+              step: 300, // 5 min
+            }}
+            sx={{ width: 150 }}
+            />
+          <TextField
+            id="end-time-picker"
+            label="End time"
             type="time"
             value={endTime}
             onChange={(event) => handleChange('endTime', event)}
-          />
-          <label className="form-label">Location: </label>
-          <input
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{
+              step: 300, // 5 min
+            }}
+            sx={{ width: 150 }}
+            />
+          <TextField
+            id="location-picker"
+            label="Location"
             type="text"
             value={location}
             onChange={(event) => handleChange('location', event)}
-          />
-          <button className="submit-button">Create Event</button>
+            InputLabelProps={{
+              shrink: true,
+            }}
+            sx={{ width: 300 }}
+            />
         </form>
       </div>
 
