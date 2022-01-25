@@ -193,7 +193,6 @@ a {
 
 .vote-card-image {
   height: 100px;
-  width: 75px;
 }
 
 #vote-card {
@@ -368,6 +367,32 @@ a {
   outline: none;
   box-shadow: none;
   background-color: green;
+}
+
+#feedback-form {
+  text-align: center;
+}
+
+#game-feedback {
+  justify-content: center;
+  margin-top: 40px;
+}
+
+#feedback-game-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+#feedback-submit {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+#game-feedback > h3 {
+  margin-top: 40px;
+  margin-bottom: 10px;
 }
 
 .menu-image {
