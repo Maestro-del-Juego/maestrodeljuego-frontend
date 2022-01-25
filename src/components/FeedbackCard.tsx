@@ -11,7 +11,7 @@ interface feedbackCardProps {
 }
 
 export default function FeedbackCard(props: feedbackCardProps) {
-  const [score, setScore] = useState<number | null>(2);
+  const [score, setScore] = useState<number | null>(2.5);
   const [hover, setHover] = useState(-1);
 
   const labels: { [index: string]: string } = {
@@ -39,7 +39,8 @@ export default function FeedbackCard(props: feedbackCardProps) {
         value={score}
         precision={0.5}
         onChange={(event, newValue) => {
-          props.voteHandler(props.pk, newValue)
+          props.voteHandler(props.pk, newValue);
+          setScore(newValue);
         }}
         onChangeActive={(event, newHover) => {
           setHover(newHover);

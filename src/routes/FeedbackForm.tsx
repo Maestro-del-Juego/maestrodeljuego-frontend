@@ -21,8 +21,9 @@ export default function FeedbackForm(props: feedbackProps) {
   const [host, setHost] = useState('');
   const [playedGames, setPlayedGames] = useState<any[]>([]);
   const [feedback, setFeedback] = useState('');
-  const [overallScore, setOverallScore] = useState<number | null>(2);
+  const [overallScore, setOverallScore] = useState<number | null>(2.5);
   const [overallHover, setOverallHover] = useState(-1);
+  const [voted, setVoted] = useState(false);
 
   let { gameId } = useParams();
 
@@ -62,13 +63,64 @@ export default function FeedbackForm(props: feedbackProps) {
     }
   }, [guest]);
 
-  const feedbackHandler = () => {
-    console.log('Vote Submitted!');
+  const feedbackHandler = (event: any) => {
+    event.preventDefault();
+    let gameSubmission = [...votes];
+    for (let game of gameSubmission) {
+      game.attendee = feedbackProvider;
+    }
+    console.log(gameSubmission);
+
+    let overallSubmission = {
+      attendee: feedbackProvider,
+      overall_rating: overallScore,
+      comments: feedback,
+    };
+    console.log(overallSubmission);
+
+    axios
+      .post(
+        `https://maestrodeljuego.herokuapp.com/gamenight/${gameId}/feedback/`,
+        overallSubmission,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+
+    axios
+      .post(
+        `https://maestrodeljuego.herokuapp.com/gamenight/${gameId}/gamefeedback/`,
+        gameSubmission,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        setVoted(true);
+      })
+      .catch((error) => console.log(error));
   };
 
-  const guestHandler = () => {
-    console.log('Placeholder');
-    setGuestPick(false);
+  const guestHandler = (event: any) => {
+    event.preventDefault();
+    for (let individual of guestList) {
+      if (individual.first_name + ' ' + individual.last_name === guest) {
+        if (individual.email === guestEmail) {
+          setGuestPick(false);
+        } else {
+          setEmailError('Email does not match our records for this guest.');
+        }
+      }
+    }
   };
 
   const voteHandler = (gamePk: number, voteScore: number) => {
@@ -136,7 +188,7 @@ export default function FeedbackForm(props: feedbackProps) {
       </form>
     </div>
   ) : (
-    <form>
+    <form onSubmit={feedbackHandler} id="feedback">
       <div id="feedback-form">
         <h1>Thank you for attending {host}'s Game Night!</h1>
         <h2>Let {host} know what you thought about the evening.</h2>
@@ -187,7 +239,7 @@ export default function FeedbackForm(props: feedbackProps) {
             fullWidth
           />
         </div>
-        <Button id="feedback-submit" variant="contained">
+        <Button id="feedback-submit" variant="contained" type="submit">
           Submit
         </Button>
       </div>
