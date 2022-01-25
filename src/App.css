@@ -317,10 +317,10 @@ a {
   margin-top: 5px;
 }
 
-.selected-game-container img {
+/* .selected-game-container img {
   float: left;
   margin-right: 10px;
-}
+} */
 
 .selected-game-container h6 {
   margin-left: 10px;
@@ -399,17 +399,22 @@ width: 50px;
   margin-bottom: 10px;
 }
 
-.guest-list-container {
-  display: flex;
-}
-
-.selected-games-container * {
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.selected-games-container {
+.guest-picker-container, .game-picker-container {
   display: flex;
   margin-left: 20px;
+}
+
+.guest-picker-container {
+  float: left;
+}
+.games-guests-container {
+  display: flex;
+}
+
+.contact-button-group-container {
+  float: left;
+}
+
+.game-picker-title {
+  margin-right: 15px;
 }

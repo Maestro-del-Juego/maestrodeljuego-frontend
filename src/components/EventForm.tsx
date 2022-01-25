@@ -14,6 +14,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import React from 'react';
 
 interface eventFormProps {
   collection: collectionObject[];
@@ -99,9 +108,9 @@ export default function EventForm(props: eventFormProps) {
         tempArray.push(response.data);
         props.setGuestList(tempArray);
         setUpdater(updater + 1);
-        setNewContactFirst("");
-        setNewContactLast("");
-        setNewContactEmail("");
+        setNewContactFirst('');
+        setNewContactLast('');
+        setNewContactEmail('');
       });
   };
 
@@ -171,8 +180,8 @@ export default function EventForm(props: eventFormProps) {
   const newContactPopupId = newContactOpen ? 'new-contact-popup' : undefined;
 
   return (
-    <>
-      <div className="new-event-form-container">
+    <div className="new-event-form-container">
+      <div>
         <form className="new-event-form" onSubmit={handleSubmit}>
           <TextField
             id="date-time-picker"
@@ -182,8 +191,8 @@ export default function EventForm(props: eventFormProps) {
             onChange={(event) => handleChange('date', event)}
             sx={{ width: 220 }}
             InputLabelProps={{
-             shrink: true,
-           }}
+              shrink: true,
+            }}
           />
           <TextField
             id="start-time-picker"
@@ -198,7 +207,7 @@ export default function EventForm(props: eventFormProps) {
               step: 300, // 5 min
             }}
             sx={{ width: 150 }}
-            />
+          />
           <TextField
             id="end-time-picker"
             label="End time"
@@ -212,7 +221,7 @@ export default function EventForm(props: eventFormProps) {
               step: 300, // 5 min
             }}
             sx={{ width: 150 }}
-            />
+          />
           <TextField
             id="location-picker"
             label="Location"
@@ -223,28 +232,32 @@ export default function EventForm(props: eventFormProps) {
               shrink: true,
             }}
             sx={{ width: 300 }}
-            />
+          />
         </form>
       </div>
 
-      <div>
-        <ButtonGroup className="contact-button-group" variant="contained" aria-label="outlined primary button group">
-        <Button
-          id="contact-menu-button"
-          aria-controls={openContactMenu ? 'basic-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={openContactMenu ? 'true' : undefined}
-          onClick={handleContactClick}
-        >
-          Add Contacts
-        </Button>
-        <Button
-          aria-describedby={newContactPopupId}
+      <div className="contact-button-group-container">
+        <ButtonGroup
+          className="contact-button-group"
           variant="contained"
-          onClick={handleNewContactClick}
+          aria-label="outlined primary button group"
         >
-          Create New Contact
-        </Button>
+          <Button
+            id="contact-menu-button"
+            aria-controls={openContactMenu ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={openContactMenu ? 'true' : undefined}
+            onClick={handleContactClick}
+          >
+            Add Contacts
+          </Button>
+          <Button
+            aria-describedby={newContactPopupId}
+            variant="contained"
+            onClick={handleNewContactClick}
+          >
+            Create New Contact
+          </Button>
         </ButtonGroup>
         <Menu
           id="game-menu"
@@ -270,13 +283,6 @@ export default function EventForm(props: eventFormProps) {
       </div>
 
       <div className="contact-form-popup-container">
-        {/* <Button
-          aria-describedby={newContactPopupId}
-          variant="contained"
-          onClick={handleNewContactClick}
-        >
-          Create New Contact
-        </Button> */}
         <Popover
           id={newContactPopupId}
           open={newContactOpen}
@@ -321,7 +327,7 @@ export default function EventForm(props: eventFormProps) {
           aria-haspopup="true"
           aria-expanded={openGameMenu ? 'true' : undefined}
           onClick={handleGameClick}
-          variant="contained" 
+          variant="contained"
         >
           Select Games
         </Button>
@@ -347,59 +353,80 @@ export default function EventForm(props: eventFormProps) {
           ))}
         </Menu>
       </div>
-      <div className="selected-games-container">
-        <h3>Selected Games:</h3>
-        {props.selectedGames.map((game) => (
-          <div
-            className="game-selection-container"
-            key={`${game.pk}-selected-container`}
+      <div className="games-guests-container">
+        <div className="guest-picker-container">
+          <List
+            sx={{ minWidth: 240 }}
+            subheader={
+              <ListSubheader sx={{ fontSize: 16 }}>Guest List</ListSubheader>
+            }
           >
-            <img
-              className="game-selection-image"
-              key={`${game.pk}-selected-image`}
-              src={game.image}
-              alt={game.title}
-            />
-            <h6>{game.title}</h6>
-            <button
-              className="event-form-game-button"
-              key={`${game.pk}-remove-game-button`}
-              onClick={() => {
-                props.handleRemoveClick(game);
-                setUpdater(updater - 1);
-              }}
-            >
-              Remove Game
-            </button>
-          </div>
-        ))}
-
-      </div>
-      <div className="guest-list-container">
-        <h3>Guest List:</h3>
-        {props.guestList.map((guest) => (
-          <Card
-            sx={{maxWidth: 200}}
-            key={`${guest.first_name}${guest.last_name}`}
+            {props.guestList.map((guest) => (
+              <React.Fragment key={`${guest.first_name}${guest.last_name}`}>
+                <Divider />
+                <ListItem
+                  secondaryAction={
+                    <IconButton
+                      className="guest-list-delete-button"
+                      onClick={() => {
+                        props.handleRemoveGuestClick(guest);
+                        setUpdater(updater - 1);
+                      }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  }
+                >
+                  <ListItemText
+                    primary={`${guest.first_name} ${guest.last_name}`}
+                    secondary={`${guest.email}`}
+                  ></ListItemText>
+                </ListItem>
+              </React.Fragment>
+            ))}
+          </List>
+        </div>
+        <div className="game-picker-container">
+          <List
+            sx={{ maxWidth: 500 }}
+            subheader={
+              <ListSubheader sx={{ fontSize: 16 }}>Game List</ListSubheader>
+            }
           >
-            <CardContent>
-            <Typography sx={{fontWeight: "bold"}}>{guest.first_name} {guest.last_name}</Typography>
-            <Typography sx={{fontSize: 12}}>{guest.email}</Typography>
-            <CardActions>
-            <IconButton
-              className="guest-list-form-button"
-              onClick={() => {
-                props.handleRemoveGuestClick(guest);
-                setUpdater(updater - 1);
-              }}
-            >
-              <DeleteIcon />
-            </IconButton>
-            </CardActions>
-            </CardContent>
-          </Card>
-        ))}
+            {props.selectedGames.map((game) => (
+              <React.Fragment key={`${game.pk}-selected-container`}>
+                <Divider />
+                <ListItem
+                  secondaryAction={
+                    <IconButton
+                      className="game-list-delete-button"
+                      onClick={() => {
+                        props.handleRemoveClick(game);
+                        setUpdater(updater - 1);
+                      }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  }
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      className="game-selection-image"
+                      variant="square"
+                      src={game.image}
+                      alt={game.title}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    className="game-picker-title"
+                    primary={game.title}
+                  />
+                </ListItem>
+              </React.Fragment>
+            ))}
+          </List>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
