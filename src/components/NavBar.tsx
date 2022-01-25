@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import image from '../assets/logo.png';
+import logo from '../assets/GameKnight.png';
 
 interface navProps {
   user: string;
@@ -14,7 +15,7 @@ export default function NavBar(props: navProps) {
       <div id="nav-bar">
         <Link to={props.auth === '' ? '/' : `/play_stats/${props.user}`}>
           <img
-            src={image}
+            src={logo}
             id="logo"
             title="Game Master"
             alt="Game Master Logo"
