@@ -48,6 +48,11 @@ export default function GameNightMenu(props: gameNightProps) {
             });
         }}, [props.token]);
 
+    const copyToClipboard = (url: string) => {
+        const copyText = url;
+        navigator.clipboard.writeText(copyText);
+    }
+
     return (
         <>
         {props.token !== "" ? (
@@ -60,7 +65,7 @@ export default function GameNightMenu(props: gameNightProps) {
                     <div className={`game-night-event-container ${event.status==="Finalized" ? "event-container-finalized" : "event-container-voting"}`}>
                             <p className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
                             <p className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
-                            <Link className="event-voting-link" to={`/game_night/${event.rid}/`}>Share this link with your guests</Link> | 
+                            <button className="event-voting-link" onClick={() => copyToClipboard(`${window.location.href}/${event.rid}`)}>Copy guest link</button> | 
                             <Link className="event-finalize-link" to={`/game_night/${event.rid}/finalize`}>View event details</Link>
                     </div>) : (<></>)
                 }
