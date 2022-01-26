@@ -159,6 +159,7 @@ a {
 
 #most-played {
   display: flex;
+  margin-left: 60px;
 }
 
 .event-form-game-button {
