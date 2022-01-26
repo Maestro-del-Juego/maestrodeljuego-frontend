@@ -46,7 +46,9 @@ export default function CollectionPage(props: collectionProps) {
       .catch((error) => console.log(error));
   }, []);
 
-  return alpha ? (
+  return props.token === '' ? (
+    <h1>Please login to see your collection page</h1>
+  ) : alpha ? (
     <div className="collection-display">
       <ProSidebar>
         <Menu iconShape="square">
