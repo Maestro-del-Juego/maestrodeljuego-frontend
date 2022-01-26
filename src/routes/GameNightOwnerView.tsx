@@ -2,16 +2,8 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { IconButton, Popover, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import Card from '@mui/material/Card';
-import DeleteIcon from '@mui/icons-material/Delete';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -23,7 +15,6 @@ import Divider from '@mui/material/Divider';
 import React from 'react';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import { forEachChild } from 'typescript';
 
 interface gameNightProps {
   token: string;
@@ -425,13 +416,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
             Cancel Game Night
           </Button>
         )}
-        {/* {status === "Finalized" ? (
-        <Button className="reopen-button" variant="contained"
-            onClick={() => {if (window.confirm("Reopen game night for voting and new RSVPs?")) reopenGameNight()}}>Reopen Game Night</Button>
-        ) : (
-          <Button className="reopen-button-disabled" variant="contained" disabled
-            >Reopen Game Night</Button>
-        ) } */}
       </div>
       <div className="voting-and-rsvp-container">
         <div className="voting-results-container">
