@@ -471,3 +471,6 @@ a {
   grid-template-rows: 1fr 1fr;
 }
 
+.game-night-menu-container * {
+  margin: auto !important;
+}

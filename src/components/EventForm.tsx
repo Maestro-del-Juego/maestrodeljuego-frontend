@@ -305,25 +305,40 @@ export default function EventForm(props: eventFormProps) {
             className="create-contact-form"
             onSubmit={handleNewContactSubmit}
           >
-            <label className="form-label">First Name: </label>
-            <input
-              type="text"
-              value={newContactFirst}
-              onChange={(event) => handleChange('newContactFirst', event)}
-            />
-            <label className="form-label">Last Name: </label>
-            <input
-              type="text"
-              value={newContactLast}
-              onChange={(event) => handleChange('newContactLast', event)}
-            />
-            <label className="form-label">Email: </label>
-            <input
-              type="text"
-              value={newContactEmail}
-              onChange={(event) => handleChange('newContactEmail', event)}
-            />
-            <button className="submit-button">Add New Contact</button>
+            <TextField
+            id="new-contact-first"
+            label="First name"
+            type="text"
+            value={newContactFirst}
+            onChange={(event) => handleChange('newContactFirst', event)}
+            sx={{ width: 200 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+            <TextField
+            id="new-contact-last"
+            label="Last name"
+            type="text"
+            value={newContactLast}
+            onChange={(event) => handleChange('newContactLast', event)}
+            sx={{ width: 200 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+            <TextField
+            id="new-contact-email"
+            label="Email"
+            type="text"
+            value={newContactEmail}
+            onChange={(event) => handleChange('newContactEmail', event)}
+            sx={{ width: 300 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+            <Button variant="contained" onClick={(event) => handleNewContactSubmit(event)} className="submit-button">Add New Contact</Button>
           </form>
         </Popover>
       </div>
