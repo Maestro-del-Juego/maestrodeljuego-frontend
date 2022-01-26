@@ -1,6 +1,20 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button';
+import { IconButton, Popover, Typography } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import React from 'react';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 interface gameNightProps {
   token: string;
@@ -15,9 +29,23 @@ interface gameObject {
   votes: number;
 }
 
+interface inviteeObject {
+  pk: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+}
+
+interface rsvpObject {
+  invitee: string;
+  attending: boolean;
+}
+
 export default function GameNightOwnerView(props: gameNightProps) {
   const [gameList, setGameList] = useState<gameObject[]>([]);
   const [selectedGameList, setSelectedGameList] = useState<gameObject[]>([]);
+  const [inviteeList, setInviteeList] = useState<inviteeObject[]>([]);
+  const [rsvpList, setRsvpList] = useState<rsvpObject[]>([]);
   const [date, setDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
@@ -41,10 +69,14 @@ export default function GameNightOwnerView(props: gameNightProps) {
         setLocation(response.data.location);
         setSelectedGameList(response.data.games);
         setStatus(response.data.status);
+        setInviteeList(response.data.invitees);
+        // setRsvpList(response.data.rsvps);
         let tempArray = response.data.options.sort((a: any, b: any) =>
           a.votes > b.votes ? -1 : a.votes < b.votes ? 1 : 0
         );
         setGameList(tempArray);
+        let rsvpTempArray = response.data.rsvps.sort((a: any, b: any) => a.attending > b.attending ? -1 : a.attending < b.attending ? 1 : 0)
+        setRsvpList(rsvpTempArray);
         console.log(response.data);
       });
   }, [props.token, gameNightUrl]);
@@ -55,11 +87,11 @@ export default function GameNightOwnerView(props: gameNightProps) {
       .patch(
         gameNightUrl,
         {
-          "date": date,
-          "start_time": startTime,
-          "end_time": endTime,
-          "location": location,
-          "games": selectedGameList,
+          date: date,
+          start_time: startTime,
+          end_time: endTime,
+          location: location,
+          games: selectedGameList,
         },
         {
           headers: {
@@ -70,8 +102,8 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
-        setStatus(response.data.status)
-        setUpdater(updater+1)
+        setStatus(response.data.status);
+        setUpdater(updater + 1);
         console.log(selectedGameList);
       });
   };
@@ -92,9 +124,8 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
-        setStatus(response.data.status)
-        setUpdater(updater-1)
-        alert("Game night cancelled!");
+        setStatus(response.data.status);
+        setUpdater(updater - 1);
       });
   };
 
@@ -119,9 +150,8 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
-        setStatus(response.data.status)
-        setUpdater(updater+1)
-        alert("Game night confirmed!")
+        setStatus(response.data.status);
+        setUpdater(updater + 1);
       });
   };
 
@@ -146,9 +176,8 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
-        setStatus(response.data.status)
-        setUpdater(updater+1)
-        alert("Game night reopened.")
+        setStatus(response.data.status);
+        setUpdater(updater + 1);
       });
   };
 
@@ -189,109 +218,334 @@ export default function GameNightOwnerView(props: gameNightProps) {
   return (
     <>
       <div className="gn-owner-view-container">
-        <form className="edit-gn-form" onSubmit={handleSubmit}>
-          <label className="form-label">Date: </label>
-          <input
-            type="date"
-            value={date}
-            onChange={(event) => {if (status==="Voting") handleChange('date', event)}}
-          />
-          <label className="form-label">Start Time: </label>
-          <input
-            type="time"
-            value={startTime}
-            onChange={(event) => {if (status==="Voting") handleChange('startTime', event)}}
-          />
-          <label className="form-label">End Time: </label>
-          <input
-            type="time"
-            value={endTime}
-            onChange={(event) => {if (status==="Voting") handleChange('endTime', event)}}
-          />
-          <label className="form-label">Location: </label>
-          <input
-            type="text"
-            value={location}
-            onChange={(event) => {if (status==="Voting") handleChange('location', event)}}
-          />
-          {status === "Voting" ?
-          <button className="submit-button">Submit Changes</button>
-          : <></>
-          }
-        </form>
-      </div>
+        {status === 'Voting' ? (
+          <form className="edit-gn-form">
+            <TextField
+              id="date-time-picker"
+              label="Date"
+              type="date"
+              value={date}
+              onChange={(event) => {
+                if (status === 'Voting') handleChange('date', event);
+              }}
+              sx={{ width: 220 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="start-time-picker"
+              label="Start time"
+              type="time"
+              value={startTime}
+              onChange={(event) => {
+                if (status === 'Voting') handleChange('startTime', event);
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+              sx={{ width: 150 }}
+            />
+            <TextField
+              id="end-time-picker"
+              label="End time"
+              type="time"
+              value={endTime}
+              onChange={(event) => {
+                if (status === 'Voting') handleChange('endTime', event);
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+              sx={{ width: 150 }}
+            />
+            <TextField
+              id="location-picker"
+              label="Location"
+              type="text"
+              value={location}
+              onChange={(event) => {
+                if (status === 'Voting') handleChange('location', event);
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={{ width: 300 }}
+            />
+            <Button
+              sx={{ marginLeft: 2}}
+              className="submit-button"
+              variant="contained"
+              onClick={(event) => handleSubmit(event)}
+            >
+              Submit Changes
+            </Button>
+          </form>
+        ) : (
+          <form className="edit-gn-form">
+            <TextField
+              disabled
+              id="date-time-picker"
+              label="Date"
+              type="date"
+              value={date}
+              onChange={(event) => {
+                if (status === 'Voting') handleChange('date', event);
+              }}
+              sx={{ width: 220 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              disabled
+              id="start-time-picker"
+              label="Start time"
+              type="time"
+              value={startTime}
+              onChange={(event) => {
+                if (status === 'Voting') handleChange('startTime', event);
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+              sx={{ width: 150 }}
+            />
+            <TextField
+              disabled
+              id="end-time-picker"
+              label="End time"
+              type="time"
+              value={endTime}
+              onChange={(event) => {
+                if (status === 'Voting') handleChange('endTime', event);
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+              sx={{ width: 150 }}
+            />
+            <TextField
+              disabled
+              id="location-picker"
+              label="Location"
+              type="text"
+              value={location}
+              onChange={(event) => {
+                if (status === 'Voting') handleChange('location', event);
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              sx={{ width: 300 }}
+            />
+            <Button
+              disabled
+              className="submit-button"
+              variant="contained"
+              onClick={(event) => handleSubmit(event)}
+            >
+              Submit Changes
+            </Button>
+          </form>
+        )}
 
       <div className="finalize-cancel-buttons-container">
-        {status === "Voting" ? (
-        <button className="finalize-button"
-            onClick={() => {if (window.confirm("Finalize game night details?")) finalizeGameNight()}}>Confirm Game Night</button>
-        ) : (<></>) }
-        {status !== "Cancelled" ? (
-        <button className="cancel-button"
-            onClick={() => {if (window.confirm("Cancel game night?")) cancelGameNight()}}>Cancel Game Night</button>
-        ) : (<></>) }
-        {status === "Finalized" ? (
-        <button className="reopen-button"
-            onClick={() => {if (window.confirm("Reopen game night for voting and new RSVPs?")) reopenGameNight()}}>Reopen Game Night</button>
-        ) : (<></>) }
-      </div>
-
-
-      <div className="all-voting-results-container">
-        <h4>Voting Results:</h4>
-        {gameList.map((game) => (
-          <div
-            className="vote-results-container"
-            key={`vote-container${game.pk}`}
+        {status === 'Voting' ? (
+          <Button
+            className="finalize-button"
+            variant="contained"
+            sx={{ backgroundColor: 'mediumseagreen' }}
+            onClick={() => {
+              finalizeGameNight();
+            }}
           >
-            <img
-              className="game-selection-image"
-              src={game.image}
-              alt={game.title}
-            />
-            <div className="game-selection-text-container">
-              <h6>{game.title}</h6>
-              <p>Vote Score: {game.votes}</p>
-              {status === "Voting" ? (
-              <button
+            Finalize Game Night
+          </Button>
+        ) : (
+          <>
+            {status === 'Finalized' ? (
+              <Button
+                className="reopen-button"
+                variant="contained"
                 onClick={() => {
-                  handleAddClick(game);
-                  setUpdater(updater + 1);
+                  reopenGameNight();
                 }}
               >
-                Select Game
-              </button> ) : <></> }
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="all-selected-games-container">
-        <h4>Selected Games:</h4>
-        {selectedGameList.map((game) => (
-          <div
-            className="selected-game-container"
-            key={`selected-game-container${game.pk}`}
-          >
-            <img
-              className="game-selection-image"
-              src={game.image}
-              alt={game.title}
-            />
-            <div className="game-selection-text-container">
-              <h6>{game.title}</h6>
-              <p>Vote Score: {game.votes}</p>
-              {status === "Voting" ? (
-              <button
-                onClick={() => {
-                  handleRemoveClick(game);
-                  setUpdater(updater - 1);
-                }}
+                Reopen Game Night
+              </Button>
+            ) : (
+              <Button
+                className="reopen-button-disabled"
+                variant="contained"
+                disabled
               >
-                Remove Game
-              </button> ) : <></> }
-            </div>
-          </div>
-        ))}
+                Reopen Game Night
+              </Button>
+            )}
+          </>
+        )}
+        {status !== 'Cancelled' ? (
+          <Button
+            className="cancel-button"
+            variant="contained"
+            sx={{ backgroundColor: 'crimson', marginLeft: 1 }}
+            onClick={() => {
+              cancelGameNight();
+            }}
+          >
+            Cancel Game Night
+          </Button>
+        ) : (
+          <Button
+            className="cancel-button-disabled"
+            variant="contained"
+            disabled
+          >
+            Cancel Game Night
+          </Button>
+        )}
+      </div>
+      <div className="voting-and-rsvp-container">
+        <div className="voting-results-container">
+          <List
+            sx={{ maxWidth: 500 }}
+            subheader={
+              <ListSubheader sx={{ fontSize: 16 }}>
+                Select games to be played:
+              </ListSubheader>
+            }
+          >
+            {gameList.map((game) => (
+              <React.Fragment key={`voting-results-${game.pk}`}>
+                <Divider />
+                {selectedGameList.includes(game) === false ? (
+                  <ListItem
+                    secondaryAction={
+                      <>
+                        {status === 'Voting' ? (
+                          <IconButton
+                            className="voting-results-add-button"
+                            onClick={() => {
+                              handleAddClick(game);
+                              setUpdater(updater + 1);
+                            }}
+                          >
+                            <AddBoxIcon />
+                          </IconButton>
+                        ) : (
+                          <IconButton
+                            className="voting-results-add-button-disabled"
+                            disabled
+                          >
+                            <AddBoxIcon />
+                          </IconButton>
+                        )}
+                      </>
+                    }
+                  >
+                    <ListItemAvatar>
+                      <Avatar
+                        className="game-selection-image"
+                        variant="square"
+                        src={game.image}
+                        alt={game.title}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      className="game-picker-title"
+                      primary={game.title}
+                      secondary={`Vote score: ${game.votes}`}
+                    />
+                  </ListItem>
+                ) : (
+                  <ListItem
+                    sx={{ backgroundColor: 'powderblue' }}
+                    secondaryAction={
+                      <>
+                        {status === 'Voting' ? (
+                          <IconButton
+                            className="voting-results-remove-button"
+                            onClick={() => {
+                              handleRemoveClick(game);
+                              setUpdater(updater + 1);
+                            }}
+                          >
+                            <RemoveCircleIcon />
+                          </IconButton>
+                        ) : (
+                          <IconButton
+                            className="voting-results-remove-button-disabled"
+                            disabled
+                          >
+                            <RemoveCircleIcon />
+                          </IconButton>
+                        )}
+                      </>
+                    }
+                  >
+                    <ListItemAvatar>
+                      <Avatar
+                        className="game-selection-image"
+                        variant="square"
+                        src={game.image}
+                        alt={game.title}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      className="game-picker-title"
+                      primary={game.title}
+                      secondary={`Vote score: ${game.votes}`}
+                    />
+                  </ListItem>
+                )}
+              </React.Fragment>
+            ))}
+          </List>
+        </div>
+
+        <div className="rsvp-container">
+          <List
+            sx={{ maxWidth: 300 }}
+            subheader={
+              <ListSubheader sx={{ fontSize: 16 }}>RSVPs:</ListSubheader>
+            }
+          >
+            {rsvpList.map((rsvp) => (
+              <React.Fragment key={`invitee-${rsvp.invitee}`}>
+                <Divider />
+                {rsvp.attending === true ? (
+                  <ListItem>
+                    <ListItemText
+                      primary={rsvp.invitee}
+                      secondary="attending"
+                    />
+                  </ListItem>
+                ) : (
+                  <ListItem sx={{ backgroundColor: "gainsboro" }}>
+                    <ListItemText
+                      primary={rsvp.invitee}
+                      secondary="not attending"
+                    />
+                  </ListItem>
+                )}
+              </React.Fragment>
+            ))}
+          </List>
+        </div>
+      </div>
       </div>
     </>
   );

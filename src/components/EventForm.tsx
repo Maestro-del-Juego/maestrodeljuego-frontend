@@ -233,6 +233,14 @@ export default function EventForm(props: eventFormProps) {
             }}
             sx={{ width: 300 }}
           />
+          <Button
+            sx={{ backgroundColor: "mediumseagreen", marginLeft: 3}}
+            id="submit-game-night-button"
+            onClick={(event) => handleSubmit(event)}
+            variant="contained"
+          >
+          Create Game Night
+        </Button>
         </form>
       </div>
 

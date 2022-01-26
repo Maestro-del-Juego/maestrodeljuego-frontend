@@ -407,7 +407,7 @@ a {
 
 .new-event-form {
   margin-left: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
@@ -445,6 +445,23 @@ a {
   margin-right: 15px;
 }
 
+.gn-owner-view-container {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.voting-and-rsvp-container {
+  display: flex;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.rsvp-container {
+  margin-left: 20px;
+}
+.finalize-cancel-buttons-container {
+  margin-top: 10px;
+}
+
 #avatar-field {
   margin-top: 30px;
 }
@@ -453,3 +470,4 @@ a {
   display: grid;
   grid-template-rows: 1fr 1fr;
 }
+
