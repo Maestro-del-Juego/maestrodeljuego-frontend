@@ -98,7 +98,7 @@ export default function EventForm(props: eventFormProps) {
     setStartTimeValid(timeRGEX.test(startTime));
     setEndTimeValid(timeRGEX.test(endTime));
     const dateRGEX = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
-    setDateValid(dateRGEX.test(date));
+    setDateValid(dateRGEX.test(date) && !moment(date).isBefore(moment()));
     setLocationValid(location !== "");
     setGuestsValid(props.guestList.length > 0);
     setGamesValid(props.selectedGames.length > 0)
