@@ -2,21 +2,9 @@ import axios from 'axios';
 import { useState } from 'react';
 import { collectionObject, contactObject } from '../routes/CreateEvent';
 import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { IconButton, Popover, Typography, Modal, Box } from '@mui/material';
-import TextField from '@mui/material/TextField';
+import { TextField, Button, ButtonGroup, Menu, MenuItem, List, ListItem, ListItemText, ListSubheader,
+  ListItemAvatar, Avatar, ListItemIcon, IconButton, Popover, Divider} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
 import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
 import moment from 'moment';
@@ -98,7 +86,7 @@ export default function EventForm(props: eventFormProps) {
     setStartTimeValid(timeRGEX.test(startTime));
     setEndTimeValid(timeRGEX.test(endTime));
     const dateRGEX = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
-    setDateValid(dateRGEX.test(date) && !moment(date).isBefore(moment()));
+    setDateValid(dateRGEX.test(date) && moment(date).isSameOrAfter(moment().format("yyyy-MM-DD")));
     setLocationValid(location !== "");
     setGuestsValid(props.guestList.length > 0);
     setGamesValid(props.selectedGames.length > 0)
@@ -306,7 +294,7 @@ export default function EventForm(props: eventFormProps) {
               {!locationValid ? (
               <ListItem>
                 <ListItemIcon><ErrorIcon /></ListItemIcon>
-                <ListItemText>Please enter a location,</ListItemText>
+                <ListItemText>Please enter a location.</ListItemText>
               </ListItem> ) : (<></>)}
               {!guestsValid ? (
               <ListItem>
