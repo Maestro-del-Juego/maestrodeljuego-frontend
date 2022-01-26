@@ -40,7 +40,7 @@
 #nav-bar {
   display: -ms-grid;
   display: grid;
-  grid-template-columns: 1fr 5fr 2fr;
+  grid-template-columns: 1fr 5fr 1fr;
   margin: auto;
   background-color: #759eb8;
   height: 120px;
@@ -493,6 +493,7 @@ a {
 #game-knight {
   width: 300px;
   display: flex;
+  justify-content: center;
 }
 
 #app-nav-bar {
