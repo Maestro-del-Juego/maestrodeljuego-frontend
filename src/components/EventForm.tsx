@@ -1,19 +1,14 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { collectionObject } from '../routes/CreateEvent';
-import { contactObject } from '../routes/CreateEvent';
+import { collectionObject, contactObject } from '../routes/CreateEvent';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { IconButton, Popover, Typography } from '@mui/material';
+import { IconButton, Popover, Typography, Modal, Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import Card from '@mui/material/Card';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -22,7 +17,9 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
+import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
+import moment from 'moment';
 
 interface eventFormProps {
   collection: collectionObject[];
@@ -41,15 +38,22 @@ interface eventFormProps {
 }
 
 export default function EventForm(props: eventFormProps) {
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(`${moment().format("yyyy-MM-DD")}`);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [location, setLocation] = useState('');
   const [updater, setUpdater] = useState(0);
-
+  const [isFormValid, setIsFormValid] = useState(false)
   const [newContactFirst, setNewContactFirst] = useState('');
   const [newContactLast, setNewContactLast] = useState('');
   const [newContactEmail, setNewContactEmail] = useState('');
+  // Validation variables:
+  const [startTimeValid, setStartTimeValid] = useState(false);
+  const [endTimeValid, setEndTimeValid] = useState(false);
+  const [dateValid, setDateValid] = useState(false);
+  const [locationValid, setLocationValid] = useState(false);
+  const [guestsValid, setGuestsValid] = useState(false);
+  const [gamesValid, setGamesValid] = useState(false);
 
   const navigate: any = useNavigate();
 
@@ -59,7 +63,9 @@ export default function EventForm(props: eventFormProps) {
     props.selectedGames.forEach((game) => gameSelectionArray.push(game.pk));
     const inviteesArray: any = [];
     props.guestList.forEach((guest) => inviteesArray.push(guest.pk));
+    validateForm();
     event.preventDefault();
+    if (isFormValid===true) {
     axios
       .post(
         eventApi,
@@ -83,7 +89,24 @@ export default function EventForm(props: eventFormProps) {
         console.log(response);
         navigate('/game_night/');
       });
+    }
+    else {handleValidatorClick(event)}
   };
+
+  const validateForm = () => {
+    const timeRGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    setStartTimeValid(timeRGEX.test(startTime));
+    setEndTimeValid(timeRGEX.test(endTime));
+    const dateRGEX = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
+    setDateValid(dateRGEX.test(date));
+    setLocationValid(location !== "");
+    setGuestsValid(props.guestList.length > 0);
+    setGamesValid(props.selectedGames.length > 0)
+    if (startTimeValid===true && endTimeValid===true && dateValid===true &&
+        locationValid===true && guestsValid===true && gamesValid===true) {
+          setIsFormValid(true);
+        }
+  }
 
   const handleNewContactSubmit = (event: any) => {
     const contactApi = 'https://maestrodeljuego.herokuapp.com/contacts/';
@@ -179,6 +202,17 @@ export default function EventForm(props: eventFormProps) {
   const newContactOpen = Boolean(newContactAnchor);
   const newContactPopupId = newContactOpen ? 'new-contact-popup' : undefined;
 
+  // validation MUI
+  const [validationAnchor, setValidationAnchor] = useState(null)
+  const handleValidatorClick = (event: any) => {
+    setValidationAnchor(event.currentTarget);
+  }
+  const handleValidatorClose = () => {
+    setValidationAnchor(null);
+  }
+  const validationOpen = Boolean(validationAnchor);
+  const validationId = validationOpen ? "validation-popover" : undefined;
+
   return (
     <div className="new-event-form-container">
       <div>
@@ -199,6 +233,7 @@ export default function EventForm(props: eventFormProps) {
             label="Start time"
             type="time"
             value={startTime}
+            
             onChange={(event) => handleChange('startTime', event)}
             InputLabelProps={{
               shrink: true,
@@ -231,6 +266,7 @@ export default function EventForm(props: eventFormProps) {
             InputLabelProps={{
               shrink: true,
             }}
+            inputProps={{ maxLength: 70}}
             sx={{ width: 300 }}
           />
           <Button
@@ -241,6 +277,49 @@ export default function EventForm(props: eventFormProps) {
           >
           Create Game Night
         </Button>
+        <Popover
+          id={validationId}
+          open={validationOpen}
+          anchorEl={validationAnchor}
+          onClose={handleValidatorClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          >
+            <List sx={{ p: 2 }}>
+            {!startTimeValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please select a valid start time.</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!endTimeValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please select a valid end time.</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!dateValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please select a valid date.</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!locationValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please enter a location,</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!guestsValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please add at least one contact to the guest list.</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!gamesValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please select at least one game.</ListItemText>
+              </ListItem> ) : (<></>)}
+            </List>
+          </Popover>
         </form>
       </div>
 
@@ -300,6 +379,7 @@ export default function EventForm(props: eventFormProps) {
             vertical: 'bottom',
             horizontal: 'left',
           }}
+          sx={{ p: 2 }}
         >
           <form
             className="create-contact-form"
@@ -315,6 +395,7 @@ export default function EventForm(props: eventFormProps) {
             InputLabelProps={{
               shrink: true,
             }}
+            inputProps={{ maxLength: 30}}
           />
             <TextField
             id="new-contact-last"
@@ -326,6 +407,7 @@ export default function EventForm(props: eventFormProps) {
             InputLabelProps={{
               shrink: true,
             }}
+            inputProps={{ maxLength: 30}}
           />
             <TextField
             id="new-contact-email"
@@ -337,6 +419,7 @@ export default function EventForm(props: eventFormProps) {
             InputLabelProps={{
               shrink: true,
             }}
+            inputProps={{ maxLength: 320}}
           />
             <Button variant="contained" onClick={(event) => handleNewContactSubmit(event)} className="submit-button">Add New Contact</Button>
           </form>
