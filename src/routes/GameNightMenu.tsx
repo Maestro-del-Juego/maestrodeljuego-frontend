@@ -3,6 +3,24 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import PendingIcon from '@mui/icons-material/Pending';
+import EditIcon from '@mui/icons-material/Edit';
+import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import Divider from '@mui/material/Divider';
+import ListSubheader from '@mui/material/ListSubheader';
 
 interface gameNightProps {
     token: string;
@@ -48,29 +66,46 @@ export default function GameNightMenu(props: gameNightProps) {
             });
         }}, [props.token]);
 
-    const copyToClipboard = (url: string) => {
-        const copyText = url;
-        navigator.clipboard.writeText(copyText);
-    }
+        const copyToClipboard = (url: string) => {
+            const copyText = url;
+            navigator.clipboard.writeText(copyText);
+        }
 
     return (
         <>
         {props.token !== "" ? (
         <div className="game-night-menu-container">
             <Link className="new-event-link" to="/createevent/">Create New Event</Link>
-            <h4>Upcoming Game Nights</h4>
+            <List
+                sx={{ maxWidth: 500}}
+                subheader={<ListSubheader>Upcoming Game Nights</ListSubheader>}
+            >
             {gameNightList.map((event) => (
                 <React.Fragment key={`upcoming-${event.pk}`}>
                 {(moment(event.date).isBefore(moment()) === false && event.status !== "Cancelled") ? (
-                    <div className={`game-night-event-container ${event.status==="Finalized" ? "event-container-finalized" : "event-container-voting"}`}>
-                            <p className="event-info-date-loc">{moment(event.date).format('MMM DD, YYYY')} @ {event.location}</p>
-                            <p className="event-info-times">{moment(event.start_time, "HH.mm.ss").format("h:mm A")} - {moment(event.end_time, "HH.mm.ss").format("h:mm A")}</p>
-                            <button className="event-voting-link" onClick={() => copyToClipboard(`${window.location.href}/${event.rid}`)}>Copy guest link</button> | 
-                            <Link className="event-finalize-link" to={`/game_night/${event.rid}/finalize`}>View event details</Link>
-                    </div>) : (<></>)
+                    <>
+                        <Divider />
+                        <ListItem
+                            secondaryAction={<><Link to={`/game_night/${event.rid}/finalize`}><IconButton><EditIcon /></IconButton></Link>
+                                <IconButton onClick={() => copyToClipboard(`${window.location.href}/${event.rid}`)}><ContentPasteIcon /></IconButton></>}
+                        >
+                            <ListItemAvatar>
+                                {event.status==="Finalized" ? (
+                                    <Avatar sx={{bgcolor:"mediumseagreen"}}><CheckCircleIcon /></Avatar>
+                                ) : (
+                                    <Avatar sx={{bgcolor:"gold"}}><PendingIcon /></Avatar>
+                                )}
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={`${moment(event.date).format('MMM DD, YYYY')} @ ${event.location}`}
+                                secondary={`${moment(event.start_time, "HH.mm.ss").format("h:mm A")} - ${moment(event.end_time, "HH.mm.ss").format("h:mm A")}`}    
+                            />
+                        </ListItem>                       
+                    </>) :(<></>)
                 }
                 </React.Fragment>
             ))}
+            </List>
             {showPast===false ? (
             <h4>Past Game Nights <button onClick={() => setShowPast(true)}>Show</button></h4>
             ) : (
