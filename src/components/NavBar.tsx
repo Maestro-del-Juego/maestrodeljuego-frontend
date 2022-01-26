@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom';
-import image from '../assets/logo.png';
-import logo from '../assets/GameKnight.png';
+import logo from '../assets/game-knight-navbar.png';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import { autocompleteClasses } from '@mui/material';
 
 interface navProps {
   user: string;
@@ -13,17 +25,27 @@ export default function NavBar(props: navProps) {
   return (
     <>
       <div id="nav-bar">
-        <Link to={props.auth === '' ? '/' : `/play_stats/${props.user}`}>
-          <img
-            src={logo}
-            id="logo"
-            title="Game Master"
-            alt="Game Master Logo"
-          />
-        </Link>
+        <div id="game-knight">
+          <Link
+            to={props.auth === '' ? '/' : `/play_stats/${props.user}`}
+            style={{ marginTop: 'auto', marginBottom: 'auto' }}
+          >
+            <img
+              src={logo}
+              id="logo"
+              title="Game Master"
+              alt="Game Master Logo"
+            />
+          </Link>
+          <span id="game-knight-banner">Game Knight</span>
+        </div>
         <div id="site-nav">
-          <Link to={`/collection/${props.user}`}>Your Collection</Link> |
-          <Link to={`/wishlist/${props.user}`}>Wishlist</Link> |
+          <Link
+            to={`/collection/${props.user}`}
+          >
+            Your Collection
+          </Link>{' '}
+          |<Link to={`/wishlist/${props.user}`}>Wishlist</Link> |
           <Link to="/">Browse Games</Link> |
           <Link to="/search">Search Games</Link> |
           <Link to="/game_night">Game Night!</Link>
@@ -54,8 +76,8 @@ export default function NavBar(props: navProps) {
           )}
         </div>
       </div>
-      <hr id="hr-one" />
-      <hr id="hr-two" />
+      <hr id="hr-1" />
+      <hr id="hr-2" />
     </>
   );
 }

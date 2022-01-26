@@ -73,7 +73,7 @@ export default function PlayStats(props: statProps) {
 
   return (
     <div id="play-stats-page">
-      <h1>Welcome to Game Master, {props.user}!</h1>
+      <h1>Welcome to Game Knight, {props.user}!</h1>
       <div id="most-played">
         <div id="weekday-stats">
           <h3>Weekday Stats</h3>
