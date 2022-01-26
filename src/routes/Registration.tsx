@@ -46,8 +46,14 @@ const Registration = (props: regProps) => {
               if (data && data.data.auth_token) {
                 props.setAuth(username, data.data.auth_token);
                 setLoggedIn(true);
-                props.updateAvatar(data.data.avatar);
-                props.updateAvatar('');
+                axios
+                  .get('https://maestrodeljuego.herokuapp.com/auth/users/me', {
+                    headers: {
+                      Authorization: `Token ${data.data.auth_token}`,
+                    },
+                  })
+                  .then((results) => props.updateAvatar(results.data.avatar))
+                  .catch((error) => console.log(error));
               }
             })
             .catch((error) => alert(error.message));
