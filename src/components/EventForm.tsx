@@ -380,7 +380,7 @@ export default function EventForm(props: eventFormProps) {
             type="text"
             value={newContactFirst}
             onChange={(event) => handleChange('newContactFirst', event)}
-            sx={{ width: 200 }}
+            sx={{ width: 200, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -392,7 +392,7 @@ export default function EventForm(props: eventFormProps) {
             type="text"
             value={newContactLast}
             onChange={(event) => handleChange('newContactLast', event)}
-            sx={{ width: 200 }}
+            sx={{ width: 200, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -404,13 +404,13 @@ export default function EventForm(props: eventFormProps) {
             type="text"
             value={newContactEmail}
             onChange={(event) => handleChange('newContactEmail', event)}
-            sx={{ width: 300 }}
+            sx={{ width: 300, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
             inputProps={{ maxLength: 320}}
           />
-            <Button variant="contained" onClick={(event) => handleNewContactSubmit(event)} className="submit-button">Add New Contact</Button>
+            <Button variant="contained" sx={{ m:1 }}onClick={(event) => handleNewContactSubmit(event)} className="submit-button">Add New Contact</Button>
           </form>
         </Popover>
       </div>
