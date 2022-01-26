@@ -320,7 +320,7 @@ export default function EventForm(props: eventFormProps) {
         >
           <Button
             id="contact-menu-button"
-            aria-controls={openContactMenu ? 'basic-menu' : undefined}
+            aria-controls={openContactMenu ? 'contact-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={openContactMenu ? 'true' : undefined}
             onClick={handleContactClick}
@@ -418,7 +418,7 @@ export default function EventForm(props: eventFormProps) {
       <div>
         <Button
           id="game-menu-button"
-          aria-controls={openGameMenu ? 'basic-menu' : undefined}
+          aria-controls={openGameMenu ? 'game-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={openGameMenu ? 'true' : undefined}
           onClick={handleGameClick}
