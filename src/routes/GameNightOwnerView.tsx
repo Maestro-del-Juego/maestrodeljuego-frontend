@@ -279,6 +279,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               sx={{ width: 300 }}
             />
             <Button
+              sx={{ marginLeft: 2}}
               className="submit-button"
               variant="contained"
               onClick={(event) => handleSubmit(event)}
@@ -400,7 +401,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           <Button
             className="cancel-button"
             variant="contained"
-            sx={{ backgroundColor: 'crimson' }}
+            sx={{ backgroundColor: 'crimson', marginLeft: 1 }}
             onClick={() => {
               cancelGameNight();
             }}
