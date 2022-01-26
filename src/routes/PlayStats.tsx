@@ -81,9 +81,10 @@ export default function PlayStats(props: statProps) {
             <Box>
               {avgAttendRatio.length > 0 ? (
                 <VictoryChart
-                  width={600}
+                  width={700}
                   height={500}
                   padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
+                  domainPadding={45}
                 >
                   <VictoryAxis
                     label="Average Attendance Ratio per Weekday for Game Nights"
@@ -105,9 +106,10 @@ export default function PlayStats(props: statProps) {
             <Box>
               {avgOverallFeedback.length > 0 ? (
                 <VictoryChart
-                  width={600}
+                  width={700}
                   height={500}
                   padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
+                  domainPadding={45}
                 >
                   <VictoryAxis
                     label="Average Overall Score for Gamenights per Weekday"
@@ -129,9 +131,10 @@ export default function PlayStats(props: statProps) {
             <Box>
               {avgPlayerNum.length > 0 ? (
                 <VictoryChart
-                  width={600}
+                  width={700}
                   height={500}
                   padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
+                  domainPadding={45}
                 >
                   <VictoryAxis
                     label="Average Attendance per Weekday for Game Nights"
