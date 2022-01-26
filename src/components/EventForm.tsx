@@ -158,7 +158,7 @@ export default function EventForm(props: eventFormProps) {
   // variables for MUI dropdown menu: games
   const [gameAnchor, setGameAnchor] = useState<null | HTMLElement>(null);
   const openGameMenu = Boolean(gameAnchor);
-  const handleGameClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleGameClick = (event: any) => {
     setGameAnchor(event.currentTarget);
   };
   const handleGameClose = () => {
@@ -168,7 +168,7 @@ export default function EventForm(props: eventFormProps) {
   // variables for MUI dropdown menu: contacts
   const [contactAnchor, setContactAnchor] = useState<null | HTMLElement>(null);
   const openContactMenu = Boolean(contactAnchor);
-  const handleContactClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleContactClick = (event: any) => {
     setContactAnchor(event.currentTarget);
   };
   const handleContactClose = () => {
