@@ -29,6 +29,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Tooltip from '@mui/material/Tooltip';
+import PageviewIcon from '@mui/icons-material/Pageview';
 
 interface gameNightProps {
     token: string;
@@ -101,8 +103,8 @@ export default function GameNightMenu(props: gameNightProps) {
                     <>
                         <Divider />
                         <ListItem
-                            secondaryAction={<><Link to={`/game_night/${event.rid}/finalize`}><IconButton><EditIcon /></IconButton></Link>
-                                <IconButton onClick={() => copyToClipboard(`${window.location.href}/${event.rid}`)}><ContentPasteIcon /></IconButton></>}
+                            secondaryAction={<><Link to={`/game_night/${event.rid}/finalize`}><Tooltip title="Edit event details"><IconButton><EditIcon /></IconButton></Tooltip></Link>
+                                <Tooltip title="Copy event link to clipboard"><IconButton onClick={() => copyToClipboard(`${window.location.href}/${event.rid}`)}><ContentPasteIcon /></IconButton></Tooltip></>}
                         >
                             <ListItemAvatar>
                                 {event.status==="Finalized" ? (
@@ -140,7 +142,7 @@ export default function GameNightMenu(props: gameNightProps) {
                     <>
                         <Divider />
                         <ListItem
-                            secondaryAction={<Link to={`/game_night/${event.rid}/finalize`}><IconButton><EditIcon /></IconButton></Link>}
+                            secondaryAction={<Link to={`/game_night/${event.rid}/finalize`}><Tooltip title="View event details"><IconButton><PageviewIcon /></IconButton></Tooltip></Link>}
                         >
                             <ListItemAvatar>
                                 <Avatar sx={{bgcolor:"dodgerblue"}}><EventAvailableIcon /></Avatar>
@@ -174,7 +176,7 @@ export default function GameNightMenu(props: gameNightProps) {
                     <>
                         <Divider />
                         <ListItem
-                            secondaryAction={<Link to={`/game_night/${event.rid}/finalize`}><IconButton><EditIcon /></IconButton></Link>}
+                            secondaryAction={<Link to={`/game_night/${event.rid}/finalize`}><Tooltip title="View event details"><IconButton><PageviewIcon /></IconButton></Tooltip></Link>}
                         >
                             <ListItemAvatar>
                                 <Avatar sx={{bgcolor:"crimson"}}><CancelIcon /></Avatar>
