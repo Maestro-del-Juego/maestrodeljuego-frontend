@@ -211,7 +211,7 @@ export default function EventForm(props: eventFormProps) {
             type="date"
             value={date}
             onChange={(event) => handleChange('date', event)}
-            sx={{ width: 220 }}
+            sx={{ width: 220, m:2 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -229,7 +229,7 @@ export default function EventForm(props: eventFormProps) {
             inputProps={{
               step: 300, // 5 min
             }}
-            sx={{ width: 150 }}
+            sx={{ width: 150, m:2 }}
           />
           <TextField
             id="end-time-picker"
@@ -243,7 +243,7 @@ export default function EventForm(props: eventFormProps) {
             inputProps={{
               step: 300, // 5 min
             }}
-            sx={{ width: 150 }}
+            sx={{ width: 150, m:2 }}
           />
           <TextField
             id="location-picker"
@@ -255,10 +255,10 @@ export default function EventForm(props: eventFormProps) {
               shrink: true,
             }}
             inputProps={{ maxLength: 70}}
-            sx={{ width: 300 }}
+            sx={{ width: 300, m:2 }}
           />
           <Button
-            sx={{ backgroundColor: "mediumseagreen", marginLeft: 3}}
+            sx={{ backgroundColor: "mediumseagreen", m:2}}
             id="submit-game-night-button"
             onClick={(event) => handleSubmit(event)}
             variant="contained"
@@ -316,6 +316,7 @@ export default function EventForm(props: eventFormProps) {
           className="contact-button-group"
           variant="contained"
           aria-label="outlined primary button group"
+          sx={{ marginLeft: 4}}
         >
           <Button
             id="contact-menu-button"
