@@ -352,6 +352,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               sx={{ width: 300 }}
             />
             <Button
+              sx={{ marginLeft: 2}}
               disabled
               className="submit-button"
               variant="contained"
@@ -388,6 +389,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               </Button>
             ) : (
               <Button
+                sx={{ marginLeft: 2}}
                 className="reopen-button-disabled"
                 variant="contained"
                 disabled
@@ -410,6 +412,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           </Button>
         ) : (
           <Button
+            sx={{ marginLeft: 2}}
             className="cancel-button-disabled"
             variant="contained"
             disabled
