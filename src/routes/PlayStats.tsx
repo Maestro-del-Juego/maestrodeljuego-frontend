@@ -10,6 +10,8 @@ import {
 import { Box } from '@mui/material';
 import LeastPlayed from '../components/LeastPlayed';
 import GameCard from '../components/GameCard';
+import Carousel from 'react-material-ui-carousel';
+import { Paper, Button } from '@mui/material';
 interface statProps {
   user: string;
   token: string;
@@ -229,14 +231,16 @@ export default function PlayStats(props: statProps) {
               {loading ? (
                 <h4>Loading...</h4>
               ) : (
-                unplayed.map((game: any) => (
-                  <GameCard
-                    gameId={game.bgg}
-                    gameName={game.name}
-                    imageUrl={game.image}
-                    pubYear={game.pub_year}
-                  />
-                ))
+                <Carousel>
+                  {unplayed.map((game: any) => (
+                    <GameCard
+                      gameId={game.bgg}
+                      gameName={game.name}
+                      imageUrl={game.image}
+                      pubYear={game.pub_year}
+                    />
+                  ))}
+                </Carousel>
               )}
             </div>
           </Box>
