@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { collectionObject, contactObject } from '../routes/CreateEvent';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, ButtonGroup, Menu, MenuItem, List, ListItem, ListItemText, ListSubheader,
@@ -36,12 +36,12 @@ export default function EventForm(props: eventFormProps) {
   const [newContactLast, setNewContactLast] = useState('');
   const [newContactEmail, setNewContactEmail] = useState('');
   // Validation variables:
-  const [startTimeValid, setStartTimeValid] = useState(false);
-  const [endTimeValid, setEndTimeValid] = useState(false);
-  const [dateValid, setDateValid] = useState(false);
-  const [locationValid, setLocationValid] = useState(false);
-  const [guestsValid, setGuestsValid] = useState(false);
-  const [gamesValid, setGamesValid] = useState(false);
+  const [startTimeValid, setStartTimeValid] = useState<Boolean>(false);
+  const [endTimeValid, setEndTimeValid] = useState<Boolean>(false);
+  const [dateValid, setDateValid] = useState<Boolean>(false);
+  const [locationValid, setLocationValid] = useState<Boolean>(false);
+  const [guestsValid, setGuestsValid] = useState<Boolean>(false);
+  const [gamesValid, setGamesValid] = useState<Boolean>(false);
 
   const navigate: any = useNavigate();
 
@@ -51,9 +51,8 @@ export default function EventForm(props: eventFormProps) {
     props.selectedGames.forEach((game) => gameSelectionArray.push(game.pk));
     const inviteesArray: any = [];
     props.guestList.forEach((guest) => inviteesArray.push(guest.pk));
-    validateForm();
     event.preventDefault();
-    if (isFormValid===true) {
+    if (validateForm()===true) {
     axios
       .post(
         eventApi,
@@ -81,7 +80,7 @@ export default function EventForm(props: eventFormProps) {
     else {handleValidatorClick(event)}
   };
 
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     const timeRGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
     setStartTimeValid(timeRGEX.test(startTime));
     setEndTimeValid(timeRGEX.test(endTime));
@@ -92,9 +91,19 @@ export default function EventForm(props: eventFormProps) {
     setGamesValid(props.selectedGames.length > 0)
     if (startTimeValid===true && endTimeValid===true && dateValid===true &&
         locationValid===true && guestsValid===true && gamesValid===true) {
-          setIsFormValid(true);
+          // setIsFormValid(true);
+          return true;
         }
-  }
+  }, [date, dateValid, endTime, endTimeValid, gamesValid, guestsValid, location, locationValid, props.guestList.length, props.selectedGames.length, startTime, startTimeValid]);
+
+  useEffect(() => {
+    validateForm();
+  }, [validateForm])
+
+  // const validateStartTime = () => {
+  //   const timeRGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+  //   if (timeRGEX.test(startTime)) {return true} else return false;
+  // }
 
   const handleNewContactSubmit = (event: any) => {
     const contactApi = 'https://maestrodeljuego.herokuapp.com/contacts/';
