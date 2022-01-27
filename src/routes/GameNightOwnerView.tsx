@@ -17,6 +17,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import moment from 'moment';
 import ErrorIcon from '@mui/icons-material/Error';
+import { contactObject } from '../routes/CreateEvent';
 
 interface gameNightProps {
   token: string;
@@ -48,6 +49,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const [selectedGameList, setSelectedGameList] = useState<gameObject[]>([]);
   const [inviteeList, setInviteeList] = useState<inviteeObject[]>([]);
   const [rsvpList, setRsvpList] = useState<rsvpObject[]>([]);
+  const [contactList, setContactList] = useState<contactObject[]>([]);
   const [date, setDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
@@ -90,6 +92,19 @@ export default function GameNightOwnerView(props: gameNightProps) {
         console.log(response.data);
       });
   }, [props.token, gameNightUrl]);
+
+  useEffect(() => {
+    const contactUrl = `https://maestrodeljuego.herokuapp.com/auth/users/me/`;
+    axios.get(contactUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${props.token}`,
+      },
+    })
+    .then((response) => {
+      setContactList(response.data.contacts)
+    })
+  }, [props.token])
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
