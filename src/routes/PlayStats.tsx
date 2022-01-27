@@ -8,7 +8,8 @@ import {
   VictoryPie,
 } from 'victory';
 import { Box } from '@mui/material';
-
+import LeastPlayed from '../components/LeastPlayed';
+import GameCard from '../components/GameCard';
 interface statProps {
   user: string;
   token: string;
@@ -25,6 +26,8 @@ export default function PlayStats(props: statProps) {
   const [mostPlayed, setMostPlayed] = useState<any[]>([]);
   const [leastPlayed, setLeastPlayed] = useState<any[]>([]);
   const [commonPlayers, setCommonPlayers] = useState<any[]>([]);
+  const [unplayed, setUnplayed] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = () => {
@@ -80,15 +83,6 @@ export default function PlayStats(props: statProps) {
                 },
               ]);
             }
-            for (let entry of result.data.least_played_games) {
-              setLeastPlayed((oldData) => [
-                ...oldData,
-                {
-                  x: entry.name,
-                  y: entry.played,
-                },
-              ]);
-            }
             for (let entry of result.data.most_common_players) {
               setCommonPlayers((oldData) => [
                 ...oldData,
@@ -98,6 +92,8 @@ export default function PlayStats(props: statProps) {
                 },
               ]);
             }
+            setLeastPlayed(result.data.least_played_games);
+            setUnplayed(result.data.games_not_played);
           })
           .catch((error) => console.log(error));
       } catch (error) {
@@ -105,6 +101,7 @@ export default function PlayStats(props: statProps) {
       }
     };
     loadData();
+    setLoading(false);
   }, [props.token]);
 
   return (
@@ -135,8 +132,10 @@ export default function PlayStats(props: statProps) {
                   />
                   <VictoryBar data={avgAttendRatio} x="day" y="vote" />
                 </VictoryChart>
+              ) : loading ? (
+                <h4>Loading...</h4>
               ) : (
-                <h2>Loading...</h2>
+                <h4>Play a few game nights to start tracking your stats!</h4>
               )}
             </Box>
             <Box>
@@ -160,8 +159,10 @@ export default function PlayStats(props: statProps) {
                   />
                   <VictoryBar data={avgOverallFeedback} x="day" y="vote" />
                 </VictoryChart>
-              ) : (
+              ) : loading ? (
                 <h2>Loading...</h2>
+              ) : (
+                <h4>Play a few game nights to start tracking your stats!</h4>
               )}
             </Box>
             <Box>
@@ -185,22 +186,60 @@ export default function PlayStats(props: statProps) {
                   />
                   <VictoryBar data={avgPlayerNum} x="day" y="vote" />
                 </VictoryChart>
+              ) : loading ? (
+                <h4>Loading...</h4>
               ) : (
-                <h2>Loading...</h2>
+                <h4>Play a few game nights to start tracking your stats!</h4>
               )}
             </Box>
           </div>
         </div>
-        <div id="by-genre">
+        <div id="gameplay-stats">
           <h2>Gameplay Stats</h2>
           {mostPlayed.length > 0 ? (
             <Box>
               <h4>Most Played Games</h4>
               <VictoryPie data={mostPlayed} />
             </Box>
+          ) : loading ? (
+            <h4>Loading...</h4>
           ) : (
-            <h2>Loading...</h2>
+            <h4>Play a few game nights to start tracking your stats!</h4>
           )}
+          <Box>
+            <h4>Least Played Games</h4>
+            <div id="least-played">
+              {loading ? (
+                <h4>Loading...</h4>
+              ) : (
+                leastPlayed.map((game: any) => (
+                  <LeastPlayed
+                    gameId={game.bgg}
+                    gameName={game.name}
+                    imageUrl={game.image}
+                    amountPlayed={game.played}
+                  />
+                ))
+              )}
+            </div>
+          </Box>
+          <Box>
+            <h4>These haven't even hit the table!</h4>
+            <div id="unplayed">
+              {loading ? (
+                <h4>Loading...</h4>
+              ) : (
+                unplayed.map((game: any) => (
+                  <GameCard
+                    gameId={game.bgg}
+                    gameName={game.name}
+                    imageUrl={game.image}
+                    pubYear={game.pub_year}
+                  />
+                ))
+              )}
+            </div>
+          </Box>
         </div>
       </div>
     </div>
