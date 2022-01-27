@@ -3,9 +3,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
@@ -97,6 +94,44 @@ export default function GameNightMenu(props: gameNightProps) {
   const handleUpcomingAccordion = () => {
     setUpcomingExpanded(upcomingExpanded === true ? false : true);
   };
+
+  useEffect(() => {
+      setInterval(() => {
+        if (props.token !== '') {
+            const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/`;
+            axios
+              .get(gameNightUrl, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Token ${props.token}`,
+                },
+              })
+              .then((response) => {
+                console.log(response);
+                setGameNightList(response.data);
+                const gameNightArray: Array<gameNightObject> = [];
+                response.data.forEach((entry: any) => {
+                  const entryObject: gameNightObject = {
+                    pk: entry.pk,
+                    rid: entry.rid,
+                    date: entry.date,
+                    start_time: entry.start_time,
+                    end_time: entry.end_time,
+                    location: entry.location,
+                    status: entry.status,
+                    inviteesLeft: entry.invitees.length,
+                    rsvps: entry.rsvps.length,
+                  };
+                  gameNightArray.push(entryObject);
+                });
+                gameNightArray.sort(function (a, b) {
+                  return Date.parse(b.date) - Date.parse(a.date);
+                }); //sorts array by date, newest to oldest
+                setGameNightList(gameNightArray);
+              });
+          }
+      }, 30000);
+  }, [props.token])
 
   return (
     <>
