@@ -149,11 +149,6 @@ export default function VotingForm(props: gameNightProps) {
     <h1 className="gamenight-banner">
       I'm sorry, your host has cancelled this event!
     </h1>
-  ) : voted ? (
-    <>
-      <h1 className="gamenight-banner">Thank you for feedback!</h1>
-      <h4>Your host will contact you when the event is finalized.</h4>
-    </>
   ) : eventStatus === 'Finalized' ? (
     <div id="finalized-event">
       <h1 className="gamenight-banner">Your game night is all set!</h1>
@@ -173,6 +168,11 @@ export default function VotingForm(props: gameNightProps) {
       <h2>
         This game night will take place on {gameNightDate} at {gameNightLoc}.
       </h2>
+    </div>
+  ) : voted ? (
+    <div className="gamenight-banner">
+      <h1>Thank you for feedback!</h1>
+      <h4>Your host will contact you when the event is finalized.</h4>
     </div>
   ) : guestPick ? (
     <div id="guest-list-select">
