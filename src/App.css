@@ -528,3 +528,7 @@ a {
   font-size: larger;
   font-weight: bolder;
 }
+
+#play-stats-page {
+  text-align: center;
+}
