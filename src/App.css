@@ -42,6 +42,8 @@
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
   margin: auto;
+  background-color: #759eb8;
+  height: 120px;
 }
 
 #logo {
@@ -159,6 +161,7 @@ a {
 
 #most-played {
   display: flex;
+  margin-left: 60px;
 }
 
 .event-form-game-button {
@@ -473,4 +476,54 @@ a {
 
 .game-night-menu-container * {
   margin: auto !important;
+}
+
+#game-knight-banner {
+  font-family: 'LocalBreweryFour-Regular';
+  color: #334195;
+  font-size: 18pt;
+  font-weight: bolder;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 105px;
+}
+
+#game-knight {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+#app-nav-bar {
+  background-color: #759eb8;
+}
+
+#hr-1 {
+  background-color: #334195;
+  height: 10px;
+  border: none;
+  margin: 0;
+}
+
+#hr-2 {
+  background-color: #ffdd4a;
+  height: 10px;
+  border: none;
+  margin: 0;
+}
+
+#site-nav > a {
+  text-decoration: none;
+  color: #41463d;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+#log-out {
+  text-decoration: none;
+  color: #41463d;
+  font-size: larger;
+  font-weight: bolder;
 }

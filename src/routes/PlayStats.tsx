@@ -1,16 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import {
-  PieChart,
-  Pie,
-  RadarChart,
-  ResponsiveContainer,
-  Tooltip,
-  PolarGrid,
-  Radar,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-} from 'recharts';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from 'victory';
+import { Box } from '@mui/material';
 
 interface statProps {
   user: string;
@@ -18,53 +9,13 @@ interface statProps {
 }
 
 export default function PlayStats(props: statProps) {
-  const dataTitle = [
-    { name: 'Eclipse', value: 400 },
-    { name: 'Caylus', value: 300 },
-    { name: 'Dixit', value: 300 },
-    { name: 'Sushi Go!', value: 200 },
-    { name: 'Dominion', value: 278 },
-    { name: 'Bristol', value: 189 },
-  ];
-
-  const dataGenre = [
-    {
-      subject: 'Bidding',
-      A: 120,
-      B: 110,
-      fullMark: 150,
-    },
-    {
-      subject: 'Deck-Building',
-      A: 98,
-      B: 130,
-      fullMark: 150,
-    },
-    {
-      subject: 'Dice',
-      A: 86,
-      B: 130,
-      fullMark: 150,
-    },
-    {
-      subject: 'Area Control',
-      A: 99,
-      B: 100,
-      fullMark: 150,
-    },
-    {
-      subject: 'War Game',
-      A: 85,
-      B: 90,
-      fullMark: 150,
-    },
-    {
-      subject: 'Traditional Cards',
-      A: 65,
-      B: 85,
-      fullMark: 150,
-    },
-  ];
+  const [weekdayStats, setWeekdayStats] = useState({});
+  const [avgOverallFeedback, setAvgOverallFeedback] = useState<any[]>([]);
+  const [avgAttendRatio, setAvgAttendRatio] = useState<any[]>([]);
+  const [avgSessionLen, setAvgSessionLen] = useState<any[]>([]);
+  const [avgGameNum, setAvgGameNum] = useState<any[]>([]);
+  const [avgPlayerNum, setAvgPlayerNum] = useState<any[]>([]);
+  const [sessionsNum, setSessionsNum] = useState<any[]>([]);
 
   useEffect(() => {
     const loadData = () => {
@@ -75,50 +26,137 @@ export default function PlayStats(props: statProps) {
               Authorization: `Token ${props.token}`,
             },
           })
-          .then((result) => console.log(result))
+          .then((result) => {
+            console.log(result);
+            setWeekdayStats(result.data.weekday_stats);
+            for (let [key, value] of Object.entries(
+              result.data.weekday_stats.avg_attend_ratio
+            )) {
+              setAvgAttendRatio((oldData) => [
+                ...oldData,
+                {
+                  day: key,
+                  vote: value,
+                },
+              ]);
+            }
+            for (let [key, value] of Object.entries(
+              result.data.weekday_stats.avg_overall_feedback
+            )) {
+              setAvgOverallFeedback((oldData) => [
+                ...oldData,
+                {
+                  day: key,
+                  vote: value,
+                },
+              ]);
+            }
+            for (let [key, value] of Object.entries(
+              result.data.weekday_stats.avg_player_num
+            )) {
+              setAvgPlayerNum((oldData) => [
+                ...oldData,
+                {
+                  day: key,
+                  vote: value,
+                },
+              ]);
+            }
+          })
           .catch((error) => console.log(error));
       } catch (error) {
         console.log(error);
       }
     };
     loadData();
-  }, []);
+  }, [props.token]);
 
   return (
     <div id="play-stats-page">
-      <h1>Welcome to Game Master, {props.user}!</h1>
+      <h1>Welcome to Game Knight, {props.user}!</h1>
       <div id="most-played">
-        <div id="by-title">
-          <h3>Most Played Games</h3>
-          <PieChart width={400} height={400}>
-            <Pie
-              dataKey="value"
-              data={dataTitle}
-              cx="50%"
-              cy="50%"
-              outerRadius={80}
-              fill="#8884d8"
-              label
-            />
-            <Tooltip />
-          </PieChart>
+        <div id="weekday-stats">
+          <h3>Weekday Stats</h3>
+          <div id="weekday-vis-container">
+            <Box>
+              {avgAttendRatio.length > 0 ? (
+                <VictoryChart
+                  width={700}
+                  height={500}
+                  padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
+                  domainPadding={45}
+                >
+                  <VictoryAxis
+                    label="Average Attendance Ratio per Weekday for Game Nights"
+                    style={{
+                      axisLabel: { fontSize: 20, padding: 40 },
+                      ticks: { stroke: 'grey', size: 5 },
+                    }}
+                  />
+                  <VictoryAxis
+                    dependentAxis
+                    style={{ ticks: { stroke: 'grey', size: 5 } }}
+                  />
+                  <VictoryBar data={avgAttendRatio} x="day" y="vote" />
+                </VictoryChart>
+              ) : (
+                <h2>Loading...</h2>
+              )}
+            </Box>
+            <Box>
+              {avgOverallFeedback.length > 0 ? (
+                <VictoryChart
+                  width={700}
+                  height={500}
+                  padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
+                  domainPadding={45}
+                >
+                  <VictoryAxis
+                    label="Average Overall Score for Gamenights per Weekday"
+                    style={{
+                      axisLabel: { fontSize: 20, padding: 40 },
+                      ticks: { stroke: 'grey', size: 5 },
+                    }}
+                  />
+                  <VictoryAxis
+                    dependentAxis
+                    style={{ ticks: { stroke: 'grey', size: 5 } }}
+                  />
+                  <VictoryBar data={avgOverallFeedback} x="day" y="vote" />
+                </VictoryChart>
+              ) : (
+                <h2>Loading...</h2>
+              )}
+            </Box>
+            <Box>
+              {avgPlayerNum.length > 0 ? (
+                <VictoryChart
+                  width={700}
+                  height={500}
+                  padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
+                  domainPadding={45}
+                >
+                  <VictoryAxis
+                    label="Average Attendance per Weekday for Game Nights"
+                    style={{
+                      axisLabel: { fontSize: 20, padding: 40 },
+                      ticks: { stroke: 'grey', size: 5 },
+                    }}
+                  />
+                  <VictoryAxis
+                    dependentAxis
+                    style={{ ticks: { stroke: 'grey', size: 5 } }}
+                  />
+                  <VictoryBar data={avgPlayerNum} x="day" y="vote" />
+                </VictoryChart>
+              ) : (
+                <h2>Loading...</h2>
+              )}
+            </Box>
+          </div>
         </div>
         <div id="by-genre">
           <h3>Most Played Genres</h3>
-          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={dataGenre}>
-              <PolarGrid />
-              <PolarAngleAxis dataKey="subject" />
-              <PolarRadiusAxis />
-              <Radar
-                name="Mike"
-                dataKey="A"
-                stroke="#8884d8"
-                fill="#8884d8"
-                fillOpacity={0.6}
-              />
-            </RadarChart>
-          </ResponsiveContainer>
         </div>
       </div>
     </div>

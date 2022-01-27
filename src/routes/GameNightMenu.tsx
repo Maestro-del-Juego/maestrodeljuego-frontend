@@ -33,169 +33,254 @@ import Tooltip from '@mui/material/Tooltip';
 import PageviewIcon from '@mui/icons-material/Pageview';
 
 interface gameNightProps {
-    token: string;
+  token: string;
 }
 
 interface gameNightObject {
-    pk: number;
-    rid: string;
-    date: string;
-    start_time: string;
-    end_time: string;
-    location: string;
-    status: string;
+  pk: number;
+  rid: string;
+  date: string;
+  start_time: string;
+  end_time: string;
+  location: string;
+  status: string;
 }
 
-
 export default function GameNightMenu(props: gameNightProps) {
-    const [gameNightList, setGameNightList] = useState<gameNightObject[]>([]);
-    const [showPast, setShowPast] = useState(false);
-    const [showCancelled, setShowCancelled] = useState(false);
-    useEffect(() => {
-        if (props.token !== "") {
-        const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/`;
-        axios
-            .get(gameNightUrl, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Token ${props.token}`,
-                  },
-            })
-            .then((response) => {
-                console.log(response)
-                setGameNightList(response.data)
-                const gameNightArray: Array<gameNightObject> = []
-                response.data.forEach((entry: any) => {
-                    const entryObject: gameNightObject =
-                    {pk:entry.pk, rid:entry.rid, date:entry.date, start_time:entry.start_time, end_time:entry.end_time, location:entry.location, status: entry.status};
-                    gameNightArray.push(entryObject)
-                })
-                gameNightArray.sort(function(a,b) {
-                    return Date.parse(b.date) - Date.parse(a.date); }); //sorts array by date, newest to oldest
-                setGameNightList(gameNightArray);
-            });
-        }}, [props.token]);
+  const [gameNightList, setGameNightList] = useState<gameNightObject[]>([]);
+  const [showPast, setShowPast] = useState(false);
+  const [showCancelled, setShowCancelled] = useState(false);
+  useEffect(() => {
+    if (props.token !== '') {
+      const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/`;
+      axios
+        .get(gameNightUrl, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${props.token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          setGameNightList(response.data);
+          const gameNightArray: Array<gameNightObject> = [];
+          response.data.forEach((entry: any) => {
+            const entryObject: gameNightObject = {
+              pk: entry.pk,
+              rid: entry.rid,
+              date: entry.date,
+              start_time: entry.start_time,
+              end_time: entry.end_time,
+              location: entry.location,
+              status: entry.status,
+            };
+            gameNightArray.push(entryObject);
+          });
+          gameNightArray.sort(function (a, b) {
+            return Date.parse(b.date) - Date.parse(a.date);
+          }); //sorts array by date, newest to oldest
+          setGameNightList(gameNightArray);
+        });
+    }
+  }, [props.token]);
 
-        const copyToClipboard = (url: string) => {
-            const copyText = url;
-            navigator.clipboard.writeText(copyText);
-        }
+  const copyToClipboard = (url: string) => {
+    const copyText = url;
+    navigator.clipboard.writeText(copyText);
+  };
 
-    return (
-        <>
-        {props.token !== "" ? (
+  return (
+    <>
+      {props.token !== '' ? (
         <div className="game-night-menu-container">
-            <Link className="new-event-link" to="/createevent/"><Button variant="contained">Create New Event</Button></Link>
+          <Link className="new-event-link" to="/createevent/">
+            <Button variant="contained">Create New Event</Button>
+          </Link>
 
-        <Accordion sx={{maxWidth: 600}}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Upcoming Game Nights</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        <List>
-            {gameNightList.map((event) => (
-                <React.Fragment key={`upcoming-${event.pk}`}>
-                {(moment(event.date).isBefore(moment()) === false && event.status !== "Cancelled") ? (
-                    <>
+          <Accordion sx={{ maxWidth: 600 }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Upcoming Game Nights</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <List>
+                {gameNightList.map((event) => (
+                  <React.Fragment key={`upcoming-${event.pk}`}>
+                    {moment(event.date).isBefore(moment()) === false &&
+                    event.status !== 'Cancelled' ? (
+                      <>
                         <Divider />
                         <ListItem
-                            secondaryAction={<><Link to={`/game_night/${event.rid}/finalize`}><Tooltip title="Edit event details"><IconButton><EditIcon /></IconButton></Tooltip></Link>
-                                <Tooltip title="Copy event link to clipboard"><IconButton onClick={() => copyToClipboard(`${window.location.href}/${event.rid}`)}><ContentPasteIcon /></IconButton></Tooltip></>}
+                          secondaryAction={
+                            <>
+                              <Link to={`/game_night/${event.rid}/finalize`}>
+                                <Tooltip title="Edit event details">
+                                  <IconButton>
+                                    <EditIcon />
+                                  </IconButton>
+                                </Tooltip>
+                              </Link>
+                              <Tooltip title="Copy event link to clipboard">
+                                <IconButton
+                                  onClick={() =>
+                                    copyToClipboard(
+                                      `${window.location.href}/${event.rid}`
+                                    )
+                                  }
+                                >
+                                  <ContentPasteIcon />
+                                </IconButton>
+                              </Tooltip>
+                            </>
+                          }
                         >
-                            <ListItemAvatar>
-                                {event.status==="Finalized" ? (
-                                    <Avatar sx={{bgcolor:"mediumseagreen"}}><CheckCircleIcon /></Avatar>
-                                ) : (
-                                    <Avatar sx={{bgcolor:"gold"}}><PendingIcon /></Avatar>
-                                )}
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={`${moment(event.date).format('MMM DD, YYYY')} @ ${event.location}`}
-                                secondary={`${moment(event.start_time, "HH.mm.ss").format("h:mm A")} - ${moment(event.end_time, "HH.mm.ss").format("h:mm A")}`}    
-                            />
-                        </ListItem>                       
-                    </>) :(<></>)
-                }
-                </React.Fragment>
-            ))}
-            </List>
-        </AccordionDetails>
-        </Accordion>
-        
-        <Accordion sx={{maxWidth: 600}}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Past Game Nights</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        <List>
-            {gameNightList.map((event) => (
-                <React.Fragment key={`past-${event.pk}`}>
-                {(moment(event.date).isBefore(moment()) && event.status !== "Cancelled") ? (
-                    <>
+                          <ListItemAvatar>
+                            {event.status === 'Finalized' ? (
+                              <Avatar sx={{ bgcolor: 'mediumseagreen' }}>
+                                <CheckCircleIcon />
+                              </Avatar>
+                            ) : (
+                              <Avatar sx={{ bgcolor: 'gold' }}>
+                                <PendingIcon />
+                              </Avatar>
+                            )}
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={`${moment(event.date).format(
+                              'MMM DD, YYYY'
+                            )} @ ${event.location}`}
+                            secondary={`${moment(
+                              event.start_time,
+                              'HH.mm.ss'
+                            ).format('h:mm A')} - ${moment(
+                              event.end_time,
+                              'HH.mm.ss'
+                            ).format('h:mm A')}`}
+                          />
+                        </ListItem>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </React.Fragment>
+                ))}
+              </List>
+            </AccordionDetails>
+          </Accordion>
+
+          <Accordion sx={{ maxWidth: 600 }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Past Game Nights</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <List>
+                {gameNightList.map((event) => (
+                  <React.Fragment key={`past-${event.pk}`}>
+                    {moment(event.date).isBefore(moment()) &&
+                    event.status !== 'Cancelled' ? (
+                      <>
                         <Divider />
                         <ListItem
-                            secondaryAction={<Link to={`/game_night/${event.rid}/finalize`}><Tooltip title="View event details"><IconButton><PageviewIcon /></IconButton></Tooltip></Link>}
+                          secondaryAction={
+                            <Link to={`/game_night/${event.rid}/finalize`}>
+                              <Tooltip title="View event details">
+                                <IconButton>
+                                  <PageviewIcon />
+                                </IconButton>
+                              </Tooltip>
+                            </Link>
+                          }
                         >
-                            <ListItemAvatar>
-                                <Avatar sx={{bgcolor:"dodgerblue"}}><EventAvailableIcon /></Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={`${moment(event.date).format('MMM DD, YYYY')} @ ${event.location}`}
-                                secondary={`${moment(event.start_time, "HH.mm.ss").format("h:mm A")} - ${moment(event.end_time, "HH.mm.ss").format("h:mm A")}`}    
-                            />
-                        </ListItem>                       
-                    </>) :(<></>)
-                }
-                </React.Fragment>
-            ))}
-            </List>
-        </AccordionDetails>
-        </Accordion>
+                          <ListItemAvatar>
+                            <Avatar sx={{ bgcolor: 'dodgerblue' }}>
+                              <EventAvailableIcon />
+                            </Avatar>
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={`${moment(event.date).format(
+                              'MMM DD, YYYY'
+                            )} @ ${event.location}`}
+                            secondary={`${moment(
+                              event.start_time,
+                              'HH.mm.ss'
+                            ).format('h:mm A')} - ${moment(
+                              event.end_time,
+                              'HH.mm.ss'
+                            ).format('h:mm A')}`}
+                          />
+                        </ListItem>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </React.Fragment>
+                ))}
+              </List>
+            </AccordionDetails>
+          </Accordion>
 
-        <Accordion sx={{maxWidth: 600}}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Cancelled Game Nights</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        <List>
-            {gameNightList.map((event) => (
-                <React.Fragment key={`cancelled-${event.pk}`}>
-                {event.status === "Cancelled" ? (
-                    <>
+          <Accordion sx={{ maxWidth: 600 }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Cancelled Game Nights</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <List>
+                {gameNightList.map((event) => (
+                  <React.Fragment key={`cancelled-${event.pk}`}>
+                    {event.status === 'Cancelled' ? (
+                      <>
                         <Divider />
                         <ListItem
-                            secondaryAction={<Link to={`/game_night/${event.rid}/finalize`}><Tooltip title="View event details"><IconButton><PageviewIcon /></IconButton></Tooltip></Link>}
+                          secondaryAction={
+                            <Link to={`/game_night/${event.rid}/finalize`}>
+                              <Tooltip title="View event details">
+                                <IconButton>
+                                  <PageviewIcon />
+                                </IconButton>
+                              </Tooltip>
+                            </Link>
+                          }
                         >
-                            <ListItemAvatar>
-                                <Avatar sx={{bgcolor:"crimson"}}><CancelIcon /></Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={`${moment(event.date).format('MMM DD, YYYY')} @ ${event.location}`}
-                                secondary={`${moment(event.start_time, "HH.mm.ss").format("h:mm A")} - ${moment(event.end_time, "HH.mm.ss").format("h:mm A")}`}    
-                            />
-                        </ListItem>                       
-                    </>) :(<></>)
-                }
-                </React.Fragment>
-            ))}
-            </List>
-        </AccordionDetails>
-        </Accordion>            
+                          <ListItemAvatar>
+                            <Avatar sx={{ bgcolor: 'crimson' }}>
+                              <CancelIcon />
+                            </Avatar>
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={`${moment(event.date).format(
+                              'MMM DD, YYYY'
+                            )} @ ${event.location}`}
+                            secondary={`${moment(
+                              event.start_time,
+                              'HH.mm.ss'
+                            ).format('h:mm A')} - ${moment(
+                              event.end_time,
+                              'HH.mm.ss'
+                            ).format('h:mm A')}`}
+                          />
+                        </ListItem>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </React.Fragment>
+                ))}
+              </List>
+            </AccordionDetails>
+          </Accordion>
 
-        
-            {/* <List
+          {/* <List
                 sx={{ maxWidth: 500}}
                 subheader={<ListSubheader>Upcoming Game Nights</ListSubheader>}
             >
@@ -286,7 +371,11 @@ export default function GameNightMenu(props: gameNightProps) {
             ))}
             </List> */}
         </div>
-        ) : (<><h4>Please log in to see your game night events.</h4></>)
-        }</>
-    )
+      ) : (
+        <>
+          <h4>Please log in to see your game night events.</h4>
+        </>
+      )}
+    </>
+  );
 }
