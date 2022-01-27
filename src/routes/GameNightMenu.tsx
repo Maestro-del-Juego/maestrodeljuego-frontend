@@ -44,6 +44,8 @@ interface gameNightObject {
   end_time: string;
   location: string;
   status: string;
+  inviteesLeft: number;
+  rsvps: number;
 }
 
 export default function GameNightMenu(props: gameNightProps) {
@@ -73,6 +75,8 @@ export default function GameNightMenu(props: gameNightProps) {
               end_time: entry.end_time,
               location: entry.location,
               status: entry.status,
+              inviteesLeft: entry.invitees.length,
+              rsvps: entry.rsvps.length
             };
             gameNightArray.push(entryObject);
           });
@@ -158,7 +162,7 @@ export default function GameNightMenu(props: gameNightProps) {
                             ).format('h:mm A')} - ${moment(
                               event.end_time,
                               'HH.mm.ss'
-                            ).format('h:mm A')}`}
+                            ).format('h:mm A')}; ${event.rsvps}/${event.rsvps + event.inviteesLeft} RSVP'd`}
                           />
                         </ListItem>
                       </>

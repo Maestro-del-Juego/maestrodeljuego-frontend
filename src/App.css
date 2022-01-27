@@ -522,9 +522,20 @@ a {
   font-weight: bolder;
 }
 
+#account-links > a {
+  text-decoration: none;
+  color: #41463d;
+  font-size: larger;
+  font-weight: bolder;
+}
+
 #log-out {
   text-decoration: none;
   color: #41463d;
   font-size: larger;
   font-weight: bolder;
+}
+
+#play-stats-page {
+  text-align: center;
 }
