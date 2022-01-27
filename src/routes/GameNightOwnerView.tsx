@@ -787,10 +787,10 @@ export default function GameNightOwnerView(props: gameNightProps) {
                   key={`invitee-${invitee.first_name} ${invitee.last_name}`}
                 >
                   <Divider />
-                  <ListItem>
+                  <ListItem sx={{ backgroundColor: 'silver' }}>
                     <ListItemText
                       primary={`${invitee.first_name} ${invitee.last_name}`}
-                      secondary="not RSVPd"
+                      secondary="not RSVP'd"
                     />
                   </ListItem>
                 </React.Fragment>
