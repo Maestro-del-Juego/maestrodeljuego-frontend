@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from 'victory';
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryAxis,
+  VictoryLabel,
+  VictoryPie,
+} from 'victory';
 import { Box } from '@mui/material';
 
 interface statProps {
@@ -16,6 +22,9 @@ export default function PlayStats(props: statProps) {
   const [avgGameNum, setAvgGameNum] = useState<any[]>([]);
   const [avgPlayerNum, setAvgPlayerNum] = useState<any[]>([]);
   const [sessionsNum, setSessionsNum] = useState<any[]>([]);
+  const [mostPlayed, setMostPlayed] = useState<any[]>([]);
+  const [leastPlayed, setLeastPlayed] = useState<any[]>([]);
+  const [commonPlayers, setCommonPlayers] = useState<any[]>([]);
 
   useEffect(() => {
     const loadData = () => {
@@ -62,6 +71,33 @@ export default function PlayStats(props: statProps) {
                 },
               ]);
             }
+            for (let entry of result.data.most_played_games) {
+              setMostPlayed((oldData) => [
+                ...oldData,
+                {
+                  x: entry.name,
+                  y: entry.played,
+                },
+              ]);
+            }
+            for (let entry of result.data.least_played_games) {
+              setLeastPlayed((oldData) => [
+                ...oldData,
+                {
+                  x: entry.name,
+                  y: entry.played,
+                },
+              ]);
+            }
+            for (let entry of result.data.most_common_players) {
+              setCommonPlayers((oldData) => [
+                ...oldData,
+                {
+                  name: entry.name,
+                  play_count: entry.attended,
+                },
+              ]);
+            }
           })
           .catch((error) => console.log(error));
       } catch (error) {
@@ -76,7 +112,7 @@ export default function PlayStats(props: statProps) {
       <h1>Welcome to Game Master, {props.user}!</h1>
       <div id="most-played">
         <div id="weekday-stats">
-          <h3>Weekday Stats</h3>
+          <h2>Weekday Stats</h2>
           <div id="weekday-vis-container">
             <Box>
               {avgAttendRatio.length > 0 ? (
@@ -156,7 +192,15 @@ export default function PlayStats(props: statProps) {
           </div>
         </div>
         <div id="by-genre">
-          <h3>Most Played Genres</h3>
+          <h2>Gameplay Stats</h2>
+          {mostPlayed.length > 0 ? (
+            <Box>
+              <h4>Most Played Games</h4>
+              <VictoryPie data={mostPlayed} />
+            </Box>
+          ) : (
+            <h2>Loading...</h2>
+          )}
         </div>
       </div>
     </div>
