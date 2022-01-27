@@ -523,6 +523,13 @@ a {
   font-weight: bolder;
 }
 
+.search-result-link {
+  text-decoration: none;
+  color: #41463d;
+  font-size: larger;
+  font-weight: bolder;
+}
+
 #account-links > a {
   text-decoration: none;
   color: #41463d;

@@ -5,6 +5,7 @@ import axios from 'axios';
 import GameCard from '../components/GameCard';
 import useLocalStorage from 'use-local-storage';
 import Button from '@mui/material/Button';
+import dateFormat from 'dateformat';
 interface gameNightProps {
   token: string;
 }
@@ -25,8 +26,10 @@ export default function VotingForm(props: gameNightProps) {
   const [finalGames, setFinalGames] = useState<any[]>([]);
   const [gameNightDate, setGameNightDate] = useState('');
   const [gameNightLoc, setGameNightLoc] = useState('');
+  const [gameNightTime, setGameNightTime] = useState('');
 
   let { gameId } = useParams();
+  let convertTime = require('convert-time');
 
   useEffect(() => {
     console.log(gameId);
@@ -42,6 +45,7 @@ export default function VotingForm(props: gameNightProps) {
         setFinalGames(result.data.games);
         setGameNightDate(result.data.date);
         setGameNightLoc(result.data.location);
+        setGameNightTime(result.data.start_time);
         setGuest(
           result.data.invitees[0].first_name +
             ' ' +
@@ -166,7 +170,9 @@ export default function VotingForm(props: gameNightProps) {
         })}
       </div>
       <h2>
-        This game night will take place on {gameNightDate} at {gameNightLoc}.
+        This game night will take place on{' '}
+        {dateFormat(gameNightDate, 'dddd, mmmm dS, yyyy')} at{' '}
+        {convertTime(gameNightTime)} at {gameNightLoc}.
       </h2>
     </div>
   ) : voted ? (
