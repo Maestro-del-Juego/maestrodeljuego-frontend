@@ -316,7 +316,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               onChange={(event) => {
                 if (status === 'Voting') handleChange('date', event);
               }}
-              sx={{ width: 220 }}
+              sx={{ width: 220, m:2 }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -335,7 +335,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150 }}
+              sx={{ width: 150, m:2 }}
             />
             <TextField
               id="end-time-picker"
@@ -351,7 +351,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150 }}
+              sx={{ width: 150, m:2 }}
             />
             <TextField
               id="location-picker"
@@ -364,10 +364,10 @@ export default function GameNightOwnerView(props: gameNightProps) {
               InputLabelProps={{
                 shrink: true,
               }}
-              sx={{ width: 300 }}
+              sx={{ width: 300, m:2 }}
             />
             <Button
-              sx={{ marginLeft: 2 }}
+              sx={{ m:2 }}
               className="submit-button"
               variant="contained"
               onClick={(event) => handleSubmit(event)}
@@ -504,7 +504,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               sx={{ width: 300 }}
             />
             <Button
-              sx={{ marginLeft: 2 }}
+              sx={{ m: 2 }}
               disabled
               className="submit-button"
               variant="contained"
@@ -521,7 +521,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               <Button
                 className="finalize-button"
                 variant="contained"
-                sx={{ backgroundColor: 'mediumseagreen' }}
+                sx={{ backgroundColor: 'mediumseagreen', marginLeft:2, marginRight: 2 }}
                 onClick={(event) => {
                   finalizeGameNight(event);
                 }}
@@ -616,6 +616,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 <Button
                   className="reopen-button"
                   variant="contained"
+                  sx={{ marginLeft:2, marginRight: 2 }}
                   onClick={() => {
                     reopenGameNight();
                   }}
@@ -624,7 +625,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 </Button>
               ) : (
                 <Button
-                  sx={{ marginLeft: 2 }}
+                  sx={{ m: 2 }}
                   className="reopen-button-disabled"
                   variant="contained"
                   disabled
@@ -638,7 +639,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <Button
               className="cancel-button"
               variant="contained"
-              sx={{ backgroundColor: 'crimson', marginLeft: 1 }}
+              sx={{ backgroundColor: 'crimson', marginLeft:2, marginRight: 2 }}
               onClick={() => {
                 cancelGameNight();
               }}
@@ -647,7 +648,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </Button>
           ) : (
             <Button
-              sx={{ marginLeft: 2 }}
+              sx={{ marginLeft:2, marginRight: 2 }}
               className="cancel-button-disabled"
               variant="contained"
               disabled
