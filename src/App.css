@@ -476,7 +476,8 @@ a {
 }
 
 .game-night-menu-container * {
-  margin: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 #game-knight-banner {

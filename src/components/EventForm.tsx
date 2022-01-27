@@ -31,7 +31,6 @@ export default function EventForm(props: eventFormProps) {
   const [endTime, setEndTime] = useState('');
   const [location, setLocation] = useState('');
   const [updater, setUpdater] = useState(0);
-  const [isFormValid, setIsFormValid] = useState(false)
   const [newContactFirst, setNewContactFirst] = useState('');
   const [newContactLast, setNewContactLast] = useState('');
   const [newContactEmail, setNewContactEmail] = useState('');
@@ -334,7 +333,7 @@ export default function EventForm(props: eventFormProps) {
             aria-expanded={openContactMenu ? 'true' : undefined}
             onClick={handleContactClick}
           >
-            Add Contacts
+            Invite Contacts
           </Button>
           <Button
             aria-describedby={newContactPopupId}
