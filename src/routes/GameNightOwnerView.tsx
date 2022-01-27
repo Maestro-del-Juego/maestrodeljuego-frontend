@@ -657,9 +657,51 @@ export default function GameNightOwnerView(props: gameNightProps) {
           )}
         </div>
         <div className="voting-and-rsvp-container">
+        <div className="rsvp-container">
+            <List
+              sx={{ maxWidth: 300 }}
+              subheader={
+                <ListSubheader sx={{ fontSize: 16 }}>RSVPs:</ListSubheader>
+              }
+            >
+              {rsvpList.map((rsvp) => (
+                <React.Fragment key={`invitee-${rsvp.invitee}`}>
+                  <Divider />
+                  {rsvp.attending === true ? (
+                    <ListItem>
+                      <ListItemText
+                        primary={rsvp.invitee}
+                        secondary="attending"
+                      />
+                    </ListItem>
+                  ) : (
+                    <ListItem sx={{ backgroundColor: 'gainsboro' }}>
+                      <ListItemText
+                        primary={rsvp.invitee}
+                        secondary="not attending"
+                      />
+                    </ListItem>
+                  )}
+                </React.Fragment>
+              ))}
+              {inviteeList.map((invitee) => (
+                <React.Fragment
+                  key={`invitee-${invitee.first_name} ${invitee.last_name}`}
+                >
+                  <Divider />
+                  <ListItem sx={{ backgroundColor: 'silver' }}>
+                    <ListItemText
+                      primary={`${invitee.first_name} ${invitee.last_name}`}
+                      secondary="not RSVP'd"
+                    />
+                  </ListItem>
+                </React.Fragment>
+              ))}
+            </List>
+          </div>
           <div className="voting-results-container">
             <List
-              sx={{ maxWidth: 500 }}
+              sx={{ maxWidth: 500, marginLeft: 4 }}
               subheader={
                 <ListSubheader sx={{ fontSize: 16 }}>
                   Select games to be played:
@@ -754,48 +796,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </List>
           </div>
 
-          <div className="rsvp-container">
-            <List
-              sx={{ maxWidth: 300 }}
-              subheader={
-                <ListSubheader sx={{ fontSize: 16 }}>RSVPs:</ListSubheader>
-              }
-            >
-              {rsvpList.map((rsvp) => (
-                <React.Fragment key={`invitee-${rsvp.invitee}`}>
-                  <Divider />
-                  {rsvp.attending === true ? (
-                    <ListItem>
-                      <ListItemText
-                        primary={rsvp.invitee}
-                        secondary="attending"
-                      />
-                    </ListItem>
-                  ) : (
-                    <ListItem sx={{ backgroundColor: 'gainsboro' }}>
-                      <ListItemText
-                        primary={rsvp.invitee}
-                        secondary="not attending"
-                      />
-                    </ListItem>
-                  )}
-                </React.Fragment>
-              ))}
-              {inviteeList.map((invitee) => (
-                <React.Fragment
-                  key={`invitee-${invitee.first_name} ${invitee.last_name}`}
-                >
-                  <Divider />
-                  <ListItem sx={{ backgroundColor: 'silver' }}>
-                    <ListItemText
-                      primary={`${invitee.first_name} ${invitee.last_name}`}
-                      secondary="not RSVP'd"
-                    />
-                  </ListItem>
-                </React.Fragment>
-              ))}
-            </List>
-          </div>
+          
         </div>
       </div>
     </>
