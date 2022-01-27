@@ -34,14 +34,14 @@ export default function FeedbackForm(props: feedbackProps) {
       .then((result: any) => {
         console.log(result.data);
         setHost(result.data.user.username);
-        setGuestList(result.data.invitees);
+        setGuestList(result.data.attendees);
         setPlayedGames(result.data.games);
         setGuest(
-          result.data.invitees[0].first_name +
+          result.data.attendees[0].first_name +
             ' ' +
-            result.data.invitees[0].last_name
+            result.data.attendees[0].last_name
         );
-        setFeedbackProvider(result.data.invitees[0].pk);
+        setFeedbackProvider(result.data.attendees[0].pk);
         for (let i = 0; i < result.data.games.length; i++) {
           setVotes((oldData) => [
             ...oldData,
