@@ -59,6 +59,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const [dateValid, setDateValid] = useState<Boolean>(false);
   const [locationValid, setLocationValid] = useState<Boolean>(false);
   const [gamesValid, setGamesValid] = useState<Boolean>(false);
+  const [rsvpValid, setRsvpValid] = useState<Boolean>(false);
   let { gameNightId } = useParams();
   const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightId}`;
 
@@ -72,10 +73,8 @@ export default function GameNightOwnerView(props: gameNightProps) {
       })
       .then((response) => {
         setDate(response.data.date);
-        setStartTime(
-          moment(response.data.start_time, 'hh:mm:ss').format('HH:MM')
-        );
-        setEndTime(moment(response.data.end_time, 'hh:mm:ss').format('HH:MM'));
+        setStartTime(response.data.start_time);
+        setEndTime(response.data.end_time);
         setLocation(response.data.location);
         setSelectedGameList(response.data.games);
         setStatus(response.data.status);
@@ -122,7 +121,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   };
 
   const validateForm = useCallback(() => {
-    const timeRGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    const timeRGEX = /^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/;
     setStartTimeValid(timeRGEX.test(startTime));
     setEndTimeValid(timeRGEX.test(endTime));
     const dateRGEX = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
@@ -186,7 +185,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const finalizeGameNight = (event: any) => {
     event.preventDefault();
 
-    if (validateForm() === true && selectedGameList.length > 0) {
+    if (validateForm() === true && selectedGameList.length > 0 && rsvpList.length > 0) {
       axios
         .patch(
           gameNightUrl,
@@ -625,7 +624,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 </Button>
               ) : (
                 <Button
-                  sx={{ m: 2 }}
+                sx={{ marginLeft:2, marginRight: 2 }}
                   className="reopen-button-disabled"
                   variant="contained"
                   disabled
