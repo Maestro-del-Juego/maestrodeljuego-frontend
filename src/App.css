@@ -456,6 +456,7 @@ a {
   display: flex;
   margin-left: 20px;
   margin-top: 10px;
+  /* justify-content: space-evenly; */
 }
 
 .rsvp-container {
