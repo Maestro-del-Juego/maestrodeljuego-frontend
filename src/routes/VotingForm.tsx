@@ -224,7 +224,7 @@ export default function VotingForm(props: gameNightProps) {
         </Button>
       </form>
     </div>
-  ) : (
+  ) : attending === 'True' ? (
     <div id="guest-vote-form">
       <h1 className="vote-header">Welcome to Game Night!</h1>
       <br></br>
@@ -252,6 +252,11 @@ export default function VotingForm(props: gameNightProps) {
           Back
         </Button>
       </div>
+    </div>
+  ) : (
+    <div>
+      <h2>Sorry you couldn't make it this time!</h2>
+      <h3>We'll have to play again soon!</h3>
     </div>
   );
 }

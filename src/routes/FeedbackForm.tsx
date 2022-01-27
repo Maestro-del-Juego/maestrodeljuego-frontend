@@ -187,6 +187,8 @@ export default function FeedbackForm(props: feedbackProps) {
         </Button>
       </form>
     </div>
+  ) : voted ? (
+    <h2>Thank you for your feedback!</h2>
   ) : (
     <form onSubmit={feedbackHandler} id="feedback">
       <div id="feedback-form">
