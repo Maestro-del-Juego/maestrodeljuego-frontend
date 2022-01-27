@@ -71,9 +71,8 @@ export default function EventForm(props: eventFormProps) {
         }
       )
       .then((response) => {
-        alert('Game Night created!');
         console.log(response);
-        navigate('/game_night/');
+        navigate(`/game_night/$`);
       });
     }
     else {handleValidatorClick(event)}
