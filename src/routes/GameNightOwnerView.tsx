@@ -450,7 +450,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               onChange={(event) => {
                 if (status === 'Voting') handleChange('date', event);
               }}
-              sx={{ width: 220 }}
+              sx={{ width: 220, m:2 }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -470,7 +470,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150 }}
+              sx={{ width: 150, m:2 }}
             />
             <TextField
               disabled
@@ -487,7 +487,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150 }}
+              sx={{ width: 150, m:2 }}
             />
             <TextField
               disabled
@@ -501,7 +501,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               InputLabelProps={{
                 shrink: true,
               }}
-              sx={{ width: 300 }}
+              sx={{ width: 300, m:2 }}
             />
             <Button
               sx={{ m: 2 }}
