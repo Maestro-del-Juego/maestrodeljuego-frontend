@@ -214,11 +214,11 @@ export default function GameNightMenu(props: gameNightProps) {
                                     </IconButton>
                                   </Tooltip>
                                 </Link>
-                                <Tooltip title="Copy event link to clipboard">
+                                <Tooltip title="Copy feedback link to clipboard">
                                   <IconButton
                                     onClick={() =>
                                       copyToClipboard(
-                                        `${window.location.href}/${event.rid}`
+                                        `${window.location.href}/${event.rid}/feedback`
                                       )
                                     }
                                   >
