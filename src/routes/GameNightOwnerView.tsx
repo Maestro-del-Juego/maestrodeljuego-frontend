@@ -54,6 +54,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const [status, setStatus] = useState('');
   let { gameNightId } = useParams();
   const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightId}`;
+        
   useEffect(() => {
     axios
       .get(gameNightUrl, {
@@ -70,7 +71,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
         setSelectedGameList(response.data.games);
         setStatus(response.data.status);
         setInviteeList(response.data.invitees);
-        // setRsvpList(response.data.rsvps);
         let tempArray = response.data.options.sort((a: any, b: any) =>
           a.votes > b.votes ? -1 : a.votes < b.votes ? 1 : 0
         );
@@ -544,6 +544,17 @@ export default function GameNightOwnerView(props: gameNightProps) {
                     />
                   </ListItem>
                 )}
+              </React.Fragment>
+            ))}
+            {inviteeList.map((invitee) => (
+              <React.Fragment key={`invitee-${invitee.first_name} ${invitee.last_name}`}>
+              <Divider />
+                <ListItem>
+                  <ListItemText
+                    primary={`${invitee.first_name} ${invitee.last_name}`}
+                    secondary="not RSVPd"
+                  />
+                </ListItem>
               </React.Fragment>
             ))}
           </List>
