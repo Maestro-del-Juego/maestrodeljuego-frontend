@@ -5,6 +5,9 @@ import SearchResult from '../components/SearchResult';
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { FaGem, FaHeart } from 'react-icons/fa';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import logo from '../assets/searchperson.svg';
 
 interface collectionProps {
   user: string;
@@ -49,44 +52,64 @@ export default function CollectionPage(props: collectionProps) {
   return props.token === '' ? (
     <h1>Please login to see your collection page</h1>
   ) : alpha ? (
-    <div className="collection-display">
-      <ProSidebar>
-        <Menu iconShape="square">
-          <button type="submit" onClick={() => setAlpha(true)}>
+    <Grid container xs={12} direction="row">
+      <Grid item xs={3}>
+        <Grid container direction="column">
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={() => setAlpha(true)}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+          >
             Alphabetical
-          </button>
-          <button type="submit" onClick={() => setAlpha(false)}>
+          </Button>
+          <Button
+            type="submit"
+            variant="outlined"
+            onClick={() => setAlpha(false)}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '20px' }}
+          >
             Card View
-          </button>
-        </Menu>
-      </ProSidebar>
-      <div>
+          </Button>
+        </Grid>
+      </Grid>
+      <Grid item xs={5}>
         <h1 className="collection-header-alpha">{props.user}'s Collection</h1>
         <div className="collection-container-alpha">
           {alphaCollection.map((game: any) => (
             <SearchResult gameId={game.bgg} gameName={game.title} />
           ))}
         </div>
-      </div>
-    </div>
+      </Grid>
+      <Grid item xs={4}>
+        <img src={logo} alt="Library Image"></img>
+      </Grid>
+    </Grid>
   ) : (
-    <div className="collection-display">
-      <ProSidebar>
-        <Menu iconShape="square">
-          <button
+    <Grid container xs={12} direction="row">
+      <Grid item xs={2}>
+        <Grid container direction="column">
+          <Button
             type="submit"
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
             onClick={() => {
               setAlpha(true);
             }}
+            variant="outlined"
           >
             Alphabetical
-          </button>
-          <button type="submit" onClick={() => setAlpha(false)}>
+          </Button>
+          <Button
+            type="submit"
+            onClick={() => setAlpha(false)}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '20px' }}
+            variant="contained"
+          >
             Card View
-          </button>
-        </Menu>
-      </ProSidebar>
-      <div>
+          </Button>
+        </Grid>
+      </Grid>
+      <Grid item xs={10}>
         <h1 className="collection-header">{props.user}'s Collection</h1>
         <div className="collection-container">
           {collection.map((game: any) => (
@@ -98,7 +121,7 @@ export default function CollectionPage(props: collectionProps) {
             />
           ))}
         </div>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 }

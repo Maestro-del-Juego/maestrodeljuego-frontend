@@ -28,8 +28,10 @@ export default function NavBar(props: navProps) {
         </div>
         <div id="site-nav">
           <Link to={`/collection/${props.user}`}>Your Collection</Link> |
-          <Link to={`/wishlist/${props.user}`}>Wishlist</Link> |
-          <Link to="/search">Search Games</Link> |
+          <Link to={props.auth === '' ? '/login' : `/wishlist/${props.user}`}>
+            Wishlist
+          </Link>{' '}
+          |<Link to="/search">Search Games</Link> |
           <Link to="/game_night">Game Night Dashboard</Link>
         </div>
         <div id="account-links">

@@ -360,7 +360,6 @@ export default function EventForm(props: eventFormProps) {
             >
               {contact.first_name} {contact.last_name}
             </MenuItem>
-            // with image: <MenuItem key={`${game.pk}-dropdown`} onClick={() => {props.handleAddClick(game); setUpdater(updater + 1); handleGameClose();}}><img className="menu-image" src={game.image} alt={game.title}></img>{game.title}</MenuItem>
           ))}
         </Menu>
       </div>
