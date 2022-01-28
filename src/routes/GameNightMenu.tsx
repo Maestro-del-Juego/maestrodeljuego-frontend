@@ -96,7 +96,7 @@ export default function GameNightMenu(props: gameNightProps) {
   };
 
   useEffect(() => {
-      setInterval(() => {
+      const timer = setInterval(() => {
         if (props.token !== '') {
             const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/`;
             axios
@@ -126,11 +126,11 @@ export default function GameNightMenu(props: gameNightProps) {
                 });
                 gameNightArray.sort(function (a, b) {
                   return Date.parse(b.date) - Date.parse(a.date);
-                }); //sorts array by date, newest to oldest
+                });
                 setGameNightList(gameNightArray);
               });
           }
-      }, 30000);
+      }, 30000); return() => clearInterval(timer);
   }, [props.token])
 
   return (
