@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import { IconButton, Popover, Typography } from '@mui/material';
+import { IconButton, Popover, Menu, MenuItem, ButtonGroup } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -17,6 +17,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import moment from 'moment';
 import ErrorIcon from '@mui/icons-material/Error';
+import { contactObject } from '../routes/CreateEvent';
 
 interface gameNightProps {
   token: string;
@@ -47,7 +48,12 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const [gameList, setGameList] = useState<gameObject[]>([]);
   const [selectedGameList, setSelectedGameList] = useState<gameObject[]>([]);
   const [inviteeList, setInviteeList] = useState<inviteeObject[]>([]);
+  const [newInviteeList, setNewInviteeList] = useState<inviteeObject[]>([]);
   const [rsvpList, setRsvpList] = useState<rsvpObject[]>([]);
+  const [contactList, setContactList] = useState<contactObject[]>([]);
+  const [newContactFirst, setNewContactFirst] = useState('');
+  const [newContactLast, setNewContactLast] = useState('');
+  const [newContactEmail, setNewContactEmail] = useState('');
   const [date, setDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
@@ -60,6 +66,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const [locationValid, setLocationValid] = useState<Boolean>(false);
   const [gamesValid, setGamesValid] = useState<Boolean>(false);
   const [rsvpValid, setRsvpValid] = useState<Boolean>(false);
+
   let { gameNightId } = useParams();
   const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightId}`;
 
@@ -78,7 +85,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
         setLocation(response.data.location);
         setSelectedGameList(response.data.games);
         setStatus(response.data.status);
-        setInviteeList(response.data.invitees);
         let tempArray = response.data.options.sort((a: any, b: any) =>
           a.votes > b.votes ? -1 : a.votes < b.votes ? 1 : 0
         );
@@ -87,9 +93,27 @@ export default function GameNightOwnerView(props: gameNightProps) {
           a.attending > b.attending ? -1 : a.attending < b.attending ? 1 : 0
         );
         setRsvpList(rsvpTempArray);
+        let inviteeTempArray = response.data.invitees.sort((a: any, b: any) =>
+          a.first_name < b.first_name ? -1 : a.first_name > b.first_name ? 1 : 0
+        );
+        setInviteeList(inviteeTempArray);
         console.log(response.data);
       });
   }, [props.token, gameNightUrl]);
+
+  useEffect(() => {
+    const contactUrl = `https://maestrodeljuego.herokuapp.com/auth/users/me/`;
+    axios.get(contactUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${props.token}`,
+      },
+    })
+    .then((response) => {
+      let tempArray = response.data.contacts.sort((a: any, b: any) => a.first_name < b.first_name ? -1 : a.first_name > b.first_name ? 1 : 0)
+      setContactList(tempArray);
+    })
+  }, [props.token])
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -100,6 +124,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           gameNightUrl,
           {
             date: date,
+            invitees: newInviteeList,
             start_time: startTime,
             end_time: endTime,
             location: location,
@@ -115,9 +140,44 @@ export default function GameNightOwnerView(props: gameNightProps) {
         .then((response) => {
           console.log(response);
           setStatus(response.data.status);
+          let inviteeTempArray = response.data.invitees.sort((a: any, b: any) =>
+          a.first_name < b.first_name ? -1 : a.first_name > b.first_name ? 1 : 0
+          );
+          setInviteeList(inviteeTempArray);
+          setNewInviteeList([])
           setUpdater(updater + 1);
         });
     }
+  };
+
+  const handleNewContactSubmit = (event: any) => {
+    const contactApi = 'https://maestrodeljuego.herokuapp.com/contacts/';
+    event.preventDefault();
+    axios
+      .post(
+        contactApi,
+        {
+          first_name: newContactFirst,
+          last_name: newContactLast,
+          email: newContactEmail,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${props.token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        const tempArray2 = newInviteeList;
+        tempArray2.push(response.data);
+        setNewInviteeList(tempArray2)
+        setUpdater(updater + 1);
+        setNewContactFirst('');
+        setNewContactLast('');
+        setNewContactEmail('');
+      });
   };
 
   const validateForm = useCallback(() => {
@@ -191,6 +251,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           gameNightUrl,
           {
             date: date,
+            invitees: newInviteeList,
             start_time: startTime,
             end_time: endTime,
             location: location,
@@ -257,6 +318,18 @@ export default function GameNightOwnerView(props: gameNightProps) {
       setLocation(event.target.value);
       console.log(event.target.value);
     }
+    if (inputType === 'newContactFirst') {
+      setNewContactFirst(event.target.value);
+      console.log(event.target.value);
+    }
+    if (inputType === 'newContactLast') {
+      setNewContactLast(event.target.value);
+      console.log(event.target.value);
+    }
+    if (inputType === 'newContactEmail') {
+      setNewContactEmail(event.target.value);
+      console.log(event.target.value);
+    }
   };
 
   const handleAddClick = (game: gameObject) => {
@@ -272,6 +345,15 @@ export default function GameNightOwnerView(props: gameNightProps) {
     let array = selectedGameList;
     array.splice(array.indexOf(game), 1);
     setSelectedGameList(array);
+  };
+
+  const handleAddGuestClick = (contact: contactObject) => {
+    let array = newInviteeList;
+    console.log(inviteeList.includes(contact))
+    if (!(JSON.stringify(inviteeList).includes(JSON.stringify(contact))) && !(array.includes(contact))) {
+      array.push(contact);
+    }
+    setNewInviteeList(array);
   };
 
   // finalize validation MUI
@@ -301,6 +383,31 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const editValidationId = editValidationOpen
     ? 'edit-validation-popover'
     : undefined;
+
+    // variables for MUI dropdown menu: contacts
+  const [contactAnchor, setContactAnchor] = useState<null | HTMLElement>(null);
+  const openContactMenu = Boolean(contactAnchor);
+  const handleContactClick = (event: any) => {
+    setContactAnchor(event.currentTarget);
+  };
+  const handleContactClose = () => {
+    setContactAnchor(null);
+  };
+
+  // new contact MUI
+  const [newContactAnchor, setNewContactAnchor] = useState<null | HTMLElement>(
+    null
+  );
+  const handleNewContactClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setNewContactAnchor(event.currentTarget);
+  };
+  const handleNewContactClose = () => {
+    setNewContactAnchor(null);
+  };
+  const newContactOpen = Boolean(newContactAnchor);
+  const newContactPopupId = newContactOpen ? 'new-contact-popup' : undefined;
 
   return (
     <>
@@ -507,13 +614,135 @@ export default function GameNightOwnerView(props: gameNightProps) {
               disabled
               className="submit-button"
               variant="contained"
-              onClick={(event) => handleSubmit(event)}
             >
               Submit Changes
             </Button>
           </form>
         )}
+              <div className="contact-button-group-container">
+        <ButtonGroup
+          className="contact-button-group"
+          variant="contained"
+          aria-label="outlined primary button group"
+          sx={{ marginLeft: 4}}
+        >
+          <> {(status === "Voting") ? (
+          <Button
+            id="contact-menu-button"
+            aria-controls={openContactMenu ? 'contact-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={openContactMenu ? 'true' : undefined}
+            onClick={handleContactClick}
+          >
+            Invite Contacts
+          </Button> ) : (
+          <Button
+          id="contact-menu-button"
+          disabled
+          aria-controls={openContactMenu ? 'contact-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={openContactMenu ? 'true' : undefined}
+        >
+          Invite Contacts
+        </Button>  
+          )}
+          </>
+          <> {(status === "Voting") ? (
+          <Button
+            aria-describedby={newContactPopupId}
+            variant="contained"
+            onClick={handleNewContactClick}
+          >
+            Create New Contact
+          </Button> ) : (
+            <Button
+            aria-describedby={newContactPopupId}
+            variant="contained"
+            disabled
+          >
+            Create New Contact
+          </Button>
+          )}
+          </>
+        </ButtonGroup>
+        <Menu
+          id="game-menu"
+          anchorEl={contactAnchor}
+          open={openContactMenu}
+          onClose={handleContactClose}
+          MenuListProps={{ 'aria-labelledby': 'contact-menu-button' }}
+        >
+          {contactList.map((contact) => (
+            <MenuItem
+              key={`${contact.pk}-dropdown`}
+              onClick={() => {
+                handleAddGuestClick(contact);
+                setUpdater(updater + 1);
+                handleContactClose();
+              }}
+            >
+              {contact.first_name} {contact.last_name}
+            </MenuItem>
+          ))}
+        </Menu>
+      </div>
 
+      <div className="contact-form-popup-container">
+        <Popover
+          id={newContactPopupId}
+          open={newContactOpen}
+          anchorEl={newContactAnchor}
+          onClose={handleNewContactClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          sx={{ p: 2 }}
+        >
+          <form
+            className="create-contact-form"
+            onSubmit={handleNewContactSubmit}
+          >
+            <TextField
+            id="new-contact-first"
+            label="First name"
+            type="text"
+            value={newContactFirst}
+            onChange={(event) => handleChange('newContactFirst', event)}
+            sx={{ width: 200, m:1 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{ maxLength: 30}}
+          />
+            <TextField
+            id="new-contact-last"
+            label="Last name"
+            type="text"
+            value={newContactLast}
+            onChange={(event) => handleChange('newContactLast', event)}
+            sx={{ width: 200, m:1 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{ maxLength: 30}}
+          />
+            <TextField
+            id="new-contact-email"
+            label="Email"
+            type="text"
+            value={newContactEmail}
+            onChange={(event) => handleChange('newContactEmail', event)}
+            sx={{ width: 300, m:1 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{ maxLength: 320}}
+          />
+            <Button variant="contained" sx={{ m:1 }}onClick={(event) => handleNewContactSubmit(event)} className="submit-button">Add New Contact</Button>
+          </form>
+        </Popover>
+      </div>
         <div className="finalize-cancel-buttons-container">
           {status === 'Voting' ? (
             <>
@@ -657,9 +886,64 @@ export default function GameNightOwnerView(props: gameNightProps) {
           )}
         </div>
         <div className="voting-and-rsvp-container">
+        <div className="rsvp-container">
+            <List
+              sx={{ maxWidth: 300 }}
+              subheader={
+                <ListSubheader sx={{ fontSize: 16 }}>RSVPs:</ListSubheader>
+              }
+            >
+              {newInviteeList.map((invitee) => (
+                <React.Fragment
+                  key={`pending-${invitee.first_name} ${invitee.last_name}`}
+                >
+                  <Divider />
+                  <ListItem sx={{ backgroundColor: 'gold' }}>
+                    <ListItemText
+                      primary={`${invitee.first_name} ${invitee.last_name}`}
+                      secondary="pending invite..."
+                    />
+                  </ListItem>
+                </React.Fragment>
+              ))}
+              {rsvpList.map((rsvp) => (
+                <React.Fragment key={`rsvp-${rsvp.invitee}`}>
+                  <Divider />
+                  {rsvp.attending === true ? (
+                    <ListItem>
+                      <ListItemText
+                        primary={rsvp.invitee}
+                        secondary="attending"
+                      />
+                    </ListItem>
+                  ) : (
+                    <ListItem sx={{ backgroundColor: 'gainsboro' }}>
+                      <ListItemText
+                        primary={rsvp.invitee}
+                        secondary="not attending"
+                      />
+                    </ListItem>
+                  )}
+                </React.Fragment>
+              ))}
+              {inviteeList.map((invitee) => (
+                <React.Fragment
+                  key={`invitee-${invitee.first_name} ${invitee.last_name}`}
+                >
+                  <Divider />
+                  <ListItem sx={{ backgroundColor: 'silver' }}>
+                    <ListItemText
+                      primary={`${invitee.first_name} ${invitee.last_name}`}
+                      secondary="not RSVP'd"
+                    />
+                  </ListItem>
+                </React.Fragment>
+              ))}
+            </List>
+          </div>
           <div className="voting-results-container">
             <List
-              sx={{ maxWidth: 500 }}
+              sx={{ maxWidth: 500, marginLeft: 4 }}
               subheader={
                 <ListSubheader sx={{ fontSize: 16 }}>
                   Select games to be played:
@@ -754,48 +1038,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </List>
           </div>
 
-          <div className="rsvp-container">
-            <List
-              sx={{ maxWidth: 300 }}
-              subheader={
-                <ListSubheader sx={{ fontSize: 16 }}>RSVPs:</ListSubheader>
-              }
-            >
-              {rsvpList.map((rsvp) => (
-                <React.Fragment key={`invitee-${rsvp.invitee}`}>
-                  <Divider />
-                  {rsvp.attending === true ? (
-                    <ListItem>
-                      <ListItemText
-                        primary={rsvp.invitee}
-                        secondary="attending"
-                      />
-                    </ListItem>
-                  ) : (
-                    <ListItem sx={{ backgroundColor: 'gainsboro' }}>
-                      <ListItemText
-                        primary={rsvp.invitee}
-                        secondary="not attending"
-                      />
-                    </ListItem>
-                  )}
-                </React.Fragment>
-              ))}
-              {inviteeList.map((invitee) => (
-                <React.Fragment
-                  key={`invitee-${invitee.first_name} ${invitee.last_name}`}
-                >
-                  <Divider />
-                  <ListItem sx={{ backgroundColor: 'silver' }}>
-                    <ListItemText
-                      primary={`${invitee.first_name} ${invitee.last_name}`}
-                      secondary="not RSVP'd"
-                    />
-                  </ListItem>
-                </React.Fragment>
-              ))}
-            </List>
-          </div>
+          
         </div>
       </div>
     </>
