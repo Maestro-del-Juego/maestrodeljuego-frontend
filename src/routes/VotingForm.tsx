@@ -218,6 +218,7 @@ export default function VotingForm(props: gameNightProps) {
           <TextField
             id="invitee-email"
             type="text"
+            fullWidth
             value={inviteeEmail}
             onChange={(event) => setInviteeEmail(event.target.value)}
           ></TextField>

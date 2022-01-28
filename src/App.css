@@ -356,6 +356,8 @@ a {
 
 #email-confirm {
   margin-top: 60px;
+  width: 350px;
+  justify-content: center;
 }
 
 .gamenight-banner {
