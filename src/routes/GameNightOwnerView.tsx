@@ -68,7 +68,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const [rsvpValid, setRsvpValid] = useState<Boolean>(false);
 
   let { gameNightId } = useParams();
-  const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightId}`;
+  const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightId}/`;
 
   useEffect(() => {
     axios
@@ -118,6 +118,12 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     handleEditValidatorClick(event);
+    console.log(date)
+    console.log(newInviteeList)
+    console.log(startTime)
+    console.log(endTime)
+    console.log(location)
+    console.log(selectedGameList)
     if (validateForm() === true) {
       axios
         .patch(
@@ -334,7 +340,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
 
   const handleAddClick = (game: gameObject) => {
     let array = selectedGameList;
-    if (array.includes(game) === false) {
+    if (JSON.stringify(array).includes(JSON.stringify(game)) === false) {
       array.push(game);
     }
     setSelectedGameList(array);
@@ -953,7 +959,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               {gameList.map((game) => (
                 <React.Fragment key={`voting-results-${game.pk}`}>
                   <Divider />
-                  {selectedGameList.includes(game) === false ? (
+                  {JSON.stringify(selectedGameList).includes(JSON.stringify(game)) === false ? (
                     <ListItem
                       secondaryAction={
                         <>
