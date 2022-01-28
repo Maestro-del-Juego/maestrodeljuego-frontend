@@ -614,7 +614,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
               disabled
               className="submit-button"
               variant="contained"
-              onClick={(event) => handleSubmit(event)}
             >
               Submit Changes
             </Button>
@@ -627,6 +626,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           aria-label="outlined primary button group"
           sx={{ marginLeft: 4}}
         >
+          <> {(status === "Voting") ? (
           <Button
             id="contact-menu-button"
             aria-controls={openContactMenu ? 'contact-menu' : undefined}
@@ -635,14 +635,35 @@ export default function GameNightOwnerView(props: gameNightProps) {
             onClick={handleContactClick}
           >
             Invite Contacts
-          </Button>
+          </Button> ) : (
+          <Button
+          id="contact-menu-button"
+          disabled
+          aria-controls={openContactMenu ? 'contact-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={openContactMenu ? 'true' : undefined}
+        >
+          Invite Contacts
+        </Button>  
+          )}
+          </>
+          <> {(status === "Voting") ? (
           <Button
             aria-describedby={newContactPopupId}
             variant="contained"
             onClick={handleNewContactClick}
           >
             Create New Contact
+          </Button> ) : (
+            <Button
+            aria-describedby={newContactPopupId}
+            variant="contained"
+            disabled
+          >
+            Create New Contact
           </Button>
+          )}
+          </>
         </ButtonGroup>
         <Menu
           id="game-menu"
