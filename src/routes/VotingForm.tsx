@@ -186,8 +186,8 @@ export default function VotingForm(props: gameNightProps) {
   ) : guestPick ? (
     <div id="guest-list-select">
       <form onSubmit={rsvpHandler} id="guest-list-form">
-        <h2>Guest List</h2>
-        <h4>Select your name</h4>
+        <h1>Guest List</h1>
+        <h3>Select your name</h3>
         <div id="guest-select">
           <Select
             title="Guest List Dropdown"
