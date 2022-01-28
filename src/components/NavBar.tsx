@@ -31,8 +31,8 @@ export default function NavBar(props: navProps) {
           <Link to={props.auth === '' ? '/login' : `/wishlist/${props.user}`}>
             Wishlist
           </Link>{' '}
-          |<Link to="/search">Search Games</Link> |
-          <Link to="/game_night">Game Night Dashboard</Link>
+          |<Link to="/search">Add Games</Link> |
+          <Link to="/game_night">Game Knight Dashboard</Link>
         </div>
         <div id="account-links">
           {props.user === '' ? (
