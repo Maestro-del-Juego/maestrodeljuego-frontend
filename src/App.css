@@ -255,14 +255,17 @@ a {
   display: flex;
 }
 
-#collection-container {
+.collection-container {
   display: flex;
+  flex-grow: inherit;
   justify-content: space-around;
   margin-top: 60px;
 }
+
 .collection-header {
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 65px;
 }
 
 .collection-display {

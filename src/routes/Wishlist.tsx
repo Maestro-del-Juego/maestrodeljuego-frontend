@@ -9,7 +9,6 @@ interface wishlistProps {
 
 export default function CollectionPage(props: wishlistProps) {
   const [wishlist, setWishlist] = useState<any>([]);
-  
 
   useEffect(() => {
     axios
@@ -27,7 +26,7 @@ export default function CollectionPage(props: wishlistProps) {
 
   return (
     <>
-      <h1 id="wishlist-header">{props.user}'s Wishlist</h1>
+      <h1 className="wishlist-header">{props.user}'s Wishlist</h1>
       <div id="collection-container">
         {wishlist.map((game: any) => (
           <GameCard

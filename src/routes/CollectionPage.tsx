@@ -111,16 +111,18 @@ export default function CollectionPage(props: collectionProps) {
       </Grid>
       <Grid item xs={10}>
         <h1 className="collection-header">{props.user}'s Collection</h1>
-        <div className="collection-container">
+        <Grid container direction="row" spacing={2}>
           {collection.map((game: any) => (
-            <GameCard
-              gameId={game.bgg}
-              gameName={game.title}
-              pubYear={game.pub_year}
-              imageUrl={game.image}
-            />
+            <Grid item xs={3}>
+              <GameCard
+                gameId={game.bgg}
+                gameName={game.title}
+                pubYear={game.pub_year}
+                imageUrl={game.image}
+              />
+            </Grid>
           ))}
-        </div>
+        </Grid>
       </Grid>
     </Grid>
   );
