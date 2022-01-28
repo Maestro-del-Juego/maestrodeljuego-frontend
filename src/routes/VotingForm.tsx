@@ -30,6 +30,7 @@ export default function VotingForm(props: gameNightProps) {
   const [gameNightDate, setGameNightDate] = useState('');
   const [gameNightLoc, setGameNightLoc] = useState('');
   const [gameNightTime, setGameNightTime] = useState('');
+  const [host, setHost] = useState('');
 
   let { gameId } = useParams();
   let convertTime = require('convert-time');
@@ -49,6 +50,7 @@ export default function VotingForm(props: gameNightProps) {
         setGameNightDate(result.data.date);
         setGameNightLoc(result.data.location);
         setGameNightTime(result.data.start_time);
+        setHost(result.data.user.username);
         setGuest(
           result.data.invitees[0].first_name +
             ' ' +
@@ -186,8 +188,8 @@ export default function VotingForm(props: gameNightProps) {
   ) : guestPick ? (
     <div id="guest-list-select">
       <form onSubmit={rsvpHandler} id="guest-list-form">
-        <h1>Guest List</h1>
-        <h3>Select your name</h3>
+        <h1>You have been invited to {host}'s Game Knight!</h1>
+        <h3>Select your name from below and provide an RSVP.</h3>
         <div id="guest-select">
           <Select
             title="Guest List Dropdown"
@@ -253,9 +255,13 @@ export default function VotingForm(props: gameNightProps) {
     </div>
   ) : attending === 'True' ? (
     <div id="guest-vote-form">
-      <h1 className="vote-header">Welcome to Game Night!</h1>
-      <br></br>
-      <h2 className="vote-header">Your host has suggested these games:</h2>
+      <div id="vote-form-header">
+        <h1 className="vote-header">Welcome to Game Night!</h1>
+        <h2>
+          Use the smileys below to indicate your level of interest in the games
+          your host has selected.
+        </h2>
+      </div>
       <div id="vote-card-container">
         {gameList.map((game: any, i: any) => {
           return (
