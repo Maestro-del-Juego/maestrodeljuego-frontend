@@ -159,7 +159,7 @@ export default function GameNightMenu(props: gameNightProps) {
                 <List>
                   {gameNightList.map((event) => (
                     <React.Fragment key={`upcoming-${event.pk}`}>
-                      {moment(event.date).isBefore(moment()) === false &&
+                      {moment(event.date).isBefore(moment(), "day") === false &&
                       event.status !== 'Cancelled' ? (
                         <>
                           <Divider />
