@@ -548,3 +548,7 @@ a {
 #finalized-event {
   text-align: center;
 }
+
+#registration-errors {
+  color: red;
+}

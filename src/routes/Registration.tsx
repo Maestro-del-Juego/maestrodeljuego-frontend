@@ -58,7 +58,11 @@ const Registration = (props: regProps) => {
             })
             .catch((error) => alert(error.message));
         })
-        .catch((error) => console.log(error));
+        .catch((error) =>
+          setErrors(
+            "Username or password is invalid. Passwords must be at least 8 characters long and contain no strung together patterns (i.e. '1234' or 'abcde')."
+          )
+        );
     } else {
       setErrors('Passwords do not match.');
     }
@@ -92,7 +96,7 @@ const Registration = (props: regProps) => {
               autoFocus
             />
           </div>
-          <p>{errors}</p>
+          <p id="registration-errors">{errors}</p>
           <div className="mv2">
             <TextField
               margin="normal"
