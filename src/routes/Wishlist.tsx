@@ -27,7 +27,7 @@ export default function CollectionPage(props: wishlistProps) {
 
   return (
     <>
-      <h1>{props.user}'s Wishlist</h1>
+      <h1 id="wishlist-header">{props.user}'s Wishlist</h1>
       <div id="collection-container">
         {wishlist.map((game: any) => (
           <GameCard
