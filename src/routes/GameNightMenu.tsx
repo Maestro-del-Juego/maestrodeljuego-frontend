@@ -253,7 +253,7 @@ export default function GameNightMenu(props: gameNightProps) {
                                   <IconButton
                                     onClick={() =>
                                       copyToClipboard(
-                                        `${window.location.href}/${event.rid}/feedback`
+                                        `${window.location.href}${event.rid}/feedback`
                                       )
                                     }
                                   >

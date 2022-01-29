@@ -42,6 +42,9 @@ export default function EventForm(props: eventFormProps) {
   const [locationValid, setLocationValid] = useState<Boolean>(false);
   const [guestsValid, setGuestsValid] = useState<Boolean>(false);
   const [gamesValid, setGamesValid] = useState<Boolean>(false);
+  const [contactFirstValid, setContactFirstValid] = useState<Boolean>(false);
+  const [contactLastValid, setContactLastValid] = useState<Boolean>(false);
+  const [contactEmailValid, setContactEmailValid] = useState<Boolean>(false);
 
   const navigate: any = useNavigate();
 
@@ -73,7 +76,7 @@ export default function EventForm(props: eventFormProps) {
       )
       .then((response) => {
         console.log(response);
-        navigate(`/game_night/`);
+        navigate(`/game_night`);
       });
     }
     else {handleValidatorClick(event)}
@@ -99,6 +102,21 @@ export default function EventForm(props: eventFormProps) {
     validateForm();
   }, [validateForm])
 
+  const validateContact = useCallback(() => {
+    // Regex courtsey of emailregex.com
+    const emailRGEX = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    setContactEmailValid(emailRGEX.test(newContactEmail));
+    setContactFirstValid(newContactFirst !== "");
+    setContactLastValid(newContactLast !== "");
+    if (contactEmailValid===true && contactFirstValid===true && contactLastValid===true) {
+      return true;
+    }
+  }, [newContactEmail, contactEmailValid, newContactFirst, contactFirstValid, newContactLast, contactLastValid])
+
+  useEffect(() => {
+    validateContact();
+  }, [validateContact])
+
   // const validateStartTime = () => {
   //   const timeRGEX = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
   //   if (timeRGEX.test(startTime)) {return true} else return false;
@@ -107,6 +125,7 @@ export default function EventForm(props: eventFormProps) {
   const handleNewContactSubmit = (event: any) => {
     const contactApi = 'https://maestrodeljuego.herokuapp.com/contacts/';
     event.preventDefault();
+    if (validateContact()===true) {
     axios
       .post(
         contactApi,
@@ -130,8 +149,11 @@ export default function EventForm(props: eventFormProps) {
         setNewContactFirst('');
         setNewContactLast('');
         setNewContactEmail('');
+        handleNewContactClose();
       });
-  };
+  }
+  else {handleContactValidatorClick(event)}
+};
 
   const handleChange = (inputType: any, event: any) => {
     if (inputType === 'date') {
@@ -208,6 +230,17 @@ export default function EventForm(props: eventFormProps) {
   }
   const validationOpen = Boolean(validationAnchor);
   const validationId = validationOpen ? "validation-popover" : undefined;
+
+  // new contact validation MUI
+  const [contactValidationAnchor, setContactValidationAnchor] = useState(null)
+  const handleContactValidatorClick = (event: any) => {
+    setContactValidationAnchor(event.currentTarget);
+  }
+  const handleContactValidatorClose = () => {
+    setContactValidationAnchor(null);
+  }
+  const contactValidationOpen = Boolean(contactValidationAnchor);
+  const contactValidationId = contactValidationOpen ? "contact-validation-popover" : undefined;
 
   return (
     <div className="new-event-form-container">
@@ -349,7 +382,7 @@ export default function EventForm(props: eventFormProps) {
           open={openContactMenu}
           onClose={handleContactClose}
           MenuListProps={{ 'aria-labelledby': 'contact-menu-button' }}
-        > {props.contactList.length ===0 ? (<MenuItem>Create new contacts to see them in this list!</MenuItem>) : (<></>)}
+        > {props.contactList.length ===0 ? (<MenuItem>Create new contacts to see them in this list!</MenuItem>) : ("")}
           {props.contactList.map((contact) => (
             <MenuItem
               key={`${contact.pk}-dropdown`}
@@ -417,7 +450,35 @@ export default function EventForm(props: eventFormProps) {
             }}
             inputProps={{ maxLength: 320}}
           />
-            <Button variant="contained" sx={{ m:1 }}onClick={(event) => handleNewContactSubmit(event)} className="submit-button">Add New Contact</Button>
+            <Button variant="contained" sx={{ m:1 }}onClick={(event) => handleNewContactSubmit(event) } className="submit-button">Invite New Contact</Button>
+            <Popover
+          id={contactValidationId}
+          open={contactValidationOpen}
+          anchorEl={contactValidationAnchor}
+          onClose={handleContactValidatorClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          >
+            <List sx={{ p: 2 }}>
+            {!contactFirstValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please enter a first name.</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!contactLastValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please enter a last name.</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!contactEmailValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please enter a valid email address.</ListItemText>
+              </ListItem> ) : (<></>)}
+            </List>
+          </Popover>
           </form>
         </Popover>
       </div>
@@ -439,7 +500,7 @@ export default function EventForm(props: eventFormProps) {
           open={openGameMenu}
           onClose={handleGameClose}
           MenuListProps={{ 'aria-labelledby': 'game-menu-button' }}
-        > {props.collection.length ===0 ? (<MenuItem onClick={() => {navigate(`/search/`)}}>Use Search to add games to your collection!</MenuItem>) : (<></>)}
+        > {props.collection.length ===0 ? (<MenuItem onClick={() => {navigate(`/search/`)}}>Use Search to add games to your collection!</MenuItem>) : ("")}
           {props.collection.map((game) => (
             <MenuItem
               key={`${game.pk}-dropdown`}

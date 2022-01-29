@@ -64,6 +64,9 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const [endTimeValid, setEndTimeValid] = useState<Boolean>(false);
   const [dateValid, setDateValid] = useState<Boolean>(false);
   const [locationValid, setLocationValid] = useState<Boolean>(false);
+  const [contactFirstValid, setContactFirstValid] = useState<Boolean>(false);
+  const [contactLastValid, setContactLastValid] = useState<Boolean>(false);
+  const [contactEmailValid, setContactEmailValid] = useState<Boolean>(false);
 
 
   let { gameNightId } = useParams();
@@ -157,6 +160,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const handleNewContactSubmit = (event: any) => {
     const contactApi = 'https://maestrodeljuego.herokuapp.com/contacts/';
     event.preventDefault();
+    if (validateContact()===true) {
     axios
       .post(
         contactApi,
@@ -181,8 +185,9 @@ export default function GameNightOwnerView(props: gameNightProps) {
         setNewContactFirst('');
         setNewContactLast('');
         setNewContactEmail('');
+        handleNewContactClose();
       });
-  };
+  } else {handleContactValidatorClick(event)}};
 
   const validateForm = useCallback(() => {
     const timeRGEX = /^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/;
@@ -194,13 +199,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
         moment(date).isSameOrAfter(moment().format('yyyy-MM-DD'))
     );
     setLocationValid(location !== '');
-    // console.log(startTime)
-    // console.log(`starttime ${startTimeValid}`)
-    // console.log(endTime)
-    // console.log(`endtime ${endTimeValid}`)
-    // console.log(date)
-    // console.log(`date ${dateValid}`)
-    // console.log(`location ${locationValid}`)
     if (
       startTimeValid === true &&
       endTimeValid === true &&
@@ -224,6 +222,21 @@ export default function GameNightOwnerView(props: gameNightProps) {
   useEffect(() => {
     validateForm();
   }, [validateForm]);
+
+  const validateContact = useCallback(() => {
+    // Regex courtsey of emailregex.com
+    const emailRGEX = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    setContactEmailValid(emailRGEX.test(newContactEmail));
+    setContactFirstValid(newContactFirst !== "");
+    setContactLastValid(newContactLast !== "");
+    if (contactEmailValid===true && contactFirstValid===true && contactLastValid===true) {
+      return true;
+    }
+  }, [newContactEmail, contactEmailValid, newContactFirst, contactFirstValid, newContactLast, contactLastValid])
+
+  useEffect(() => {
+    validateContact();
+  }, [validateContact])
 
   const cancelGameNight = () => {
     axios
@@ -416,6 +429,17 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const editValidationId = editValidationOpen
     ? 'edit-validation-popover'
     : undefined;
+
+  // new contact validation MUI
+  const [contactValidationAnchor, setContactValidationAnchor] = useState(null)
+  const handleContactValidatorClick = (event: any) => {
+    setContactValidationAnchor(event.currentTarget);
+  }
+  const handleContactValidatorClose = () => {
+    setContactValidationAnchor(null);
+  }
+  const contactValidationOpen = Boolean(contactValidationAnchor);
+  const contactValidationId = contactValidationOpen ? "contact-validation-popover" : undefined;
 
     // variables for MUI dropdown menu: contacts
   const [contactAnchor, setContactAnchor] = useState<null | HTMLElement>(null);
@@ -772,7 +796,35 @@ export default function GameNightOwnerView(props: gameNightProps) {
             }}
             inputProps={{ maxLength: 320}}
           />
-            <Button variant="contained" sx={{ m:1 }}onClick={(event) => handleNewContactSubmit(event)} className="submit-button">Add New Contact</Button>
+            <Button variant="contained" sx={{ m:1 }}onClick={(event) => handleNewContactSubmit(event)} className="submit-button">Invite New Contact</Button>
+            <Popover
+          id={contactValidationId}
+          open={contactValidationOpen}
+          anchorEl={contactValidationAnchor}
+          onClose={handleContactValidatorClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          >
+            <List sx={{ p: 2 }}>
+            {!contactFirstValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please enter a first name.</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!contactLastValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please enter a last name.</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!contactEmailValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please enter a valid email address.</ListItemText>
+              </ListItem> ) : (<></>)}
+            </List>
+          </Popover>
           </form>
         </Popover>
       </div>
