@@ -7,6 +7,8 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import Button from '@mui/material/Button';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 interface feedbackProps {}
 
@@ -149,10 +151,11 @@ export default function FeedbackForm(props: feedbackProps) {
   return guestPick ? (
     <div id="guest-list-select">
       <form onSubmit={guestHandler} id="guest-list-form">
-        <h3>Guest List</h3>
-        <h6>Select your name</h6>
+        <h1>Thank you for attending {host}'s Game Knight!</h1>
+        <h3>{host} would like to know what you thought of the evening.</h3>
+        <h4>Select your name below:</h4>
         <div id="guest-select">
-          <select
+          <Select
             title="Guest List Dropdown"
             name="guests"
             id="guest-list-dropdown"
@@ -163,24 +166,27 @@ export default function FeedbackForm(props: feedbackProps) {
           >
             {guestList.map((name: any, i: any) => {
               return (
-                <option value={name.first_name + ' ' + name.last_name} key={i}>
+                <MenuItem
+                  value={name.first_name + ' ' + name.last_name}
+                  key={i}
+                >
                   {name.first_name + ' ' + name.last_name}
-                </option>
+                </MenuItem>
               );
             })}
-          </select>
+          </Select>
         </div>
         <div id="email-confirm">
           <p>{emailError}</p>
           <label htmlFor="guest-email">
             <h3>Please confirm your email:</h3>
           </label>
-          <input
+          <TextField
             id="guest-email"
             type="text"
             value={guestEmail}
             onChange={(event) => setGuestEmail(event.target.value)}
-          ></input>
+          ></TextField>
         </div>
         <Button type="submit" id="guest-list-button">
           Submit
@@ -192,10 +198,8 @@ export default function FeedbackForm(props: feedbackProps) {
   ) : (
     <form onSubmit={feedbackHandler} id="feedback">
       <div id="feedback-form">
-        <h1>Thank you for attending {host}'s Game Night!</h1>
-        <h2>Let {host} know what you thought about the evening.</h2>
         <div id="game-feedback">
-          <h3>How would you rate the games you played?</h3>
+          <h2>How would you rate the games you played?</h2>
           <div id="feedback-game-cards">
             {playedGames.map((game: any, i: any) => {
               return (
@@ -209,7 +213,7 @@ export default function FeedbackForm(props: feedbackProps) {
               );
             })}
           </div>
-          <h3>How was the night overall?</h3>
+          <h2>How was the night overall?</h2>
           <Rating
             name="hover-feedback"
             value={overallScore}
@@ -229,7 +233,7 @@ export default function FeedbackForm(props: feedbackProps) {
               {labels[overallHover !== -1 ? overallHover : overallScore]}
             </Box>
           )}
-          <h3>Any feeback you would like to give your host?</h3>
+          <h2>Any feeback you would like to give your host?</h2>
           <TextField
             id="outlined-multiline-flexible"
             label="Your thoughts?"

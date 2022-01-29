@@ -6,6 +6,9 @@ import GameCard from '../components/GameCard';
 import useLocalStorage from 'use-local-storage';
 import Button from '@mui/material/Button';
 import dateFormat from 'dateformat';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
 interface gameNightProps {
   token: string;
 }
@@ -18,7 +21,7 @@ export default function VotingForm(props: gameNightProps) {
   const [guest, setGuest] = useState('');
   const [voter, setVoter] = useState(0);
   const [votes, setVotes] = useState<any[]>([]);
-  const [attending, setAttending] = useState('True');
+  const [attending, setAttending] = useState('');
   const [inviteeEmail, setInviteeEmail] = useState('');
   const [eventStatus, setEventStatus] = useState('');
   const [voted, setVoted] = useLocalStorage('gameNightHasVoted', false);
@@ -27,6 +30,7 @@ export default function VotingForm(props: gameNightProps) {
   const [gameNightDate, setGameNightDate] = useState('');
   const [gameNightLoc, setGameNightLoc] = useState('');
   const [gameNightTime, setGameNightTime] = useState('');
+  const [host, setHost] = useState('');
 
   let { gameId } = useParams();
   let convertTime = require('convert-time');
@@ -46,6 +50,7 @@ export default function VotingForm(props: gameNightProps) {
         setGameNightDate(result.data.date);
         setGameNightLoc(result.data.location);
         setGameNightTime(result.data.start_time);
+        setHost(result.data.user.username);
         setGuest(
           result.data.invitees[0].first_name +
             ' ' +
@@ -183,10 +188,10 @@ export default function VotingForm(props: gameNightProps) {
   ) : guestPick ? (
     <div id="guest-list-select">
       <form onSubmit={rsvpHandler} id="guest-list-form">
-        <h3>Guest List</h3>
-        <h6>Select your name</h6>
+        <h1>You have been invited to {host}'s Game Knight!</h1>
+        <h3>Select your name from below and provide an RSVP.</h3>
         <div id="guest-select">
-          <select
+          <Select
             title="Guest List Dropdown"
             name="guests"
             id="guest-list-dropdown"
@@ -197,33 +202,51 @@ export default function VotingForm(props: gameNightProps) {
           >
             {guestList.map((name: any, i: any) => {
               return (
-                <option value={name.first_name + ' ' + name.last_name} key={i}>
+                <MenuItem
+                  value={name.first_name + ' ' + name.last_name}
+                  key={i}
+                >
                   {name.first_name + ' ' + name.last_name}
-                </option>
+                </MenuItem>
               );
             })}
-          </select>
+          </Select>
         </div>
         <div id="email-confirm">
           <p>{emailError}</p>
           <label htmlFor="invitee-email">
             <h3>Please confirm your email:</h3>
           </label>
-          <input
+          <TextField
             id="invitee-email"
             type="text"
+            fullWidth
             value={inviteeEmail}
             onChange={(event) => setInviteeEmail(event.target.value)}
-          ></input>
+          ></TextField>
         </div>
         <div id="rsvp-form">
           <h3>Will you be attending?</h3>
-          <Button variant="contained" onClick={() => setAttending('True')}>
-            Yes
-          </Button>
-          <Button variant="contained" onClick={() => setAttending('False')}>
-            No
-          </Button>
+          <div id="rsvp-buttons">
+            {attending === 'True' ? (
+              <Button variant="contained" onClick={() => setAttending('')}>
+                Yes
+              </Button>
+            ) : (
+              <Button variant="outlined" onClick={() => setAttending('True')}>
+                Yes
+              </Button>
+            )}
+            {attending === 'False' ? (
+              <Button variant="contained" onClick={() => setAttending('')}>
+                No
+              </Button>
+            ) : (
+              <Button variant="outlined" onClick={() => setAttending('False')}>
+                No
+              </Button>
+            )}
+          </div>
         </div>
         <Button variant="contained" type="submit" id="guest-list-button">
           Submit
@@ -232,9 +255,13 @@ export default function VotingForm(props: gameNightProps) {
     </div>
   ) : attending === 'True' ? (
     <div id="guest-vote-form">
-      <h1 className="vote-header">Welcome to Game Night!</h1>
-      <br></br>
-      <h2 className="vote-header">Your host has suggested these games:</h2>
+      <div id="vote-form-header">
+        <h1 className="vote-header">Welcome to Game Night!</h1>
+        <h2>
+          Use the smileys below to indicate your level of interest in the games
+          your host has selected.
+        </h2>
+      </div>
       <div id="vote-card-container">
         {gameList.map((game: any, i: any) => {
           return (

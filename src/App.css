@@ -346,7 +346,7 @@ a {
 #rsvp-form {
   align-self: center;
   display: grid;
-  margin-top: 100px;
+  margin-top: 70px;
 }
 
 #rsvp-form > Button {
@@ -356,6 +356,8 @@ a {
 
 #email-confirm {
   margin-top: 60px;
+  width: 350px;
+  justify-content: center;
 }
 
 .gamenight-banner {
@@ -561,4 +563,13 @@ a {
   text-align: center;
   margin-top: 40px;
   margin-bottom: 40px;
+}
+
+#rsvp-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+#vote-form-header {
+  text-align: center;
 }
