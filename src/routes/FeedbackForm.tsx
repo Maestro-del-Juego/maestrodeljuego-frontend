@@ -49,7 +49,7 @@ export default function FeedbackForm(props: feedbackProps) {
             ...oldData,
             {
               game: result.data.games[i].pk,
-              rating: 0,
+              rating: null,
             },
           ]);
         }
@@ -67,7 +67,10 @@ export default function FeedbackForm(props: feedbackProps) {
 
   const feedbackHandler = (event: any) => {
     event.preventDefault();
-    let gameSubmission = [...votes];
+
+    let voteCopy = [...votes];
+    let gameSubmission = voteCopy.filter((vote) => vote.rating !== null);
+    console.log(gameSubmission);
     for (let game of gameSubmission) {
       game.attendee = feedbackProvider;
     }
