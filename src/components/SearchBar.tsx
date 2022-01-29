@@ -14,6 +14,7 @@ interface searchProps {
 }
 
 export default function SearchBar(props: searchProps) {
+
   var parseString = require('xml2js').parseString;
   const handleSubmit = (event: any) => {
     var testArray: any = [];
