@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { isTemplateTail } from 'typescript';
-var parseString = require('xml2js').parseString;
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 interface searchProps {
   searchValue: string;
@@ -13,6 +14,8 @@ interface searchProps {
 }
 
 export default function SearchBar(props: searchProps) {
+
+  var parseString = require('xml2js').parseString;
   const handleSubmit = (event: any) => {
     var testArray: any = [];
     var testArray2: any = [];
@@ -57,14 +60,18 @@ export default function SearchBar(props: searchProps) {
     <div className="search-bar-container">
       <form className="search-bar" onSubmit={handleSubmit}>
         <label className="search-label">Search for games: </label>
-        <input
+        <TextField
           className="input-field"
           type="text"
           placeholder="Please enter your search terms here."
+          fullWidth
           value={props.searchValue}
           onChange={(event) => handleChange('searchValue', event)}
+          sx={{ marginBottom: '20px' }}
         />
-        <button className="submit-button">Search</button>
+        <Button className="submit-button" type="submit">
+          Search
+        </Button>
       </form>
     </div>
   );

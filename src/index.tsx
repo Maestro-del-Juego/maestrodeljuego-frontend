@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import '@fontsource/oswald';
+import '@fontsource/open-sans';
+import '@fontsource/caesar-dressing';
 
 ReactDOM.render(
   <React.StrictMode>

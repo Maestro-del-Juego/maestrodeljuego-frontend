@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 interface eventFormProps {
   collection: collectionObject[];
@@ -72,7 +73,7 @@ export default function EventForm(props: eventFormProps) {
       )
       .then((response) => {
         console.log(response);
-        navigate(`/game_night/$`);
+        navigate(`/game_night/`);
       });
     }
     else {handleValidatorClick(event)}
@@ -348,7 +349,7 @@ export default function EventForm(props: eventFormProps) {
           open={openContactMenu}
           onClose={handleContactClose}
           MenuListProps={{ 'aria-labelledby': 'contact-menu-button' }}
-        >
+        > {props.contactList.length ===0 ? (<MenuItem>Create new contacts to see them in this list!</MenuItem>) : (<></>)}
           {props.contactList.map((contact) => (
             <MenuItem
               key={`${contact.pk}-dropdown`}
@@ -438,7 +439,7 @@ export default function EventForm(props: eventFormProps) {
           open={openGameMenu}
           onClose={handleGameClose}
           MenuListProps={{ 'aria-labelledby': 'game-menu-button' }}
-        >
+        > {props.collection.length ===0 ? (<MenuItem onClick={() => {navigate(`/search/`)}}>Use Search to add games to your collection!</MenuItem>) : (<></>)}
           {props.collection.map((game) => (
             <MenuItem
               key={`${game.pk}-dropdown`}

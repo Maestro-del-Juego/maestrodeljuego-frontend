@@ -37,6 +37,21 @@
   }
 }
 
+h1,
+h2 {
+  font-family: 'Oswald';
+}
+
+a,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  font-family: 'Open Sans';
+}
+
 #nav-bar {
   display: -ms-grid;
   display: grid;
@@ -484,7 +499,7 @@ a {
 }
 
 #game-knight-banner {
-  font-family: 'LocalBreweryFour-Regular';
+  font-family: 'Caesar Dressing';
   color: #334195;
   font-size: 18pt;
   font-weight: bolder;
@@ -572,4 +587,20 @@ a {
 
 #vote-form-header {
   text-align: center;
+}
+
+.search-label {
+  font-size: 20pt;
+  margin-top: 15px;
+}
+
+#search-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 45px;
+}
+
+#octo-search {
+  margin-right: 160px;
+  align-self: flex-start;
 }
