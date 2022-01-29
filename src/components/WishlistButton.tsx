@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { Button } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 interface wishlistButtonProps {
     token: string;
@@ -35,16 +37,23 @@ export default function WishlistButton(props: wishlistButtonProps) {
   };
   return (
     <>
-      {props.token !== "" ? (
-        <button
-          className="wishlist-button"
-          onClick={(event) => handleSubmit(event)}
-        >
-          {props.wishlisted === true ? (<>Remove from wishlist</>) : (<>Add to wishlist</>)}
-        </button>
-      ) : (
-        <></>
-      )}
-    </>
+          {props.token !== "" ? (
+            <>
+            {props.wishlisted === true ? (
+              <Button
+              className="wishlist-button-on-list"
+              onClick={(event) => handleSubmit(event)}
+              variant="contained"
+              startIcon={<NotificationsIcon />}
+              >On wishlist</Button>
+            ):(
+              <Button
+              className="wishlist-button-not-on-list"
+              onClick={(event) => handleSubmit(event)}
+              variant="outlined">Add to wishlist</Button>
+            ) }
+            </>
+          ) : (<></>) }
+        </>
   );
 }
