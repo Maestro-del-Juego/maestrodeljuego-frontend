@@ -64,8 +64,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const [endTimeValid, setEndTimeValid] = useState<Boolean>(false);
   const [dateValid, setDateValid] = useState<Boolean>(false);
   const [locationValid, setLocationValid] = useState<Boolean>(false);
-  const [gamesValid, setGamesValid] = useState<Boolean>(false);
-  const [rsvpValid, setRsvpValid] = useState<Boolean>(false);
+
 
   let { gameNightId } = useParams();
   const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightId}/`;
@@ -134,7 +133,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
             start_time: startTime,
             end_time: endTime,
             location: location,
-            games: selectedGameList,
           },
           {
             headers: {
@@ -261,7 +259,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
             start_time: startTime,
             end_time: endTime,
             location: location,
-            games: selectedGameList,
             status: 'Finalized',
           },
           {
@@ -290,7 +287,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
           start_time: startTime,
           end_time: endTime,
           location: location,
-          games: selectedGameList,
           status: 'Voting',
         },
         {
@@ -339,18 +335,49 @@ export default function GameNightOwnerView(props: gameNightProps) {
   };
 
   const handleAddClick = (game: gameObject) => {
-    let array = selectedGameList;
-    if (JSON.stringify(array).includes(JSON.stringify(game)) === false) {
-      array.push(game);
-    }
-    setSelectedGameList(array);
-    console.log(selectedGameList);
+    const gameArray: gameObject[] = []
+    gameArray.push(game)
+    axios
+        .patch(
+          gameNightUrl,
+          {
+            games: gameArray,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Token ${props.token}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response)
+          setSelectedGameList(response.data.games)
+          console.log(selectedGameList);
+        })
   };
 
   const handleRemoveClick = (game: gameObject) => {
-    let array = selectedGameList;
-    array.splice(array.indexOf(game), 1);
-    setSelectedGameList(array);
+    const gameArray: gameObject[] = []
+    gameArray.push(game)
+    axios
+        .patch(
+          gameNightUrl,
+          {
+            games: gameArray,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Token ${props.token}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response)
+          setSelectedGameList(response.data.games)
+          console.log(selectedGameList);
+        })
   };
 
   const handleAddGuestClick = (contact: contactObject) => {
