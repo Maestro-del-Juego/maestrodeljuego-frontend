@@ -145,6 +145,10 @@ export default function EventForm(props: eventFormProps) {
         const tempArray = props.guestList;
         tempArray.push(response.data);
         props.setGuestList(tempArray);
+        let tempArray2 = props.contactList;
+        tempArray2.push(response.data)
+        tempArray2 = tempArray2.sort((a: any, b: any) => a.first_name < b.first_name ? -1 : a.first_name > b.first_name ? 1 : 0)
+        props.setContactList(tempArray2);
         setUpdater(updater + 1);
         setNewContactFirst('');
         setNewContactLast('');

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { Button } from '@mui/material';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 interface collectionButtonProps {
     token: string;
@@ -32,15 +34,22 @@ export default function CollectionButton(props: collectionButtonProps) {
     return (
         <>
           {props.token !== "" ? (
-            <button
-              className="collection-button"
+            <>
+            {props.owned === true ? (
+              <Button
+              className="collection-button-owned"
               onClick={(event) => handleSubmit(event)}
-            >
-              {props.owned === true ? (<>Remove from collection</>) : (<>Add to collection</>)}
-            </button>
-          ) : (
-            <></>
-          )}
+              variant="contained"
+              startIcon={<CheckCircleIcon />}
+              >In collection</Button>
+            ):(
+              <Button
+              className="collection-button-not-owned"
+              onClick={(event) => handleSubmit(event)}
+              variant="outlined">Add to collection</Button>
+            ) }
+            </>
+          ) : (<></>) }
         </>
       );
 }

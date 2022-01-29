@@ -178,9 +178,13 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
-        const tempArray2 = newInviteeList;
-        tempArray2.push(response.data);
-        setNewInviteeList(tempArray2)
+        const tempArray = newInviteeList;
+        tempArray.push(response.data);
+        setNewInviteeList(tempArray)
+        let tempArray2 = contactList;
+        tempArray2.push(response.data)
+        tempArray2 = tempArray2.sort((a: any, b: any) => a.first_name < b.first_name ? -1 : a.first_name > b.first_name ? 1 : 0)
+        setContactList(tempArray2);
         setUpdater(updater + 1);
         setNewContactFirst('');
         setNewContactLast('');
