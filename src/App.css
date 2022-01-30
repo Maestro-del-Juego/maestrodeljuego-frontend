@@ -478,7 +478,7 @@ a {
 
 #site-nav > a {
   text-decoration: none;
-  color: #41463d;
+  color: #334195;
   font-size: larger;
   font-weight: bolder;
 }
@@ -492,14 +492,14 @@ a {
 
 #account-links > a {
   text-decoration: none;
-  color: #41463d;
+  color: #334195;
   font-size: larger;
   font-weight: bolder;
 }
 
 #log-out {
   text-decoration: none;
-  color: #41463d;
+  color: #334195;
   font-size: larger;
   font-weight: bolder;
 }
@@ -551,7 +551,6 @@ a {
   align-self: flex-start;
 }
 
-
 #settings-container {
   margin-left: 60px;
   margin-right: 60px;
@@ -561,6 +560,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
 
 #play-stats-page {
   display: grid;
