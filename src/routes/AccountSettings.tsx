@@ -1,5 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 interface settingsProps {
   user: string;
@@ -124,83 +129,98 @@ export default function AccountSettings(props: settingsProps) {
             id="settings-avatar"
           ></img>
           <h3>{currentUsername}</h3>
-          <button
+          <Button
             onClick={() => {
               setAvExpanded(!avExpanded);
             }}
           >
             Change Avatar
-          </button>
+          </Button>
           {avExpanded && (
             <form onSubmit={handleAvSubmit}>
-              <label htmlFor="change-av">Submit a new HTML image link: </label>
-              <input
+              <TextField
+                label="Submit a new HTML image link:"
                 type="text"
                 value={newAv}
                 id="change-av"
+                style={{ width: 600 }}
                 onChange={(event) => setNewAv(event.target.value)}
               />
-              <button type="submit">Submit</button>
+              <Button type="submit">Submit</Button>
             </form>
           )}
         </div>
         <div id="change-username">
           <h2>Change Username</h2>
           <form onSubmit={handleUserSubmit}>
-            <label htmlFor="current-pass-username">Password</label>
-            <input
-              type="password"
-              id="current-pass-username"
-              value={currentPassUser}
-              onChange={(event) => setCurrentPassUser(event.target.value)}
-            ></input>
-            {badCurrentPassUser === '' ? null : <p>{badCurrentPassUser}</p>}
-            <label htmlFor="new-user-name">New Username</label>
-            <input
-              type="text"
-              id="new-user-name"
-              value={newUserName}
-              onChange={(event) => setNewUserName(event.target.value)}
-            ></input>
-            {badNewUser === '' ? null : <p>{badNewUser}</p>}
-            <label htmlFor="re-new-user-name">Re-enter New Username</label>
-            <input
-              type="text"
-              id="re-new-user-name"
-              value={reNewUsername}
-              onChange={(event) => setReNewUsername(event.target.value)}
-            ></input>
-            <button type="submit">Submit</button>
+            <div id="change-username-container">
+              <TextField
+                label="Password"
+                type="password"
+                id="current-pass-username"
+                value={currentPassUser}
+                onChange={(event) => setCurrentPassUser(event.target.value)}
+                style={{ width: 250, marginTop: '10px' }}
+              ></TextField>
+              {badCurrentPassUser === '' ? null : <p>{badCurrentPassUser}</p>}
+              <TextField
+                label="New Username"
+                type="text"
+                id="new-user-name"
+                value={newUserName}
+                onChange={(event) => setNewUserName(event.target.value)}
+                style={{ width: 250, marginTop: '10px' }}
+              ></TextField>
+              {badNewUser === '' ? null : <p>{badNewUser}</p>}
+              <TextField
+                label="Re-enter New Username"
+                type="text"
+                id="re-new-user-name"
+                value={reNewUsername}
+                onChange={(event) => setReNewUsername(event.target.value)}
+                style={{ width: 250, marginTop: '10px' }}
+              ></TextField>
+              <Button type="submit" style={{ width: 70, marginTop: '10px' }}>
+                Submit
+              </Button>
+            </div>
           </form>
         </div>
       </div>
       <div id="change-password">
         <h2>Change Password</h2>
         <form onSubmit={handlePassSubmit}>
-          <label htmlFor="current-pass">Current Password</label>
-          <input
+          <TextField
+            label="Current Password"
             type="password"
             id="current-pass"
             value={currentPassword}
             onChange={(event) => setCurrentPassword(event.target.value)}
-          ></input>
+          ></TextField>
           {badCurrentPass === '' ? null : <p>{badCurrentPass}</p>}
-          <label htmlFor="new-pass">New Password</label>
-          <input
+          <TextField
+            label="New Password"
             type="password"
             id="new-pass"
             value={newPassword}
             onChange={(event) => setNewPassword(event.target.value)}
-          ></input>
+            style={{ marginLeft: '10px' }}
+          ></TextField>
           {badNewPass === '' ? null : <p>{badNewPass}</p>}
-          <label htmlFor="re-new-pass">Re-enter New Password</label>
-          <input
+          <TextField
+            label="Re-enter New Password"
             type="password"
             id="re-new-pass"
             value={reNewPassword}
             onChange={(event) => setReNewPassword(event.target.value)}
-          ></input>
-          <button type="submit">Submit</button>
+            style={{ marginLeft: '10px' }}
+          ></TextField>
+          <Button
+            type="submit"
+            style={{ marginLeft: '10px', marginTop: '10px' }}
+          >
+            Submit
+          </Button>
         </form>
       </div>
     </div>

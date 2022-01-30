@@ -551,6 +551,17 @@ a {
   align-self: flex-start;
 }
 
+
+#settings-container {
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+#change-username-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
 #play-stats-page {
   display: grid;
   grid-template-columns: 1fr 1fr;
