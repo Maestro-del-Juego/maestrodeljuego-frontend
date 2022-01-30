@@ -175,7 +175,7 @@ a {
 }
 
 #most-played {
-  margin-left: 60px;
+  margin-left: 30px;
 }
 
 .event-form-game-button {
@@ -424,8 +424,6 @@ a {
   display: block;
 }
 
-
-
 #avatar-field {
   margin-top: 30px;
 }
@@ -646,4 +644,27 @@ a {
 
 #octo-search {
   opacity: 25%;
+}
+
+#gameplay-stats {
+  margin-right: 70px;
+}
+
+#explanation-cards {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+#profile-page {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#profile-page-banner {
+  font-size: 80;
+  text-align: center;
 }
