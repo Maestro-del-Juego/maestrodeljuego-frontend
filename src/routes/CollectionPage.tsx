@@ -61,7 +61,7 @@ export default function CollectionPage(props: collectionProps) {
             onClick={() => setAlpha(true)}
             style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
           >
-            Alphabetical
+            List View
           </Button>
           <Button
             type="submit"
@@ -77,12 +77,12 @@ export default function CollectionPage(props: collectionProps) {
         <h1 className="collection-header-alpha">{props.user}'s Collection</h1>
         <div className="collection-container-alpha">
           {alphaCollection.map((game: any) => (
-            <SearchResult gameId={game.bgg} gameName={game.title} />
+            <SearchResult gameId={game.bgg} gameName={game.title} token={props.token} user={props.user}/>
           ))}
         </div>
       </Grid>
       <Grid item xs={4}>
-        <img src={logo} alt="Library Image"></img>
+        <img src={logo} alt="Library Image" id="collection-list-view-image"></img>
       </Grid>
     </Grid>
   ) : (
@@ -97,7 +97,7 @@ export default function CollectionPage(props: collectionProps) {
             }}
             variant="outlined"
           >
-            Alphabetical
+            List View
           </Button>
           <Button
             type="submit"
@@ -112,7 +112,7 @@ export default function CollectionPage(props: collectionProps) {
       <Grid item xs={10}>
         <h1 className="collection-header">{props.user}'s Collection</h1>
         <Grid container direction="row" spacing={2}>
-          {collection.map((game: any) => (
+          {alphaCollection.map((game: any) => (
             <Grid item xs={3}>
               <GameCard
                 gameId={game.bgg}

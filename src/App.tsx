@@ -81,7 +81,7 @@ function App() {
           }
         />
         {/* <Route path="/search" element={<Search />} /> */}
-        <Route path="/search" element={<Search />} />
+        <Route path="/search" element={<Search token={token} user={user}/>} />
         <Route
           path="games/:gameId"
           element={<GameInfoPage token={token} user={user} />}
