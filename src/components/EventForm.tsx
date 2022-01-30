@@ -523,7 +523,7 @@ export default function EventForm(props: eventFormProps) {
           <List
             sx={{ minWidth: 250, maxWidth: 250 }}
             subheader={
-              <ListSubheader sx={{ fontSize: 16 }}>Guest List</ListSubheader>
+              <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>Guest List</ListSubheader>
             }
           >
             {props.guestList.map((guest) => (
@@ -556,7 +556,7 @@ export default function EventForm(props: eventFormProps) {
           <List
             sx={{ minWidth: 500, maxWidth: 500 }}
             subheader={
-              <ListSubheader sx={{ fontSize: 16 }}>Game List</ListSubheader>
+              <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>Game List</ListSubheader>
             }
           >
             {props.selectedGames.map((game) => (

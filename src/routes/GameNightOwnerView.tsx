@@ -979,7 +979,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <List
               sx={{ minWidth: 250, maxWidth: 250 }}
               subheader={
-                <ListSubheader sx={{ fontSize: 16 }}>RSVPs:</ListSubheader>
+                <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>RSVPs:</ListSubheader>
               }
             >
               {newInviteeList.map((invitee) => (
@@ -1035,7 +1035,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <List
               sx={{ minWidth: 500, maxWidth: 500, marginLeft: 4 }}
               subheader={
-                <ListSubheader sx={{ fontSize: 16 }}>
+                <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>
                   Select games to be played:
                 </ListSubheader>
               }
