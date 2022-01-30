@@ -550,7 +550,7 @@ export default function EventForm(props: eventFormProps) {
             ))}
           </List>
         </div>
-        <Divider orientation="vertical" flexItem />
+        {/* <Divider orientation="vertical" flexItem /> */}
         <div className="game-picker-container">
           <List
             sx={{ maxWidth: 500 }}
