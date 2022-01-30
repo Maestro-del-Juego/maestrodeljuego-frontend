@@ -4,6 +4,12 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import OctoSearch from '../assets/OctoSearch.png';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState('');
@@ -39,9 +45,11 @@ export default function Search() {
           ) : (
             ''
           )}
+          <List>
           {resultsData.map(({ id, name }: any) => (
             <SearchResult key={id} gameId={id} gameName={name} />
           ))}
+          </List>
         </Box>
         <img src={OctoSearch} alt="OctoSearch" id="octo-search"></img>
       </div>
