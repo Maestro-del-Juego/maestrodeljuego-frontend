@@ -20,7 +20,7 @@ export default function GameCard(props: gameProps) {
         to={`/games/${props.gameId}`}
         key={props.gameId}
       >
-        <h3>{props.gameName}</h3>
+        <h5>{props.gameName}</h5>
       </Link>
     </div>
   );

@@ -175,7 +175,6 @@ a {
 }
 
 #most-played {
-  display: flex;
   margin-left: 60px;
 }
 
@@ -508,6 +507,10 @@ a {
 #play-stats-page {
   text-align: center;
 }
+#pie-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
 #finalized-event {
   text-align: center;
@@ -558,6 +561,18 @@ a {
   flex-direction: column;
   justify-content: space-around;
 }
+
+#play-stats-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#lowest-played-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 100px;
+}
+
 .edit-gn-form {
   margin-top: 20px;
   display: flex;
