@@ -668,3 +668,7 @@ a {
   font-size: 80;
   text-align: center;
 }
+
+#collection-list-view-image {
+  opacity: 25%;
+}
