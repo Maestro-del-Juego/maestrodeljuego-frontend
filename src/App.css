@@ -417,12 +417,6 @@ a {
   margin: 10px;
 }
 
-/* #game-menu-button {
-  margin-left: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-} */
-
 .game-picker-title {
   margin-right: 15px;
 }
@@ -431,9 +425,7 @@ a {
   display: block;
 }
 
-.finalize-cancel-buttons-container {
-  margin-top: 10px;
-}
+
 
 #avatar-field {
   margin-top: 30px;
@@ -494,7 +486,7 @@ a {
 
 .search-result-link {
   text-decoration: none;
-  color: #41463d;
+  color: #334195;
   font-size: larger;
   font-weight: bolder;
 }
@@ -560,20 +552,23 @@ a {
   margin-top: 20px;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .contact-finalize-cancel-button-container {
-  margin-top: 10px;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .rsvps-and-games {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .voting-and-rsvp-container {
   display: flex;
+  flex-wrap: wrap;
   margin-left: 20px;
   margin-top: 10px;
   justify-content: center;
@@ -591,11 +586,13 @@ a {
   margin-top: 20px;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .contact-and-games-new-event-container {
   margin-top: 10px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -606,6 +603,7 @@ a {
 .games-guests-container {
   margin-top: 10px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -615,4 +613,12 @@ a {
 
 .guest-picker-container {
   margin-right: 40px;
+}
+
+.search-bar {
+  display: flex;
+}
+
+#octo-search {
+  opacity: 25%;
 }

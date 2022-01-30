@@ -256,7 +256,7 @@ export default function EventForm(props: eventFormProps) {
             type="date"
             value={date}
             onChange={(event) => handleChange('date', event)}
-            sx={{ width: 220, m:2 }}
+            sx={{ minWidth: 220, m:2 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -274,7 +274,7 @@ export default function EventForm(props: eventFormProps) {
             inputProps={{
               step: 300, // 5 min
             }}
-            sx={{ width: 150, m:2 }}
+            sx={{ minWidth: 150, m:2 }}
           />
           <TextField
             id="end-time-picker"
@@ -288,7 +288,7 @@ export default function EventForm(props: eventFormProps) {
             inputProps={{
               step: 300, // 5 min
             }}
-            sx={{ width: 150, m:2 }}
+            sx={{ minWidth: 150, m:2 }}
           />
           <TextField
             id="location-picker"
@@ -300,7 +300,7 @@ export default function EventForm(props: eventFormProps) {
               shrink: true,
             }}
             inputProps={{ maxLength: 70}}
-            sx={{ width: 300, m:2 }}
+            sx={{ minWidth: 300, m:2 }}
           />
           <Button
             sx={{ backgroundColor: "mediumseagreen", m:2}}
@@ -422,7 +422,7 @@ export default function EventForm(props: eventFormProps) {
             type="text"
             value={newContactFirst}
             onChange={(event) => handleChange('newContactFirst', event)}
-            sx={{ width: 200, m:1 }}
+            sx={{ minWidth: 200, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -434,7 +434,7 @@ export default function EventForm(props: eventFormProps) {
             type="text"
             value={newContactLast}
             onChange={(event) => handleChange('newContactLast', event)}
-            sx={{ width: 200, m:1 }}
+            sx={{ minWidth: 200, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -446,7 +446,7 @@ export default function EventForm(props: eventFormProps) {
             type="text"
             value={newContactEmail}
             onChange={(event) => handleChange('newContactEmail', event)}
-            sx={{ width: 300, m:1 }}
+            sx={{ minWidth: 300, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -491,6 +491,7 @@ export default function EventForm(props: eventFormProps) {
           aria-expanded={openGameMenu ? 'true' : undefined}
           onClick={handleGameClick}
           variant="contained"
+          sx={{ marginLeft: 2}}
         >
           Select Games
         </Button>
@@ -520,9 +521,9 @@ export default function EventForm(props: eventFormProps) {
       <div className="games-guests-container">
         <div className="guest-picker-container">
           <List
-            sx={{ minWidth: 240 }}
+            sx={{ minWidth: 250, maxWidth: 250 }}
             subheader={
-              <ListSubheader sx={{ fontSize: 16 }}>Guest List</ListSubheader>
+              <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>Guest List</ListSubheader>
             }
           >
             {props.guestList.map((guest) => (
@@ -553,9 +554,9 @@ export default function EventForm(props: eventFormProps) {
         {/* <Divider orientation="vertical" flexItem /> */}
         <div className="game-picker-container">
           <List
-            sx={{ maxWidth: 500 }}
+            sx={{ minWidth: 500, maxWidth: 500 }}
             subheader={
-              <ListSubheader sx={{ fontSize: 16 }}>Game List</ListSubheader>
+              <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>Game List</ListSubheader>
             }
           >
             {props.selectedGames.map((game) => (
