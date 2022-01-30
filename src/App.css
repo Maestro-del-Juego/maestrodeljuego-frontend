@@ -618,3 +618,7 @@ a {
 .search-bar {
   display: flex;
 }
+
+#octo-search {
+  opacity: 30%;
+}
