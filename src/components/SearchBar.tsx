@@ -11,12 +11,15 @@ interface searchProps {
   setResultsData: any;
   searchSubmitted: boolean;
   setSearchSubmitted: any;
+  searchValueDisplay: string;
+  setSearchValueDisplay: any;
 }
 
 export default function SearchBar(props: searchProps) {
 
   var parseString = require('xml2js').parseString;
   const handleSubmit = (event: any) => {
+    props.setSearchValueDisplay(props.searchValue);
     var testArray: any = [];
     var testArray2: any = [];
     var testArrayMerged: any = [];
@@ -59,17 +62,17 @@ export default function SearchBar(props: searchProps) {
   return (
     <div className="search-bar-container">
       <form className="search-bar" onSubmit={handleSubmit}>
-        <label className="search-label">Search for games: </label>
+        {/* <label className="search-label">Search for games: </label> */}
         <TextField
           className="input-field"
+          label="Search for games"
           type="text"
           placeholder="Please enter your search terms here."
-          fullWidth
           value={props.searchValue}
           onChange={(event) => handleChange('searchValue', event)}
-          sx={{ marginBottom: '20px' }}
+          sx={{ minWidth: 400, maxWidth: 400, marginBottom: 2 }}
         />
-        <Button className="submit-button" type="submit">
+        <Button variant="contained" className="search-submit-button" type="submit" sx={{ marginLeft: 2, marginBottom: 2 }}>
           Search
         </Button>
       </form>
