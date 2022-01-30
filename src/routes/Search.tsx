@@ -9,6 +9,7 @@ export default function Search() {
   const [searchValue, setSearchValue] = useState('');
   const [resultsData, setResultsData] = useState([]);
   const [searchSubmitted, setSearchSubmitted] = useState(false);
+  const [searchValueDisplay, setSearchValueDisplay] = useState('');
 
   return (
     <>
@@ -27,12 +28,14 @@ export default function Search() {
           setResultsData={setResultsData}
           searchSubmitted={searchSubmitted}
           setSearchSubmitted={setSearchSubmitted}
+          searchValueDisplay={searchValueDisplay}
+          setSearchValueDisplay={setSearchValueDisplay}
         />
       </Box>
       <div id="search-bottom">
         <Box sx={{ marginLeft: '60px' }}>
           {searchSubmitted !== false ? (
-            <h3>Displaying search results for "{searchValue}"...</h3>
+            <h3>Displaying search results for "{searchValueDisplay}"...</h3>
           ) : (
             ''
           )}

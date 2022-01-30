@@ -11,12 +11,15 @@ interface searchProps {
   setResultsData: any;
   searchSubmitted: boolean;
   setSearchSubmitted: any;
+  searchValueDisplay: string;
+  setSearchValueDisplay: any;
 }
 
 export default function SearchBar(props: searchProps) {
 
   var parseString = require('xml2js').parseString;
   const handleSubmit = (event: any) => {
+    props.setSearchValueDisplay(props.searchValue);
     var testArray: any = [];
     var testArray2: any = [];
     var testArrayMerged: any = [];
