@@ -301,18 +301,6 @@ a {
   text-align: center;
 }
 
-.game-night-event-container {
-  padding: 8px;
-  margin: 8px;
-  border-style: solid;
-  border-width: 1px;
-  display: inline-block;
-}
-
-.game-night-event-container * {
-  text-align: center;
-}
-
 .event-container-finalized {
   border-color: green;
   border-width: 3px;
@@ -429,40 +417,10 @@ a {
   margin: 10px;
 }
 
-.new-event-form {
-  margin-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-/* .contact-button-group {
-  text-align: center;
+/* #game-menu-button {
   margin-left: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
-} */
-
-#game-menu-button {
-  margin-left: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.guest-picker-container,
-.game-picker-container {
-  display: flex;
-  margin-left: 20px;
-}
-
-.guest-picker-container {
-  float: left;
-}
-.games-guests-container {
-  display: flex;
-}
-
-/* .contact-button-group-container {
-  float: left;
 } */
 
 .game-picker-title {
@@ -627,4 +585,34 @@ a {
 
 .voting-results-container {
   margin-left: 40px;
+}
+
+.new-event-form {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-and-games-new-event-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-button-group {
+  margin-right: 20px;
+}
+
+.games-guests-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.game-picker-container {
+  margin-left: 40px;
+}
+
+.guest-picker-container {
+  margin-right: 40px;
 }

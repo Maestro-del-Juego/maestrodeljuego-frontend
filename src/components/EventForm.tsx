@@ -355,13 +355,12 @@ export default function EventForm(props: eventFormProps) {
           </Popover>
         </form>
       </div>
-
-      <div className="contact-button-group-container">
+      <div className="contact-and-games-new-event-container">
+      
         <ButtonGroup
           className="contact-button-group"
           variant="contained"
           aria-label="outlined primary button group"
-          sx={{ marginLeft: 4}}
         >
           <Button
             id="contact-menu-button"
@@ -400,7 +399,6 @@ export default function EventForm(props: eventFormProps) {
             </MenuItem>
           ))}
         </Menu>
-      </div>
 
       <div className="contact-form-popup-container">
         <Popover
@@ -486,8 +484,6 @@ export default function EventForm(props: eventFormProps) {
           </form>
         </Popover>
       </div>
-
-      <div>
         <Button
           id="game-menu-button"
           aria-controls={openGameMenu ? 'game-menu' : undefined}
@@ -519,6 +515,7 @@ export default function EventForm(props: eventFormProps) {
             // with image: <MenuItem key={`${game.pk}-dropdown`} onClick={() => {props.handleAddClick(game); setUpdater(updater + 1); handleGameClose();}}><img className="menu-image" src={game.image} alt={game.title}></img>{game.title}</MenuItem>
           ))}
         </Menu>
+      
       </div>
       <div className="games-guests-container">
         <div className="guest-picker-container">
@@ -553,6 +550,7 @@ export default function EventForm(props: eventFormProps) {
             ))}
           </List>
         </div>
+        <Divider orientation="vertical" flexItem />
         <div className="game-picker-container">
           <List
             sx={{ maxWidth: 500 }}

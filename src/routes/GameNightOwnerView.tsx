@@ -1030,6 +1030,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               ))}
             </List>
           </div>
+          {/* <Divider orientation="vertical" flexItem /> */}
           <div className="voting-results-container">
             <List
               sx={{ maxWidth: 500, marginLeft: 4 }}
