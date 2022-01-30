@@ -21,7 +21,7 @@ export default function LeastPlayed(props: gameProps) {
         to={`/games/${props.gameId}`}
         key={props.gameId}
       >
-        <h2>{props.gameName}</h2>
+        <h5>{props.gameName}</h5>
       </Link>
       <h6>Times Played: {props.amountPlayed}</h6>
       {/* <h6>Date Last Played: {props.dateLastPlayed}</h6> */}
