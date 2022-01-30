@@ -5,13 +5,17 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import OctoSearch from '../assets/OctoSearch.png';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import ListSubheader from '@mui/material/ListSubheader';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
+interface searchProps {
+    token: string;
+    user: string;
+  }
 
-export default function Search() {
+export default function Search(props: searchProps) {
   const [searchValue, setSearchValue] = useState('');
   const [resultsData, setResultsData] = useState([]);
   const [searchSubmitted, setSearchSubmitted] = useState(false);
@@ -39,15 +43,16 @@ export default function Search() {
         />
       </Box>
       <div id="search-bottom">
-        <Box sx={{ marginLeft: '60px' }}>
-          {searchSubmitted !== false ? (
-            <h3>Displaying search results for "{searchValueDisplay}"...</h3>
-          ) : (
-            ''
-          )}
-          <List>
+        <Box sx={{ marginLeft: '20px' }}>
+          <List subheader={
+              <>
+            {searchSubmitted !== false ? (<ListSubheader sx={{ fontSize: "x-large"}} component="div" id="search-results-subheader">
+            Displaying search results for "{searchValueDisplay}"...
+            </ListSubheader>) : (<ListSubheader></ListSubheader>) }
+          
+          </> }>
           {resultsData.map(({ id, name }: any) => (
-            <SearchResult key={id} gameId={id} gameName={name} />
+            <SearchResult key={id} gameId={id} gameName={name} token={props.token} user={props.user}/>
           ))}
           </List>
         </Box>

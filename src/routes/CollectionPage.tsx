@@ -77,7 +77,7 @@ export default function CollectionPage(props: collectionProps) {
         <h1 className="collection-header-alpha">{props.user}'s Collection</h1>
         <div className="collection-container-alpha">
           {alphaCollection.map((game: any) => (
-            <SearchResult gameId={game.bgg} gameName={game.title} />
+            <SearchResult gameId={game.bgg} gameName={game.title} token={props.token} user={props.user}/>
           ))}
         </div>
       </Grid>

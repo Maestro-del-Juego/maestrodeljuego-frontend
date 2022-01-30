@@ -140,16 +140,24 @@ a {
 }
 
 .game-info-card,
-.game-info-card p {
+.game-info-card p,
+.game-popover-card,
+.game-popover-card p {
   text-align: center;
 }
 
-.game-info-card h6 {
+.game-info-card h6,
+.game-popover-card h6 {
   margin-top: 0px;
 }
 
-.game-info-card h3 {
+.game-info-card h3,
+.game-popover-card h3 {
   margin-bottom: 10px;
+}
+
+.game-popover-card {
+  padding: 20px;
 }
 
 #settings-avatar {
@@ -671,4 +679,11 @@ a {
 
 #collection-list-view-image {
   opacity: 25%;
+}
+
+.search-popover-anchor-div {
+  position:absolute;
+  margin: 0 auto;
+  left: 50%;
+  right: 50;
 }
