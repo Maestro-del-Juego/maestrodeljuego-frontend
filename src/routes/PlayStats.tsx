@@ -6,6 +6,8 @@ import {
   VictoryAxis,
   VictoryLabel,
   VictoryPie,
+  VictoryTheme,
+  VictoryTooltip,
 } from 'victory';
 import { Box } from '@mui/material';
 import LeastPlayed from '../components/LeastPlayed';
@@ -26,6 +28,7 @@ export default function PlayStats(props: statProps) {
   const [avgPlayerNum, setAvgPlayerNum] = useState<any[]>([]);
   const [sessionsNum, setSessionsNum] = useState<any[]>([]);
   const [mostPlayed, setMostPlayed] = useState<any[]>([]);
+  const [mostPlayedCategories, setMostPlayedCategories] = useState<any[]>([]);
   const [leastPlayed, setLeastPlayed] = useState<any[]>([]);
   const [commonPlayers, setCommonPlayers] = useState<any[]>([]);
   const [unplayed, setUnplayed] = useState<any[]>([]);
@@ -81,8 +84,17 @@ export default function PlayStats(props: statProps) {
               setMostPlayed((oldData) => [
                 ...oldData,
                 {
+                  x: entry.title,
+                  y: entry.percentage,
+                },
+              ]);
+            }
+            for (let entry of result.data.most_played_categories) {
+              setMostPlayedCategories((oldData) => [
+                ...oldData,
+                {
                   x: entry.name,
-                  y: entry.played,
+                  y: entry.percentage,
                 },
               ]);
             }
@@ -111,141 +123,188 @@ export default function PlayStats(props: statProps) {
   }, [props.token]);
 
   return (
-    <div id="play-stats-page">
-      <h1>Welcome to Game Knight, {props.user}!</h1>
-      {playedEnough ? (
-        <div id="most-played">
-          <div id="weekday-stats">
-            <h2>Weekday Stats</h2>
-            <div id="weekday-vis-container">
-              <Box>
-                {loading ? (
-                  <h4>Loading...</h4>
-                ) : (
-                  <VictoryChart
-                    width={700}
-                    height={500}
-                    padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
-                    domainPadding={45}
-                  >
-                    <VictoryAxis
-                      label="Average Attendance Ratio per Weekday for Game Nights"
-                      style={{
-                        axisLabel: { fontSize: 20, padding: 40 },
-                        ticks: { stroke: 'grey', size: 5 },
-                      }}
-                    />
-                    <VictoryAxis
-                      dependentAxis
-                      style={{ ticks: { stroke: 'grey', size: 5 } }}
-                    />
-                    <VictoryBar data={avgAttendRatio} x="day" y="vote" />
-                  </VictoryChart>
-                )}
-              </Box>
-              <Box>
-                {loading ? (
-                  <h2>Loading...</h2>
-                ) : (
-                  <VictoryChart
-                    width={700}
-                    height={500}
-                    padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
-                    domainPadding={45}
-                  >
-                    <VictoryAxis
-                      label="Average Overall Score for Gamenights per Weekday"
-                      style={{
-                        axisLabel: { fontSize: 20, padding: 40 },
-                        ticks: { stroke: 'grey', size: 5 },
-                      }}
-                    />
-                    <VictoryAxis
-                      dependentAxis
-                      style={{ ticks: { stroke: 'grey', size: 5 } }}
-                    />
-                    <VictoryBar data={avgOverallFeedback} x="day" y="vote" />
-                  </VictoryChart>
-                )}
-              </Box>
-              <Box>
-                {loading ? (
-                  <h4>Loading...</h4>
-                ) : (
-                  <VictoryChart
-                    width={700}
-                    height={500}
-                    padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
-                    domainPadding={45}
-                  >
-                    <VictoryAxis
-                      label="Average Attendance per Weekday for Game Nights"
-                      style={{
-                        axisLabel: { fontSize: 20, padding: 40 },
-                        ticks: { stroke: 'grey', size: 5 },
-                      }}
-                    />
-                    <VictoryAxis
-                      dependentAxis
-                      style={{ ticks: { stroke: 'grey', size: 5 } }}
-                    />
-                    <VictoryBar data={avgPlayerNum} x="day" y="vote" />
-                  </VictoryChart>
-                )}
-              </Box>
-            </div>
-          </div>
-          <div id="gameplay-stats">
-            <h2>Gameplay Stats</h2>
-            {loading ? (
-              <h4>Loading...</h4>
-            ) : (
-              <Box>
-                <h4>Most Played Games</h4>
-                <VictoryPie data={mostPlayed} />
-              </Box>
-            )}
-            <Box>
-              <h4>Least Played Games</h4>
-              <div id="least-played">
-                {loading ? (
-                  <h4>Loading...</h4>
-                ) : (
-                  leastPlayed.map((game: any) => (
-                    <LeastPlayed
-                      gameId={game.bgg}
-                      gameName={game.name}
-                      imageUrl={game.image}
-                      amountPlayed={game.played}
-                    />
-                  ))
-                )}
-              </div>
-            </Box>
-            <Box>
-              <h4>These haven't even hit the table!</h4>
-              <div id="unplayed">
-                {loading ? (
-                  <h4>Loading...</h4>
-                ) : (
-                  <Carousel>
-                    {unplayed.map((game: any) => (
-                      <GameCard
-                        gameId={game.bgg}
-                        gameName={game.name}
-                        imageUrl={game.image}
-                        pubYear={game.pub_year}
+    <>
+      <h1 style={{ textAlign: 'center' }}>
+        Welcome to Game Knight, {props.user}!
+      </h1>
+      <div id="play-stats-page">
+        {playedEnough ? (
+          <>
+            <div id="most-played">
+              <h2>Weekday Stats</h2>
+              <div id="weekday-vis-container">
+                <Box>
+                  {loading ? (
+                    <h4>Loading...</h4>
+                  ) : (
+                    <VictoryChart
+                      width={700}
+                      height={500}
+                      padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
+                      domainPadding={45}
+                      theme={VictoryTheme.material}
+                    >
+                      <VictoryAxis
+                        label="Average Attendance Ratio per Weekday for Game Nights"
+                        style={{
+                          axisLabel: { fontSize: 20, padding: 40 },
+                          ticks: { stroke: 'grey', size: 5 },
+                        }}
                       />
-                    ))}
-                  </Carousel>
-                )}
+                      <VictoryAxis
+                        dependentAxis
+                        style={{ ticks: { stroke: 'grey', size: 5 } }}
+                      />
+                      <VictoryBar data={avgAttendRatio} x="day" y="vote" />
+                    </VictoryChart>
+                  )}
+                </Box>
+                <Box>
+                  {loading ? (
+                    <h4>Loading...</h4>
+                  ) : (
+                    <VictoryChart
+                      width={700}
+                      height={500}
+                      padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
+                      domainPadding={45}
+                      theme={VictoryTheme.material}
+                    >
+                      <VictoryAxis
+                        label="Average Overall Score for Gamenights per Weekday"
+                        style={{
+                          axisLabel: { fontSize: 20, padding: 40 },
+                          ticks: { stroke: 'grey', size: 5 },
+                        }}
+                      />
+                      <VictoryAxis
+                        dependentAxis
+                        style={{ ticks: { stroke: 'grey', size: 5 } }}
+                      />
+                      <VictoryBar data={avgOverallFeedback} x="day" y="vote" />
+                    </VictoryChart>
+                  )}
+                </Box>
+                <Box>
+                  {loading ? (
+                    <h4>Loading...</h4>
+                  ) : (
+                    <VictoryChart
+                      width={700}
+                      height={500}
+                      padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
+                      domainPadding={45}
+                      theme={VictoryTheme.material}
+                    >
+                      <VictoryAxis
+                        label="Average Attendance per Weekday for Game Nights"
+                        style={{
+                          axisLabel: { fontSize: 20, padding: 40 },
+                          ticks: { stroke: 'grey', size: 5 },
+                        }}
+                      />
+                      <VictoryAxis
+                        dependentAxis
+                        style={{ ticks: { stroke: 'grey', size: 5 } }}
+                      />
+                      <VictoryBar data={avgPlayerNum} x="day" y="vote" />
+                    </VictoryChart>
+                  )}
+                </Box>
               </div>
-            </Box>
-          </div>
-        </div>
-      ) : (
-        <h2>Play a few game nights to start tracking your stats!</h2>
-      )}
-    </div>
+            </div>
+            <div id="gameplay-stats">
+              <h2>Gameplay Stats</h2>
+              {loading ? (
+                <h4>Loading...</h4>
+              ) : (
+                <div id="pie-data">
+                  <div id="most-played-games">
+                    <h3>Most Played Games</h3>
+                    <VictoryPie
+                      labelComponent={<VictoryLabel />}
+                      data={mostPlayed}
+                      colorScale={[
+                        'tomato',
+                        'teal',
+                        'orange',
+                        'gold',
+                        'cyan',
+                        'navy',
+                        'pink',
+                        'purple',
+                        'grey',
+                        'green',
+                      ]}
+                      padding={100}
+                    />
+                  </div>
+                  <div id="most-played-categories">
+                    <h3>Most Played Games by Category</h3>
+                    <VictoryPie
+                      labelComponent={
+                        <VictoryLabel labelPlacement="parallel" />
+                      }
+                      data={mostPlayedCategories}
+                      colorScale={[
+                        'tomato',
+                        'teal',
+                        'orange',
+                        'gold',
+                        'cyan',
+                        'navy',
+                        'pink',
+                        'purple',
+                        'grey',
+                        'green',
+                      ]}
+                      padding={100}
+                    />
+                  </div>
+                </div>
+              )}
+              <div id="lowest-played-section">
+                <div id="least-played">
+                  <h3>Least Played Games</h3>
+                  {loading ? (
+                    <h4>Loading...</h4>
+                  ) : (
+                    <Carousel>
+                      {leastPlayed.map((game: any) => (
+                        <LeastPlayed
+                          gameId={game.bgg}
+                          gameName={game.name}
+                          imageUrl={game.image}
+                          amountPlayed={game.played}
+                        />
+                      ))}
+                    </Carousel>
+                  )}
+                </div>
+                <div id="unplayed">
+                  <h3>These haven't even hit the table!</h3>
+                  {loading ? (
+                    <h4>Loading...</h4>
+                  ) : (
+                    <Carousel>
+                      {unplayed.map((game: any) => (
+                        <GameCard
+                          gameId={game.bgg}
+                          gameName={game.name}
+                          imageUrl={game.image}
+                          pubYear={game.pub_year}
+                        />
+                      ))}
+                    </Carousel>
+                  )}
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <h2>Play a few game nights to start tracking your stats!</h2>
+        )}
+      </div>
+    </>
   );
 }
