@@ -680,12 +680,13 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </Button>
           </form>
         )}
-              <div className="contact-button-group-container">
+        <div className="contact-finalize-cancel-button-container">
+        
         <ButtonGroup
           className="contact-button-group"
           variant="contained"
           aria-label="outlined primary button group"
-          sx={{ marginLeft: 4}}
+          sx={{ marginRight: 2 }}
         >
           <> {(status === "Voting") ? (
           <Button
@@ -746,7 +747,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </MenuItem>
           ))}
         </Menu>
-      </div>
 
       <div className="contact-form-popup-container">
         <Popover
@@ -832,7 +832,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
           </form>
         </Popover>
       </div>
-        <div className="finalize-cancel-buttons-container">
           {status === 'Voting' ? (
             <>
               <Button
@@ -974,6 +973,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </Button>
           )}
         </div>
+        
         <div className="voting-and-rsvp-container">
         <div className="rsvp-container">
             <List
