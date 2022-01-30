@@ -64,8 +64,10 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const [endTimeValid, setEndTimeValid] = useState<Boolean>(false);
   const [dateValid, setDateValid] = useState<Boolean>(false);
   const [locationValid, setLocationValid] = useState<Boolean>(false);
-  const [gamesValid, setGamesValid] = useState<Boolean>(false);
-  const [rsvpValid, setRsvpValid] = useState<Boolean>(false);
+  const [contactFirstValid, setContactFirstValid] = useState<Boolean>(false);
+  const [contactLastValid, setContactLastValid] = useState<Boolean>(false);
+  const [contactEmailValid, setContactEmailValid] = useState<Boolean>(false);
+
 
   let { gameNightId } = useParams();
   const gameNightUrl = `https://maestrodeljuego.herokuapp.com/gamenight/${gameNightId}/`;
@@ -134,7 +136,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
             start_time: startTime,
             end_time: endTime,
             location: location,
-            games: selectedGameList,
           },
           {
             headers: {
@@ -159,6 +160,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const handleNewContactSubmit = (event: any) => {
     const contactApi = 'https://maestrodeljuego.herokuapp.com/contacts/';
     event.preventDefault();
+    if (validateContact()===true) {
     axios
       .post(
         contactApi,
@@ -176,15 +178,20 @@ export default function GameNightOwnerView(props: gameNightProps) {
       )
       .then((response) => {
         console.log(response);
-        const tempArray2 = newInviteeList;
-        tempArray2.push(response.data);
-        setNewInviteeList(tempArray2)
+        const tempArray = newInviteeList;
+        tempArray.push(response.data);
+        setNewInviteeList(tempArray)
+        let tempArray2 = contactList;
+        tempArray2.push(response.data)
+        tempArray2 = tempArray2.sort((a: any, b: any) => a.first_name < b.first_name ? -1 : a.first_name > b.first_name ? 1 : 0)
+        setContactList(tempArray2);
         setUpdater(updater + 1);
         setNewContactFirst('');
         setNewContactLast('');
         setNewContactEmail('');
+        handleNewContactClose();
       });
-  };
+  } else {handleContactValidatorClick(event)}};
 
   const validateForm = useCallback(() => {
     const timeRGEX = /^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/;
@@ -196,13 +203,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
         moment(date).isSameOrAfter(moment().format('yyyy-MM-DD'))
     );
     setLocationValid(location !== '');
-    // console.log(startTime)
-    // console.log(`starttime ${startTimeValid}`)
-    // console.log(endTime)
-    // console.log(`endtime ${endTimeValid}`)
-    // console.log(date)
-    // console.log(`date ${dateValid}`)
-    // console.log(`location ${locationValid}`)
     if (
       startTimeValid === true &&
       endTimeValid === true &&
@@ -226,6 +226,21 @@ export default function GameNightOwnerView(props: gameNightProps) {
   useEffect(() => {
     validateForm();
   }, [validateForm]);
+
+  const validateContact = useCallback(() => {
+    // Regex courtsey of emailregex.com
+    const emailRGEX = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    setContactEmailValid(emailRGEX.test(newContactEmail));
+    setContactFirstValid(newContactFirst !== "");
+    setContactLastValid(newContactLast !== "");
+    if (contactEmailValid===true && contactFirstValid===true && contactLastValid===true) {
+      return true;
+    }
+  }, [newContactEmail, contactEmailValid, newContactFirst, contactFirstValid, newContactLast, contactLastValid])
+
+  useEffect(() => {
+    validateContact();
+  }, [validateContact])
 
   const cancelGameNight = () => {
     axios
@@ -261,7 +276,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
             start_time: startTime,
             end_time: endTime,
             location: location,
-            games: selectedGameList,
             status: 'Finalized',
           },
           {
@@ -290,7 +304,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
           start_time: startTime,
           end_time: endTime,
           location: location,
-          games: selectedGameList,
           status: 'Voting',
         },
         {
@@ -339,18 +352,49 @@ export default function GameNightOwnerView(props: gameNightProps) {
   };
 
   const handleAddClick = (game: gameObject) => {
-    let array = selectedGameList;
-    if (JSON.stringify(array).includes(JSON.stringify(game)) === false) {
-      array.push(game);
-    }
-    setSelectedGameList(array);
-    console.log(selectedGameList);
+    const gameArray: gameObject[] = []
+    gameArray.push(game)
+    axios
+        .patch(
+          gameNightUrl,
+          {
+            games: gameArray,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Token ${props.token}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response)
+          setSelectedGameList(response.data.games)
+          console.log(selectedGameList);
+        })
   };
 
   const handleRemoveClick = (game: gameObject) => {
-    let array = selectedGameList;
-    array.splice(array.indexOf(game), 1);
-    setSelectedGameList(array);
+    const gameArray: gameObject[] = []
+    gameArray.push(game)
+    axios
+        .patch(
+          gameNightUrl,
+          {
+            games: gameArray,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Token ${props.token}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response)
+          setSelectedGameList(response.data.games)
+          console.log(selectedGameList);
+        })
   };
 
   const handleAddGuestClick = (contact: contactObject) => {
@@ -390,6 +434,17 @@ export default function GameNightOwnerView(props: gameNightProps) {
     ? 'edit-validation-popover'
     : undefined;
 
+  // new contact validation MUI
+  const [contactValidationAnchor, setContactValidationAnchor] = useState(null)
+  const handleContactValidatorClick = (event: any) => {
+    setContactValidationAnchor(event.currentTarget);
+  }
+  const handleContactValidatorClose = () => {
+    setContactValidationAnchor(null);
+  }
+  const contactValidationOpen = Boolean(contactValidationAnchor);
+  const contactValidationId = contactValidationOpen ? "contact-validation-popover" : undefined;
+
     // variables for MUI dropdown menu: contacts
   const [contactAnchor, setContactAnchor] = useState<null | HTMLElement>(null);
   const openContactMenu = Boolean(contactAnchor);
@@ -428,7 +483,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               onChange={(event) => {
                 if (status === 'Voting') handleChange('date', event);
               }}
-              sx={{ width: 220, m:2 }}
+              sx={{ minWidth: 220, m:2 }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -447,7 +502,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150, m:2 }}
+              sx={{ minWidth: 150, m:2 }}
             />
             <TextField
               id="end-time-picker"
@@ -463,7 +518,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150, m:2 }}
+              sx={{ minWidth: 150, m:2 }}
             />
             <TextField
               id="location-picker"
@@ -476,7 +531,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               InputLabelProps={{
                 shrink: true,
               }}
-              sx={{ width: 300, m:2 }}
+              sx={{ minWidth: 300, m:2 }}
             />
             <Button
               sx={{ m:2 }}
@@ -562,7 +617,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               onChange={(event) => {
                 if (status === 'Voting') handleChange('date', event);
               }}
-              sx={{ width: 220, m:2 }}
+              sx={{ minWidth: 220, m:2 }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -582,7 +637,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150, m:2 }}
+              sx={{ minWidth: 150, m:2 }}
             />
             <TextField
               disabled
@@ -599,7 +654,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150, m:2 }}
+              sx={{ minWidth: 150, m:2 }}
             />
             <TextField
               disabled
@@ -613,7 +668,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               InputLabelProps={{
                 shrink: true,
               }}
-              sx={{ width: 300, m:2 }}
+              sx={{ minWidth: 300, m:2 }}
             />
             <Button
               sx={{ m: 2 }}
@@ -625,12 +680,13 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </Button>
           </form>
         )}
-              <div className="contact-button-group-container">
+        <div className="contact-finalize-cancel-button-container">
+        
         <ButtonGroup
           className="contact-button-group"
           variant="contained"
           aria-label="outlined primary button group"
-          sx={{ marginLeft: 4}}
+          sx={{ marginRight: 2, marginTop: 2 }}
         >
           <> {(status === "Voting") ? (
           <Button
@@ -691,7 +747,6 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </MenuItem>
           ))}
         </Menu>
-      </div>
 
       <div className="contact-form-popup-container">
         <Popover
@@ -715,7 +770,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             type="text"
             value={newContactFirst}
             onChange={(event) => handleChange('newContactFirst', event)}
-            sx={{ width: 200, m:1 }}
+            sx={{ minWidth: 200, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -727,7 +782,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             type="text"
             value={newContactLast}
             onChange={(event) => handleChange('newContactLast', event)}
-            sx={{ width: 200, m:1 }}
+            sx={{ minWidth: 200, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -739,23 +794,50 @@ export default function GameNightOwnerView(props: gameNightProps) {
             type="text"
             value={newContactEmail}
             onChange={(event) => handleChange('newContactEmail', event)}
-            sx={{ width: 300, m:1 }}
+            sx={{ minWidth: 300, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
             inputProps={{ maxLength: 320}}
           />
-            <Button variant="contained" sx={{ m:1 }}onClick={(event) => handleNewContactSubmit(event)} className="submit-button">Add New Contact</Button>
+            <Button variant="contained" sx={{ m:1 }}onClick={(event) => handleNewContactSubmit(event)} className="submit-button">Invite New Contact</Button>
+            <Popover
+          id={contactValidationId}
+          open={contactValidationOpen}
+          anchorEl={contactValidationAnchor}
+          onClose={handleContactValidatorClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          >
+            <List sx={{ p: 2 }}>
+            {!contactFirstValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please enter a first name.</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!contactLastValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please enter a last name.</ListItemText>
+              </ListItem> ) : (<></>)}
+              {!contactEmailValid ? (
+              <ListItem>
+                <ListItemIcon><ErrorIcon /></ListItemIcon>
+                <ListItemText>Please enter a valid email address.</ListItemText>
+              </ListItem> ) : (<></>)}
+            </List>
+          </Popover>
           </form>
         </Popover>
       </div>
-        <div className="finalize-cancel-buttons-container">
           {status === 'Voting' ? (
             <>
               <Button
                 className="finalize-button"
                 variant="contained"
-                sx={{ backgroundColor: 'mediumseagreen', marginLeft:2, marginRight: 2 }}
+                sx={{ backgroundColor: 'mediumseagreen', marginLeft:2, marginRight: 2, marginTop: 2 }}
                 onClick={(event) => {
                   finalizeGameNight(event);
                 }}
@@ -873,7 +955,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <Button
               className="cancel-button"
               variant="contained"
-              sx={{ backgroundColor: 'crimson', marginLeft:2, marginRight: 2 }}
+              sx={{ backgroundColor: 'crimson', marginLeft:2, marginRight: 2, marginTop: 2 }}
               onClick={() => {
                 cancelGameNight();
               }}
@@ -891,12 +973,13 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </Button>
           )}
         </div>
+        
         <div className="voting-and-rsvp-container">
         <div className="rsvp-container">
             <List
-              sx={{ maxWidth: 300 }}
+              sx={{ minWidth: 250, maxWidth: 250 }}
               subheader={
-                <ListSubheader sx={{ fontSize: 16 }}>RSVPs:</ListSubheader>
+                <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>RSVPs:</ListSubheader>
               }
             >
               {newInviteeList.map((invitee) => (
@@ -947,11 +1030,12 @@ export default function GameNightOwnerView(props: gameNightProps) {
               ))}
             </List>
           </div>
+          {/* <Divider orientation="vertical" flexItem /> */}
           <div className="voting-results-container">
             <List
-              sx={{ maxWidth: 500, marginLeft: 4 }}
+              sx={{ minWidth: 500, maxWidth: 500, marginLeft: 4 }}
               subheader={
-                <ListSubheader sx={{ fontSize: 16 }}>
+                <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>
                   Select games to be played:
                 </ListSubheader>
               }
