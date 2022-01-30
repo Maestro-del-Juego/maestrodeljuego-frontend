@@ -483,7 +483,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               onChange={(event) => {
                 if (status === 'Voting') handleChange('date', event);
               }}
-              sx={{ width: 220, m:2 }}
+              sx={{ minWidth: 220, m:2 }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -502,7 +502,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150, m:2 }}
+              sx={{ minWidth: 150, m:2 }}
             />
             <TextField
               id="end-time-picker"
@@ -518,7 +518,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150, m:2 }}
+              sx={{ minWidth: 150, m:2 }}
             />
             <TextField
               id="location-picker"
@@ -531,7 +531,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               InputLabelProps={{
                 shrink: true,
               }}
-              sx={{ width: 300, m:2 }}
+              sx={{ minWidth: 300, m:2 }}
             />
             <Button
               sx={{ m:2 }}
@@ -617,7 +617,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               onChange={(event) => {
                 if (status === 'Voting') handleChange('date', event);
               }}
-              sx={{ width: 220, m:2 }}
+              sx={{ minWidth: 220, m:2 }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -637,7 +637,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150, m:2 }}
+              sx={{ minWidth: 150, m:2 }}
             />
             <TextField
               disabled
@@ -654,7 +654,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ width: 150, m:2 }}
+              sx={{ minWidth: 150, m:2 }}
             />
             <TextField
               disabled
@@ -668,7 +668,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               InputLabelProps={{
                 shrink: true,
               }}
-              sx={{ width: 300, m:2 }}
+              sx={{ minWidth: 300, m:2 }}
             />
             <Button
               sx={{ m: 2 }}
@@ -686,7 +686,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           className="contact-button-group"
           variant="contained"
           aria-label="outlined primary button group"
-          sx={{ marginRight: 2 }}
+          sx={{ marginRight: 2, marginTop: 2 }}
         >
           <> {(status === "Voting") ? (
           <Button
@@ -770,7 +770,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             type="text"
             value={newContactFirst}
             onChange={(event) => handleChange('newContactFirst', event)}
-            sx={{ width: 200, m:1 }}
+            sx={{ minWidth: 200, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -782,7 +782,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             type="text"
             value={newContactLast}
             onChange={(event) => handleChange('newContactLast', event)}
-            sx={{ width: 200, m:1 }}
+            sx={{ minWidth: 200, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -794,7 +794,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             type="text"
             value={newContactEmail}
             onChange={(event) => handleChange('newContactEmail', event)}
-            sx={{ width: 300, m:1 }}
+            sx={{ minWidth: 300, m:1 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -837,7 +837,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               <Button
                 className="finalize-button"
                 variant="contained"
-                sx={{ backgroundColor: 'mediumseagreen', marginLeft:2, marginRight: 2 }}
+                sx={{ backgroundColor: 'mediumseagreen', marginLeft:2, marginRight: 2, marginTop: 2 }}
                 onClick={(event) => {
                   finalizeGameNight(event);
                 }}
@@ -955,7 +955,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <Button
               className="cancel-button"
               variant="contained"
-              sx={{ backgroundColor: 'crimson', marginLeft:2, marginRight: 2 }}
+              sx={{ backgroundColor: 'crimson', marginLeft:2, marginRight: 2, marginTop: 2 }}
               onClick={() => {
                 cancelGameNight();
               }}
@@ -977,7 +977,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
         <div className="voting-and-rsvp-container">
         <div className="rsvp-container">
             <List
-              sx={{ maxWidth: 300 }}
+              sx={{ minWidth: 250, maxWidth: 250 }}
               subheader={
                 <ListSubheader sx={{ fontSize: 16 }}>RSVPs:</ListSubheader>
               }
@@ -1033,7 +1033,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           {/* <Divider orientation="vertical" flexItem /> */}
           <div className="voting-results-container">
             <List
-              sx={{ maxWidth: 500, marginLeft: 4 }}
+              sx={{ minWidth: 500, maxWidth: 500, marginLeft: 4 }}
               subheader={
                 <ListSubheader sx={{ fontSize: 16 }}>
                   Select games to be played:
