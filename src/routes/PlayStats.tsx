@@ -86,6 +86,7 @@ export default function PlayStats(props: statProps) {
                 {
                   x: entry.title,
                   y: entry.percentage,
+                  label: `${entry.title} ${entry.percentage}%`,
                 },
               ]);
             }
@@ -95,6 +96,7 @@ export default function PlayStats(props: statProps) {
                 {
                   x: entry.name,
                   y: entry.percentage,
+                  label: `${entry.name} ${entry.percentage}%`,
                 },
               ]);
             }
@@ -222,41 +224,39 @@ export default function PlayStats(props: statProps) {
                   <div id="most-played-games">
                     <h3>Most Played Games</h3>
                     <VictoryPie
-                      labelComponent={<VictoryLabel style={{ fontSize: 9 }} />}
+                      labelComponent={<VictoryTooltip />}
                       data={mostPlayed}
                       colorScale={[
-                        'tomato',
-                        'teal',
-                        'orange',
-                        'gold',
-                        'cyan',
-                        'navy',
-                        'pink',
-                        'purple',
-                        'grey',
-                        'green',
+                        '#003f5c',
+                        '#2f4b7c',
+                        '#665191',
+                        '#a05195',
+                        '#d45087',
+                        '#f95d6a',
+                        '#ff7c43',
+                        '#ffa600',
+                        '#FFDD4A',
+                        '#9FD356',
                       ]}
-                      padding={120}
                     />
                   </div>
                   <div id="most-played-categories">
                     <h3>Most Played Games by Category</h3>
                     <VictoryPie
-                      labelComponent={<VictoryLabel style={{ fontSize: 9 }} />}
+                      labelComponent={<VictoryTooltip />}
                       data={mostPlayedCategories}
                       colorScale={[
-                        'tomato',
-                        'teal',
-                        'orange',
-                        'gold',
-                        'cyan',
-                        'navy',
-                        'pink',
-                        'purple',
-                        'grey',
-                        'green',
+                        '#003f5c',
+                        '#2f4b7c',
+                        '#665191',
+                        '#a05195',
+                        '#d45087',
+                        '#f95d6a',
+                        '#ff7c43',
+                        '#ffa600',
+                        '#FFDD4A',
+                        '#9FD356',
                       ]}
-                      padding={120}
                     />
                   </div>
                 </div>
