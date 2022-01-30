@@ -222,7 +222,7 @@ export default function PlayStats(props: statProps) {
                   <div id="most-played-games">
                     <h3>Most Played Games</h3>
                     <VictoryPie
-                      labelComponent={<VictoryLabel />}
+                      labelComponent={<VictoryLabel style={{ fontSize: 9 }} />}
                       data={mostPlayed}
                       colorScale={[
                         'tomato',
@@ -236,15 +236,13 @@ export default function PlayStats(props: statProps) {
                         'grey',
                         'green',
                       ]}
-                      padding={100}
+                      padding={120}
                     />
                   </div>
                   <div id="most-played-categories">
                     <h3>Most Played Games by Category</h3>
                     <VictoryPie
-                      labelComponent={
-                        <VictoryLabel labelPlacement="parallel" />
-                      }
+                      labelComponent={<VictoryLabel style={{ fontSize: 9 }} />}
                       data={mostPlayedCategories}
                       colorScale={[
                         'tomato',
@@ -258,7 +256,7 @@ export default function PlayStats(props: statProps) {
                         'grey',
                         'green',
                       ]}
-                      padding={100}
+                      padding={120}
                     />
                   </div>
                 </div>
