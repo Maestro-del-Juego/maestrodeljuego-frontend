@@ -604,3 +604,14 @@ a {
   margin-right: 160px;
   align-self: flex-start;
 }
+
+#settings-container {
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+#change-username-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
