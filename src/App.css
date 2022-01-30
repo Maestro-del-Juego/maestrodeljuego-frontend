@@ -614,3 +614,7 @@ a {
 .guest-picker-container {
   margin-right: 40px;
 }
+
+.search-bar {
+  display: flex;
+}
