@@ -5,6 +5,9 @@ interface gameProps {
   gameName: string;
   pubYear: string;
   imageUrl: string;
+  minPlayers: number;
+  maxPlayers: number;
+  playtime: number;
 }
 
 export default function GameCard(props: gameProps) {

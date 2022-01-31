@@ -118,6 +118,9 @@ export default function CollectionPage(props: collectionProps) {
                 gameId={game.bgg}
                 gameName={game.title}
                 pubYear={game.pub_year}
+                minPlayers={game.min_players}
+                maxPlayers={game.max_players}
+                playtime={game.playtime}
                 imageUrl={game.image}
               />
             </Grid>
