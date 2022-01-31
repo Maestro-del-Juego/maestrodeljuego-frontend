@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useState } from 'react'
 import {  ListItem, ListItemText, ListItemIcon, Popover, IconButton, Tooltip } from '@mui/material';
 import GameInfoPopover from './GameInfoPopover'
@@ -32,7 +31,6 @@ export default function SearchResult(props: resultsProps) {
             </IconButton>
             </Tooltip>
         }>
-            <ListItemIcon><ArrowRightIcon /></ListItemIcon>
             <ListItemText className="search-result" key={`result-${props.gameId}`}>
             <Link className="search-result-link" to={`/games/${props.gameId}`} key={props.gameId}>
                 {props.gameName}

@@ -38,10 +38,11 @@ export default function NavBar(props: navProps) {
         </Box>
         <div id="account-links">
           {props.user === '' ? (
-            <>
-              <Link to="/login">Login</Link>|
+            <Box id="login-nav" sx={{display: "flex" }}>
+              <Link to="/login">Login</Link>
+              <Divider sx={{ background: "#334195", marginLeft:1, marginRight:1 }} orientation="vertical" flexItem />
               <Link to="/registration">Register</Link>
-            </>
+            </Box>
           ) : (
             <div id="navbar-avatar">
               <Link to={`/user_page/${props.user}`}>
