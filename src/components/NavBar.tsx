@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/game-knight-navbar.png';
-import { Divider, Box } from '@mui/material'
+import { Divider, Box } from '@mui/material';
 
 interface navProps {
   user: string;
@@ -27,22 +27,40 @@ export default function NavBar(props: navProps) {
           </Link>
           <span id="game-knight-banner">Game Knight</span>
         </div>
-        <Box id="site-nav" sx={{display: "flex" }}>
+        <Box id="site-nav" sx={{ display: 'flex' }}>
           <Link to={`/collection/${props.user}`}>Your Collection</Link>
-          <Divider sx={{ background: "#334195", marginLeft:1, marginRight:1 }} orientation="vertical" flexItem />
+          <Divider
+            sx={{ background: '#334195', marginLeft: 1, marginRight: 1 }}
+            orientation="vertical"
+            flexItem
+          />
           <Link to={`/wishlist/${props.user}`}>Wishlist</Link>
-          <Divider sx={{ background: "#334195", marginLeft:1, marginRight:1 }} orientation="vertical" flexItem />
+          <Divider
+            sx={{ background: '#334195', marginLeft: 1, marginRight: 1 }}
+            orientation="vertical"
+            flexItem
+          />
           <Link to="/search">Add Games</Link>
-          <Divider sx={{ background: "#334195", marginLeft:1, marginRight:1 }} orientation="vertical" flexItem />
-          {props.user !== "" ? (
-          <Link to={`/game_night/`}>Game Night Dashboard</Link> ) : (
-          <Link to={`/login/`}>Game Night Dashboard</Link> )}
+          <Divider
+            sx={{ background: '#334195', marginLeft: 1, marginRight: 1 }}
+            orientation="vertical"
+            flexItem
+          />
+          {props.user !== '' ? (
+            <Link to={`/game_night/`}>Game Knight Dashboard</Link>
+          ) : (
+            <Link to={`/login/`}>Game Night Dashboard</Link>
+          )}
         </Box>
         <div id="account-links">
           {props.user === '' ? (
-            <Box id="login-nav" sx={{display: "flex" }}>
+            <Box id="login-nav" sx={{ display: 'flex' }}>
               <Link to="/login">Login</Link>
-              <Divider sx={{ background: "#334195", marginLeft:1, marginRight:1 }} orientation="vertical" flexItem />
+              <Divider
+                sx={{ background: '#334195', marginLeft: 1, marginRight: 1 }}
+                orientation="vertical"
+                flexItem
+              />
               <Link to="/registration">Register</Link>
             </Box>
           ) : (
