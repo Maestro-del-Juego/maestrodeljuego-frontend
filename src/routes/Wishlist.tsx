@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import GameCard from '../components/GameCard';
+import React from 'react'
 
 interface wishlistProps {
   user: string;
@@ -29,6 +30,7 @@ export default function CollectionPage(props: wishlistProps) {
       <h1 className="wishlist-header">{props.user}'s Wishlist</h1>
       <div id="collection-container">
         {wishlist.map((game: any) => (
+          <React.Fragment key={`wishlist-item-${game.title}`}>
           <GameCard
             gameId={game.bgg}
             gameName={game.title}
@@ -38,6 +40,7 @@ export default function CollectionPage(props: wishlistProps) {
             maxPlayers={game.max_players}
             playtime={game.playtime}
           />
+          </React.Fragment>
         ))}
       </div>
     </>

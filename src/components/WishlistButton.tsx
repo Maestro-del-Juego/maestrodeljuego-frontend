@@ -53,7 +53,13 @@ export default function WishlistButton(props: wishlistButtonProps) {
               variant="outlined">Add to wishlist</Button>
             ) }
             </>
-          ) : (<></>) }
+          ) : (<>
+              <Button
+              disabled
+              className="wishlist-button-disabled"
+              variant="outlined"
+              >Add to wishlist</Button>
+          </>) }
         </>
   );
 }
