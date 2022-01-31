@@ -21,17 +21,17 @@ export default function CollectionPage(props: collectionProps) {
 
   useEffect(() => {
     axios
-      .get('https://maestrodeljuego.herokuapp.com/library/', {
+      .get('https://maestrodeljuego.herokuapp.com/auth/users/me/', {
         headers: {
           Authorization: `Token ${props.token}`,
         },
       })
       .then((result) => {
         console.log(result);
-        setCollection(result.data);
+        setCollection(result.data.games);
         console.log(collection);
         setAlphaCollection(
-          [...result.data].sort(function (a: any, b: any) {
+          [...result.data.games].sort(function (a: any, b: any) {
             let fa = a.title.toLowerCase(),
               fb = b.title.toLowerCase();
 
@@ -77,12 +77,21 @@ export default function CollectionPage(props: collectionProps) {
         <h1 className="collection-header-alpha">{props.user}'s Collection</h1>
         <div className="collection-container-alpha">
           {alphaCollection.map((game: any) => (
-            <SearchResult gameId={game.bgg} gameName={game.title} token={props.token} user={props.user}/>
+            <SearchResult
+              gameId={game.bgg}
+              gameName={game.title}
+              token={props.token}
+              user={props.user}
+            />
           ))}
         </div>
       </Grid>
       <Grid item xs={4}>
-        <img src={logo} alt="Library Image" id="collection-list-view-image"></img>
+        <img
+          src={logo}
+          alt="Library Image"
+          id="collection-list-view-image"
+        ></img>
       </Grid>
     </Grid>
   ) : (

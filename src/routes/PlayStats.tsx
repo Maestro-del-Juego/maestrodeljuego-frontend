@@ -336,7 +336,7 @@ export default function PlayStats(props: statProps) {
             <img
               src={StatsUser}
               alt="User Analyzing Stats"
-              style={{ height: '300px', width: '300px', margin: '20px' }}
+              style={{ height: '300px', opacity: 0.75, margin: '20px' }}
             ></img>
             <Card
               sx={{
