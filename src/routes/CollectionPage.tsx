@@ -120,14 +120,14 @@ export default function CollectionPage(props: collectionProps) {
       <Grid item xs={10}>
         <h1 className="collection-header">{props.user}'s Collection</h1>
         <div id="loading-components">
-          <LoadingComponent />
-          <LoadingComponent />
-          <LoadingComponent />
-          <LoadingComponent />
-          <LoadingComponent />
-          <LoadingComponent />
-          <LoadingComponent />
-          <LoadingComponent />
+          <LoadingComponent loadingWidth={250} loadingPadding="20" />
+          <LoadingComponent loadingWidth={250} loadingPadding="20" />
+          <LoadingComponent loadingWidth={250} loadingPadding="20" />
+          <LoadingComponent loadingWidth={250} loadingPadding="20" />
+          <LoadingComponent loadingWidth={250} loadingPadding="20" />
+          <LoadingComponent loadingWidth={250} loadingPadding="20" />
+          <LoadingComponent loadingWidth={250} loadingPadding="20" />
+          <LoadingComponent loadingWidth={250} loadingPadding="20" />
         </div>
       </Grid>
     </Grid>
