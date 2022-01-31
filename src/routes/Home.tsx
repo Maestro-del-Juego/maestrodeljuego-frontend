@@ -1,4 +1,4 @@
-import FeatureBlock from "../components/FeatureBlock"
+import FeatureBlock from "../components/FeatureBlock";
 
 export default function Home() {
     return (
@@ -7,32 +7,32 @@ export default function Home() {
         <div className="feature-list">
         <FeatureBlock
             featureIcon="/icon1.svg"
-            featureName="Feature Name 1"
+            featureName="Plan your game nights"
             featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
         />
         <FeatureBlock
             featureIcon="/icon2.svg"
-            featureName="Feature Name 2"
+            featureName="Collect feedback"
             featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
         />
         <FeatureBlock
             featureIcon="/icon3.svg"
-            featureName="Feature Name 3"
+            featureName="Track your play stats"
             featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
         />
         <FeatureBlock
             featureIcon="/icon4.svg"
-            featureName="Feature Name 4"
+            featureName="Make hosting easy"
             featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
         />
         <FeatureBlock
             featureIcon="/icon5.svg"
-            featureName="Feature Name 5"
+            featureName="Play more of your games"
             featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
         />
         <FeatureBlock
             featureIcon="/icon6.svg"
-            featureName="Feature Name 6"
+            featureName="Organize your collection"
             featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
         />
         </div>

@@ -290,6 +290,9 @@ export default function PlayStats(props: statProps) {
                         gameName={game.name}
                         imageUrl={game.image}
                         pubYear={game.pub_year}
+                        minPlayers={game.min_players}
+                        maxPlayers={game.max_players}
+                        playtime={game.playtime}
                       />
                     ))}
                   </Carousel>

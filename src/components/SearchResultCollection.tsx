@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useState } from 'react'
 import {  ListItem, ListItemText, ListItemIcon, Popover, IconButton, Tooltip } from '@mui/material';
-import GameInfoPopover from './GameInfoPopover'
+import GameInfoPopoverCollection from './GameInfoPopoverCollection'
 import InfoIcon from '@mui/icons-material/Info';
 
 interface resultsProps {
@@ -12,7 +12,7 @@ interface resultsProps {
     user: string;
 }
 
-export default function SearchResult(props: resultsProps) {
+export default function SearchResultCollection(props: resultsProps) {
     const [detailAnchor, setDetailAnchor] = useState(null)
     const handleDetailClick = (event: any) => {
         setDetailAnchor(event.currentTarget);
@@ -49,7 +49,7 @@ export default function SearchResult(props: resultsProps) {
                     horizontal: 'right',
                 }}
           >
-            <GameInfoPopover token={props.token} user={props.user} gameId={props.gameId} />
+            <GameInfoPopoverCollection token={props.token} user={props.user} gameId={props.gameId} />
           </Popover>
         </ListItem>
         </>
