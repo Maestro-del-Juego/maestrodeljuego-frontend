@@ -28,11 +28,9 @@ export default function NavBar(props: navProps) {
         </div>
         <div id="site-nav">
           <Link to={`/collection/${props.user}`}>Your Collection</Link> |
-          <Link to={props.auth === '' ? '/login' : `/wishlist/${props.user}`}>
-            Wishlist
-          </Link>{' '}
-          |<Link to="/search">Add Games</Link> |
-          <Link to="/game_night">Game Knight Dashboard</Link>
+          <Link to={`/wishlist/${props.user}`}>Wishlist</Link> |
+          <Link to="/search">Add Games</Link> |
+          <Link to={`/game_night/${props.user}`}>Game Night Dashboard</Link>
         </div>
         <div id="account-links">
           {props.user === '' ? (
@@ -44,6 +42,7 @@ export default function NavBar(props: navProps) {
             <div id="navbar-avatar">
               <Link to={`/user_page/${props.user}`}>
                 <img
+                  alt="User Avatar"
                   src={
                     props.avatar === '' || props.avatar === null
                       ? 'https://thumbs.dreamstime.com/b/vector-illustration-isolated-white-background-user-profile-avatar-black-line-icon-user-profile-avatar-black-solid-icon-121102166.jpg'

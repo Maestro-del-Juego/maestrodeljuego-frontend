@@ -98,8 +98,18 @@ function App() {
           path="/game_night/:gameId"
           element={<VotingForm token={token} />}
         />
-        <Route path="/game_night/:gameId/feedback" element={<FeedbackForm />} />
-        <Route path="/game_night" element={<GameNightMenu token={token} />} />
+        <Route
+          path="/game_night/:gameId/feedback"
+          element={<FeedbackForm />}
+        />
+        <Route
+          path="/game_night/:user"
+          element={<GameNightMenu user={user} token={token} />}
+        />
+        <Route
+          path="/game_night"
+          element={<Login setAuth={setAuth} updateAvatar={updateAvatar} />}
+        />
         <Route
           path="/game_night/:gameNightId/finalize"
           element={<GameNightOwnerView token={token} />}
@@ -115,6 +125,10 @@ function App() {
         <Route
           path="/wishlist/:user"
           element={<Wishlist user={user} token={token} />}
+        />
+        <Route
+          path="/wishlist/"
+          element={<Login setAuth={setAuth} updateAvatar={updateAvatar} />}
         />
       </Routes>
     </Router>

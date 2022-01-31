@@ -31,6 +31,7 @@ import PageviewIcon from '@mui/icons-material/Pageview';
 
 interface gameNightProps {
   token: string;
+  user: string;
 }
 
 interface gameNightObject {
