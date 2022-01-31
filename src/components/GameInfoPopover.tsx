@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import WishlistButton from '../components/WishlistButton';
 import CollectionButton from '../components/CollectionButton';
+import GroupIcon from '@mui/icons-material/Group';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 interface gameInfoProps {
   token: string;
@@ -57,12 +59,17 @@ export default function GameInfoPopover(props: gameInfoProps) {
 
   return (
     <div className="game-popover-card">
-      <h2>{gameTitle}</h2>
-      <h6>({pubYear})</h6>
+      <h2 className="popover-title">{gameTitle}</h2>
+      <h4 className="popover-pub-year">({pubYear})</h4>
       <img className="game-box-image" alt={gameTitle} src={imageUrl}></img>
-      <p>
-        {minPlayers} - {maxPlayers} Players | {playtime} Min Playtime
-      </p>
+      <div className="popover-players-playtime">
+        <div className="popover-players">
+            <GroupIcon sx={{ verticalAlign: "text-bottom" }}/> {minPlayers} - {maxPlayers} Players
+        </div>
+        <div className="popover-playtime">
+            <AccessTimeIcon sx={{ verticalAlign: "text-bottom" }}/> {playtime} Min Playtime
+        </div>
+      </div>
       <WishlistButton
         token={props.token}
         gameId={props.gameId!} // ! is non-null assertion operator
