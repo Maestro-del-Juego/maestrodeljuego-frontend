@@ -170,6 +170,9 @@ export default function VotingForm(props: gameNightProps) {
               gameName={game.title}
               pubYear={game.pub_year}
               imageUrl={game.image}
+              minPlayers={game.min_players}
+              maxPlayers={game.max_players}
+              playtime={game.playtime}
             />
           );
         })}

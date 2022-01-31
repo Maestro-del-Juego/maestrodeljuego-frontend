@@ -49,7 +49,12 @@ export default function CollectionButton(props: collectionButtonProps) {
               variant="outlined">Add to collection</Button>
             ) }
             </>
-          ) : (<></>) }
+          ) : (<>
+          <Button
+              disabled
+              className="collection-button-disabled"
+              variant="outlined"
+              >Add to collection</Button></>) }
         </>
       );
 }

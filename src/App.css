@@ -157,7 +157,9 @@ a {
 }
 
 .game-popover-card {
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
 }
 
 #settings-avatar {
@@ -687,3 +689,4 @@ a {
   left: 50%;
   right: 50;
 }
+
