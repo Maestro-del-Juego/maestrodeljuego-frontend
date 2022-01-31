@@ -288,8 +288,10 @@ export default function VotingForm(props: gameNightProps) {
     </div>
   ) : (
     <div>
-      <h2>Sorry you couldn't make it this time!</h2>
-      <h3>We'll have to play again soon!</h3>
+      <h2 className="gamenight-banner">
+        Sorry you couldn't make it this time!
+      </h2>
+      <h3 className="gamenight-banner">We'll have to play again soon!</h3>
     </div>
   );
 }

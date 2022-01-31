@@ -15,15 +15,10 @@ export default function FeedbackCard(props: feedbackCardProps) {
   const [hover, setHover] = useState(-1);
 
   const labels: { [index: string]: string } = {
-    0.5: 'Never Again',
     1: 'Awful',
-    1.5: 'Not Great',
     2: 'Meh',
-    2.5: 'Ok',
-    3: 'Not Bad',
-    3.5: 'Pretty Fun',
+    3: 'Prety Fun',
     4: 'Great',
-    4.5: 'Excellent',
     5: 'I NEED MORE OF THIS',
   };
 
@@ -37,7 +32,7 @@ export default function FeedbackCard(props: feedbackCardProps) {
       <Rating
         name="hover-feedback"
         value={score}
-        precision={0.5}
+        precision={1}
         onChange={(event, newValue) => {
           props.voteHandler(props.pk, newValue);
           setScore(newValue);
