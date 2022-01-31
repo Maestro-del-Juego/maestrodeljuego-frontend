@@ -1,5 +1,4 @@
 import FeatureBlock from "../components/FeatureBlock";
-import { List } from '@mui/material';
 
 export default function Home() {
     return (
