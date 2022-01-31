@@ -139,15 +139,10 @@ export default function FeedbackForm(props: feedbackProps) {
   };
 
   const labels: { [index: string]: string } = {
-    0.5: 'Never Again',
     1: 'Awful',
-    1.5: 'Not Great',
     2: 'Meh',
-    2.5: 'Ok',
-    3: 'Not Bad',
-    3.5: 'Pretty Fun',
+    3: 'Pretty Fun',
     4: 'Great',
-    4.5: 'Excellent',
     5: 'I NEED MORE OF THIS',
   };
 
@@ -220,7 +215,7 @@ export default function FeedbackForm(props: feedbackProps) {
           <Rating
             name="hover-feedback"
             value={overallScore}
-            precision={0.5}
+            precision={1}
             onChange={(event, newValue) => {
               setOverallScore(newValue);
             }}

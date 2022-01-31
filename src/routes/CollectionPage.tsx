@@ -22,17 +22,17 @@ export default function CollectionPage(props: collectionProps) {
 
   useEffect(() => {
     axios
-      .get('https://maestrodeljuego.herokuapp.com/library/', {
+      .get('https://maestrodeljuego.herokuapp.com/auth/users/me/', {
         headers: {
           Authorization: `Token ${props.token}`,
         },
       })
       .then((result) => {
         console.log(result);
-        setCollection(result.data);
+        setCollection(result.data.games);
         console.log(collection);
         setAlphaCollection(
-          [...result.data].sort(function (a: any, b: any) {
+          [...result.data.games].sort(function (a: any, b: any) {
             let fa = a.title.toLowerCase(),
               fb = b.title.toLowerCase();
 

@@ -576,8 +576,8 @@ a {
 }
 
 #lowest-played-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   margin-top: 100px;
 }
 
@@ -682,3 +682,11 @@ a {
 #collection-list-view-image {
   opacity: 25%;
 }
+
+.search-popover-anchor-div {
+  position: absolute;
+  margin: 0 auto;
+  left: 50%;
+  right: 50;
+}
+
