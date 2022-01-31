@@ -577,8 +577,7 @@ a {
 
 #lowest-played-section {
   display: flex;
-  flex-direction: column;
-  margin-top: 100px;
+  justify-content: space-around;
 }
 
 .edit-gn-form {
