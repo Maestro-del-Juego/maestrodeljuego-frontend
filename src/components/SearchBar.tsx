@@ -23,7 +23,6 @@ export default function SearchBar(props: searchProps) {
     var testArray: any = [];
     var testArray2: any = [];
     var testArrayMerged: any = [];
-    var arrayfromxml: any = [];
     props.setSearchSubmitted(true);
     const searchTerm: string = props.searchValue.replaceAll(' ', '+');
     console.log(
@@ -33,21 +32,14 @@ export default function SearchBar(props: searchProps) {
     event.preventDefault();
     axios.get(boardGameApi).then((response) => {
       parseString(response.data, function (err: any, result: any) {
-        // console.log(result.items.item[0].name[0].$.value);
-        // console.log(result.items.item[0].yearpublished[0].$.value);
-        // console.log(result.items.item[0].$.id);
-        // console.log(result.items)
         for (var i2 in result.items.item) {
           testArray.push(result.items.item[i2].name[0].$.value);
           testArray2.push(result.items.item[i2].$.id);
         }
-        // console.log(testArray)
-        // console.log(testArray2)
         testArrayMerged = testArray.map((str: string, index: number) => ({
           name: str,
           id: testArray2[index],
         }));
-        // console.log(testArrayMerged)
         props.setResultsData(testArrayMerged);
         console.log(props.resultsData);
       });
@@ -67,7 +59,7 @@ export default function SearchBar(props: searchProps) {
           className="input-field"
           label="Search for games"
           type="text"
-          placeholder="Please enter your search terms here."
+          placeholder="Search for games by title."
           value={props.searchValue}
           onChange={(event) => handleChange('searchValue', event)}
           sx={{ minWidth: 400, maxWidth: 400, marginBottom: 2 }}

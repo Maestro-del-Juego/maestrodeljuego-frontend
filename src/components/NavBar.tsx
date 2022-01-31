@@ -34,14 +34,17 @@ export default function NavBar(props: navProps) {
           <Divider sx={{ background: "#334195", marginLeft:1, marginRight:1 }} orientation="vertical" flexItem />
           <Link to="/search">Add Games</Link>
           <Divider sx={{ background: "#334195", marginLeft:1, marginRight:1 }} orientation="vertical" flexItem />
-          <Link to={`/game_night/${props.user}`}>Game Night Dashboard</Link>
+          {props.user !== "" ? (
+          <Link to={`/game_night/`}>Game Night Dashboard</Link> ) : (
+          <Link to={`/login/`}>Game Night Dashboard</Link> )}
         </Box>
         <div id="account-links">
           {props.user === '' ? (
-            <>
-              <Link to="/login">Login</Link>|
+            <Box id="login-nav" sx={{display: "flex" }}>
+              <Link to="/login">Login</Link>
+              <Divider sx={{ background: "#334195", marginLeft:1, marginRight:1 }} orientation="vertical" flexItem />
               <Link to="/registration">Register</Link>
-            </>
+            </Box>
           ) : (
             <div id="navbar-avatar">
               <Link to={`/user_page/${props.user}`}>
