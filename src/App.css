@@ -709,3 +709,8 @@ a {
   display: flex;
   justify-content: space-evenly;
 }
+
+#weekday-vis-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

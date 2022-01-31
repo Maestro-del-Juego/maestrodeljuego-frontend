@@ -56,7 +56,7 @@ export default function PlayStats(props: statProps) {
               setAvgAttendRatio((oldData) => [
                 ...oldData,
                 {
-                  day: key,
+                  day: key.substring(0, 3),
                   vote: value,
                 },
               ]);
@@ -67,7 +67,7 @@ export default function PlayStats(props: statProps) {
               setAvgOverallFeedback((oldData) => [
                 ...oldData,
                 {
-                  day: key,
+                  day: key.substring(0, 3),
                   vote: value,
                 },
               ]);
@@ -78,7 +78,7 @@ export default function PlayStats(props: statProps) {
               setAvgPlayerNum((oldData) => [
                 ...oldData,
                 {
-                  day: key,
+                  day: key.substring(0, 3),
                   vote: value,
                 },
               ]);
@@ -89,7 +89,7 @@ export default function PlayStats(props: statProps) {
               setSessionsNum((oldData) => [
                 ...oldData,
                 {
-                  day: key,
+                  day: key.substring(0, 3),
                   number: value,
                 },
               ]);
@@ -149,21 +149,24 @@ export default function PlayStats(props: statProps) {
               <Box>
                 {loading ? (
                   <LoadingComponent
-                    loadingWidth={600}
+                    loadingWidth={550}
                     loadingPadding={'20px'}
                   />
                 ) : (
                   <VictoryChart
-                    width={700}
-                    height={500}
-                    padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
-                    domainPadding={45}
+                    width={350}
+                    height={250}
+                    domainPadding={10}
                     theme={VictoryTheme.material}
                   >
                     <VictoryAxis
-                      label="Average Overall Score for Gamenights per Weekday"
+                      label="Avg Overall Score for Gamenights per Weekday"
                       style={{
-                        axisLabel: { fontSize: 20, padding: 40 },
+                        axisLabel: {
+                          fontSize: 14,
+                          padding: 30,
+                          fontWeight: 'bolder',
+                        },
                         ticks: { stroke: 'grey', size: 5 },
                       }}
                     />
@@ -183,22 +186,28 @@ export default function PlayStats(props: statProps) {
                   />
                 ) : (
                   <VictoryChart
-                    width={700}
-                    height={500}
-                    padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
-                    domainPadding={45}
+                    width={350}
+                    height={250}
+                    domainPadding={10}
                     theme={VictoryTheme.material}
                   >
                     <VictoryAxis
-                      label="Average Attendance per Weekday for Game Nights"
+                      label="Avg Overall Score for Gamenights per Weekday"
                       style={{
-                        axisLabel: { fontSize: 20, padding: 40 },
+                        axisLabel: {
+                          fontSize: 14,
+                          padding: 30,
+                          fontWeight: 'bolder',
+                        },
                         ticks: { stroke: 'grey', size: 5 },
                       }}
                     />
                     <VictoryAxis
                       dependentAxis
-                      style={{ ticks: { stroke: 'grey', size: 5 } }}
+                      style={{
+                        axisLabel: { fontSize: 14, padding: 30 },
+                        ticks: { stroke: 'grey', size: 5 },
+                      }}
                     />
                     <VictoryBar data={avgPlayerNum} x="day" y="vote" />
                   </VictoryChart>
@@ -212,23 +221,22 @@ export default function PlayStats(props: statProps) {
                   />
                 ) : (
                   <VictoryChart
-                    width={700}
-                    height={500}
-                    padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
-                    domainPadding={45}
+                    width={350}
+                    height={250}
                     theme={VictoryTheme.material}
                   >
                     <VictoryAxis
-                      label="Average Attendance Ratio per Weekday for Game Nights"
+                      label="Avg Overall Score for Gamenights per Weekday"
                       style={{
-                        axisLabel: { fontSize: 20, padding: 40 },
+                        axisLabel: {
+                          fontSize: 14,
+                          padding: 30,
+                          fontWeight: 'bolder',
+                        },
                         ticks: { stroke: 'grey', size: 5 },
                       }}
                     />
-                    <VictoryAxis
-                      dependentAxis
-                      style={{ ticks: { stroke: 'grey', size: 5 } }}
-                    />
+                    <VictoryAxis dependentAxis />
                     <VictoryBar data={avgAttendRatio} x="day" y="vote" />
                   </VictoryChart>
                 )}
@@ -241,23 +249,22 @@ export default function PlayStats(props: statProps) {
                   />
                 ) : (
                   <VictoryChart
-                    width={700}
-                    height={500}
-                    padding={{ left: 150, top: 50, right: 50, bottom: 150 }}
-                    domainPadding={45}
+                    width={350}
+                    height={250}
                     theme={VictoryTheme.material}
                   >
                     <VictoryAxis
                       label="Total Game Knights per Day of Week"
                       style={{
-                        axisLabel: { fontSize: 20, padding: 40 },
+                        axisLabel: {
+                          fontSize: 14,
+                          padding: 30,
+                          fontWeight: 'bolder',
+                        },
                         ticks: { stroke: 'grey', size: 5 },
                       }}
                     />
-                    <VictoryAxis
-                      dependentAxis
-                      style={{ ticks: { stroke: 'grey', size: 5 } }}
-                    />
+                    <VictoryAxis dependentAxis />
                     <VictoryBar data={sessionsNum} x="day" y="number" />
                   </VictoryChart>
                 )}
