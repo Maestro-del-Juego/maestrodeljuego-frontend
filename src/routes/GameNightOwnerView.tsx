@@ -928,7 +928,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </>
           ) : (
             <>
-              {(status === 'Finalized') || (moment(date).isBefore(moment())) ? (
+              {(status === 'Finalized') && (!moment(date).isBefore(moment())) ? (
                 <Button
                   className="reopen-button"
                   variant="contained"
@@ -1047,7 +1047,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                     <ListItem
                       secondaryAction={
                         <>
-                          {status === 'Voting' ? (
+                          {status === 'Voting' && !moment(date).isBefore(moment()) ? (
                             <IconButton
                               className="voting-results-add-button"
                               onClick={() => {
