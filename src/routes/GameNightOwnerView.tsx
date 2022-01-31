@@ -67,6 +67,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   const [contactFirstValid, setContactFirstValid] = useState<Boolean>(false);
   const [contactLastValid, setContactLastValid] = useState<Boolean>(false);
   const [contactEmailValid, setContactEmailValid] = useState<Boolean>(false);
+  const [backendDate, setBackendDate] = useState('');
 
 
   let { gameNightId } = useParams();
@@ -82,6 +83,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
       })
       .then((response) => {
         setDate(response.data.date);
+        setBackendDate(response.data.date);
         setStartTime(response.data.start_time);
         setEndTime(response.data.end_time);
         setLocation(response.data.location);
@@ -288,6 +290,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
         .then((response) => {
           console.log(response);
           setStatus(response.data.status);
+          setBackendDate(response.data.date);
           setUpdater(updater + 1);
         });
     } else {
@@ -316,6 +319,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
       .then((response) => {
         console.log(response);
         setStatus(response.data.status);
+        setBackendDate(response.data.date);
         setUpdater(updater + 1);
       });
   };
@@ -473,7 +477,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
   return (
     <>
       <div className="gn-owner-view-container">
-        {status === 'Voting' ? (
+        {status === 'Voting' && !(moment(backendDate).isBefore(moment())) ? (
           <form className="edit-gn-form">
             <TextField
               id="date-time-picker"
@@ -688,7 +692,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           aria-label="outlined primary button group"
           sx={{ marginRight: 2, marginTop: 2 }}
         >
-          <> {(status === "Voting") ? (
+          <> {status === 'Voting' && !(moment(backendDate).isBefore(moment())) ? (
           <Button
             id="contact-menu-button"
             aria-controls={openContactMenu ? 'contact-menu' : undefined}
@@ -709,7 +713,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
         </Button>  
           )}
           </>
-          <> {(status === "Voting") ? (
+          <> {status === 'Voting' && !(moment(backendDate).isBefore(moment())) ? (
           <Button
             aria-describedby={newContactPopupId}
             variant="contained"
@@ -832,7 +836,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           </form>
         </Popover>
       </div>
-          {status === 'Voting' ? (
+          {status === 'Voting' && !(moment(backendDate).isBefore(moment())) ? (
             <>
               <Button
                 className="finalize-button"
@@ -928,7 +932,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </>
           ) : (
             <>
-              {(status === 'Finalized') && (!moment(date).isBefore(moment())) ? (
+              {(status === 'Finalized') && !(moment(backendDate).isBefore(moment())) ? (
                 <Button
                   className="reopen-button"
                   variant="contained"
@@ -951,7 +955,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               )}
             </>
           )}
-          {status !== 'Cancelled' ? (
+          {status !== 'Cancelled' && !(moment(backendDate).isBefore(moment())) ? (
             <Button
               className="cancel-button"
               variant="contained"
@@ -964,7 +968,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </Button>
           ) : (
             <Button
-              sx={{ marginLeft:2, marginRight: 2 }}
+              sx={{ marginLeft:2, marginRight: 2, marginTop:2 }}
               className="cancel-button-disabled"
               variant="contained"
               disabled
@@ -1047,7 +1051,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                     <ListItem
                       secondaryAction={
                         <>
-                          {status === 'Voting' && !moment(date).isBefore(moment()) ? (
+                          {status === 'Voting' && !(moment(backendDate).isBefore(moment())) ? (
                             <IconButton
                               className="voting-results-add-button"
                               onClick={() => {
@@ -1087,7 +1091,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                       sx={{ backgroundColor: 'powderblue' }}
                       secondaryAction={
                         <>
-                          {status === 'Voting' ? (
+                          {status === 'Voting' && !(moment(backendDate).isBefore(moment())) ? (
                             <IconButton
                               className="voting-results-remove-button"
                               onClick={() => {
