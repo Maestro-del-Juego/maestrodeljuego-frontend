@@ -103,12 +103,8 @@ function App() {
           element={<FeedbackForm />}
         />
         <Route
-          path="/game_night/:user"
+          path="/game_night/"
           element={<GameNightMenu user={user} token={token} />}
-        />
-        <Route
-          path="/game_night"
-          element={<Login setAuth={setAuth} updateAvatar={updateAvatar} />}
         />
         <Route
           path="/game_night/:gameNightId/finalize"

@@ -941,7 +941,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 </Button>
               ) : (
                 <Button
-                sx={{ marginLeft:2, marginRight: 2 }}
+                sx={{ marginLeft:2, marginRight: 2, marginTop: 2 }}
                   className="reopen-button-disabled"
                   variant="contained"
                   disabled
