@@ -928,7 +928,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             </>
           ) : (
             <>
-              {status === 'Finalized' ? (
+              {(status === 'Finalized') || (moment(date).isBefore(moment())) ? (
                 <Button
                   className="reopen-button"
                   variant="contained"

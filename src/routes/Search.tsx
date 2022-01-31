@@ -2,13 +2,9 @@ import SearchBar from '../components/SearchBar';
 import SearchResult from '../components/SearchResult';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import OctoSearch from '../assets/OctoSearch.png';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 
 interface searchProps {
     token: string;

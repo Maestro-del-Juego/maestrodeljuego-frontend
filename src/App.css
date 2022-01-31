@@ -690,3 +690,17 @@ a {
   right: 50;
 }
 
+.popover-title {
+  margin-bottom: 0;
+}
+
+.popover-pub-year {
+  margin-top: 0;
+}
+
+.popover-players-playtime {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
