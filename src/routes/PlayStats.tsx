@@ -16,6 +16,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import StatsUser from '../assets/StatsUser.png';
+import LoadingComponent from '../components/LoadingComponent';
 interface statProps {
   user: string;
   token: string;
@@ -147,7 +148,7 @@ export default function PlayStats(props: statProps) {
             <div id="weekday-vis-container">
               <Box>
                 {loading ? (
-                  <h4>Loading...</h4>
+                  <LoadingComponent />
                 ) : (
                   <VictoryChart
                     width={700}
@@ -173,7 +174,7 @@ export default function PlayStats(props: statProps) {
               </Box>
               <Box>
                 {loading ? (
-                  <h4>Loading...</h4>
+                  <LoadingComponent />
                 ) : (
                   <VictoryChart
                     width={700}
@@ -199,7 +200,7 @@ export default function PlayStats(props: statProps) {
               </Box>
               <Box>
                 {loading ? (
-                  <h4>Loading...</h4>
+                  <LoadingComponent />
                 ) : (
                   <VictoryChart
                     width={700}
@@ -225,7 +226,7 @@ export default function PlayStats(props: statProps) {
               </Box>
               <Box>
                 {loading ? (
-                  <h4>Loading...</h4>
+                  <LoadingComponent />
                 ) : (
                   <VictoryChart
                     width={700}
@@ -254,7 +255,7 @@ export default function PlayStats(props: statProps) {
           <div id="gameplay-stats">
             <h2>Gameplay Stats</h2>
             {loading ? (
-              <h4>Loading...</h4>
+              <LoadingComponent />
             ) : (
               <div id="pie-data">
                 <div id="most-played-games">
@@ -301,7 +302,7 @@ export default function PlayStats(props: statProps) {
               <div id="least-played">
                 <h3>Least Played Games</h3>
                 {loading ? (
-                  <h4>Loading...</h4>
+                  <LoadingComponent />
                 ) : (
                   <Carousel>
                     {leastPlayed.map((game: any) => (
@@ -318,7 +319,7 @@ export default function PlayStats(props: statProps) {
               <div id="unplayed">
                 <h3>These haven't even hit the table!</h3>
                 {loading ? (
-                  <h4>Loading...</h4>
+                  <LoadingComponent />
                 ) : (
                   <Carousel>
                     {unplayed.map((game: any) => (
