@@ -89,16 +89,19 @@ img {
 }
 .feature-block h3 {
   margin-top: 10px;
+  color: white;
 }
 .feature-block p {
   margin-top: 15px;
   clear: left;
+  color: white;
 }
 .feature-block .feature-icon {
   width: 40px;
   margin-bottom: 0px;
   margin-right: 10px;
   float: left;
+  color: white;
 }
 
 .feature-list {
@@ -107,6 +110,7 @@ img {
   justify-content: center;
   margin-top: 60px;
   padding-top: 40px;
+  color: white;
 }
 .feature-block {
   margin-left: 4%;
