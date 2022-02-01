@@ -14,7 +14,7 @@ import PlayStats from './routes/PlayStats';
 import CreateEvent from './routes/CreateEvent';
 import VotingForm from './routes/VotingForm';
 import CollectionPage from './routes/CollectionPage';
-import Wishlist from './routes/Wishlist';
+import Wishlist from './components/Wishlist';
 import GameNightMenu from './routes/GameNightMenu';
 import GameNightOwnerView from './routes/GameNightOwnerView';
 import FeedbackForm from './routes/FeedbackForm';
@@ -116,14 +116,6 @@ function App() {
         />
         <Route
           path="/collection/"
-          element={<Login setAuth={setAuth} updateAvatar={updateAvatar} />}
-        />
-        <Route
-          path="/wishlist/:user"
-          element={<Wishlist user={user} token={token} />}
-        />
-        <Route
-          path="/wishlist/"
           element={<Login setAuth={setAuth} updateAvatar={updateAvatar} />}
         />
       </Routes>
