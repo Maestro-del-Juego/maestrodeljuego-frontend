@@ -1,6 +1,7 @@
 import { Box, Button, Typography, Grid } from '@mui/material'
 import FeatureBlock from "../components/FeatureBlock";
 import { useNavigate } from 'react-router-dom';
+import pieces from '../assets/game-pieces.png';
 
 export default function Home() {
     const navigate = useNavigate();
@@ -13,19 +14,19 @@ export default function Home() {
         <Box sx={{ flexGrow:1 }}>
         <Grid container spacing={2}>
             <Grid item xs={6}>
-                <Box className="home-screen-left" sx={{ marginLeft:12, marginTop:12 }}>
+                <Box className="home-screen-left" sx={{ marginLeft:12, marginTop:6 }}>
                     <Typography variant="h2" sx={{ fontWeight:"bolder", textAlign:"center" }}>Play More Games</Typography>
                     <Typography variant="h6" sx={{ marginLeft:10, marginRight:10, marginTop:6, marginBottom:6 }}>
-                        Game Knight helps you optimize your game nights for maximum fun, so you spend more time playing and less time deciding what to play.
+                        Game Knight helps you optimize your game nights for maximum fun, so you spend more time playing and less time worrying about logistics.
                     </Typography>
-                    <Button variant="contained" sx={{ p:3, display:"block", margin:"auto" }} onClick={handleClickToReg}>
+                    <Button variant="contained" sx={{ p:3, display:"block", margin:"auto", backgroundColor:"#759eb8" }} onClick={handleClickToReg}>
                         <Typography variant="h6">Register Now</Typography>
                     </Button>
                 </Box>
             </Grid>
             <Grid item xs={6}>
-                <Box className="home-screen-right" sx={{ marginRight:12, marginTop:12 }}>
-                    <img className="home-image" src="/meeples.jpeg" alt="Board game" />
+                <Box className="home-screen-right" sx={{ marginRight:12, marginTop:6 }}>
+                    <img className="home-image" src={pieces} alt="Board game" />
                 </Box>
             </Grid>
         </Grid>
@@ -33,10 +34,10 @@ export default function Home() {
         <Box className="home-screen-upper-box" sx={{ display:"inline" }}>
         
         </Box>
-        <Box className="feature-list" sx={{ backgroundColor:"#759eb8" }}>
+        <Box className="feature-list" sx={{ backgroundColor:"#334195" }}>
         <FeatureBlock
             featureIcon="/icon4.svg"
-            featureName="Make hosting easy"
+            featureName="Hosting made easy"
             featureDetails="Seamlessly organize your next game night and invite guests to join in on the planning process by giving them a vote on what games will hit the table."
         />
         <FeatureBlock
@@ -46,23 +47,23 @@ export default function Home() {
         />
         <FeatureBlock
             featureIcon="/icon5.svg"
-            featureName="Play more of your games"
-            featureDetails="Know what you're playing before you gather."
-        />
-        <FeatureBlock
-            featureIcon="/icon2.svg"
-            featureName="Placeholder text is here"
-            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices, velit aliquet rutrum congue, augue leo suscipit eros, non porta sapien erat porta eros. Nullam."
-        />
-        <FeatureBlock
-            featureIcon="/icon3.svg"
-            featureName="Placeholder text is here"
-            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices, velit aliquet rutrum congue, augue leo suscipit eros, non porta sapien erat porta eros. Nullam."
+            featureName="End the scheduling hassle"
+            featureDetails="Pick a time, date, and a handful of games, then let your guests do the rest. Lock in the details, and you're ready for game night!"
         />
         <FeatureBlock
             featureIcon="/icon6.svg"
-            featureName="Placeholder text is here"
+            featureName="Track your play stats"
             featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices, velit aliquet rutrum congue, augue leo suscipit eros, non porta sapien erat porta eros. Nullam."
+        />
+        <FeatureBlock
+            featureIcon="/icon2.svg"
+            featureName="Catalog your collection"
+            featureDetails="Keep a list of all the board games in your collection to quickly add these to your event without the need to check your closet."
+        />
+        <FeatureBlock
+            featureIcon="/icon3.svg"
+            featureName="Play more of your games"
+            featureDetails="Are your guests ready to play something new? See which games haven't left the shelf and add them to the next event."
         />
         </Box>
         </>
