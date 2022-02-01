@@ -14,20 +14,12 @@ export default function FeedbackCard(props: feedbackCardProps) {
   const [score, setScore] = useState<number | null>(2.5);
   const [hover, setHover] = useState(-1);
 
-  const labels: { [index: string]: string } = {
-    1: 'Awful',
-    2: 'Meh',
-    3: 'Pretty Fun',
-    4: 'Great',
-    5: 'I NEED MORE OF THIS',
-  };
-
   let hoverValue: any[];
   hoverValue = [hover !== -1 ? hover : score];
 
   return (
     <div id="vote-card">
-      <h5>{props.title}</h5>
+      <h3 style={{ fontFamily: 'Roboto Condensed' }}>{props.title}</h3>
       <img src={props.url} alt="Game Cover Art" className="vote-card-image" />
       <Rating
         name="hover-feedback"
@@ -42,9 +34,6 @@ export default function FeedbackCard(props: feedbackCardProps) {
         }}
         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
       />
-      {score !== null && (
-        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : score]}</Box>
-      )}
     </div>
   );
 }

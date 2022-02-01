@@ -39,7 +39,8 @@
 
 h1,
 h2 {
-  font-family: 'Oswald';
+  font-family: 'Raleway';
+  color: #334195;
 }
 
 a,
@@ -49,7 +50,8 @@ h5,
 h6,
 p,
 span {
-  font-family: 'Open Sans';
+  font-family: 'Roboto Condensed';
+  color: #334195;
 }
 
 #nav-bar {
@@ -579,6 +581,8 @@ a {
 #lowest-played-section {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 30px;
+  margin-left: 30px;
 }
 
 .edit-gn-form {

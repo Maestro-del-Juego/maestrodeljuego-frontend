@@ -20,9 +20,6 @@ import LoadingComponent from '../components/LoadingComponent';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import pieces from '../assets/game-pieces.png';
-import castleDoor from '../assets/dungeon-door.png';
-import guyKnight from '../assets/knight-with-sword.png';
-import ladyKnight from '../assets/knight-with-sword-2.png';
 interface statProps {
   user: string;
   token: string;
@@ -192,6 +189,7 @@ export default function PlayStats(props: statProps) {
                           minPlayers={game.min_players}
                           maxPlayers={game.max_players}
                           playtime={game.playtime}
+                          categories={game.categories}
                         />
                       </div>
                     ))}
@@ -212,7 +210,7 @@ export default function PlayStats(props: statProps) {
                     <VictoryChart
                       width={350}
                       height={250}
-                      domainPadding={10}
+                      domainPadding={20}
                       theme={VictoryTheme.material}
                     >
                       <VictoryAxis
@@ -244,7 +242,7 @@ export default function PlayStats(props: statProps) {
                     <VictoryChart
                       width={350}
                       height={250}
-                      domainPadding={10}
+                      domainPadding={20}
                       theme={VictoryTheme.material}
                     >
                       <VictoryAxis
@@ -276,6 +274,7 @@ export default function PlayStats(props: statProps) {
                     <VictoryChart
                       width={350}
                       height={250}
+                      domainPadding={20}
                       theme={VictoryTheme.material}
                     >
                       <VictoryAxis
@@ -307,6 +306,7 @@ export default function PlayStats(props: statProps) {
                     <VictoryChart
                       width={350}
                       height={250}
+                      domainPadding={20}
                       theme={VictoryTheme.material}
                     >
                       <VictoryAxis
@@ -333,12 +333,15 @@ export default function PlayStats(props: statProps) {
           </div>
           <div id="gameplay-stats">
             <h2>Gameplay Stats</h2>
+            <h3 style={{ marginTop: '0px' }}>
+              Hover over a slice to find out more!
+            </h3>
             {loading ? (
               <LoadingComponent loadingWidth={600} loadingPadding={'20px'} />
             ) : (
               <div id="pie-data">
                 <div id="most-played-games">
-                  <h3>Most Played Games</h3>
+                  <h3 style={{ fontWeight: 'bolder' }}>Most Played Games</h3>
                   <VictoryPie
                     labelComponent={<VictoryTooltip />}
                     data={mostPlayed}
@@ -357,7 +360,9 @@ export default function PlayStats(props: statProps) {
                   />
                 </div>
                 <div id="most-played-categories">
-                  <h3>Most Played Games by Category</h3>
+                  <h3 style={{ fontWeight: 'bolder' }}>
+                    Most Played Games by Category
+                  </h3>
                   <VictoryPie
                     labelComponent={<VictoryTooltip />}
                     data={mostPlayedCategories}
@@ -377,19 +382,14 @@ export default function PlayStats(props: statProps) {
                 </div>
               </div>
             )}
-            <Box sx={{ width: 590, margin: 'auto' }}>
-              <ImageList variant="masonry" cols={2} gap={8}>
+            <Box sx={{ width: 520, margin: 'auto' }}>
+              <ImageList variant="masonry" cols={1} gap={8}>
                 <ImageListItem key={0}>
-                  <img src={pieces} alt="Game Pieces" />
-                </ImageListItem>
-                <ImageListItem key={1}>
-                  <img src={ladyKnight} alt="Long-haired Knight" />
-                </ImageListItem>
-                <ImageListItem key={2}>
-                  <img src={castleDoor} alt="Castle Door" />
-                </ImageListItem>
-                <ImageListItem key={3}>
-                  <img src={guyKnight} alt="Short-hair Knight" />
+                  <img
+                    src={pieces}
+                    alt="Game Pieces"
+                    style={{ opacity: 0.5 }}
+                  />
                 </ImageListItem>
               </ImageList>
             </Box>
