@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import GameCard from '../components/GameCard';
+import GameCard from './GameCard';
 import React from 'react'
 
 interface wishlistProps {

@@ -577,8 +577,7 @@ a {
 
 #lowest-played-section {
   display: flex;
-  flex-direction: column;
-  margin-top: 100px;
+  justify-content: space-around;
 }
 
 .edit-gn-form {
@@ -710,6 +709,22 @@ a {
   justify-content: space-evenly;
 }
 
+#weekday-vis-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#unplayed {
+  min-width: 300px;
+}
+
+#least-played {
+  min-width: 300px;
+}
+
+#times-played-name {
+  margin-bottom: 0px;
+}
 .filter-white {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(67deg) brightness(102%) contrast(102%);
 }
