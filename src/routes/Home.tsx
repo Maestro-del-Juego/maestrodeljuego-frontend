@@ -42,12 +42,27 @@ export default function Home() {
         <FeatureBlock
             featureIcon="/icon1.svg"
             featureName="Build a perfect game night"
-            featureDetails="Maximize enjoyment by collecting feedback from your guests and seeing which games and days of the week get everyone excited to play."
+            featureDetails="Maximize enjoyment by collecting feedback from your guests to see which games and days of the week get everyone excited to play."
         />
         <FeatureBlock
             featureIcon="/icon5.svg"
             featureName="Play more of your games"
             featureDetails="Know what you're playing before you gather."
+        />
+        <FeatureBlock
+            featureIcon="/icon2.svg"
+            featureName="Placeholder text is here"
+            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices, velit aliquet rutrum congue, augue leo suscipit eros, non porta sapien erat porta eros. Nullam."
+        />
+        <FeatureBlock
+            featureIcon="/icon3.svg"
+            featureName="Placeholder text is here"
+            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices, velit aliquet rutrum congue, augue leo suscipit eros, non porta sapien erat porta eros. Nullam."
+        />
+        <FeatureBlock
+            featureIcon="/icon6.svg"
+            featureName="Placeholder text is here"
+            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices, velit aliquet rutrum congue, augue leo suscipit eros, non porta sapien erat porta eros. Nullam."
         />
         </Box>
         </>
