@@ -694,11 +694,11 @@ a {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.popover-title {
+.popover-title, .info-page-title {
   margin-bottom: 0;
 }
 
-.popover-pub-year {
+.popover-pub-year, .info-page-pub-year {
   margin-top: 0;
 }
 
