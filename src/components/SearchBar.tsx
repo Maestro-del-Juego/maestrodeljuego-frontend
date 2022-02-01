@@ -54,7 +54,6 @@ export default function SearchBar(props: searchProps) {
   return (
     <div className="search-bar-container">
       <form className="search-bar" onSubmit={handleSubmit}>
-        {/* <label className="search-label">Search for games: </label> */}
         <TextField
           className="input-field"
           label="Search for games"
@@ -62,9 +61,9 @@ export default function SearchBar(props: searchProps) {
           placeholder="Search for games by title."
           value={props.searchValue}
           onChange={(event) => handleChange('searchValue', event)}
-          sx={{ minWidth: 400, maxWidth: 400, marginBottom: 2 }}
+          sx={{ width: 400 }}
         />
-        <Button variant="contained" className="search-submit-button" type="submit" sx={{ marginLeft: 2, marginBottom: 2 }}>
+        <Button variant="contained" className="search-submit-button" type="submit" sx={{ marginLeft: 2 }}>
           Search
         </Button>
       </form>
