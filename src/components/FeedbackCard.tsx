@@ -17,7 +17,7 @@ export default function FeedbackCard(props: feedbackCardProps) {
   const labels: { [index: string]: string } = {
     1: 'Awful',
     2: 'Meh',
-    3: 'Prety Fun',
+    3: 'Pretty Fun',
     4: 'Great',
     5: 'I NEED MORE OF THIS',
   };
