@@ -690,7 +690,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           className="contact-button-group"
           variant="contained"
           aria-label="outlined primary button group"
-          sx={{ marginRight: 2, marginTop: 2 }}
+          sx={{ marginRight: 8, marginTop: 2 }}
         >
           <> {status === 'Voting' && !(moment(backendDate).isBefore(moment())) ? (
           <Button
@@ -841,7 +841,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               <Button
                 className="finalize-button"
                 variant="contained"
-                sx={{ backgroundColor: 'mediumseagreen', marginLeft:2, marginRight: 2, marginTop: 2 }}
+                sx={{ backgroundColor: 'mediumseagreen', marginLeft:8, marginRight: 2, marginTop: 2 }}
                 onClick={(event) => {
                   finalizeGameNight(event);
                 }}
@@ -936,7 +936,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 <Button
                   className="reopen-button"
                   variant="contained"
-                  sx={{ marginLeft:2, marginRight: 2, marginTop: 2 }}
+                  sx={{ marginLeft:6, marginRight: 2, marginTop: 2 }}
                   onClick={() => {
                     reopenGameNight();
                   }}
@@ -945,7 +945,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 </Button>
               ) : (
                 <Button
-                sx={{ marginLeft:2, marginRight: 2, marginTop: 2 }}
+                sx={{ marginLeft:8, marginRight: 2, marginTop: 2 }}
                   className="reopen-button-disabled"
                   variant="contained"
                   disabled
