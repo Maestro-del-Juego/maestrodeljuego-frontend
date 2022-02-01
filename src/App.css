@@ -690,6 +690,11 @@ a {
   right: 50;
 }
 
+#loading-components {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .popover-title {
   margin-bottom: 0;
 }
