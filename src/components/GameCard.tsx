@@ -54,8 +54,8 @@ export default function GameCard(props: gameProps) {
           textAlign="left"
           fontWeight="bolder"
         >
-          {props.gameName.length > 18
-            ? props.gameName.slice(0, 19) + '...'
+          {props.gameName.length > 16
+            ? props.gameName.slice(0, 17) + '...'
             : props.gameName}
         </Typography>
       </CardContent>
