@@ -256,7 +256,7 @@ export default function EventForm(props: eventFormProps) {
             type="date"
             value={date}
             onChange={(event) => handleChange('date', event)}
-            sx={{ minWidth: 220, m:2 }}
+            sx={{ minWidth: 220, m:2, backgroundColor:"white" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -274,7 +274,7 @@ export default function EventForm(props: eventFormProps) {
             inputProps={{
               step: 300, // 5 min
             }}
-            sx={{ minWidth: 150, m:2 }}
+            sx={{ minWidth: 150, m:2, backgroundColor:"white" }}
           />
           <TextField
             id="end-time-picker"
@@ -288,7 +288,7 @@ export default function EventForm(props: eventFormProps) {
             inputProps={{
               step: 300, // 5 min
             }}
-            sx={{ minWidth: 150, m:2 }}
+            sx={{ minWidth: 150, m:2, backgroundColor:"white" }}
           />
           <TextField
             id="location-picker"
@@ -300,7 +300,7 @@ export default function EventForm(props: eventFormProps) {
               shrink: true,
             }}
             inputProps={{ maxLength: 70}}
-            sx={{ minWidth: 300, m:2 }}
+            sx={{ minWidth: 300, m:2, backgroundColor:"white" }}
           />
           <Button
             sx={{ backgroundColor: "mediumseagreen", m:2}}
@@ -368,6 +368,7 @@ export default function EventForm(props: eventFormProps) {
             aria-haspopup="true"
             aria-expanded={openContactMenu ? 'true' : undefined}
             onClick={handleContactClick}
+            sx={{ backgroundColor:"#334195" }}
           >
             Invite Contacts
           </Button>
@@ -375,6 +376,7 @@ export default function EventForm(props: eventFormProps) {
             aria-describedby={newContactPopupId}
             variant="contained"
             onClick={handleNewContactClick}
+            sx={{ backgroundColor:"#334195" }}
           >
             Create New Contact
           </Button>
@@ -491,7 +493,7 @@ export default function EventForm(props: eventFormProps) {
           aria-expanded={openGameMenu ? 'true' : undefined}
           onClick={handleGameClick}
           variant="contained"
-          sx={{ marginLeft: 2}}
+          sx={{ marginLeft: 2, backgroundColor:"#334195" }}
         >
           Select Games
         </Button>
@@ -523,7 +525,7 @@ export default function EventForm(props: eventFormProps) {
           <List
             sx={{ minWidth: 250, maxWidth: 250 }}
             subheader={
-              <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>Guest List</ListSubheader>
+              <ListSubheader sx={{ fontSize: 16, textAlign: "center", backgroundColor:"#f8f8f8" }}>Guest List</ListSubheader>
             }
           >
             {props.guestList.map((guest) => (
@@ -556,7 +558,7 @@ export default function EventForm(props: eventFormProps) {
           <List
             sx={{ minWidth: 500, maxWidth: 500 }}
             subheader={
-              <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>Game List</ListSubheader>
+              <ListSubheader sx={{ fontSize: 16, textAlign: "center", backgroundColor:"#f8f8f8" }}>Game List</ListSubheader>
             }
           >
             {props.selectedGames.map((game) => (

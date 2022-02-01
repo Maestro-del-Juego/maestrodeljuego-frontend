@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(248, 248, 248);
+}
+
 .App {
   text-align: center;
 }
@@ -438,6 +442,7 @@ a {
 }
 
 .gn-owner-view-container {
+  margin-top: 50px;
   display: block;
 }
 
@@ -625,7 +630,7 @@ a {
 }
 
 .new-event-form {
-  margin-top: 20px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

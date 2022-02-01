@@ -44,12 +44,14 @@ export default function WishlistButton(props: wishlistButtonProps) {
               className="wishlist-button-on-list"
               onClick={(event) => handleSubmit(event)}
               variant="contained"
+              sx={{ backgroundColor:"#334195" }}
               startIcon={<NotificationsIcon />}
               >On wishlist</Button>
             ):(
               <Button
               className="wishlist-button-not-on-list"
               onClick={(event) => handleSubmit(event)}
+              sx={{ backgroundColor:"white", color:"#334195", borderColor:"#334195" }}
               variant="outlined">Add to wishlist</Button>
             ) }
             </>

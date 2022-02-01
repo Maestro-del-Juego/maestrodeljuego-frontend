@@ -40,12 +40,14 @@ export default function CollectionButton(props: collectionButtonProps) {
               className="collection-button-owned"
               onClick={(event) => handleSubmit(event)}
               variant="contained"
+              sx={{ backgroundColor:"#334195" }}
               startIcon={<CheckCircleIcon />}
               >In collection</Button>
             ):(
               <Button
               className="collection-button-not-owned"
               onClick={(event) => handleSubmit(event)}
+              sx={{ backgroundColor:"white", color:"#334195", borderColor:"#334195" }}
               variant="outlined">Add to collection</Button>
             ) }
             </>

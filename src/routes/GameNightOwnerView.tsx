@@ -491,7 +491,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               onChange={(event) => {
                 if (status === 'Voting') handleChange('date', event);
               }}
-              sx={{ minWidth: 220, m:2 }}
+              sx={{ minWidth: 220, m:2, backgroundColor:"white" }}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -510,7 +510,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ minWidth: 150, m:2 }}
+              sx={{ minWidth: 150, m:2, backgroundColor:"white" }}
             />
             <TextField
               id="end-time-picker"
@@ -526,7 +526,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               inputProps={{
                 step: 300, // 5 min
               }}
-              sx={{ minWidth: 150, m:2 }}
+              sx={{ minWidth: 150, m:2, backgroundColor:"white" }}
             />
             <TextField
               id="location-picker"
@@ -539,10 +539,10 @@ export default function GameNightOwnerView(props: gameNightProps) {
               InputLabelProps={{
                 shrink: true,
               }}
-              sx={{ minWidth: 300, m:2 }}
+              sx={{ minWidth: 300, m:2, backgroundColor:"white" }}
             />
             <Button
-              sx={{ m:2 }}
+              sx={{ m:2, backgroundColor:"#334195" }}
               className="submit-button"
               variant="contained"
               onClick={(event) => handleSubmit(event)}
@@ -703,6 +703,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             aria-haspopup="true"
             aria-expanded={openContactMenu ? 'true' : undefined}
             onClick={handleContactClick}
+            sx={{ backgroundColor:"#334195" }}
           >
             Invite Contacts
           </Button> ) : (
@@ -722,6 +723,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             aria-describedby={newContactPopupId}
             variant="contained"
             onClick={handleNewContactClick}
+            sx={{ backgroundColor:"#334195" }}
           >
             Create New Contact
           </Button> ) : (
@@ -940,7 +942,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 <Button
                   className="reopen-button"
                   variant="contained"
-                  sx={{ marginLeft:6, marginRight: 2, marginTop: 2 }}
+                  sx={{ marginLeft:6, marginRight: 2, marginTop: 2, backgroundColor:"#334195" }}
                   onClick={() => {
                     reopenGameNight();
                   }}
@@ -987,7 +989,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <List
               sx={{ minWidth: 250, maxWidth: 250 }}
               subheader={
-                <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>RSVPs:</ListSubheader>
+                <ListSubheader sx={{ fontSize: 16, textAlign: "center", backgroundColor:"#f8f8f8" }}>RSVPs:</ListSubheader>
               }
             >
               {newInviteeList.map((invitee) => (
@@ -1043,7 +1045,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
             <List
               sx={{ minWidth: 500, maxWidth: 500, marginLeft: 4 }}
               subheader={
-                <ListSubheader sx={{ fontSize: 16, textAlign: "center" }}>
+                <ListSubheader sx={{ fontSize: 16, textAlign: "center", backgroundColor:"#f8f8f8" }}>
                   Select games to be played:
                 </ListSubheader>
               }
@@ -1094,7 +1096,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                     </ListItem>
                   ) : (
                     <ListItem
-                      sx={{ backgroundColor: 'powderblue' }}
+                      sx={{ backgroundColor: '#d9ddf2' }}
                       secondaryAction={
                         <>
                           {status === 'Voting' && !(moment(backendDate).isBefore(moment())) ? (
