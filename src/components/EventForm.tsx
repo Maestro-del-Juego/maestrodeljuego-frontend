@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { collectionObject, contactObject } from '../routes/CreateEvent';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, ButtonGroup, Menu, MenuItem, List, ListItem, ListItemText, ListSubheader,
-  ListItemAvatar, Avatar, ListItemIcon, IconButton, Popover, Divider} from '@mui/material';
+  ListItemAvatar, Avatar, ListItemIcon, IconButton, Popover, Divider, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ErrorIcon from '@mui/icons-material/Error';
 import React from 'react';
@@ -576,12 +576,14 @@ export default function EventForm(props: eventFormProps) {
                   }
                 >
                   <ListItemAvatar>
+                    <Tooltip title={`${game.min_players}-${game.max_players} Players; ${game.playtime} Minutes`}>
                     <Avatar
                       className="game-selection-image"
                       variant="square"
                       src={game.image}
                       alt={game.title}
                     />
+                    </Tooltip>
                   </ListItemAvatar>
                   <ListItemText
                     className="game-picker-title"

@@ -138,14 +138,6 @@ export default function FeedbackForm(props: feedbackProps) {
     }
   };
 
-  const labels: { [index: string]: string } = {
-    1: 'Awful',
-    2: 'Meh',
-    3: 'Pretty Fun',
-    4: 'Great',
-    5: 'I NEED MORE OF THIS',
-  };
-
   return guestPick ? (
     <div id="guest-list-select">
       <form onSubmit={guestHandler} id="guest-list-form">
@@ -226,11 +218,6 @@ export default function FeedbackForm(props: feedbackProps) {
               <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
             }
           />
-          {overallScore !== null && (
-            <Box sx={{ ml: 2 }}>
-              {labels[overallHover !== -1 ? overallHover : overallScore]}
-            </Box>
-          )}
           <h2>Any feeback you would like to give your host?</h2>
           <TextField
             id="outlined-multiline-flexible"

@@ -10,6 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import React from 'react';
@@ -30,6 +31,9 @@ interface gameObject {
   pub_year: number;
   title: string;
   votes: number;
+  min_players: number;
+  max_players: number;
+  playtime: number;
 }
 
 interface inviteeObject {
@@ -690,7 +694,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
           className="contact-button-group"
           variant="contained"
           aria-label="outlined primary button group"
-          sx={{ marginRight: 2, marginTop: 2 }}
+          sx={{ marginRight: 8, marginTop: 2 }}
         >
           <> {status === 'Voting' && !(moment(backendDate).isBefore(moment())) ? (
           <Button
@@ -841,7 +845,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
               <Button
                 className="finalize-button"
                 variant="contained"
-                sx={{ backgroundColor: 'mediumseagreen', marginLeft:2, marginRight: 2, marginTop: 2 }}
+                sx={{ backgroundColor: 'mediumseagreen', marginLeft:8, marginRight: 2, marginTop: 2 }}
                 onClick={(event) => {
                   finalizeGameNight(event);
                 }}
@@ -936,7 +940,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 <Button
                   className="reopen-button"
                   variant="contained"
-                  sx={{ marginLeft:2, marginRight: 2, marginTop: 2 }}
+                  sx={{ marginLeft:6, marginRight: 2, marginTop: 2 }}
                   onClick={() => {
                     reopenGameNight();
                   }}
@@ -945,7 +949,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                 </Button>
               ) : (
                 <Button
-                sx={{ marginLeft:2, marginRight: 2, marginTop: 2 }}
+                sx={{ marginLeft:8, marginRight: 2, marginTop: 2 }}
                   className="reopen-button-disabled"
                   variant="contained"
                   disabled
@@ -1073,12 +1077,14 @@ export default function GameNightOwnerView(props: gameNightProps) {
                       }
                     >
                       <ListItemAvatar>
+                      <Tooltip title={`${game.min_players}-${game.max_players} Players; ${game.playtime} Minutes`}>
                         <Avatar
                           className="game-selection-image"
                           variant="square"
                           src={game.image}
                           alt={game.title}
                         />
+                        </Tooltip>
                       </ListItemAvatar>
                       <ListItemText
                         className="game-picker-title"
@@ -1113,12 +1119,14 @@ export default function GameNightOwnerView(props: gameNightProps) {
                       }
                     >
                       <ListItemAvatar>
+                      <Tooltip title={`${game.min_players}-${game.max_players} Players; ${game.playtime} Minutes`}>
                         <Avatar
                           className="game-selection-image"
                           variant="square"
                           src={game.image}
                           alt={game.title}
                         />
+                        </Tooltip>
                       </ListItemAvatar>
                       <ListItemText
                         className="game-picker-title"

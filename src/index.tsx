@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import '@fontsource/oswald';
 import '@fontsource/open-sans';
 import '@fontsource/caesar-dressing';
+import '@fontsource/raleway';
+import '@fontsource/roboto-condensed';
 
 ReactDOM.render(
   <React.StrictMode>

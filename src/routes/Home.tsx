@@ -1,17 +1,17 @@
-import { Box, Button, Typography, Grid } from '@mui/material'
-import FeatureBlock from "../components/FeatureBlock";
+import { Box, Button, Typography, Grid } from '@mui/material';
+import FeatureBlock from '../components/FeatureBlock';
 import { useNavigate } from 'react-router-dom';
 import pieces from '../assets/game-pieces.png';
 
 export default function Home() {
-    const navigate = useNavigate();
-    const handleClickToReg = () => {
-        navigate('/registration/');
-    }
+  const navigate = useNavigate();
+  const handleClickToReg = () => {
+    navigate('/registration/');
+  };
 
-    return (
-        <>
-        <Box sx={{ flexGrow:1 }}>
+  return (
+    <>
+      <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
             <Grid item xs={6}>
                 <Box className="home-screen-left" sx={{ marginLeft:12, marginTop:6 }}>
@@ -65,7 +65,7 @@ export default function Home() {
             featureName="Play more of your games"
             featureDetails="Are your guests ready to play something new? See which games haven't left the shelf and add them to the next event."
         />
-        </Box>
-        </>
-    )
+      </Box>
+    </>
+  );
 }
