@@ -39,7 +39,8 @@
 
 h1,
 h2 {
-  font-family: 'Oswald';
+  font-family: 'Raleway';
+  color: #334195;
 }
 
 a,
@@ -49,7 +50,8 @@ h5,
 h6,
 p,
 span {
-  font-family: 'Open Sans';
+  font-family: 'Roboto Condensed';
+  color: #334195;
 }
 
 #nav-bar {
