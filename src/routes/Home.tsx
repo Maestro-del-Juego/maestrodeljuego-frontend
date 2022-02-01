@@ -15,12 +15,12 @@ export default function Home() {
         <Grid container spacing={2}>
             <Grid item xs={6}>
                 <Box className="home-screen-left" sx={{ marginLeft:12, marginTop:6 }}>
-                    <Typography variant="h2" sx={{ fontWeight:"bolder", textAlign:"center" }}>Play More Games</Typography>
-                    <Typography variant="h6" sx={{ marginLeft:10, marginRight:10, marginTop:6, marginBottom:6 }}>
+                    <Typography variant="h2" sx={{ fontWeight:"bold", textAlign:"center", fontFamily:'Raleway' }}>Play More Games</Typography>
+                    <Typography variant="h5" sx={{ marginLeft:10, marginRight:10, marginTop:6, marginBottom:6, fontFamily:'Roboto Condensed' }}>
                         Game Knight helps you optimize your game nights for maximum fun, so you spend more time playing and less time worrying about logistics.
                     </Typography>
                     <Button variant="contained" sx={{ p:3, display:"block", margin:"auto", backgroundColor:"#759eb8" }} onClick={handleClickToReg}>
-                        <Typography variant="h6">Register Now</Typography>
+                        <Typography variant="h6" sx={{ color:"white" }}>Register Now</Typography>
                     </Button>
                 </Box>
             </Grid>
@@ -53,7 +53,7 @@ export default function Home() {
         <FeatureBlock
             featureIcon="/icon6.svg"
             featureName="Track your play stats"
-            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices, velit aliquet rutrum congue, augue leo suscipit eros, non porta sapien erat porta eros. Nullam."
+            featureDetails="Keep track of which games you play most, what genres are most popular, and which games you haven't played at all."
         />
         <FeatureBlock
             featureIcon="/icon2.svg"

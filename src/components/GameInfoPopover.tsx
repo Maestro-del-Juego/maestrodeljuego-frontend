@@ -63,7 +63,7 @@ export default function GameInfoPopover(props: gameInfoProps) {
   return (
     <div className="game-popover-card">
       <h2 className="popover-title">{gameTitle}</h2>
-      <h4 className="popover-pub-year">Year Released ({pubYear})</h4>
+      <h5 className="popover-pub-year">Published: {pubYear}</h5>
       <img className="game-box-image" alt={gameTitle} src={imageUrl}></img>
       <div className="popover-players-playtime">
         <div className="popover-players">
