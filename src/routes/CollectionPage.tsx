@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import logo from '../assets/searchperson.svg';
 import React from 'react';
 import LoadingComponent from '../components/LoadingComponent';
+import Wishlist from '../components/Wishlist';
 
 interface collectionProps {
   user: string;
@@ -21,6 +22,7 @@ export default function CollectionPage(props: collectionProps) {
   const [alphaCollection, setAlphaCollection] = useState<any>([]);
   const [alpha, setAlpha] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [wishlist, setWishlist] = useState<boolean>(false);
 
   useEffect(() => {
     axios
@@ -62,7 +64,10 @@ export default function CollectionPage(props: collectionProps) {
           <Button
             type="submit"
             variant="contained"
-            onClick={() => setAlpha(true)}
+            onClick={() => {
+              setAlpha(true);
+              setWishlist(false);
+            }}
             style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
           >
             List View
@@ -70,10 +75,24 @@ export default function CollectionPage(props: collectionProps) {
           <Button
             type="submit"
             variant="outlined"
-            onClick={() => setAlpha(false)}
+            onClick={() => {
+              setAlpha(false);
+              setWishlist(false);
+            }}
             style={{ width: '130px', marginLeft: '50px', marginTop: '20px' }}
           >
             Card View
+          </Button>
+          <Button
+            type="submit"
+            variant="outlined"
+            onClick={() => {
+              setWishlist(true);
+              setAlpha(false);
+            }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+          >
+            Wishlist
           </Button>
         </Grid>
       </Grid>
@@ -95,6 +114,49 @@ export default function CollectionPage(props: collectionProps) {
         <img src={logo} alt="Library" id="collection-list-view-image"></img>
       </Grid>
     </Grid>
+  ) : wishlist ? (
+    <Grid container direction="row">
+      <Grid item xs={3}>
+        <Grid container direction="column">
+          <Button
+            type="submit"
+            variant="outlined"
+            onClick={() => {
+              setAlpha(true);
+              setWishlist(false);
+            }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+          >
+            List View
+          </Button>
+          <Button
+            type="submit"
+            variant="outlined"
+            onClick={() => {
+              setAlpha(false);
+              setWishlist(false);
+            }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '20px' }}
+          >
+            Card View
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={() => {
+              setWishlist(true)
+              setAlpha(false)
+            }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+          >
+            Wishlist
+          </Button>
+        </Grid>
+      </Grid>
+      <Grid item xs={9}>
+        <Wishlist user={props.user} token={props.token} />
+      </Grid>
+    </Grid>
   ) : loading ? (
     <Grid container direction="row">
       <Grid item xs={2}>
@@ -114,6 +176,14 @@ export default function CollectionPage(props: collectionProps) {
             variant="contained"
           >
             Card View
+          </Button>
+          <Button
+            type="submit"
+            variant="outlined"
+            disabled
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+          >
+            Wishlist
           </Button>
         </Grid>
       </Grid>
@@ -140,6 +210,7 @@ export default function CollectionPage(props: collectionProps) {
             style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
             onClick={() => {
               setAlpha(true);
+              setWishlist(false);
             }}
             variant="outlined"
           >
@@ -147,11 +218,25 @@ export default function CollectionPage(props: collectionProps) {
           </Button>
           <Button
             type="submit"
-            onClick={() => setAlpha(false)}
+            onClick={() => {
+              setAlpha(false);
+              setWishlist(false);
+            }}
             style={{ width: '130px', marginLeft: '50px', marginTop: '20px' }}
             variant="contained"
           >
             Card View
+          </Button>
+          <Button
+            type="submit"
+            variant="outlined"
+                    onClick={() => {
+                      setWishlist(true)
+                      setAlpha(false)
+                    }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+          >
+            Wishlist
           </Button>
         </Grid>
       </Grid>
