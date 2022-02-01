@@ -17,6 +17,12 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import StatsUser from '../assets/StatsUser.png';
 import LoadingComponent from '../components/LoadingComponent';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import pieces from '../assets/game-pieces.png';
+import castleDoor from '../assets/dungeon-door.png';
+import guyKnight from '../assets/knight-with-sword.png';
+import ladyKnight from '../assets/knight-with-sword-2.png';
 interface statProps {
   user: string;
   token: string;
@@ -367,6 +373,22 @@ export default function PlayStats(props: statProps) {
                 </div>
               </div>
             )}
+            <Box sx={{ width: 650, margin: 'auto' }}>
+              <ImageList variant="masonry" cols={2} gap={8}>
+                <ImageListItem key={0}>
+                  <img src={pieces} alt="Game Pieces" />
+                </ImageListItem>
+                <ImageListItem key={1}>
+                  <img src={ladyKnight} alt="Long-haired Knight" />
+                </ImageListItem>
+                <ImageListItem key={2}>
+                  <img src={castleDoor} alt="Castle Door" />
+                </ImageListItem>
+                <ImageListItem key={3}>
+                  <img src={guyKnight} alt="Short-hair Knight" />
+                </ImageListItem>
+              </ImageList>
+            </Box>
           </div>
         </div>
       ) : (

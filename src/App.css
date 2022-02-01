@@ -713,3 +713,15 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+#unplayed {
+  min-width: 300px;
+}
+
+#least-played {
+  min-width: 300px;
+}
+
+#times-played-name {
+  margin-bottom: 0px;
+}
