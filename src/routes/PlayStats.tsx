@@ -192,6 +192,7 @@ export default function PlayStats(props: statProps) {
                           minPlayers={game.min_players}
                           maxPlayers={game.max_players}
                           playtime={game.playtime}
+                          categories={game.categories}
                         />
                       </div>
                     ))}
