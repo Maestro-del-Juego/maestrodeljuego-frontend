@@ -4,6 +4,8 @@ import WishlistButton from '../components/WishlistButton';
 import CollectionButton from '../components/CollectionButton';
 import GroupIcon from '@mui/icons-material/Group';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import Chip from '@mui/material/Chip';
+import Box from '@mui/material/Box';
 
 interface gameInfoProps {
   token: string;
@@ -20,6 +22,7 @@ export default function GameInfoPopover(props: gameInfoProps) {
   const [imageUrl, setImageUrl] = useState('');
   const [wishlisted, setWishlisted] = useState(false);
   const [owned, setOwned] = useState(false);
+  const [categories, setCategories] = useState([])
 
   useEffect(() => {
     const gameUrl = `https://maestrodeljuego.herokuapp.com/games/${props.gameId}`;
@@ -40,7 +43,7 @@ export default function GameInfoPopover(props: gameInfoProps) {
           setImageUrl(response.data.image);
           setWishlisted(response.data.wishlisted);
           setOwned(response.data.owned);
-          console.log(response.data);
+          setCategories(response.data.categories)
         });
     } else {
       axios.get(gameUrl).then((response) => {
@@ -72,6 +75,13 @@ export default function GameInfoPopover(props: gameInfoProps) {
           Min Playtime
         </div>
       </div>
+      <Box className="popover-categories" sx={{ marginBottom:2, marginTop:2 }}>
+            <>
+            {categories.map((category) => (
+                <Chip label={category} key={category} sx={{marginLeft:"2px", marginRight:"2px"}}/>
+            ))}
+            </>
+        </Box>
       <WishlistButton
         token={props.token}
         gameId={props.gameId!} // ! is non-null assertion operator
