@@ -50,26 +50,31 @@ export default function GameCard(props: gameProps) {
         <Typography
           color="#F8F0E3"
           fontFamily="Open Sans"
-          fontSize={18}
+          fontSize={20}
           textAlign="left"
           fontWeight="bolder"
         >
-          {props.gameName}
+          {props.gameName.length > 18
+            ? props.gameName.slice(0, 19) + '...'
+            : props.gameName}
         </Typography>
       </CardContent>
       <CardContent
         sx={{
+          flexDirection: 'row',
           justifyContent: 'flex-start',
-          paddingBottom: '0px',
         }}
       >
         {gameCategories &&
-          gameCategories.map((category: any) => (
-            <Chip
-              label={category}
-              size="small"
-              sx={{ backgroundColor: '#F8F0E3' }}
-            />
+          gameCategories.slice(0, 3).map((category: any) => (
+            <Typography
+              color="#F8F0E3"
+              fontFamily="Open Sans"
+              fontSize={12}
+              fontWeight="bolder"
+            >
+              {category}
+            </Typography>
           ))}
       </CardContent>
       <CardActions sx={{ justifyContent: 'flex-end' }}>
@@ -77,8 +82,11 @@ export default function GameCard(props: gameProps) {
           className="search-result-link"
           to={`/games/${props.gameId}`}
           key={props.gameId}
+          style={{ textDecoration: 'none' }}
         >
-          <Button>Details</Button>
+          <Button sx={{ fontWeight: 'bolder', color: '#759EB8' }}>
+            Details
+          </Button>
         </Link>
       </CardActions>
     </Card>

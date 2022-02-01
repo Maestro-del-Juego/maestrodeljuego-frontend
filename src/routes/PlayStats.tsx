@@ -161,12 +161,14 @@ export default function PlayStats(props: statProps) {
                 ) : (
                   <Carousel>
                     {leastPlayed.map((game: any) => (
-                      <LeastPlayed
-                        gameId={game.bgg}
-                        gameName={game.name}
-                        imageUrl={game.image}
-                        amountPlayed={game.played}
-                      />
+                      <div style={{ marginLeft: '30px' }}>
+                        <LeastPlayed
+                          gameId={game.bgg}
+                          gameName={game.name}
+                          imageUrl={game.image}
+                          amountPlayed={game.played}
+                        />
+                      </div>
                     ))}
                   </Carousel>
                 )}
@@ -181,15 +183,17 @@ export default function PlayStats(props: statProps) {
                 ) : (
                   <Carousel>
                     {unplayed.map((game: any) => (
-                      <GameCard
-                        gameId={game.bgg}
-                        gameName={game.name}
-                        imageUrl={game.image}
-                        pubYear={game.pub_year}
-                        minPlayers={game.min_players}
-                        maxPlayers={game.max_players}
-                        playtime={game.playtime}
-                      />
+                      <div style={{ marginLeft: '30px' }}>
+                        <GameCard
+                          gameId={game.bgg}
+                          gameName={game.name}
+                          imageUrl={game.image}
+                          pubYear={game.pub_year}
+                          minPlayers={game.min_players}
+                          maxPlayers={game.max_players}
+                          playtime={game.playtime}
+                        />
+                      </div>
                     ))}
                   </Carousel>
                 )}
@@ -373,7 +377,7 @@ export default function PlayStats(props: statProps) {
                 </div>
               </div>
             )}
-            <Box sx={{ width: 650, margin: 'auto' }}>
+            <Box sx={{ width: 590, margin: 'auto' }}>
               <ImageList variant="masonry" cols={2} gap={8}>
                 <ImageListItem key={0}>
                   <img src={pieces} alt="Game Pieces" />

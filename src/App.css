@@ -523,6 +523,7 @@ a {
 #pie-data {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 85px;
 }
 
 #finalized-event {
@@ -535,8 +536,8 @@ a {
 
 .wishlist-header {
   text-align: center;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 #rsvp-buttons {
@@ -732,4 +733,12 @@ a {
 
 .register-link-button {
   text-decoration: none;
+}
+
+#most-played-categories {
+  height: 350px;
+}
+
+#most-played-games {
+  height: 350px;
 }

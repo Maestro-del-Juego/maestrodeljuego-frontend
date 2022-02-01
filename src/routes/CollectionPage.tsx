@@ -60,9 +60,9 @@ export default function CollectionPage(props: collectionProps) {
       Please login to see your collection page
     </h1>
   ) : alpha ? (
-    <Grid container direction="row">
+    <Grid container direction="row" marginLeft="30px">
       <Grid item xs={3}>
-        <Grid container direction="column">
+        <Grid container direction="column" justifyContent="center">
           <Button
             type="submit"
             variant="contained"
@@ -119,7 +119,7 @@ export default function CollectionPage(props: collectionProps) {
   ) : wishlist ? (
     <Grid container direction="row">
       <Grid item xs={3}>
-        <Grid container direction="column">
+        <Grid container direction="column" marginLeft="30px">
           <Button
             type="submit"
             variant="outlined"
@@ -161,8 +161,8 @@ export default function CollectionPage(props: collectionProps) {
     </Grid>
   ) : loading ? (
     <Grid container direction="row">
-      <Grid item xs={2}>
-        <Grid container direction="column">
+      <Grid item xs={3}>
+        <Grid container direction="column" marginLeft="30px">
           <Button
             type="submit"
             style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
@@ -189,7 +189,7 @@ export default function CollectionPage(props: collectionProps) {
           </Button>
         </Grid>
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={9}>
         <h1 className="collection-header">{props.user}'s Collection</h1>
         <div id="loading-components">
           <LoadingComponent loadingWidth={250} loadingPadding="20" />
@@ -205,8 +205,8 @@ export default function CollectionPage(props: collectionProps) {
     </Grid>
   ) : (
     <Grid container direction="row">
-      <Grid item xs={2}>
-        <Grid container direction="column">
+      <Grid item xs={3}>
+        <Grid container direction="column" marginLeft="30px">
           <Button
             type="submit"
             style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
@@ -242,7 +242,7 @@ export default function CollectionPage(props: collectionProps) {
           </Button>
         </Grid>
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={9}>
         <h1 className="collection-header">{props.user}'s Collection</h1>
         <Grid container direction="row" spacing={2}>
           {alphaCollection.map((game: any) => (
