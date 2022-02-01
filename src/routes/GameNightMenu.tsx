@@ -144,7 +144,7 @@ export default function GameNightMenu(props: gameNightProps) {
       {props.token !== '' ? (
         <div className="game-night-menu-container">
           <Link className="new-event-link" to="/createevent/">
-            <Button sx={{ marginTop: 4, marginBottom: 2 }} variant="contained">
+            <Button sx={{ marginTop: 6, marginBottom: 2 }} variant="contained">
               Create New Event
             </Button>
           </Link>
