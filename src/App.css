@@ -285,8 +285,8 @@ a {
 }
 
 #collection-container {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   margin-top: 60px;
 }
 
@@ -503,7 +503,7 @@ a {
   font-weight: bolder;
 }
 
-#account-links > a {
+#login-nav > a {
   text-decoration: none;
   color: #334195;
   font-size: larger;
@@ -726,7 +726,8 @@ a {
   margin-bottom: 0px;
 }
 .filter-white {
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(67deg) brightness(102%) contrast(102%);
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(67deg)
+    brightness(102%) contrast(102%);
 }
 
 .register-link-button {
