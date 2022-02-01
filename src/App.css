@@ -98,21 +98,26 @@ img {
 .feature-list {
   display: flex;
   flex-wrap: wrap;
-  margin: 30px;
   justify-content: center;
+  margin-top: 60px;
+  padding-top: 40px;
 }
 .feature-block {
-  margin-left: 3%;
-  margin-right: 3%;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 10px;
+  margin-bottom: 40px;
   width: 22%;
+  color: white;
 }
 .home-image {
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
-  height: 400px;
-  width: 70%;
+  max-width: 80%;
+  max-height: 80%;
+  height: auto;
 }
 
 #avatar {
@@ -491,7 +496,7 @@ a {
   font-weight: bolder;
 }
 
-.search-result-link {
+.search-result-text {
   text-decoration: none;
   color: #334195;
   font-size: larger;
@@ -543,19 +548,14 @@ a {
   text-align: center;
 }
 
-.search-label {
-  font-size: 20pt;
-  margin-top: 15px;
-}
-
 #search-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: 45px;
+  margin-top: 20px;
 }
 
 #octo-search {
-  margin-right: 160px;
+  margin-right: 40px;
   align-self: flex-start;
 }
 
@@ -724,4 +724,11 @@ a {
 
 #times-played-name {
   margin-bottom: 0px;
+}
+.filter-white {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(67deg) brightness(102%) contrast(102%);
+}
+
+.register-link-button {
+  text-decoration: none;
 }
