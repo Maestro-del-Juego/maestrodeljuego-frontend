@@ -70,7 +70,7 @@ export default function CollectionPage(props: collectionProps) {
               setAlpha(true);
               setWishlist(false);
             }}
-            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px', backgroundColor:"#334195" }}
           >
             List View
           </Button>
@@ -81,7 +81,7 @@ export default function CollectionPage(props: collectionProps) {
               setAlpha(false);
               setWishlist(false);
             }}
-            style={{ width: '130px', marginLeft: '50px', marginTop: '20px' }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '20px', backgroundColor:"white", borderColor:"#334195", color:"#334195" }}
           >
             Card View
           </Button>
@@ -92,7 +92,7 @@ export default function CollectionPage(props: collectionProps) {
               setWishlist(true);
               setAlpha(false);
             }}
-            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px', backgroundColor:"white", borderColor:"#334195", color:"#334195" }}
           >
             Wishlist
           </Button>
@@ -127,7 +127,7 @@ export default function CollectionPage(props: collectionProps) {
               setAlpha(true);
               setWishlist(false);
             }}
-            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px', backgroundColor:"white", borderColor:"#334195", color:"#334195" }}
           >
             List View
           </Button>
@@ -138,7 +138,7 @@ export default function CollectionPage(props: collectionProps) {
               setAlpha(false);
               setWishlist(false);
             }}
-            style={{ width: '130px', marginLeft: '50px', marginTop: '20px' }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '20px', backgroundColor:"white", borderColor:"#334195", color:"#334195" }}
           >
             Card View
           </Button>
@@ -149,7 +149,7 @@ export default function CollectionPage(props: collectionProps) {
               setWishlist(true);
               setAlpha(false);
             }}
-            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px', backgroundColor:"#334195" }}
           >
             Wishlist
           </Button>
@@ -165,7 +165,7 @@ export default function CollectionPage(props: collectionProps) {
         <Grid container direction="column" marginLeft="30px">
           <Button
             type="submit"
-            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px', }}
             disabled
             variant="outlined"
           >
@@ -209,7 +209,7 @@ export default function CollectionPage(props: collectionProps) {
         <Grid container direction="column" marginLeft="30px">
           <Button
             type="submit"
-            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px', backgroundColor:"white", borderColor:"#334195", color:"#334195" }}
             onClick={() => {
               setAlpha(true);
               setWishlist(false);
@@ -224,7 +224,7 @@ export default function CollectionPage(props: collectionProps) {
               setAlpha(false);
               setWishlist(false);
             }}
-            style={{ width: '130px', marginLeft: '50px', marginTop: '20px' }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '20px', backgroundColor:"#334195" }}
             variant="contained"
           >
             Card View
@@ -236,7 +236,7 @@ export default function CollectionPage(props: collectionProps) {
               setWishlist(true);
               setAlpha(false);
             }}
-            style={{ width: '130px', marginLeft: '50px', marginTop: '70px' }}
+            style={{ width: '130px', marginLeft: '50px', marginTop: '70px', backgroundColor:"white", borderColor:"#334195", color:"#334195" }}
           >
             Wishlist
           </Button>

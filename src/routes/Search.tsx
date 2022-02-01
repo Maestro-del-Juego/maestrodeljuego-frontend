@@ -39,12 +39,12 @@ export default function Search(props: searchProps) {
         />
       </Box>
       <div id="search-bottom">
-        <Box sx={{display:"block", m:"auto", width:"80%", textAlign:"center"}}>
+        <Box sx={{display:"block", m:"auto", width:"80%", textAlign:"center", backgroundColor:"#F8F8F8"}}>
           <List subheader={
               <>
-            {(searchSubmitted !== false) && (searchValueDisplay !== "") ? (<ListSubheader sx={{ fontSize: "x-large", textAlign:"center" }} component="div" id="search-results-subheader">
+            {(searchSubmitted !== false) && (searchValueDisplay !== "") ? (<ListSubheader sx={{ fontSize: "x-large", textAlign:"center", backgroundColor:"#F8F8F8" }} component="div" id="search-results-subheader">
             Displaying search results for "{searchValueDisplay}"...
-            </ListSubheader>) : (<ListSubheader></ListSubheader>) }
+            </ListSubheader>) : (<ListSubheader sx={{ backgroundColor:"F8F8F8" }}></ListSubheader>) }
           
           </> }>
           {resultsData.map(({ id, name }: any) => (

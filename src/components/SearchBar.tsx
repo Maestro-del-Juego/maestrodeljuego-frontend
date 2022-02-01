@@ -61,9 +61,9 @@ export default function SearchBar(props: searchProps) {
           placeholder="Search for games by title."
           value={props.searchValue}
           onChange={(event) => handleChange('searchValue', event)}
-          sx={{ width: 400 }}
+          sx={{ width: 400, backgroundColor:"white" }}
         />
-        <Button variant="contained" className="search-submit-button" type="submit" sx={{ marginLeft: 2 }}>
+        <Button variant="contained" className="search-submit-button" type="submit" sx={{ marginLeft: 2, backgroundColor:"#334195" }}>
           Search
         </Button>
       </form>

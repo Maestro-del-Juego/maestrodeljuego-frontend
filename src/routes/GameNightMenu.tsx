@@ -144,7 +144,7 @@ export default function GameNightMenu(props: gameNightProps) {
       {props.token !== '' ? (
         <div className="game-night-menu-container">
           <Link className="new-event-link" to="/createevent/">
-            <Button sx={{ marginTop: 6, marginBottom: 2 }} variant="contained">
+            <Button size="large" sx={{ marginTop: 6, marginBottom: 4, backgroundColor:"#334195" }} variant="contained">
               Create New Event
             </Button>
           </Link>
@@ -278,7 +278,7 @@ export default function GameNightMenu(props: gameNightProps) {
                             }
                           >
                             <ListItemAvatar>
-                              <Avatar sx={{ bgcolor: 'dodgerblue' }}>
+                              <Avatar sx={{ bgcolor: '#759EB8' }}>
                                 <EventAvailableIcon />
                               </Avatar>
                             </ListItemAvatar>
