@@ -23,7 +23,7 @@ export default function Home() {
             </Grid>
             <Grid item xs={6}>
                 <Box className="home-screen-right" sx={{ marginRight:12, marginTop:12 }}>
-                    <img className="home-image" src="/catan.jpg" alt="Board game" />
+                    <img className="home-image" src="/meeples.jpeg" alt="Board game" />
                 </Box>
             </Grid>
         </Grid>
