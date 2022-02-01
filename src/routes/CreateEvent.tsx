@@ -13,6 +13,9 @@ export interface collectionObject {
   title: string;
   pub_year: number;
   image: string;
+  min_players: number;
+  max_players: number;
+  playtime: number;
 }
 
 export interface contactObject {
