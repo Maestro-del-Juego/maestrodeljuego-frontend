@@ -496,7 +496,7 @@ a {
   font-weight: bolder;
 }
 
-.search-result-link {
+.search-result-text {
   text-decoration: none;
   color: #334195;
   font-size: larger;
@@ -548,19 +548,14 @@ a {
   text-align: center;
 }
 
-.search-label {
-  font-size: 20pt;
-  margin-top: 15px;
-}
-
 #search-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: 45px;
+  margin-top: 20px;
 }
 
 #octo-search {
-  margin-right: 160px;
+  margin-right: 40px;
   align-self: flex-start;
 }
 

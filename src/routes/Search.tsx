@@ -39,10 +39,10 @@ export default function Search(props: searchProps) {
         />
       </Box>
       <div id="search-bottom">
-        <Box sx={{ marginLeft: '20px' }}>
+        <Box sx={{display:"block", m:"auto", width:"80%", textAlign:"center"}}>
           <List subheader={
               <>
-            {searchSubmitted !== false ? (<ListSubheader sx={{ fontSize: "x-large"}} component="div" id="search-results-subheader">
+            {(searchSubmitted !== false) && (searchValueDisplay !== "") ? (<ListSubheader sx={{ fontSize: "x-large", textAlign:"center" }} component="div" id="search-results-subheader">
             Displaying search results for "{searchValueDisplay}"...
             </ListSubheader>) : (<ListSubheader></ListSubheader>) }
           
@@ -52,7 +52,8 @@ export default function Search(props: searchProps) {
           ))}
           </List>
         </Box>
-        <img src={OctoSearch} alt="OctoSearch" id="octo-search"></img>
+        {resultsData.length === 0 ? (<img src={OctoSearch} alt="OctoSearch" id="octo-search"></img>) : (<></>)}
+        
       </div>
     </>
   );

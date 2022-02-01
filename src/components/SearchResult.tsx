@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react'
-import {  ListItem, ListItemText, ListItemIcon, Popover, IconButton, Tooltip } from '@mui/material';
+import {  ListItem, ListItemText, ListItemIcon, Popover, IconButton, Tooltip, Typography, Divider } from '@mui/material';
 import GameInfoPopover from './GameInfoPopover'
 import InfoIcon from '@mui/icons-material/Info';
 
@@ -24,17 +24,11 @@ export default function SearchResult(props: resultsProps) {
 
     return (
         <>
-        <ListItem className="search-result-card" secondaryAction={
-            <Tooltip title="View game details">
-            <IconButton edge="end" aria-label="info-pane" onClick={(event) => handleDetailClick(event)}>
-                <InfoIcon />
-            </IconButton>
-            </Tooltip>
-        }>
+        <ListItem className="search-result-item">
             <ListItemText className="search-result" key={`result-${props.gameId}`}>
-            <Link className="search-result-link" to={`/games/${props.gameId}`} key={props.gameId}>
+            <Typography sx={{ cursor: "pointer", color: "334195", fontSize: "large", display: "inline", marginLeft:2 }}className="search-result-text" onClick={(event) => handleDetailClick(event)} key={props.gameId}>
                 {props.gameName}
-            </Link>
+            </Typography>
             
             </ListItemText>
             <Popover
@@ -46,6 +40,7 @@ export default function SearchResult(props: resultsProps) {
                     vertical: 'top',
                     horizontal: 'right',
                 }}
+                transformOrigin={{ horizontal: "left", vertical:"bottom" }}
           >
             <GameInfoPopover token={props.token} user={props.user} gameId={props.gameId} />
           </Popover>
