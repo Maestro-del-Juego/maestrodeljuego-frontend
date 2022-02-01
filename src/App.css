@@ -57,7 +57,7 @@ span {
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
   margin: auto;
-  background-color: #759eb8;
+  background-color: #334195;
   height: 120px;
 }
 
@@ -121,8 +121,8 @@ img {
 }
 
 #avatar {
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
   border-radius: 100%;
 }
 
@@ -455,7 +455,7 @@ a {
 
 #game-knight-banner {
   font-family: 'Caesar Dressing';
-  color: #334195;
+  color: white;
   font-size: 18pt;
   font-weight: bolder;
   margin-top: auto;
@@ -491,7 +491,7 @@ a {
 
 #site-nav > a {
   text-decoration: none;
-  color: #334195;
+  color: white;
   font-size: larger;
   font-weight: bolder;
 }
@@ -505,14 +505,14 @@ a {
 
 #login-nav > a {
   text-decoration: none;
-  color: #334195;
+  color: white;
   font-size: larger;
   font-weight: bolder;
 }
 
 #log-out {
   text-decoration: none;
-  color: #334195;
+  color: white;
   font-size: larger;
   font-weight: bolder;
 }
@@ -695,11 +695,13 @@ a {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.popover-title, .info-page-title {
+.popover-title,
+.info-page-title {
   margin-bottom: 0;
 }
 
-.popover-pub-year, .info-page-pub-year {
+.popover-pub-year,
+.info-page-pub-year {
   margin-top: 0;
 }
 
@@ -741,4 +743,9 @@ a {
 
 #most-played-games {
   height: 350px;
+}
+
+#final-game-container {
+  display: flex;
+  justify-content: center;
 }

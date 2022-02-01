@@ -23,7 +23,7 @@ export default function FeedbackForm(props: feedbackProps) {
   const [host, setHost] = useState('');
   const [playedGames, setPlayedGames] = useState<any[]>([]);
   const [feedback, setFeedback] = useState('');
-  const [overallScore, setOverallScore] = useState<number | null>(2.5);
+  const [overallScore, setOverallScore] = useState<number | null >(2.5);
   const [overallHover, setOverallHover] = useState(-1);
   const [voted, setVoted] = useState(false);
 
