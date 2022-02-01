@@ -98,21 +98,26 @@ img {
 .feature-list {
   display: flex;
   flex-wrap: wrap;
-  margin: 30px;
   justify-content: center;
+  margin-top: 60px;
+  padding-top: 40px;
 }
 .feature-block {
-  margin-left: 3%;
-  margin-right: 3%;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 10px;
+  margin-bottom: 40px;
   width: 22%;
+  color: white;
 }
 .home-image {
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
-  height: 400px;
-  width: 70%;
+  max-width: 80%;
+  max-height: 80%;
+  height: auto;
 }
 
 #avatar {
@@ -708,4 +713,12 @@ a {
   margin-bottom: 10px;
   display: flex;
   justify-content: space-evenly;
+}
+
+.filter-white {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(67deg) brightness(102%) contrast(102%);
+}
+
+.register-link-button {
+  text-decoration: none;
 }
