@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import GroupIcon from '@mui/icons-material/Group';
+import GroupsIcon from '@mui/icons-material/Groups';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 interface gameInfoProps {
@@ -62,7 +62,7 @@ export default function GameInfoPopoverCollection(props: gameInfoProps) {
       <img className="game-box-image" alt={gameTitle} src={imageUrl}></img>
       <div className="popover-players-playtime">
         <div className="popover-players">
-            <GroupIcon sx={{ verticalAlign: "text-bottom" }}/> {minPlayers} - {maxPlayers} Players
+            <GroupsIcon sx={{ verticalAlign: "text-bottom" }}/> {minPlayers} - {maxPlayers} Players
         </div>
         <div className="popover-playtime">
             <AccessTimeIcon sx={{ verticalAlign: "text-bottom" }}/> {playtime} Min Playtime

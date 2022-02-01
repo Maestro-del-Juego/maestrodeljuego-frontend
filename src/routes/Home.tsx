@@ -14,11 +14,13 @@ export default function Home() {
         <Grid container spacing={2}>
             <Grid item xs={6}>
                 <Box className="home-screen-left" sx={{ marginLeft:12, marginTop:12 }}>
-                <Typography variant="h2" sx={{ fontWeight:"bolder", textAlign:"center" }}>Some Big Text Words</Typography>
-                <Typography variant="h6" sx={{ marginLeft:10, marginRight:10, marginTop:6, marginBottom:6 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit.</Typography>
-                <Button variant="contained" sx={{ p:3, display:"block", margin:"auto" }} onClick={handleClickToReg}>
-                    <Typography variant="h6">Register Now</Typography>
-                </Button>
+                    <Typography variant="h2" sx={{ fontWeight:"bolder", textAlign:"center" }}>Play More Games</Typography>
+                    <Typography variant="h6" sx={{ marginLeft:10, marginRight:10, marginTop:6, marginBottom:6 }}>
+                        Game Knight helps you optimize your game nights for maximum fun, so you spend more time playing and less time deciding what to play.
+                    </Typography>
+                    <Button variant="contained" sx={{ p:3, display:"block", margin:"auto" }} onClick={handleClickToReg}>
+                        <Typography variant="h6">Register Now</Typography>
+                    </Button>
                 </Box>
             </Grid>
             <Grid item xs={6}>
@@ -33,34 +35,19 @@ export default function Home() {
         </Box>
         <Box className="feature-list" sx={{ backgroundColor:"#759eb8" }}>
         <FeatureBlock
-            featureIcon="/icon1.svg"
-            featureName="Plan your game nights"
-            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
-        />
-        <FeatureBlock
-            featureIcon="/icon2.svg"
-            featureName="Collect feedback"
-            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
-        />
-        <FeatureBlock
-            featureIcon="/icon3.svg"
-            featureName="Track your play stats"
-            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
-        />
-        <FeatureBlock
             featureIcon="/icon4.svg"
             featureName="Make hosting easy"
-            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
+            featureDetails="Seamlessly organize your next game night and invite guests to join in on the planning process by giving them a vote on what games will hit the table."
+        />
+        <FeatureBlock
+            featureIcon="/icon1.svg"
+            featureName="Build a perfect game night"
+            featureDetails="Maximize enjoyment by collecting feedback from your guests and seeing which games and days of the week get everyone excited to play."
         />
         <FeatureBlock
             featureIcon="/icon5.svg"
             featureName="Play more of your games"
-            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
-        />
-        <FeatureBlock
-            featureIcon="/icon6.svg"
-            featureName="Organize your collection"
-            featureDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit."
+            featureDetails="Know what you're playing before you gather."
         />
         </Box>
         </>
