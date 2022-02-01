@@ -48,8 +48,8 @@ export default function GameCard(props: gameProps) {
       />
       <CardContent sx={{ justifyContent: 'flex-start', paddingBottom: '0px' }}>
         <Typography
-          color="#F8F0E3"
-          fontFamily="Open Sans"
+          color="#F8F8F8"
+          fontFamily="Roboto Condensed"
           fontSize={20}
           textAlign="left"
           fontWeight="bolder"
@@ -68,8 +68,8 @@ export default function GameCard(props: gameProps) {
         {gameCategories &&
           gameCategories.slice(0, 3).map((category: any) => (
             <Typography
-              color="#F8F0E3"
-              fontFamily="Open Sans"
+              color="#F8F8F8"
+              fontFamily="Roboto Condensed"
               fontSize={12}
               fontWeight="bolder"
             >
@@ -84,7 +84,7 @@ export default function GameCard(props: gameProps) {
           key={props.gameId}
           style={{ textDecoration: 'none' }}
         >
-          <Button sx={{ fontWeight: 'bolder', color: '#759EB8' }}>
+          <Button sx={{ fontWeight: 'bolder', color: '#F8F8F8' }}>
             Details
           </Button>
         </Link>

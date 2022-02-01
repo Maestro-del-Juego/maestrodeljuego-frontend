@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import logo from '../assets/game-knight-navbar.png';
+import logo from '../assets/bw-logo.png';
 import { Divider, Box } from '@mui/material';
+import { BoltRounded } from '@mui/icons-material';
 
 interface navProps {
   user: string;
@@ -28,15 +29,25 @@ export default function NavBar(props: navProps) {
           <span id="game-knight-banner">Game Knight</span>
         </div>
         <Box id="site-nav" sx={{ display: 'flex' }}>
+          {props.user !== '' ? (
+            <Link to={`/play_stats/${props.user}`}>Playstats Homepage</Link>
+          ) : (
+            <Link to={`/login/`}>Playstats Homepage</Link>
+          )}
+          <Divider
+            sx={{ background: 'white', marginLeft: 1, marginRight: 1 }}
+            orientation="vertical"
+            flexItem
+          />
           <Link to={`/collection/${props.user}`}>Your Collection</Link>
           <Divider
-            sx={{ background: '#334195', marginLeft: 1, marginRight: 1 }}
+            sx={{ background: 'white', marginLeft: 1, marginRight: 1 }}
             orientation="vertical"
             flexItem
           />
           <Link to="/search">Add Games</Link>
           <Divider
-            sx={{ background: '#334195', marginLeft: 1, marginRight: 1 }}
+            sx={{ background: 'white', marginLeft: 1, marginRight: 1 }}
             orientation="vertical"
             flexItem
           />
@@ -51,7 +62,7 @@ export default function NavBar(props: navProps) {
             <Box id="login-nav" sx={{ display: 'flex' }}>
               <Link to="/login">Login</Link>
               <Divider
-                sx={{ background: '#334195', marginLeft: 1, marginRight: 1 }}
+                sx={{ background: 'white', marginLeft: 1, marginRight: 1 }}
                 orientation="vertical"
                 flexItem
               />
@@ -71,6 +82,15 @@ export default function NavBar(props: navProps) {
                   id="avatar"
                 />
               </Link>
+              <span
+                style={{
+                  color: 'white',
+                  fontSize: 15,
+                  textAlign: 'center',
+                }}
+              >
+                {props.user}
+              </span>
               <Link to="/" onClick={props.logout} id="log-out">
                 Log Out
               </Link>
@@ -79,7 +99,6 @@ export default function NavBar(props: navProps) {
         </div>
       </div>
       <hr id="hr-1" />
-      <hr id="hr-2" />
     </>
   );
 }

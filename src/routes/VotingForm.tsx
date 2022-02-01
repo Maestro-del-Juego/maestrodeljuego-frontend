@@ -165,15 +165,18 @@ export default function VotingForm(props: gameNightProps) {
       <div id="final-game-container">
         {finalGames.map((game: any, i: any) => {
           return (
-            <GameCard
-              gameId={game.bgg}
-              gameName={game.title}
-              pubYear={game.pub_year}
-              imageUrl={game.image}
-              minPlayers={game.min_players}
-              maxPlayers={game.max_players}
-              playtime={game.playtime}
-            />
+            <div style={{ margin: '20px' }}>
+              <GameCard
+                gameId={game.bgg}
+                gameName={game.title}
+                pubYear={game.pub_year}
+                imageUrl={game.image}
+                minPlayers={game.min_players}
+                maxPlayers={game.max_players}
+                playtime={game.playtime}
+                categories={game.categories}
+              />
+            </div>
           );
         })}
       </div>
