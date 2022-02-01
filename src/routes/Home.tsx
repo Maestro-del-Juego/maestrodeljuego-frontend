@@ -15,7 +15,7 @@ export default function Home() {
             <Grid item xs={6}>
                 <Box className="home-screen-left" sx={{ marginLeft:12, marginTop:12 }}>
                 <Typography variant="h2" sx={{ fontWeight:"bolder", textAlign:"center" }}>Some Big Text Words</Typography>
-                <Typography variant="h6" sx={{ marginLeft:12, marginTop:6, marginBottom:6 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit.</Typography>
+                <Typography variant="h6" sx={{ marginLeft:10, marginRight:10, marginTop:6, marginBottom:6 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales, magna commodo gravida vestibulum, leo nisl viverra neque, id hendrerit.</Typography>
                 <Button variant="contained" sx={{ p:3, display:"block", margin:"auto" }} onClick={handleClickToReg}>
                     <Typography variant="h6">Register Now</Typography>
                 </Button>
