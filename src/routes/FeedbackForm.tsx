@@ -176,7 +176,7 @@ export default function FeedbackForm(props: feedbackProps) {
             type="text"
             value={guestEmail}
             onChange={(event) => setGuestEmail(event.target.value)}
-            sx={{ backgroundColor:"white" }}
+            sx={{ backgroundColor: 'white' }}
           ></TextField>
         </div>
         <Button type="submit" id="guest-list-button">
@@ -224,14 +224,19 @@ export default function FeedbackForm(props: feedbackProps) {
             id="outlined-multiline-flexible"
             label="Your thoughts?"
             multiline
-            style={{ width: 400, backgroundColor:"white" }}
+            style={{ width: 400, backgroundColor: 'white' }}
             maxRows={6}
             value={feedback}
             onChange={(event) => setFeedback(event.target.value)}
             fullWidth
           />
         </div>
-        <Button id="feedback-submit" variant="contained" type="submit">
+        <Button
+          id="feedback-submit"
+          variant="contained"
+          type="submit"
+          style={{ backgroundColor: '#334195' }}
+        >
           Submit
         </Button>
       </div>
