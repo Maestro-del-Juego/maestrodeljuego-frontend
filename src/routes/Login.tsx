@@ -52,7 +52,7 @@ const Login = (props: loginProps) => {
   };
 
   return loggedIn ? (
-    <Navigate to={`/play_stats/${username}`} />
+    <Navigate to={`/game_night/`} />
   ) : (
     <Container component="main" maxWidth="xs">
       <Box
@@ -80,7 +80,7 @@ const Login = (props: loginProps) => {
               onChange={(event) => setUsername(event.target.value)}
               autoComplete="username"
               autoFocus
-              sx={{ backgroundColor:"white" }}
+              sx={{ backgroundColor: 'white' }}
             />
           </div>
 
@@ -96,15 +96,19 @@ const Login = (props: loginProps) => {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               autoComplete="current-password"
-              sx={{ backgroundColor:"white" }}
+              sx={{ backgroundColor: 'white' }}
             />
           </div>
           <div id="login-links">
-            <Button type="submit" className="btn btn-primary" sx={{ color:"#334195" }}>
+            <Button
+              type="submit"
+              className="btn btn-primary"
+              sx={{ color: '#334195' }}
+            >
               Log In
             </Button>
             <Link to={'/registration'} style={{ textDecoration: 'none' }}>
-              <Button className="btn btn-primary" sx={{ color:"#334195" }}>
+              <Button className="btn btn-primary" sx={{ color: '#334195' }}>
                 Don't Have an Account?
               </Button>
             </Link>
