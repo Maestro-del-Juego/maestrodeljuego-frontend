@@ -221,7 +221,8 @@ a {
   border-radius: 5%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   justify-items: center;
 }
 
@@ -246,6 +247,14 @@ a {
   align-items: center;
   justify-content: space-around;
   text-align: center;
+}
+
+.vote-card-title {
+  margin-bottom: 0;
+}
+
+.vote-card-image {
+  margin-top: 0;
 }
 
 #game-suggestions {
@@ -281,7 +290,7 @@ a {
 }
 
 #vote-submit {
-  margin: auto;
+  margin-left: auto;
 }
 
 #vote-form-label,
