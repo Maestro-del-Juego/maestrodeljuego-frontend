@@ -54,7 +54,7 @@ export default function NavBar(props: navProps) {
           {props.user !== '' ? (
             <Link to={`/game_night/`}>Game Knight Dashboard</Link>
           ) : (
-            <Link to={`/login/`}>Game Night Dashboard</Link>
+            <Link to={`/login/`}>Game Knight Dashboard</Link>
           )}
         </Box>
         <div id="account-links">
