@@ -150,6 +150,7 @@ export default function FeedbackForm(props: feedbackProps) {
             name="guests"
             id="guest-list-dropdown"
             value={guest}
+            sx={{ backgroundColor: 'white' }}
             onChange={(event) => {
               setGuest(event.target.value);
             }}
