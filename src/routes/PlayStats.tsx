@@ -158,7 +158,7 @@ export default function PlayStats(props: statProps) {
                 ) : (
                   <Carousel>
                     {leastPlayed.map((game: any) => (
-                      <div style={{ marginLeft: '30px' }}>
+                      <div>
                         <LeastPlayed
                           gameId={game.bgg}
                           gameName={game.name}

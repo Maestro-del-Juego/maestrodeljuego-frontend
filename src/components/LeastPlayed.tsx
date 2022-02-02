@@ -74,7 +74,7 @@ export default function LeastPlayed(props: gameProps) {
           to={`/games/${props.gameId}`}
           key={props.gameId}
         >
-          <Button>Details</Button>
+          <Button style={{ color: 'white' }}>Details</Button>
         </Link>
       </CardActions>
     </Card>
