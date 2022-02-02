@@ -34,7 +34,7 @@ export default function Home() {
         <Box className="home-screen-upper-box" sx={{ display:"inline" }}>
         
         </Box>
-        <Box className="feature-list" sx={{ backgroundColor:"#334195" }}>
+        <Box className="feature-list" >
         <FeatureBlock
             featureIcon="/icon4.svg"
             featureName="Hosting made easy"
