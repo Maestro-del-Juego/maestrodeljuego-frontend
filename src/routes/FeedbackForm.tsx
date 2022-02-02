@@ -180,7 +180,7 @@ export default function FeedbackForm(props: feedbackProps) {
             sx={{ backgroundColor: 'white' }}
           ></TextField>
         </div>
-        <Button type="submit" id="guest-list-button">
+        <Button sx={{ color:"#334195" }} type="submit" id="guest-list-button">
           Submit
         </Button>
       </form>
