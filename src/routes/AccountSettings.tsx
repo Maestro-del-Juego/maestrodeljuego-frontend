@@ -130,6 +130,7 @@ export default function AccountSettings(props: settingsProps) {
           ></img>
           <h3>{currentUsername}</h3>
           <Button
+            sx={{ color:"#334195" }}
             onClick={() => {
               setAvExpanded(!avExpanded);
             }}
@@ -143,10 +144,10 @@ export default function AccountSettings(props: settingsProps) {
                 type="text"
                 value={newAv}
                 id="change-av"
-                style={{ width: 600 }}
+                style={{ width: 600, backgroundColor:"white" }}
                 onChange={(event) => setNewAv(event.target.value)}
               />
-              <Button type="submit">Submit</Button>
+              <Button sx={{ color:"#334195" }} type="submit">Submit</Button>
             </form>
           )}
         </div>
@@ -160,7 +161,7 @@ export default function AccountSettings(props: settingsProps) {
                 id="current-pass-username"
                 value={currentPassUser}
                 onChange={(event) => setCurrentPassUser(event.target.value)}
-                style={{ width: 250, marginTop: '10px' }}
+                style={{ width: 250, marginTop: '10px', backgroundColor:"white" }}
               ></TextField>
               {badCurrentPassUser === '' ? null : <p>{badCurrentPassUser}</p>}
               <TextField
@@ -169,7 +170,7 @@ export default function AccountSettings(props: settingsProps) {
                 id="new-user-name"
                 value={newUserName}
                 onChange={(event) => setNewUserName(event.target.value)}
-                style={{ width: 250, marginTop: '10px' }}
+                style={{ width: 250, marginTop: '10px', backgroundColor:"white" }}
               ></TextField>
               {badNewUser === '' ? null : <p>{badNewUser}</p>}
               <TextField
@@ -178,9 +179,9 @@ export default function AccountSettings(props: settingsProps) {
                 id="re-new-user-name"
                 value={reNewUsername}
                 onChange={(event) => setReNewUsername(event.target.value)}
-                style={{ width: 250, marginTop: '10px' }}
+                style={{ width: 250, marginTop: '10px', backgroundColor:"white" }}
               ></TextField>
-              <Button type="submit" style={{ width: 70, marginTop: '10px' }}>
+              <Button type="submit" style={{ width: 70, marginTop: '10px', color:"#334195" }}>
                 Submit
               </Button>
             </div>
@@ -196,6 +197,7 @@ export default function AccountSettings(props: settingsProps) {
             id="current-pass"
             value={currentPassword}
             onChange={(event) => setCurrentPassword(event.target.value)}
+            sx={{ backgroundColor:"white"}}
           ></TextField>
           {badCurrentPass === '' ? null : <p>{badCurrentPass}</p>}
           <TextField
@@ -204,7 +206,7 @@ export default function AccountSettings(props: settingsProps) {
             id="new-pass"
             value={newPassword}
             onChange={(event) => setNewPassword(event.target.value)}
-            style={{ marginLeft: '10px' }}
+            style={{ marginLeft: '10px', backgroundColor:"white" }}
           ></TextField>
           {badNewPass === '' ? null : <p>{badNewPass}</p>}
           <TextField
@@ -213,11 +215,11 @@ export default function AccountSettings(props: settingsProps) {
             id="re-new-pass"
             value={reNewPassword}
             onChange={(event) => setReNewPassword(event.target.value)}
-            style={{ marginLeft: '10px' }}
+            style={{ marginLeft: '10px', backgroundColor:"white" }}
           ></TextField>
           <Button
             type="submit"
-            style={{ marginLeft: '10px', marginTop: '10px' }}
+            style={{ marginLeft: '10px', marginTop: '10px', color:"#334195" }}
           >
             Submit
           </Button>

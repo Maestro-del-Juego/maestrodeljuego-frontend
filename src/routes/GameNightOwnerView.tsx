@@ -1096,7 +1096,7 @@ export default function GameNightOwnerView(props: gameNightProps) {
                     </ListItem>
                   ) : (
                     <ListItem
-                      sx={{ backgroundColor: '#d9ddf2' }}
+                      sx={{ backgroundColor: '#e4e7f6' }}
                       secondaryAction={
                         <>
                           {status === 'Voting' && !(moment(backendDate).isBefore(moment())) ? (

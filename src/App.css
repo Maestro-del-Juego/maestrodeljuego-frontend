@@ -53,7 +53,8 @@ h4,
 h5,
 h6,
 p,
-span {
+span,
+div {
   font-family: 'Roboto Condensed';
   color: #334195;
 }
@@ -750,4 +751,21 @@ a {
 #final-game-container {
   display: flex;
   justify-content: center;
+}
+
+.MuiButton-startIcon {
+  color: white !important;
+}
+
+.MuiListItemText-primary, .MuiListItemText-secondary {
+  font-family:'Roboto Condensed' !important;
+}
+
+.MuiListItemText-secondary {
+  color:#7279a0 !important;
+}
+
+.MuiButton-root {
+  font-family:"Raleway" !important;
+  font-weight: bold !important;
 }

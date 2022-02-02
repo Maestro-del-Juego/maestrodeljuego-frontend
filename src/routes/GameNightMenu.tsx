@@ -159,7 +159,7 @@ export default function GameNightMenu(props: gameNightProps) {
                 aria-controls="upcoming-game-nights-content"
                 id="upcoming-game-nights-header"
               >
-                <Typography>Upcoming Game Nights</Typography>
+                <Typography variant="h5" sx={{ fontFamily:"Raleway" }}>Upcoming Game Nights</Typography>
               </AccordionSummary>
               {loading ? (
                 <AccordionDetails>
@@ -181,13 +181,14 @@ export default function GameNightMenu(props: gameNightProps) {
                                     to={`/game_night/${event.rid}/finalize`}
                                   >
                                     <Tooltip title="Edit event details">
-                                      <IconButton>
+                                      <IconButton sx={{ color:"#334195" }}>
                                         <EditIcon />
                                       </IconButton>
                                     </Tooltip>
                                   </Link>
                                   <Tooltip title="Copy event link to clipboard">
                                     <IconButton
+                                      sx={{ color:"#334195" }}
                                       onClick={() =>
                                         copyToClipboard(
                                           `${window.location.href.replace(/\/+$/, '')}/${event.rid}`
@@ -243,7 +244,7 @@ export default function GameNightMenu(props: gameNightProps) {
                 aria-controls="past-game-nights-content"
                 id="past-game-nights-header"
               >
-                <Typography>Past Game Nights</Typography>
+                <Typography variant="h5" sx={{ fontFamily:"Raleway" }}>Past Game Nights</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List>
@@ -258,13 +259,14 @@ export default function GameNightMenu(props: gameNightProps) {
                               <>
                                 <Link to={`/game_night/${event.rid}/finalize`}>
                                   <Tooltip title="View event details">
-                                    <IconButton>
+                                    <IconButton sx={{ color:"#334195" }}>
                                       <PageviewIcon />
                                     </IconButton>
                                   </Tooltip>
                                 </Link>
                                 <Tooltip title="Copy feedback link to clipboard">
                                   <IconButton
+                                    sx={{ color:"#334195" }}
                                     onClick={() =>
                                       copyToClipboard(
                                         `${window.location.href}${event.rid}/feedback`
@@ -311,7 +313,7 @@ export default function GameNightMenu(props: gameNightProps) {
                 aria-controls="cancelled-game-nights-content"
                 id="cancelled-game-nights-header"
               >
-                <Typography>Cancelled Game Nights</Typography>
+                <Typography variant="h5" sx={{ fontFamily:"Raleway" }}>Cancelled Game Nights</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <List>
@@ -324,7 +326,7 @@ export default function GameNightMenu(props: gameNightProps) {
                             secondaryAction={
                               <Link to={`/game_night/${event.rid}/finalize`}>
                                 <Tooltip title="View event details">
-                                  <IconButton>
+                                  <IconButton sx={{ color:"#334195" }}>
                                     <PageviewIcon />
                                   </IconButton>
                                 </Tooltip>

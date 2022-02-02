@@ -94,6 +94,7 @@ const Registration = (props: regProps) => {
               onChange={(event) => setUsername(event.target.value)}
               autoComplete="username"
               autoFocus
+              sx={{ backgroundColor:"white" }}
             />
           </div>
           <p id="registration-errors">{errors}</p>
@@ -110,6 +111,7 @@ const Registration = (props: regProps) => {
               onChange={(event) => setPassword(event.target.value)}
               autoComplete="password"
               autoFocus
+              sx={{ backgroundColor:"white" }}
             />
           </div>
           <div className="mv2">
@@ -125,6 +127,7 @@ const Registration = (props: regProps) => {
               onChange={(event) => setRetypePassword(event.target.value)}
               autoComplete="repassword"
               autoFocus
+              sx={{ backgroundColor:"white" }}
             />
           </div>
           <div id="avatar-field">
@@ -141,10 +144,11 @@ const Registration = (props: regProps) => {
               onChange={(event) => setAvatar(event.target.value)}
               autoComplete="repassword"
               autoFocus
+              sx={{ backgroundColor:"white" }}
             />
           </div>
           <div className="mv2">
-            <Button type="submit">Submit</Button>
+            <Button type="submit" sx={{ color:"#334195" }}>Submit</Button>
           </div>
         </Box>
       </Box>
