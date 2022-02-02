@@ -765,6 +765,7 @@ a {
   color:#7279a0 !important;
 }
 
-/* .MuiTypography-body1 {
-  font-family:'Roboto Condensed' !important
-} */
+.MuiButton-root {
+  font-family:"Raleway" !important;
+  font-weight: bold !important;
+}

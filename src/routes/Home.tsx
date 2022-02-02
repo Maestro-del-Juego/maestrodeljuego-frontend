@@ -20,7 +20,7 @@ export default function Home() {
                         Game Knight helps you optimize your game nights for maximum fun, so you spend more time playing and less time worrying about logistics.
                     </Typography>
                     <Button variant="contained" sx={{ p:3, display:"block", margin:"auto", backgroundColor:"#759eb8" }} onClick={handleClickToReg}>
-                        <Typography variant="h6" sx={{ color:"white" }}>Register Now</Typography>
+                        <Typography variant="h6" sx={{ color:"white", fontFamily:"Raleway", fontWeight:"bold" }}>Register Now</Typography>
                     </Button>
                 </Box>
             </Grid>
