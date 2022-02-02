@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 interface voteCardProps {
   url: string;
@@ -15,15 +18,15 @@ export default function VoteCard(props: voteCardProps) {
 
   return (
     <div id="vote-card">
-      <h5>{props.title}</h5>
+      <h4 className="vote-card-title" >{props.title}</h4>
       <img src={props.url} alt="Game Cover Art" className="vote-card-image" />
       <div id="vote-buttons">
         {frownySelected || neutralSelected ? (
-          <Button
+          <Button          
             className="smiley-vote"
             title="Sounds Great!"
             variant="outlined"
-            color="success"
+            sx={{ color:"mediumseagreen", borderColor:"mediumseagreen", height:40 }}
             onClick={() => {
               props.voteHandler(props.pk, 1);
               setSmileySelected(true);
@@ -31,33 +34,33 @@ export default function VoteCard(props: voteCardProps) {
               setNeutralSelected(false);
             }}
           >
-            <i className="far fa-smile"></i>
+            <SentimentVerySatisfiedIcon />
           </Button>
         ) : smileySelected ? (
           <Button
             className="smiley-vote"
             title="Sounds Great!"
             variant="contained"
-            color="success"
+            sx={{ backgroundColor:"mediumseagreen", height:40 }}
             onClick={() => {
               props.voteHandler(props.pk, 0);
               setSmileySelected(false);
             }}
           >
-            <i className="far fa-smile"></i>
+            <SentimentVerySatisfiedIcon />
           </Button>
         ) : (
           <Button
             className="smiley-vote"
             title="Sounds Great!"
             variant="outlined"
-            color="success"
+            sx={{ color:"mediumseagreen", borderColor:"mediumseagreen", height:40 }}
             onClick={() => {
               props.voteHandler(props.pk, 1);
               setSmileySelected(true);
             }}
           >
-            <i className="far fa-smile"></i>
+            <SentimentVerySatisfiedIcon />
           </Button>
         )}
         {smileySelected || frownySelected ? (
@@ -65,7 +68,7 @@ export default function VoteCard(props: voteCardProps) {
             className="smiley-vote"
             title="Meh..."
             variant="outlined"
-            color="warning"
+            sx={{ color:"goldenrod", borderColor:"goldenrod", height:40 }}
             onClick={() => {
               props.voteHandler(props.pk, 0);
               setNeutralSelected(true);
@@ -73,33 +76,33 @@ export default function VoteCard(props: voteCardProps) {
               setFrownySelected(false);
             }}
           >
-            <i className="far fa-meh"></i>
+            <SentimentNeutralIcon />
           </Button>
         ) : neutralSelected ? (
           <Button
             className="smiley-vote"
             title="Meh..."
             variant="contained"
-            color="warning"
+            sx={{ backgroundColor:"goldenrod", height:40 }}
             onClick={() => {
               props.voteHandler(props.pk, 0);
               setNeutralSelected(false);
             }}
           >
-            <i className="far fa-meh"></i>
+            <SentimentNeutralIcon />
           </Button>
         ) : (
           <Button
             className="smiley-vote"
             title="Meh..."
             variant="outlined"
-            color="warning"
+            sx={{ color:"goldenrod", borderColor:"goldenrod", height:40 }}
             onClick={() => {
               props.voteHandler(props.pk, 0);
               setNeutralSelected(true);
             }}
           >
-            <i className="far fa-meh"></i>
+            <SentimentNeutralIcon />
           </Button>
         )}
         {smileySelected || neutralSelected ? (
@@ -107,7 +110,7 @@ export default function VoteCard(props: voteCardProps) {
             className="smiley-vote"
             title="It's a 'no' for me, dawg."
             variant="outlined"
-            color="error"
+            sx={{ color:"crimson", borderColor:"crimson", height:40 }}
             onClick={() => {
               props.voteHandler(props.pk, -1);
               setFrownySelected(true);
@@ -115,33 +118,33 @@ export default function VoteCard(props: voteCardProps) {
               setNeutralSelected(false);
             }}
           >
-            <i className="far fa-frown"></i>
+            <SentimentVeryDissatisfiedIcon />
           </Button>
         ) : frownySelected ? (
           <Button
             className="smiley-vote"
             title="It's a 'no' for me, dawg."
             variant="contained"
-            color="error"
+            sx={{ backgroundColor:"crimson", height:40 }}
             onClick={() => {
               props.voteHandler(props.pk, 0);
               setFrownySelected(false);
             }}
           >
-            <i className="far fa-frown"></i>
+            <SentimentVeryDissatisfiedIcon />
           </Button>
         ) : (
           <Button
             className="smiley-vote"
             title="It's a 'no' for me, dawg."
             variant="outlined"
-            color="error"
+            sx={{ color:"crimson", borderColor:"crimson", height:40 }}
             onClick={() => {
               props.voteHandler(props.pk, -1);
               setFrownySelected(true);
             }}
           >
-            <i className="far fa-frown"></i>
+            <SentimentVeryDissatisfiedIcon />
           </Button>
         )}
       </div>

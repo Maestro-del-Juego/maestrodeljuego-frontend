@@ -202,6 +202,7 @@ export default function VotingForm(props: gameNightProps) {
             name="guests"
             id="guest-list-dropdown"
             value={guest}
+            sx={{ backgroundColor:"white" }}
             onChange={(event) => {
               setGuest(event.target.value);
             }}
@@ -228,6 +229,7 @@ export default function VotingForm(props: gameNightProps) {
             type="text"
             fullWidth
             value={inviteeEmail}
+            sx={{ backgroundColor:"white" }}
             onChange={(event) => setInviteeEmail(event.target.value)}
           ></TextField>
         </div>
@@ -235,26 +237,26 @@ export default function VotingForm(props: gameNightProps) {
           <h3>Will you be attending?</h3>
           <div id="rsvp-buttons">
             {attending === 'True' ? (
-              <Button variant="contained" onClick={() => setAttending('')}>
+              <Button sx={{ backgroundColor:"#334195" }} variant="contained" onClick={() => setAttending('')}>
                 Yes
               </Button>
             ) : (
-              <Button variant="outlined" onClick={() => setAttending('True')}>
+              <Button sx={{ backgroundColor:"white", borderColor:"#334195", color:"#334195" }} variant="outlined" onClick={() => setAttending('True')}>
                 Yes
               </Button>
             )}
             {attending === 'False' ? (
-              <Button variant="contained" onClick={() => setAttending('')}>
+              <Button sx={{ backgroundColor:"#334195" }} variant="contained" onClick={() => setAttending('')}>
                 No
               </Button>
             ) : (
-              <Button variant="outlined" onClick={() => setAttending('False')}>
+              <Button sx={{ backgroundColor:"white", borderColor:"#334195", color:"#334195" }} variant="outlined" onClick={() => setAttending('False')}>
                 No
               </Button>
             )}
           </div>
         </div>
-        <Button variant="contained" type="submit" id="guest-list-button">
+        <Button sx={{ backgroundColor:"#334195" }} variant="contained" type="submit" id="guest-list-button">
           Submit
         </Button>
       </form>
@@ -283,11 +285,11 @@ export default function VotingForm(props: gameNightProps) {
       </div>
       <div id="vote-form-buttons">
         <form id="vote-submission-form" onSubmit={voteSubmit}>
-          <Button variant="contained" type="submit" id="vote-submit">
+          <Button sx={{ backgroundColor:"#334195", marginRight:4, marginTop:4 }} variant="contained" type="submit" id="vote-submit">
             Vote
           </Button>
         </form>
-        <Button variant="contained" onClick={() => setGuestPick(!guestPick)}>
+        <Button sx={{ backgroundColor:"#334195", marginTop:4 }} variant="contained" onClick={() => setGuestPick(!guestPick)}>
           Back
         </Button>
       </div>
