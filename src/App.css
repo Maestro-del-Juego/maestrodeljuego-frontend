@@ -766,15 +766,21 @@ a {
   color: white !important;
 }
 
-.MuiListItemText-primary, .MuiListItemText-secondary {
-  font-family:'Roboto Condensed' !important;
+.MuiListItemText-primary,
+.MuiListItemText-secondary {
+  font-family: 'Roboto Condensed' !important;
 }
 
 .MuiListItemText-secondary {
-  color:#7279a0 !important;
+  color: #7279a0 !important;
 }
 
 .MuiButton-root {
-  font-family:"Raleway" !important;
+  font-family: 'Raleway' !important;
   font-weight: bold !important;
+}
+
+#weekday-vis-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
