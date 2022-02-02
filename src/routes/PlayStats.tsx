@@ -246,7 +246,7 @@ export default function PlayStats(props: statProps) {
                       theme={VictoryTheme.material}
                     >
                       <VictoryAxis
-                        label="Avg Overall Score for Game Knights per Weekday"
+                        label="Avg Player Count for Game Knights per Weekday"
                         style={{
                           axisLabel: {
                             fontSize: 12,
@@ -278,7 +278,7 @@ export default function PlayStats(props: statProps) {
                       theme={VictoryTheme.material}
                     >
                       <VictoryAxis
-                        label="Avg Overall Score for Game Knights per Weekday"
+                        label="Avg Attendance Ratio for Game Knights per Weekday"
                         style={{
                           axisLabel: {
                             fontSize: 12,
