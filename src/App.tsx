@@ -50,7 +50,16 @@ function App() {
         setToken('');
         localStorage.clear();
       })
-      .catch((error) => alert(error));
+      .catch((error) => {
+        console.log(error.response.status)
+        if (error.response.status === 401 && token!=='') {
+          setUser('');
+          setToken('');
+          localStorage.clear();
+        }
+        else alert(error)
+      })
+      ;
   };
 
   return (
