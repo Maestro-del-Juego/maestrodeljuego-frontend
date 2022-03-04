@@ -264,7 +264,7 @@ export default function VotingForm(props: gameNightProps) {
   ) : attending === 'True' ? (
     <div id="guest-vote-form">
       <div id="vote-form-header">
-        <h1 className="vote-header">Welcome to Game Night!</h1>
+        <h1 className="vote-header">Welcome to Game Knight!</h1>
         <h2>
           Use the smileys below to indicate your level of interest in the games
           your host has selected.
